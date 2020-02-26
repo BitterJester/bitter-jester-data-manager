@@ -12,14 +12,14 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
     "jsx": "react"
   },
   "include": [
-    "src"
-  ]
+    "src", "setupTests.ts"
+  ],
+  "exclude": ["node_modules"]
 }
