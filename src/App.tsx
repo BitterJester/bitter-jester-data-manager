@@ -1,10 +1,9 @@
 import React from 'react';
+import { Title } from './home/Title';
 
 function App() {
   return (
-    <div >
-      <h1>Bitter Jester Data Manager</h1>
-    </div>
+    <Title titleDisplayText={'Bitter Jester Data Manager'}/>
   );
 }
 
