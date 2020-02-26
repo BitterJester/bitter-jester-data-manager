@@ -16,10 +16,15 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsx": "react"
+    "jsx": "react",
+    "isolatedModules": true,
+    "noEmit": true
   },
   "include": [
-    "src", "setupTests.ts"
+    "src",
+    "setupTests.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
