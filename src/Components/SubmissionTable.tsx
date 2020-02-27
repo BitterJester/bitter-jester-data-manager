@@ -1,5 +1,5 @@
 import React from 'react';
-import { Submission } from "../App";
+import { Submission } from '../Pages/Submissions/Submissions';
 
 type Props = {
     submissions: Submission[];
