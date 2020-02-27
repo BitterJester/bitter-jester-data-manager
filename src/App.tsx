@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Title } from './Pages/home/Title';
+import { Title } from './Pages/Submissions/Title';
 import { getFromS3 } from './s3/getFromS3';
-
+import { SubmissionTable } from './Components/SubmissionTable';
 
 type Answer = {
-  name: string;
-  order: string;
-  text: string;
-  type: string;
-  sublabels?: string;
-  answer?: object | string | string[];
-  prettyFormat?: string;
-  mcolumns?: string;
-  mrows?: string;
+
 }
 
-type Submission = {
+type Answers = {
+  "1"?: Answer;
+  "2"?: Answer;
+  "3"?: Answer;
+  "4"?: Answer;
+  "5"?: Answer;
+  "6"?: Answer;
+  "7"?: Answer;
+  "8"?: Answer;
+  "9"?: Answer;
+  "10"?: Answer;
+  "11"?: Answer;
+  "12"?: Answer;
+  "13"?: Answer;
+  "14"?: Answer;
+  "15"?: Answer;
+  "16"?: Answer;
+  "17"?: Answer;
+  "18"?: Answer;
+  "19"?: Answer;
+}
+
+export type Submission = {
   id: string;
   form_id: string;
   ip: string;
@@ -25,26 +39,28 @@ type Submission = {
   flag: string;
   notes: string;
   updated_at: string;
-  answers: Answer[];
+  answers: Answers;
 }
 
 function App() {
   const initialSubmissions: Submission[] = [];
   const [submissions, setSubmissions] = useState(initialSubmissions);
-  
+
   useEffect(() => {
     async function fetch() {
-      await getFromS3(setSubmissions);      
+      await getFromS3(setSubmissions);
     }
     fetch();
   }, []);
 
+  const answersForEachSubmission: Answers[] = submissions.map(submission => {
+    return submission.answers;
+  });
+
   return (
     <div>
       <Title titleDisplayText={'Bitter Jester Data Manager'} />
-      <p>
-        {JSON.stringify(submissions)}
-      </p>
+      <SubmissionTable submissions={submissions}/>
     </div>
   );
 }
