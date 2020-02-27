@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../../s3/getFromS3';
-import { Title } from './Title';
+import { Title } from '../../Components/Title';
 import { SubmissionTable } from '../../Components/SubmissionTable';
 
 type Answer = {

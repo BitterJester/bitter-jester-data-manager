@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Submissions } from './Submissions';
 import { SubmissionTable } from '../../Components/SubmissionTable';
-import { Title } from './Title';
+import { Title } from '../../Components/Title';
 
 describe('Submissions page', () => {
     const component = shallow(<Submissions />);

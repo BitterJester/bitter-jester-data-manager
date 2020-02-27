@@ -1,7 +1,7 @@
 import React from 'react';
 import { SubmissionTable } from './SubmissionTable';
 import { shallow } from 'enzyme';
-import { Submission } from '../App';
+import { Submission } from '../Pages/Submissions/Submissions';
 
 describe('SubmissionTable', () => {
     const mockSubmissions: Submission[] = [];
