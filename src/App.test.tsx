@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import App from './App';
-import { Title } from './home/Title';
+import { Title } from './Pages/home/Title';
 
 describe('App', () => {
     const component = shallow(<App />);

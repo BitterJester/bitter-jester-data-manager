@@ -1,17 +1,50 @@
-import React from 'react';
-import { Title } from './home/Title';
-import aws from 'aws-sdk';
+import React, { useState, useEffect } from 'react';
+import { Title } from './Pages/home/Title';
+import { getFromS3 } from './s3/getFromS3';
+
+
+type Answer = {
+  name: string;
+  order: string;
+  text: string;
+  type: string;
+  sublabels?: string;
+  answer?: object | string | string[];
+  prettyFormat?: string;
+  mcolumns?: string;
+  mrows?: string;
+}
+
+type Submission = {
+  id: string;
+  form_id: string;
+  ip: string;
+  created_at: string;
+  status: string;
+  new: string;
+  flag: string;
+  notes: string;
+  updated_at: string;
+  answers: Answer[];
+}
 
 function App() {
-  new aws.S3(
-    {
-      accessKeyId: process.env.REACT_APP_AWS_ACCESS_ID
+  const initialSubmissions: Submission[] = [];
+  const [submissions, setSubmissions] = useState(initialSubmissions);
+  
+  useEffect(() => {
+    async function fetch() {
+      await getFromS3(setSubmissions);      
     }
-  );
-  console.log(process.env)
+    fetch();
+  }, []);
+
   return (
     <div>
-      <Title titleDisplayText={'Bitter Jester Data Manager'}/>
+      <Title titleDisplayText={'Bitter Jester Data Manager'} />
+      <p>
+        {JSON.stringify(submissions)}
+      </p>
     </div>
   );
 }
