@@ -55,7 +55,7 @@ export const Submissions = () => {
 
     return (
         <div>
-            <Title titleDisplayText={'Bitter Jester Data Manager'} />
+            <Title titleDisplayText={'Completed Submissions'} />
             <SubmissionTable submissions={submissions} />
         </div>
     );

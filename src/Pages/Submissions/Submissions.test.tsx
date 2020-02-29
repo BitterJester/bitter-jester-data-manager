@@ -8,7 +8,7 @@ describe('Submissions page', () => {
     const component = shallow(<Submissions />);
 
     it('should display a title', () => {
-        expect(component.find(Title).props().titleDisplayText).toEqual('Bitter Jester Data Manager');
+        expect(component.find(Title).props().titleDisplayText).toEqual('Completed Submissions');
     });
     
     describe('SubmissionTable', () => {
