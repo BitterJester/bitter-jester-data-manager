@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
+import '../../static/tableRow.css';
 
 type Props = {
     flattenedDataToDisplay: object;
@@ -14,7 +15,7 @@ export const TableRow = (props: Props) => {
             {
                 Object.values(flattenedDataToDisplay).map(value => {
                     return (
-                        <Col key={value}>
+                        <Col className={'columnContent'} key={value}>
                             {value}
                         </Col>
                     );

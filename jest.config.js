@@ -7,5 +7,8 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     setupFiles: [
         './setupTests.ts'
-    ]
+    ],
+    moduleNameMapper: {
+        "\\.(css|less)$": "<rootDir>/mocks/styleMock.js"
+    }
 }

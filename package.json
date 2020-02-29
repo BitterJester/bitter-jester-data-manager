@@ -47,6 +47,13 @@
         ]
     },
     "devDependencies": {
-        "react-test-renderer": "16.12.0"
+        "css-loader": "^3.4.2",
+        "react-test-renderer": "16.12.0",
+        "style-loader": "^1.1.3"
+    },
+    "jest": {
+        "moduleNameMapper": {
+            "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+        }
     }
 }
