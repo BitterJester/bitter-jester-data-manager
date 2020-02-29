@@ -3,7 +3,7 @@ import { SubmissionTable } from './SubmissionTable';
 import { shallow } from 'enzyme';
 import { Submission } from '../Pages/Submissions/Submissions';
 import { TableRow } from './Table/TableRow';
-import {Table} from 'reactstrap';
+import {Table, Container} from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 
 describe('SubmissionTable', () => {
@@ -28,6 +28,10 @@ describe('SubmissionTable', () => {
     it('should render a table', () => {
         expect(component.find(Table)).toHaveLength(1);
     });
+
+    it('should render a container', () => {
+        expect(component.find(Container)).toHaveLength(1);
+    })
 
     it('should render a table header', () => {
         expect(component.find(TableHeader)).toHaveLength(1);

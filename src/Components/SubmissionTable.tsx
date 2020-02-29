@@ -1,7 +1,7 @@
 import React from 'react';
 import { Submission } from '../Pages/Submissions/Submissions';
 import { TableRow } from './Table/TableRow';
-import { Table } from 'reactstrap';
+import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 
 type Props = {
@@ -15,12 +15,14 @@ export const SubmissionTable = (props: Props) => {
 
     return (
         <Table>
-            <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames}/>
-            {
-                submissions.map(submission => {
-                    return <TableRow key={submission.id} flattenedDataToDisplay={submission} />
-                })
-            }
+            <Container>
+                <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
+                {
+                    submissions.map(submission => {
+                        return <TableRow key={submission.id} flattenedDataToDisplay={submission} />
+                    })
+                }
+            </Container>
         </Table>
     );
 }

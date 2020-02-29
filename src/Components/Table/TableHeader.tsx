@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col } from 'reactstrap';
 
 type Props = {
     tableColumnNamesOrderedFromLeftToRight: string[];
@@ -8,14 +9,16 @@ export const TableHeader = (props: Props) => {
     const { tableColumnNamesOrderedFromLeftToRight } = props;
 
     return (
-        <th>
+        <Row>
             {
                 tableColumnNamesOrderedFromLeftToRight.map(columnName => {
                     return (
-                        <td>{columnName}</td>
+                        <Col>
+                            {columnName}
+                        </Col>
                     );
                 })
             }
-        </th>
+        </Row>
     );
 }
