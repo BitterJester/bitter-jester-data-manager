@@ -1,5 +1,5 @@
 import React from 'react';
-import { Submission, Submissions } from '../Pages/Submissions/Submissions';
+import { Submission } from '../Pages/Submissions/Submissions';
 import { TableRow } from './Table/TableRow';
 import { Table } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
@@ -11,7 +11,7 @@ type Props = {
 export const SubmissionTable = (props: Props) => {
     const { submissions } = props;
 
-    const columnNames: string[] = ['id', 'ip', 'answers', 'form_id', 'created_at', 'status', 'new', 'flag', 'notes', 'updated_at'];
+    const columnNames: string[] = ['Band Name', 'Primary Email Address'];
 
     return (
         <Table>

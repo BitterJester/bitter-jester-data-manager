@@ -34,7 +34,7 @@ describe('SubmissionTable', () => {
     });
 
     it('should pass submission object keys as column names to table header', () => {
-        const expected = ['id', 'ip', 'answers', 'form_id', 'created_at', 'status', 'new', 'flag', 'notes', 'updated_at'];
+        const expected = ['Band Name', 'Primary Email Address'];
         expect(component.find(TableHeader).props().tableColumnNamesOrderedFromLeftToRight).toEqual(expected);
     })
 
