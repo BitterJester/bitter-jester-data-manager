@@ -11,7 +11,9 @@
         "@types/node": "12.12.28",
         "@types/react": "16.9.23",
         "@types/react-dom": "16.9.5",
+        "@types/reactstrap": "^8.4.2",
         "aws-sdk": "^2.627.0",
+        "bootstrap": "^4.4.1",
         "dotenv": "^8.2.0",
         "enzyme": "3.11.0",
         "enzyme-adapter-react-16": "1.15.2",
@@ -19,6 +21,7 @@
         "react": "16.12.0",
         "react-dom": "16.12.0",
         "react-scripts": "3.4.0",
+        "reactstrap": "^8.4.1",
         "ts-jest": "25.2.1",
         "typescript": "3.7.5"
     },

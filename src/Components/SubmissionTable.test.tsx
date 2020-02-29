@@ -2,7 +2,9 @@ import React from 'react';
 import { SubmissionTable } from './SubmissionTable';
 import { shallow } from 'enzyme';
 import { Submission } from '../Pages/Submissions/Submissions';
-import { SubmissionRow } from './SubmissionRow';
+import { TableRow } from './Table/TableRow';
+import {Table} from 'reactstrap';
+import { TableHeader } from './Table/TableHeader';
 
 describe('SubmissionTable', () => {
     const submission: Submission = {
@@ -23,8 +25,21 @@ describe('SubmissionTable', () => {
     ];
     const component = shallow(<SubmissionTable submissions={mockSubmissions}/>);
 
-    const firstSubmissionRow = component.find(SubmissionRow).at(0);
-    it('should pass a submission as a prop to the submission row', () => {
-        expect(firstSubmissionRow.props().submission).toEqual(submission);
+    it('should render a table', () => {
+        expect(component.find(Table)).toHaveLength(1);
     });
+
+    it('should render a table header', () => {
+        expect(component.find(TableHeader)).toHaveLength(1);
+    });
+
+    it('should pass submission object keys as column names to table header', () => {
+        const expected = ['id', 'ip', 'answers', 'form_id', 'created_at', 'status', 'new', 'flag', 'notes', 'updated_at'];
+        expect(component.find(TableHeader).props().tableColumnNamesOrderedFromLeftToRight).toEqual(expected);
+    })
+
+    it('should pass a submission as a prop to the submission row', () => {
+        expect(component.find(TableRow).at(0).props().flattenedDataToDisplay).toEqual(submission);
+    });
+
 });
