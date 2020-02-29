@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { TableRow } from './TableRow';
-import { TableColumn } from './TableColumn';
 import { Row, Col } from 'reactstrap';
 
 describe('Table Row', () => {
