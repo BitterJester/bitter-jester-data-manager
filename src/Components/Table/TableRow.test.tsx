@@ -20,10 +20,10 @@ describe('Table Row', () => {
     });
 
     it('should pass value1 to table column', () => {
-        expect(component.find(TableColumn).at(0).props().displayText).toEqual('value1');
+        expect(component.find(TableColumn).at(0).props().displayText).toEqual('"value1"');
     });
 
     it('should pass value2 to table column', () => {
-        expect(component.find(TableColumn).at(1).props().displayText).toEqual('value2');
+        expect(component.find(TableColumn).at(1).props().displayText).toEqual('"value2"');
     });
 });

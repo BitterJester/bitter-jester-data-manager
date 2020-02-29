@@ -5,5 +5,11 @@ type Props = {
 }
 
 export const TableColumn = (props: Props) => {
-    return null;
+    const {displayText} = props;
+
+    return (
+        <td>
+            {displayText}
+        </td>
+    );
 }

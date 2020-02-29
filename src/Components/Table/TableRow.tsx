@@ -13,8 +13,9 @@ export const TableRow = (props: Props) => {
         <tr>
             {
                 Object.values(flattenedDataToDisplay).map(value => {
+                    const stringifiedValue = JSON.stringify(value);
                     return (
-                        <TableColumn displayText={value} key={value}/>
+                        <TableColumn displayText={stringifiedValue} key={stringifiedValue}/>
                     );
                 })
             }
