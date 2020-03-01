@@ -1,5 +1,5 @@
-import aws, { AWSError } from 'aws-sdk';
-import { GetObjectRequest, GetObjectOutput } from 'aws-sdk/clients/s3';
+import aws from 'aws-sdk';
+import { GetObjectRequest } from 'aws-sdk/clients/s3';
 
 export const getFromS3 = (setStateFunction: Function) => {
     const s3 = new aws.S3({

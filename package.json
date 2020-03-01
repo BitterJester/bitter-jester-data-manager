@@ -30,7 +30,8 @@
         "build": "react-scripts build",
         "deploy": "npm run build && aws s3 sync build/ s3://bitter-jester-data-manager",
         "test": "jest",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "buildEnv": "./buildEnv.sh"
     },
     "eslintConfig": {
         "extends": "react-app"

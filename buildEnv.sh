@@ -1,0 +1,1 @@
+echo "Access Key: ${REACT_APP_AWS_ACCESS_ID}"
