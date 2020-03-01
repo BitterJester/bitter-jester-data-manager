@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubmissionTable, SubmissionsTableColumnNames } from './SubmissionTable';
+import { SubmissionTable, SubmissionsTableColumnNames, DisplayApplication } from './SubmissionTable';
 import { shallow } from 'enzyme';
 import { TableRow } from './Table/TableRow';
 import { Table, Container } from 'reactstrap';
@@ -9,6 +9,14 @@ import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Subm
 describe('SubmissionTable', () => {
     const submission: BitterJesterApplication = {
         id: 'id',
+        bandName: 'bandName',
+        primaryEmailAddress: 'primaryEmailAddress',
+        firstChoiceFridayNight: 'firstChoiceFriday',
+        secondChoiceFridayNight: 'secondChoiceFriday',
+        isAvailableOnAllFridays: true
+    }
+
+    const prunedSubmission: DisplayApplication = {
         bandName: 'bandName',
         primaryEmailAddress: 'primaryEmailAddress',
         firstChoiceFriday: 'firstChoiceFriday',
@@ -43,7 +51,7 @@ describe('SubmissionTable', () => {
     })
 
     it('should pass a submission as a prop to the submission row', () => {
-        expect(component.find(TableRow).at(0).props().flattenedDataToDisplay).toEqual(submission);
+        expect(component.find(TableRow).at(0).props().flattenedDataToDisplay).toEqual(prunedSubmission);
     });
 
 });

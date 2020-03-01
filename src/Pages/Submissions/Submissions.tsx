@@ -11,8 +11,9 @@ export type BitterJesterApplication = {
     id: string;
     bandName: string;
     primaryEmailAddress: string;
-    firstChoiceFriday?: string;
-    secondChoiceFriday?: string;
+    firstChoiceFridayNight?: string;
+    secondChoiceFridayNight?: string;
+    isAvailableOnAllFridays: boolean;
 }
 
 export const Submissions = () => {
