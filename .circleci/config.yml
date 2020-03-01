@@ -9,7 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            -run:
+            - run:
                 name: Install aws cli
                 command: |
                   sudo apt-get update
