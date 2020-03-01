@@ -12,6 +12,7 @@ export type BitterJesterApplication = {
     bandName: string;
     primaryEmailAddress: string;
     firstChoiceFriday?: string;
+    secondChoiceFriday?: string;
 }
 
 export const Submissions = () => {

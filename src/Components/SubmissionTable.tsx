@@ -8,12 +8,12 @@ type Props = {
     submissions: BitterJesterApplications;
 }
 
-export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday'
+export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday' | 'Second Choice Friday'
 
 export const SubmissionTable = (props: Props) => {
     const { submissions } = props;
 
-    const columnNames: SubmissionsTableColumnNames[] = ['Band Name', 'Primary Email Address', 'First Choice Friday'];
+    const columnNames: SubmissionsTableColumnNames[] = ['Band Name', 'Primary Email Address', 'First Choice Friday', 'Second Choice Friday'];
 
     const completedApplications = submissions.completedApplications || [];
     return (

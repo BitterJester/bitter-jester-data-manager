@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmissionTable, SubmissionsTableColumnNames } from './SubmissionTable';
 import { shallow } from 'enzyme';
 import { TableRow } from './Table/TableRow';
-import {Table, Container} from 'reactstrap';
+import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
 
@@ -11,13 +11,14 @@ describe('SubmissionTable', () => {
         id: 'id',
         bandName: 'bandName',
         primaryEmailAddress: 'primaryEmailAddress',
-        firstChoiceFriday: 'firstChoiceFriday'
+        firstChoiceFriday: 'firstChoiceFriday',
+        secondChoiceFriday: 'secondChoiceFriday'
     }
 
     const mockSubmissions: BitterJesterApplications = {
         completedApplications: [submission]
     };
-    const component = shallow(<SubmissionTable submissions={mockSubmissions}/>);
+    const component = shallow(<SubmissionTable submissions={mockSubmissions} />);
 
     it('should render a table', () => {
         expect(component.find(Table)).toHaveLength(1);
@@ -32,7 +33,12 @@ describe('SubmissionTable', () => {
     });
 
     it('should pass submission object keys as column names to table header', () => {
-        const expected: SubmissionsTableColumnNames[] = ['Band Name', 'Primary Email Address', 'First Choice Friday'];
+        const expected: SubmissionsTableColumnNames[] = [
+            'Band Name',
+            'Primary Email Address',
+            'First Choice Friday',
+            'Second Choice Friday'
+        ];
         expect(component.find(TableHeader).props().tableColumnNamesOrderedFromLeftToRight).toEqual(expected);
     })
 
