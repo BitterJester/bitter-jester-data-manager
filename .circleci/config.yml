@@ -23,11 +23,6 @@ jobs:
                   sudo apt-get install awscli
                   aws --version
             - run:
-                name: Setup AWS credentials
-                command: |
-                  chmod 777 ./buildAwsCredentials.sh
-                  ./buildAwsCredentials.sh
-            - run:
                 name: Install dependencies
                 command: |
                   npm install
