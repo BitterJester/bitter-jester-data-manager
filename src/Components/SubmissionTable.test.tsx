@@ -1,7 +1,7 @@
 import React from 'react';
 import { SubmissionTable, SubmissionsTableColumnNames, DisplayApplication } from './SubmissionTable';
 import { shallow } from 'enzyme';
-import { TableRow } from './Table/TableRow';
+import { SubmissionTableRow } from './Table/SubmissionTableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
@@ -51,7 +51,7 @@ describe('SubmissionTable', () => {
     })
 
     it('should pass a submission as a prop to the submission row', () => {
-        expect(component.find(TableRow).at(0).props().flattenedDataToDisplay).toEqual(prunedSubmission);
+        expect(component.find(SubmissionTableRow).at(0).props().flattenedDataToDisplay).toEqual(prunedSubmission);
     });
 
 });

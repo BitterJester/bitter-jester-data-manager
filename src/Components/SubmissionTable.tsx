@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableRow } from './Table/TableRow';
+import { SubmissionTableRow } from './Table/SubmissionTableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
@@ -25,7 +25,7 @@ export const SubmissionTable = (props: Props) => {
     const completedApplications = submissions.completedApplications || [];
 
     const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): DisplayApplications => {
-        const temp =  applications.map(app => {
+        return applications.map(app => {
             return {
                 bandName: app.bandName,
                 primaryEmailAddress: app.primaryEmailAddress,
@@ -33,11 +33,6 @@ export const SubmissionTable = (props: Props) => {
                 secondChoiceFriday: app.secondChoiceFridayNight || ''
             }
         });
-
-
-        console.log(temp);
-
-        return temp;
     }
 
     return (
@@ -46,7 +41,7 @@ export const SubmissionTable = (props: Props) => {
                 <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
                 {
                     pruneDownApplicationsForDisplay(completedApplications).map(submission => {
-                        return <TableRow key={submission.bandName} flattenedDataToDisplay={submission} />
+                        return <SubmissionTableRow key={submission.bandName} flattenedDataToDisplay={submission} />
                     })
                 }
             </Container>

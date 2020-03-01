@@ -1,8 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { TableRow } from './TableRow';
+import { SubmissionTableRow } from './SubmissionTableRow';
 import { Row, Col } from 'reactstrap';
-import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Table Row', () => {
@@ -11,7 +10,7 @@ describe('Table Row', () => {
         value2: 'value2'
     }
 
-    const component = shallow(<TableRow flattenedDataToDisplay={item} key={'1'} />);
+    const component = shallow(<SubmissionTableRow flattenedDataToDisplay={item} key={'1'} />);
     console.log(component.find('td'))
     it('should render a row', () => {
         expect(component.find(Row)).toHaveLength(1);

@@ -8,7 +8,7 @@ type Props = {
     key: React.Component | string;
 }
 
-export const TableRow = (props: Props) => {
+export const SubmissionTableRow = (props: Props) => {
     const { flattenedDataToDisplay } = props;
 
     return (
