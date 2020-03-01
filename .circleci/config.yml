@@ -25,7 +25,7 @@ jobs:
             - run:
                 name: Setup AWS credentials
                 command: |
-                  chmod 777 ./buildAwsCredntials.sh
+                  chmod 777 ./buildAwsCredentials.sh
                   ./buildAwsCredentials.sh
             - run:
                 name: Install dependencies
