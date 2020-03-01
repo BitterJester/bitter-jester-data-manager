@@ -9,10 +9,26 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run: npm run buildEnv
-            - run: npm install
-            - run: npm test
-            - run: npm run deploy
+            - run:
+                name: Make script executable
+                command: |
+                  chmod 777 ./buildEnv.sh
+            - run: 
+                name: Build an environment file
+                command: |
+                  npm run buildEnv
+            - run: 
+                name: Run tests
+                command: |
+                  npm test
+            - run: 
+                name: Install dependencies
+                command: |
+                  npm install
+            - run: 
+                name: Deploy to s3 bucket
+                command: |
+                  npm run deploy
 workflows:
     build-and-test:
       jobs:
