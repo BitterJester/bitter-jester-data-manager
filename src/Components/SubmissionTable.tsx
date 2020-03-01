@@ -46,7 +46,7 @@ export const SubmissionTable = (props: Props) => {
                 <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
                 {
                     pruneDownApplicationsForDisplay(completedApplications).map(submission => {
-                        return <TableRow key={submission.id} flattenedDataToDisplay={submission} />
+                        return <TableRow key={submission.bandName} flattenedDataToDisplay={submission} />
                     })
                 }
             </Container>
