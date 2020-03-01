@@ -3,6 +3,10 @@ import { getFromS3 } from '../../s3/getFromS3';
 import { Title } from '../../Components/Title';
 import { SubmissionTable } from '../../Components/SubmissionTable';
 
+export type BitterJesterApplications = {
+    completedApplications?: BitterJesterApplication[];
+}
+
 export type BitterJesterApplication = {
     id: string;
     bandName: string;
@@ -11,7 +15,7 @@ export type BitterJesterApplication = {
 }
 
 export const Submissions = () => {
-    const initialSubmissions: BitterJesterApplication[] = [];
+    const initialSubmissions: BitterJesterApplications = {};
     const [submissions, setSubmissions] = useState(initialSubmissions);
 
     useEffect(() => {

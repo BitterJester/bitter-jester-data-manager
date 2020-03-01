@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { TableRow } from './Table/TableRow';
 import {Table, Container} from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
-import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
 
 describe('SubmissionTable', () => {
     const submission: BitterJesterApplication = {
@@ -14,9 +14,9 @@ describe('SubmissionTable', () => {
         firstChoiceFriday: 'firstChoiceFriday'
     }
 
-    const mockSubmissions: BitterJesterApplication[] = [
-        submission
-    ];
+    const mockSubmissions: BitterJesterApplications = {
+        completedApplications: [submission]
+    };
     const component = shallow(<SubmissionTable submissions={mockSubmissions}/>);
 
     it('should render a table', () => {

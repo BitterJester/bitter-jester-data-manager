@@ -2,10 +2,10 @@ import React from 'react';
 import { TableRow } from './Table/TableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
-import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
 
 type Props = {
-    submissions: BitterJesterApplication[];
+    submissions: BitterJesterApplications;
 }
 
 export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday'
@@ -15,12 +15,13 @@ export const SubmissionTable = (props: Props) => {
 
     const columnNames: SubmissionsTableColumnNames[] = ['Band Name', 'Primary Email Address', 'First Choice Friday'];
 
+    const completedApplications = submissions.completedApplications || [];
     return (
         <Table>
             <Container>
                 <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
                 {
-                    submissions.map(submission => {
+                    completedApplications.map(submission => {
                         return <TableRow key={submission.id} flattenedDataToDisplay={submission} />
                     })
                 }
