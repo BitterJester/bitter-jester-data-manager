@@ -5,6 +5,7 @@ import { SubmissionTableRow } from './Table/SubmissionTableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 describe('SubmissionTable', () => {
     const submission: BitterJesterApplication = {
@@ -16,24 +17,26 @@ describe('SubmissionTable', () => {
         isAvailableOnAllFridays: true
     }
 
-    const prunedSubmission: DisplayApplication = {
-        bandName: 'bandName',
-        primaryEmailAddress: 'primaryEmailAddress',
-        firstChoiceFriday: 'firstChoiceFriday',
-        secondChoiceFriday: 'secondChoiceFriday'
-    }
+    const getDisplayApplication = (): DisplayApplication => {
+        return {
+            bandName: 'bandName',
+            primaryEmailAddress: 'primaryEmailAddress',
+            firstChoiceFriday: 'firstChoiceFriday',
+            secondChoiceFriday: 'secondChoiceFriday'
+        };
+    };
+
+    const prunedSubmission1: DisplayApplication = getDisplayApplication();
+    const prunedSubmission2: DisplayApplication = getDisplayApplication();
 
     const mockSubmissions: BitterJesterApplications = {
         completedApplications: [submission]
     };
     const component = shallow(<SubmissionTable submissions={mockSubmissions} />);
 
-    it('should render a table', () => {
-        expect(component.find(Table)).toHaveLength(1);
-    });
-
+    const container = component.find(Container);
     it('should render a container', () => {
-        expect(component.find(Container)).toHaveLength(1);
+        expect(container).toHaveLength(1);
     })
 
     it('should render a table header', () => {
@@ -48,10 +51,28 @@ describe('SubmissionTable', () => {
             'Second Choice Friday'
         ];
         expect(component.find(TableHeader).props().tableColumnNamesOrderedFromLeftToRight).toEqual(expected);
-    })
-
-    it('should pass a submission as a prop to the submission row', () => {
-        expect(component.find(SubmissionTableRow).at(0).props().flattenedDataToDisplay).toEqual(prunedSubmission);
     });
 
+    describe('Drag and Drop', () => {
+        const dropResult: DropResult = {
+            source: {
+                index: 0,
+                droppableId: ''
+            },
+            destination: {
+                index: 1,
+                droppableId: ''
+            },
+            reason: null,
+            type: null,
+            mode: null,
+            draggableId: ''
+        };
+        const dragDropContext = container.childAt(1).find(DragDropContext);
+        dragDropContext.props().onDragEnd(dropResult, null);
+
+        it('should have tests written eventually', () => {
+            expect(true).toEqual(true);
+        })
+    });
 });

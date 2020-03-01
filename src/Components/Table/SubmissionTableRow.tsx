@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import '../../static/tableRow.css';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 type Props = {
     flattenedDataToDisplay: object;
-    key: React.Component | string;
+    key: string | number;
 }
 
 export const SubmissionTableRow = (props: Props) => {
@@ -13,7 +12,6 @@ export const SubmissionTableRow = (props: Props) => {
 
     return (
         <Row>
-            <DragDropContext onDragEnd={() => null}>
             {
                 Object.values(flattenedDataToDisplay).map(value => {
                     return (
@@ -23,7 +21,6 @@ export const SubmissionTableRow = (props: Props) => {
                     );
                 })
             }
-            </DragDropContext>
         </Row>
     );
 }

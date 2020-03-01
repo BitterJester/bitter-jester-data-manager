@@ -12,9 +12,9 @@ export const TableHeader = (props: Props) => {
     return (
         <Row>
             {
-                tableColumnNamesOrderedFromLeftToRight.map(columnName => {
+                tableColumnNamesOrderedFromLeftToRight.map((columnName, index) => {
                     return (
-                        <Col className={'tableHeaderContent'}>
+                        <Col key={index} className={'tableHeaderContent'}>
                             {columnName}
                         </Col>
                     );

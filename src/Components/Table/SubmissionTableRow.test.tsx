@@ -20,16 +20,6 @@ describe('Table Row', () => {
         expect(component.find(Col)).toHaveLength(2);
     });
 
-    describe('Drag and Drop', () => {
-        it('should have a DragDropContext', () => {
-            expect(component.find(DragDropContext)).toBeDefined();
-        });
-
-        it('should have an onDragEnd prop', () => {
-            expect(component.find(DragDropContext).props().onDragEnd).toBeDefined();
-        });
-    })
-
     it('should pass value1 to table column', () => {
         expect(component.find(Col).at(0).childAt(0).text()).toEqual('value1');
     });

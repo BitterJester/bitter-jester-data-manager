@@ -17,11 +17,13 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "strict": false
   },
   "include": [
     "src",
-    "setupTests.ts", "mocks"
+    "setupTests.ts",
+    "mocks"
   ],
   "exclude": [
     "node_modules"
