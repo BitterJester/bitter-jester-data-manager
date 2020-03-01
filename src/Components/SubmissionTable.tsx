@@ -1,17 +1,19 @@
 import React from 'react';
-import { Submission } from '../Pages/Submissions/Submissions';
 import { TableRow } from './Table/TableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
+import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 
 type Props = {
-    submissions: Submission[];
+    submissions: BitterJesterApplication[];
 }
+
+export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday'
 
 export const SubmissionTable = (props: Props) => {
     const { submissions } = props;
 
-    const columnNames: string[] = ['Band Name', 'Primary Email Address'];
+    const columnNames: SubmissionsTableColumnNames[] = ['Band Name', 'Primary Email Address', 'First Choice Friday'];
 
     return (
         <Table>

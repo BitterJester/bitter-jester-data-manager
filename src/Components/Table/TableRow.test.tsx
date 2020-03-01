@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { TableRow } from './TableRow';
 import { Row, Col } from 'reactstrap';
+import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 
 describe('Table Row', () => {
     const item = {
