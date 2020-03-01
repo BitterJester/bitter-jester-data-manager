@@ -2,7 +2,7 @@ import React from 'react';
 import { TableRow } from './Table/TableRow';
 import { Table, Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
-import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
 
 type Props = {
     submissions: BitterJesterApplications;
