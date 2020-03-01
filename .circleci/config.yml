@@ -9,22 +9,24 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
-            - run:
+            - run: 
+                name: Build an environment file
+                command: |
+                  chmod 777 ./buildEnv.sh
+                  echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
+                  echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
+                  npm run buildEnv
+             - run:
                 name: Install aws cli
                 command: |
                   sudo apt-get update
                   sudo apt-get install awscli
                   aws --version
             - run:
-                name: Make script executable
+                name: Setup AWS credentials
                 command: |
-                  chmod 777 ./buildEnv.sh
-            - run: 
-                name: Build an environment file
-                command: |
-                  echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
-                  echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
-                  npm run buildEnv
+                  chmod 777 ./buildAwsCredntials.sh
+                  ./buildAwsCredentials.sh
             - run: 
                 name: Install dependencies
                 command: |
