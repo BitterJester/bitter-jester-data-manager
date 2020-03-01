@@ -16,8 +16,8 @@ jobs:
             - run: 
                 name: Build an environment file
                 command: |
-                  export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}
-                  export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}
+                  echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
+                  echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
                   echo $REACT_APP_AWS_SECRET_KEY
                   npm run buildEnv
             - run: 
