@@ -11,6 +11,7 @@ export const Title = (props: Props) => {
     return (
         <div className={'titleContent'}>
             <h1>{titleDisplayText}</h1>
+            Patrick is poo
         </div>
     )
 }
