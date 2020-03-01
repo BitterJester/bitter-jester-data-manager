@@ -18,13 +18,13 @@ jobs:
                 command: |
                   npm run buildEnv
             - run: 
-                name: Run tests
-                command: |
-                  npm test
-            - run: 
                 name: Install dependencies
                 command: |
                   npm install
+            - run: 
+                name: Run tests
+                command: |
+                  npm test
             - run: 
                 name: Deploy to s3 bucket
                 command: |
