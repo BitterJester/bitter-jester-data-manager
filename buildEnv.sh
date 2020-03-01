@@ -1,1 +1,2 @@
-echo "Access Key: ${REACT_APP_AWS_ACCESS_ID}"
+${REACT_APP_AWS_ACCESS_ID} >> './.env'
+${REACT_APP_AWS_SECRET_KEY} >> './env'
