@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { TableRow } from './TableRow';
 import { Row, Col } from 'reactstrap';
 import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Table Row', () => {
     const item = {
@@ -19,6 +20,16 @@ describe('Table Row', () => {
     it('should display item1', () => {
         expect(component.find(Col)).toHaveLength(2);
     });
+
+    describe('Drag and Drop', () => {
+        it('should have a DragDropContext', () => {
+            expect(component.find(DragDropContext)).toBeDefined();
+        });
+
+        it('should have an onDragEnd prop', () => {
+            expect(component.find(DragDropContext).props().onDragEnd).toBeDefined();
+        });
+    })
 
     it('should pass value1 to table column', () => {
         expect(component.find(Col).at(0).childAt(0).text()).toEqual('value1');
