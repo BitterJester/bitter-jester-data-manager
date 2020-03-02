@@ -1,9 +1,9 @@
 import React from 'react';
-import { SubmissionTable, SubmissionsTableColumnNames, DisplayApplication } from './SubmissionTable';
+import { SubmissionTable, SubmissionsTableColumnNames } from './SubmissionTable';
 import { shallow } from 'enzyme';
 import { Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
-import { BitterJesterApplication, BitterJesterApplications } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 
 describe('SubmissionTable', () => {
