@@ -29,7 +29,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build",
+        "build": "set \"CI=false\" && react-scripts build",
         "deploy": "npm run build && aws s3 sync build/ s3://bitter-jester-data-manager",
         "test": "jest",
         "eject": "react-scripts eject",
