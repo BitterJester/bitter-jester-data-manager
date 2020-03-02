@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { SubmissionTableRow } from './Table/SubmissionTableRow';
-import { Table, Container } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
-import { DragDropContext, OnDragEndResponder, DropResult, ResponderProvided, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, ResponderProvided, Droppable, Draggable } from 'react-beautiful-dnd';
 
 type Props = {
     submissions: BitterJesterApplications;
@@ -109,7 +109,7 @@ export const SubmissionTable = (props: Props) => {
                                             )}
                                         >
                                             {
-                                                <SubmissionTableRow key={index} flattenedDataToDisplay={item}/>
+                                                <SubmissionTableRow key={index} flattenedDataToDisplay={item} />
                                             }
                                         </div>
                                     )}
