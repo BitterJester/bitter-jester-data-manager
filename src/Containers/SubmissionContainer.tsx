@@ -1,10 +1,11 @@
-import React from 'react';
-import { Container, Row } from 'reactstrap';
+import React, { Fragment } from 'react';
+import { Container, Row, Card, Col } from 'reactstrap';
 import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
+import { Title } from '../Components/Title';
 
 type Props = {
     submissions: BitterJesterApplications;
@@ -49,11 +50,24 @@ export const SubmissionContainer = (props: Props) => {
 
     return (
         <Container fluid>
-            <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-            <Row>
-                <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
-            </Row>
-            <SuggestedScheduleDragAndDropLists applications={prunedApplications} />
+            <div style={{ padding: '15px' }}>
+                <Card>
+                    <Fragment>
+                        <Title titleDisplayText={'Completed Submissions'} />
+                        <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
+                        <Row>
+                            <Col>
+                                <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
+                            </Col>
+                        </Row>
+                    </Fragment>
+                </Card>
+            </div>
+            <div style={{ padding: '15px' }}>
+                <Card>
+                    <SuggestedScheduleDragAndDropLists applications={prunedApplications} />
+                </Card>
+            </div>
         </Container>
     );
 }

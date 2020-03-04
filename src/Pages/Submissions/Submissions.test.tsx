@@ -7,10 +7,7 @@ import { Title } from '../../Components/Title';
 describe('Submissions page', () => {
     const component = shallow(<Submissions />);
 
-    it('should display a title', () => {
-        expect(component.find(Title).props().titleDisplayText).toEqual('Completed Submissions');
-    });
-    
+
     describe('SubmissionTable', () => {
         it('should render a SubmissionTable', () => {
             expect(component.find(SubmissionContainer)).toBeDefined();

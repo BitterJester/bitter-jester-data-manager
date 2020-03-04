@@ -1,5 +1,6 @@
 import React from 'react';
 import '../static/title.css';
+import { Row } from 'reactstrap';
 
 type Props = {
     titleDisplayText: string;

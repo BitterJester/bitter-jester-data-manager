@@ -6,6 +6,7 @@ import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
+import { Title } from '../Components/Title';
 
 describe('SubmissionTable', () => {
     const getSubmission = (bandName) => {
@@ -41,6 +42,11 @@ describe('SubmissionTable', () => {
         ];
         expect(component.find(TableHeader).props().tableColumnNamesOrderedFromLeftToRight).toEqual(expected);
     });
+
+    it('should display a title', () => {
+        expect(component.find(Title).props().titleDisplayText).toEqual('Completed Submissions');
+    });
+    
 
     describe('Drag and Drop', () => {
         it('should render a drag and drop list', () => {

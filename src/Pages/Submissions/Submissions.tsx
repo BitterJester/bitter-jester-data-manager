@@ -29,7 +29,7 @@ export const Submissions = () => {
 
     return (
         <div>
-            <Title titleDisplayText={'Completed Submissions'} />
+            
             <SubmissionContainer submissions={submissions} />
         </div>
     );
