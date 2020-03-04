@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../../s3/getFromS3';
-import { Title } from '../../Components/Title';
 import { SubmissionContainer } from '../../Containers/SubmissionContainer';
 
 export type BitterJesterApplications = {
