@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult, ResponderProvided, Draggable } from 'react-beautiful-dnd';
-import { Row } from 'reactstrap';
+
 type Props = {
     initialOrderComponentsToDisplay: any[];
 };
@@ -50,9 +50,6 @@ export const DragAndDropList = (props: Props) => {
         setOrderedItemsForDisplay(reorderedSubmissions);
     };
 
-    initialItems.forEach(element => {
-        console.log(element);
-    });
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">

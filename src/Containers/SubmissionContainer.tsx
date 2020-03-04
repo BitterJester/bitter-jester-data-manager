@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
-import { Title } from '../Components/Title';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 
