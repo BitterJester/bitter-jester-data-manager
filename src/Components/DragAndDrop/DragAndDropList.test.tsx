@@ -24,8 +24,4 @@ describe('DragAndDropContainer', () => {
     it('should render a draggable for each item', () => {
         expect(true).toEqual(true);
     });
-
-    it('should render a row', () => {
-        expect(component.find(Row)).toHaveLength(1);
-    });
 });

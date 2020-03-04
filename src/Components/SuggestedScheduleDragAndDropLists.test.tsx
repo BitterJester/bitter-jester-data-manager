@@ -6,6 +6,7 @@ import { Title } from './Title';
 import { TableHeader } from './Table/TableHeader';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 import { PrunedApplication } from '../Containers/SubmissionContainer';
+import { SubmissionTableRow } from './Table/SubmissionTableRow';
 
 describe('SuggestedScheduleDragAndDropLists', () => {
     const band1 = {
@@ -48,4 +49,14 @@ describe('SuggestedScheduleDragAndDropLists', () => {
     it('should render a dragAndDropList for each night', () => {
         expect(component.find(DragAndDropList)).toHaveLength(4);
     });
+
+    it('should pass band names to each drag and drop list', () => {
+        expect(component.find(DragAndDropList).at(0).props().initialOrderComponentsToDisplay).toEqual(
+            [
+                <SubmissionTableRow key={0} flattenedDataToDisplay={{bandName: 'band1'}} />,
+                <SubmissionTableRow key={1} flattenedDataToDisplay={{bandName: 'band2'}} />
+
+            ]
+        )
+    })
 })

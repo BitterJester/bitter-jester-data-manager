@@ -51,7 +51,9 @@ export const SubmissionContainer = (props: Props) => {
     return (
         <Container fluid>
             <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-            <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
+            <Row>
+                <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
+            </Row>
             <SuggestedScheduleDragAndDropLists applications={prunedApplications} />
         </Container>
     );

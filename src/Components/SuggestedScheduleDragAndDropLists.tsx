@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Row } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { PrunedApplication } from '../Containers/SubmissionContainer';
 import { Title } from './Title';
 import { TableHeader } from './Table/TableHeader';
@@ -23,7 +23,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
             <Row>
                 {
                     fridayNights.map(night => {
-                        return <DragAndDropList initialOrderComponentsToDisplay={bandNames} />
+                        return <Col><DragAndDropList initialOrderComponentsToDisplay={bandNames} /></Col>
                     })
                 }
             </Row>
