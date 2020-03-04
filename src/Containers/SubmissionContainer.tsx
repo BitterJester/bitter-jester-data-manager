@@ -48,17 +48,11 @@ export const SubmissionContainer = (props: Props) => {
         return <SubmissionTableRow key={index} flattenedDataToDisplay={prunedApplication} />
     });
 
-    const bandNames = prunedApplications.map((prunedApplication, index) => {
-        return <SubmissionTableRow key={index} flattenedDataToDisplay={{ bandName: prunedApplication.bandName }} />
-    })
-
     return (
         <Container fluid>
             <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-            <Row>
-                <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
-            </Row>
-            <SuggestedScheduleDragAndDropLists applications={prunedApplications}/>
+            <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
+            <SuggestedScheduleDragAndDropLists applications={prunedApplications} />
         </Container>
     );
 }

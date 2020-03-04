@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, DropResult, ResponderProvided, Draggable } from 'react-beautiful-dnd';
+import { Row } from 'reactstrap';
 type Props = {
     initialOrderComponentsToDisplay: any[];
 };
@@ -53,35 +54,37 @@ export const DragAndDropList = (props: Props) => {
         console.log(element);
     });
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
-                    <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={getListStyle(snapshot.isDraggingOver)}
-                    >
-                        {orderedItemsForDisplay.map((item, index) => (
-                            <Draggable key={index} draggableId={`${index}`} index={index}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
-                                    >
-                                        {item}
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
-        </DragDropContext>
+        <Row>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                        <div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                        >
+                            {orderedItemsForDisplay.map((item, index) => (
+                                <Draggable key={index} draggableId={`${index}`} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}
+                                        >
+                                            {item}
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        </Row>
     )
 }

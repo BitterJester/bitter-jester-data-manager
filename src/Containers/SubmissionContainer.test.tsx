@@ -30,10 +30,6 @@ describe('SubmissionTable', () => {
     const container = component.find(Container);
     it('should render a container', () => {
         expect(container).toHaveLength(1);
-    })
-
-    it('should render a table header', () => {
-        expect(component.find(TableHeader)).toHaveLength(1);
     });
 
     it('should pass submission object keys as column names to table header', () => {
@@ -66,10 +62,10 @@ describe('SubmissionTable', () => {
                 firstChoiceFridayNight: 'firstChoiceFriday',
                 secondChoiceFridayNight: 'secondChoiceFriday'
             }
-        ]
+        ];
 
         it('should pass prunedApplications to suggested schedule component', () => {
             expect(component.find(SuggestedScheduleDragAndDropLists).props().applications).toEqual(mockPrunedApplications);
-        })
+        });
     })
 });

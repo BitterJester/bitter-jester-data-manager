@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { DragAndDropList } from './DragAndDropList';
+import { Row } from 'reactstrap';
 
 describe('DragAndDropContainer', () => {
     const mockItems = [
@@ -12,7 +13,7 @@ describe('DragAndDropContainer', () => {
             somethingElse
         </div>
     ]
-    const component = shallow(<DragAndDropList initialOrderComponentsToDisplay={mockItems}/>);
+    const component = shallow(<DragAndDropList initialOrderComponentsToDisplay={mockItems} />);
 
     const dragDropContext = component.find(DragDropContext);
 
@@ -22,5 +23,9 @@ describe('DragAndDropContainer', () => {
 
     it('should render a draggable for each item', () => {
         expect(true).toEqual(true);
+    });
+
+    it('should render a row', () => {
+        expect(component.find(Row)).toHaveLength(1);
     });
 });
