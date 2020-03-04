@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Submissions } from './Submissions';
-import { SubmissionTable } from '../../Components/SubmissionTable';
+import { SubmissionContainer } from '../../Containers/SubmissionContainer';
 import { Title } from '../../Components/Title';
 
 describe('Submissions page', () => {
@@ -13,11 +13,11 @@ describe('Submissions page', () => {
     
     describe('SubmissionTable', () => {
         it('should render a SubmissionTable', () => {
-            expect(component.find(SubmissionTable)).toBeDefined();
+            expect(component.find(SubmissionContainer)).toBeDefined();
         });
     
         it('should pass submission to the submission table as a prop', () => {
-            expect(component.find(SubmissionTable).props().submissions).toBeDefined();
+            expect(component.find(SubmissionContainer).props().submissions).toBeDefined();
         });
     });
 });

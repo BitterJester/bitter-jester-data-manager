@@ -49,6 +49,9 @@ export const DragAndDropList = (props: Props) => {
         setOrderedItemsForDisplay(reorderedSubmissions);
     };
 
+    initialItems.forEach(element => {
+        console.log(element);
+    });
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">

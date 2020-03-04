@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../../s3/getFromS3';
 import { Title } from '../../Components/Title';
-import { SubmissionTable } from '../../Components/SubmissionTable';
+import { SubmissionContainer } from '../../Containers/SubmissionContainer';
 
 export type BitterJesterApplications = {
     completedApplications?: BitterJesterApplication[];
@@ -30,7 +30,7 @@ export const Submissions = () => {
     return (
         <div>
             <Title titleDisplayText={'Completed Submissions'} />
-            <SubmissionTable submissions={submissions} />
+            <SubmissionContainer submissions={submissions} />
         </div>
     );
 }

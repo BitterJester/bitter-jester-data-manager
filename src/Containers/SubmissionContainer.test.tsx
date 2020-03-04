@@ -1,10 +1,10 @@
 import React from 'react';
-import { SubmissionTable, SubmissionsTableColumnNames } from './SubmissionTable';
+import { SubmissionContainer, SubmissionsTableColumnNames } from './SubmissionContainer';
 import { shallow } from 'enzyme';
 import { Container } from 'reactstrap';
-import { TableHeader } from './Table/TableHeader';
+import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
-import { DragAndDropList } from './DragAndDrop/DragAndDropList';
+import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 
 describe('SubmissionTable', () => {
     const getSubmission = (bandName) => {
@@ -24,7 +24,7 @@ describe('SubmissionTable', () => {
             getSubmission('band2')
         ]
     };
-    const component = shallow(<SubmissionTable submissions={mockSubmissions} />);
+    const component = shallow(<SubmissionContainer submissions={mockSubmissions} />);
 
     const container = component.find(Container);
     it('should render a container', () => {
