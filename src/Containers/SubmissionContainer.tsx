@@ -5,9 +5,17 @@ import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Subm
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { Title } from '../Components/Title';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
+import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 
 type Props = {
     submissions: BitterJesterApplications;
+}
+
+export type PrunedApplication = {
+    bandName: string;
+    primaryEmailAddress: string;
+    firstChoiceFridayNight: string;
+    secondChoiceFridayNight: string;
 }
 
 export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday' | 'Second Choice Friday'
@@ -23,13 +31,13 @@ export const SubmissionContainer = (props: Props) => {
     ];
     const completedApplications = submissions.completedApplications || [];
 
-    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): any[] => {
+    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): PrunedApplication[] => {
         return applications.map((app, index) => {
             return {
                 bandName: app.bandName,
                 primaryEmailAddress: app.primaryEmailAddress,
-                firstChoiceFriday: app.firstChoiceFridayNight || '',
-                secondChoiceFriday: app.secondChoiceFridayNight || ''
+                firstChoiceFridayNight: app.firstChoiceFridayNight || '',
+                secondChoiceFridayNight: app.secondChoiceFridayNight || ''
             };
         });
     }
@@ -50,22 +58,7 @@ export const SubmissionContainer = (props: Props) => {
             <Row>
                 <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
             </Row>
-                <Title titleDisplayText={'Suggested Friday Night Schedule'} />
-            <TableHeader tableColumnNamesOrderedFromLeftToRight={['6/5', '6/12', '6/19', '6/26']} />
-            <Row>
-                <Col>
-                    <DragAndDropList initialOrderComponentsToDisplay={bandNames} />
-                </Col>
-                <Col>
-                    <DragAndDropList initialOrderComponentsToDisplay={bandNames} />
-                </Col>
-                <Col>
-                    <DragAndDropList initialOrderComponentsToDisplay={bandNames} />
-                </Col>
-                <Col>
-                    <DragAndDropList initialOrderComponentsToDisplay={bandNames} />
-                </Col>
-            </Row>
+            <SuggestedScheduleDragAndDropLists applications={prunedApplications}/>
         </Container>
     );
 }

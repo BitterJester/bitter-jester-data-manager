@@ -5,6 +5,7 @@ import { Container } from 'reactstrap';
 import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
+import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 
 describe('SubmissionTable', () => {
     const getSubmission = (bandName) => {
@@ -46,9 +47,29 @@ describe('SubmissionTable', () => {
     });
 
     describe('Drag and Drop', () => {
-
         it('should render a drag and drop list', () => {
             expect(component.find(DragAndDropList)).toBeDefined();
         })
     });
+
+    describe('SuggestedSchedule', () => {
+        const mockPrunedApplications = [
+            {
+                bandName: 'band1',
+                primaryEmailAddress: 'primaryEmailAddress',
+                firstChoiceFridayNight: 'firstChoiceFriday',
+                secondChoiceFridayNight: 'secondChoiceFriday'
+            },
+            {
+                bandName: 'band2',
+                primaryEmailAddress: 'primaryEmailAddress',
+                firstChoiceFridayNight: 'firstChoiceFriday',
+                secondChoiceFridayNight: 'secondChoiceFriday'
+            }
+        ]
+
+        it('should pass prunedApplications to suggested schedule component', () => {
+            expect(component.find(SuggestedScheduleDragAndDropLists).props().applications).toEqual(mockPrunedApplications);
+        })
+    })
 });
