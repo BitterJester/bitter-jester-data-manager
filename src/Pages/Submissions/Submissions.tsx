@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { getFromS3 } from '../../s3/getFromS3';
+import React from 'react';
 import { SubmissionContainer } from '../../Containers/SubmissionContainer';
+import { ScheduleContainer } from '../../Containers/ScheduleContainer';
 
 export type BitterJesterApplications = {
     completedApplications?: BitterJesterApplication[];
@@ -16,20 +16,10 @@ export type BitterJesterApplication = {
 }
 
 export const Submissions = () => {
-    const initialSubmissions: BitterJesterApplications = {};
-    const [submissions, setSubmissions] = useState(initialSubmissions);
-
-    useEffect(() => {
-        async function fetch() {
-            await getFromS3(setSubmissions);
-        }
-        fetch();
-    }, []);
-
     return (
         <div>
-            
-            <SubmissionContainer submissions={submissions} />
+            <SubmissionContainer />
+            <ScheduleContainer />
         </div>
     );
 }
