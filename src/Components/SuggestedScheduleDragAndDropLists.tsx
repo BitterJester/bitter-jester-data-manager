@@ -13,20 +13,23 @@ type Props = {
 export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const { schedule } = props;
     const fridayNights = ['6/5', '6/12', '6/19', '6/26'];
-    const foo = [];
+    const schedulesInformation = [];
+
     Object.values(schedule).forEach(nightSchedule => {
-        foo.push(nightSchedule.map((schedule, index) => {
-            return <SubmissionTableRow key={index} flattenedDataToDisplay={{ bandName: schedule.bandName }} />;
+        schedulesInformation.push(nightSchedule.map((app, index) => {
+            return  <SubmissionTableRow key={index} flattenedDataToDisplay={{ bandName: app.bandName }} />;
         }));
     });
+
+    
     return (
         <Fragment>
             <Title titleDisplayText={'Suggested Friday Night Schedule'} />
             <TableHeader tableColumnNamesOrderedFromLeftToRight={fridayNights} />
             <Row>
                 {
-                    foo.map(bandNames => {
-                        return <Col><DragAndDropList initialOrderComponentsToDisplay={bandNames} /></Col>
+                    schedulesInformation.map(bands => {
+                        return <Col><DragAndDropList initialOrderComponentsToDisplay={bands} /></Col>
                     })
                 }
             </Row>
