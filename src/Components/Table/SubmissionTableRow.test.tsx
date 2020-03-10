@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { SubmissionTableRow } from './SubmissionTableRow';
 import { Row, Col } from 'reactstrap';
-import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Table Row', () => {
     const item = {
@@ -11,7 +10,7 @@ describe('Table Row', () => {
     }
 
     const component = shallow(<SubmissionTableRow flattenedDataToDisplay={item} key={'1'} />);
-    console.log(component.find('td'))
+    
     it('should render a row', () => {
         expect(component.find(Row)).toHaveLength(1);
     });
