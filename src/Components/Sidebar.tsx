@@ -10,7 +10,7 @@ export const Sidebar = () => {
     }
     return (
         <div>
-            <div className={'openSidebarComponent'}>
+            <div id='homeLogo' className={'openSidebarComponent'}>
                 <img src={require('../static/bj15ylogo.png')} alt='BJ15Years' onClick={() => openNav()} />
             </div>
             <div id='mySidenav' className={'sidenav'}>

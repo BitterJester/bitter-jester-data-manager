@@ -28,6 +28,14 @@
     color: #818181;
 }
 
+span:hover {
+    cursor: pointer;
+}
+
+#homeLogo:hover {
+    cursor: pointer;
+}
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;
