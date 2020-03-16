@@ -17,11 +17,11 @@ export const UpdateInfoButton = () => {
     }
 
     return (
-        <div>
+        <div style={{padding:'15px'}}>
             <Alert color="success" isOpen={showAlert} toggle={onAlertStatusChange}>
                 Info update has been commenced in the background.
             </Alert>
-            <Button onClick={updateInfo}>Update Submissions in Background</Button>
+            <Button style={{backgroundColor: '#8f6daf'}} onClick={updateInfo}>Update Submissions in Background</Button>
         </div>
     );
 }
