@@ -5,7 +5,7 @@ import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Subm
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { Title } from '../Components/Title';
-import { getFromS3 } from '../s3/getFromS3';
+import { getFromS3 } from '../aws/getFromS3';
 
 
 export type PrunedApplication = {

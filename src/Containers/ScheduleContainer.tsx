@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
-import { getFromS3 } from '../s3/getFromS3';
+import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 
 export type Schedule = {
