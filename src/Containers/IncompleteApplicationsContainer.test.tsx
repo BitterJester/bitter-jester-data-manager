@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { IncompleteApplicationsContainer } from './IncomplateApplicationsContainer';
+import { IncompleteApplicationsContainer } from './IncompleteApplicationsContainer';
 
 describe('IncompleteApplicationsContainer', () => {
     const component = shallow(<IncompleteApplicationsContainer />);

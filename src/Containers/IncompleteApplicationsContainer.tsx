@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../aws/getFromS3';
 import { Row, Col } from 'reactstrap';
+import { Title } from '../Components/Title';
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -31,6 +32,7 @@ export const IncompleteApplicationsContainer = () => {
 
     return (
         <div>
+            <Title titleDisplayText='Incomplete Applications'/>
             <Row>
                 <Col>
                     <strong>Applicant Name</strong>
