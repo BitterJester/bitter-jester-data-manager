@@ -1,9 +1,8 @@
 import React from 'react';
+import { IncompleteApplicationsContainer } from '../../Containers/IncomplateApplicationsContainer';
 
 export const IncompleteApplications = () => {
     return (
-        <div>
-            Hi
-        </div>
+        <IncompleteApplicationsContainer />
     );
 }
