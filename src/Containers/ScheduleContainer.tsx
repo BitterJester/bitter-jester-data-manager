@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
+import CardContainer from '../Components/CardContainer';
 
 type Night = {
     night: number;
@@ -36,10 +37,10 @@ export const ScheduleContainer = () => {
     
     return (
         <Container fluid>
-            <div style={{ padding: '15px' }}>
-                <Card>
+            <div style={{ padding: '16px' }}>
+                <CardContainer>
                     <SuggestedScheduleDragAndDropLists schedule={schedule} />
-                </Card>
+                </CardContainer>
             </div>
         </Container>
     );

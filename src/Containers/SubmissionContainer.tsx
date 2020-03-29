@@ -1,11 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Container, Row, Card, Col } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
+import CardContainer from '../Components/CardContainer';
 
 
 export type PrunedApplication = {
@@ -27,7 +28,7 @@ export const SubmissionContainer = () => {
         }
         fetch();
     }, []);
-    
+
     const columnNames: SubmissionsTableColumnNames[] = [
         'Band Name',
         'Primary Email Address',
@@ -55,18 +56,16 @@ export const SubmissionContainer = () => {
 
     return (
         <Container fluid>
-            <div style={{ padding: '15px' }}>
-                <Card>
-                    <Fragment>
-                        <Title titleDisplayText={'Completed Submissions'} />
-                        <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-                        <Row>
-                            <Col>
-                                <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
-                            </Col>
-                        </Row>
-                    </Fragment>
-                </Card>
+            <div style={{ padding: '16px' }}>
+                <CardContainer>
+                    <Title titleDisplayText={'Completed Submissions'} />
+                    <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
+                    <Row>
+                        <Col>
+                            <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
+                        </Col>
+                    </Row>
+                </CardContainer>
             </div>
         </Container>
     );
