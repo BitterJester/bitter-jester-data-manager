@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
-import { DragAndDropList } from '../Components/DragAndDrop/DragAndDropList';
 import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
@@ -37,14 +36,14 @@ export const SubmissionContainer = () => {
     ];
     const completedApplications = submissions.completedApplications || [];
 
-    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): PrunedApplication[] => {
+    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): string[][] => {
         return applications.map((app, index) => {
-            return {
-                bandName: app.bandName,
-                primaryEmailAddress: app.primaryEmailAddress,
-                firstChoiceFridayNight: app.firstChoiceFridayNight || '',
-                secondChoiceFridayNight: app.secondChoiceFridayNight || ''
-            };
+            return [
+                app.bandName,
+                app.primaryEmailAddress,
+                app.firstChoiceFridayNight || '',
+                app.secondChoiceFridayNight || ''
+            ];
         });
     }
 
@@ -60,11 +59,9 @@ export const SubmissionContainer = () => {
                 <CardContainer>
                     <Title titleDisplayText={'Completed Submissions'} />
                     <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-                    <Row>
-                        <Col>
-                            <DragAndDropList initialOrderComponentsToDisplay={submissionRows} />
-                        </Col>
-                    </Row>
+                    {
+                        submissionRows
+                    }
                 </CardContainer>
             </div>
         </Container>

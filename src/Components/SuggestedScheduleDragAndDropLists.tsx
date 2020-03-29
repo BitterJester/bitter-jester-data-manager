@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
-import { Row } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { Title } from './Title';
 import { TableHeader } from './Table/TableHeader';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
-import { SubmissionTableRow } from './Table/SubmissionTableRow';
 import { Schedule } from '../Containers/ScheduleContainer';
 
 type Props = {
@@ -17,7 +16,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands.map((app, index) => {
-            return <SubmissionTableRow key={index} flattenedDataToDisplay={{ bandName: app.bandName }} />;
+        return <Col>{app.bandName}</Col>
         });
         
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);

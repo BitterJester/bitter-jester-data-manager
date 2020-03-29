@@ -4,10 +4,7 @@ import { SubmissionTableRow } from './SubmissionTableRow';
 import { Row, Col } from 'reactstrap';
 
 describe('Table Row', () => {
-    const item = {
-        value1: 'value1',
-        value2: 'value2'
-    }
+    const item = ['value1', 'value2'];
 
     const component = shallow(<SubmissionTableRow flattenedDataToDisplay={item} key={'1'} />);
     

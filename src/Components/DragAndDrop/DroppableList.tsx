@@ -16,7 +16,7 @@ const DroppableList = (props: Props) => {
         margin: `0 0 ${grid}px 0`,
         font: 'bold 20px helvetica, arial, sans-serif',
         background: isDragging ? "#8f6daf" : "#7b5d97",
-
+        color: 'white',
         ...draggableStyle
     });
 

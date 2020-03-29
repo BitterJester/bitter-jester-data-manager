@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
 import '../../static/tableRow.css';
 
 type Props = {
-    flattenedDataToDisplay: object;
+    flattenedDataToDisplay: any[];
     key: string | number;
 }
 
@@ -13,11 +13,13 @@ export const SubmissionTableRow = (props: Props) => {
     return (
         <Row>
             {
-                Object.values(flattenedDataToDisplay).map(value => {
+                flattenedDataToDisplay.map((value, index) => {
                     return (
-                        <Col className={'columnContent'} key={value}>
-                            {value}
-                        </Col>
+                        <Fragment key={index}>
+                            <Col className={'columnContent'}>
+                                {value}
+                            </Col>
+                        </Fragment>
                     );
                 })
             }
