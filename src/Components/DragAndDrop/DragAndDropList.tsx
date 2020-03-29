@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { DragDropContext, Droppable, DropResult, ResponderProvided, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import DroppableList from './DroppableList';
+import { Col } from 'reactstrap';
 
 type Props = {
     initialOrderComponentsToDisplay: any[];
@@ -11,38 +13,25 @@ export const DragAndDropList = (props: Props) => {
 
     useEffect(() => {
         setOrderedItemsForDisplay(initialItems);
-    }, [initialItems])
+    }, [initialItems]);
 
-    const grid = 8;
+    const reorder = (listOfLists: any[], result: DropResult): any[] => {
+        const sourceDroppableIndex = result.source.droppableId.split('-')[1];
+        const listToRemoveFrom = listOfLists[sourceDroppableIndex];
+        const [removed] = listToRemoveFrom.splice(result.source.index, 1);
 
-    const reorder = (list: any[], result: DropResult): any[] => {
-        const [removed] = list.splice(result.source.index, 1);
+        const requestedIndexToDropIn = result.destination.droppableId.split('-')[1];
         const destination = result.destination;
+        const listToAddTo = listOfLists[requestedIndexToDropIn];
 
-        if (destination) {
-            list.splice(destination.index, 0, removed);
-        }
+        listToAddTo.splice(destination.index, 0, removed);
 
-        return list;
+        return listOfLists;
     };
 
-    const getItemStyle = (isDragging, draggableStyle) => ({
-        userSelect: "none",
-        padding: grid * 2,
-        margin: `0 0 ${grid}px 0`,
-        font: 'bold 20px helvetica, arial, sans-serif',
-        background: isDragging ? "#8f6daf" : "#7b5d97",
-
-        ...draggableStyle
-    });
-
-    const getListStyle = isDraggingOver => ({
-        background: isDraggingOver ? "#ffcc00" : "#e79e31",
-        padding: grid,
-        width: '100%'
-    });
-
     const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
+
+        console.log(result.destination);
         if (!result.destination) {
             return null;
         }
@@ -50,36 +39,18 @@ export const DragAndDropList = (props: Props) => {
         setOrderedItemsForDisplay(reorderedSubmissions);
     };
 
+    // Temporary hack to make this not break when this loads without the proper list
+    if (orderedItemsForDisplay.length !== 4) {
+        return null;
+    }
+
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
-                    <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={getListStyle(snapshot.isDraggingOver)}
-                    >
-                        {orderedItemsForDisplay.map((item, index) => (
-                            <Draggable key={index} draggableId={`${index}`} index={index}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
-                                    >
-                                        {item}
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
+            {
+                orderedItemsForDisplay.map((item, index) => {
+                    return <Col><DroppableList orderInList={index} orderedItemsForDisplay={item} /></Col>
+                })
+            }
         </DragDropContext>
     )
 }
