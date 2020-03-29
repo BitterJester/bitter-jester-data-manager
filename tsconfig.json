@@ -22,7 +22,8 @@
   },
   "include": [
     "src",
-    "setupTests.ts"
+    "setupTests.ts",
+    "mocks"
   ],
   "exclude": [
     "node_modules"
