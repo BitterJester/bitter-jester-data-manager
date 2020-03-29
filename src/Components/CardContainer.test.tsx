@@ -12,7 +12,6 @@ describe('CardContainer', () => {
     });
 
     it('should render the children', () => {
-        console.log(component.debug())
         expect(component.find('div').text()).toEqual('hi');
     });
 });
