@@ -15,8 +15,8 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const fridayNights = ['6/5', '6/12', '6/19', '6/26'];
     const schedulesInformation = [];
 
-    Object.values(schedule).forEach(nightSchedule => {
-        schedulesInformation.push(nightSchedule.map((app, index) => {
+    schedule.nights.forEach(night => {
+        schedulesInformation.push(night.bands.map((app, index) => {
             return  <SubmissionTableRow key={index} flattenedDataToDisplay={{ bandName: app.bandName }} />;
         }));
     });

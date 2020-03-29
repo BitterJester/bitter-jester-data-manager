@@ -4,11 +4,17 @@ import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedSchedu
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 
+type Night = {
+    night: number;
+    bands: BitterJesterApplication[]
+}
+
 export type Schedule = {
     fridayNightOne: BitterJesterApplication[],
     fridayNightTwo: BitterJesterApplication[],
     fridayNightThree: BitterJesterApplication[],
-    fridayNightFour: BitterJesterApplication[]
+    fridayNightFour: BitterJesterApplication[],
+    nights: Night[]
 }
 
 export const ScheduleContainer = () => {
@@ -16,7 +22,8 @@ export const ScheduleContainer = () => {
         fridayNightOne: [],
         fridayNightTwo: [],
         fridayNightThree: [],
-        fridayNightFour: []
+        fridayNightFour: [],
+        nights: []
     };
     const [schedule, setSchedule] = useState(initialSchedule);
 
