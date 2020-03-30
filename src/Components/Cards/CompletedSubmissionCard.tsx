@@ -15,9 +15,9 @@ const CompletedSubmissionCard = (props: Props) => {
     return (
         <CardContainer className={'completedSubmissionCardContainer'}>
             <Row>
-                    <div className={'bandName'}>
-                        {completedSubmission.bandName}
-                    </div>
+                <div className={'bandName'}>
+                    {completedSubmission.bandName}
+                </div>
             </Row>
             <Row className={'leftSide'}>
                 <Col>

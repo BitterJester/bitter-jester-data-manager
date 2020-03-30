@@ -18,23 +18,19 @@ describe('CompletedSubmissionCard', () => {
         expect(component.find(CardContainer)).toHaveLength(1);
     });
 
-    const getRowText = (outerDivIndex: number, innerDivIndex: number) => {
-        return component.find('.labelValuePair').at(outerDivIndex).find('div').at(innerDivIndex).text();
-    }
-
     it('should display a row for band name', () => {
         expect(component.find('.bandName').text()).toEqual('band1');
     });
 
     it('should display a row for primary email address', () => {
-        expect(getRowText(0, 0)).toEqual('Primary Email Address: email');
+        expect(component.find('.completedSubmissionItemValue').at(0).text()).toEqual('email');
     });
 
     it('should display a row for first choice friday night', () => {
-        expect(getRowText(1, 0)).toEqual('First Choice Friday Night: 1');
+        expect(component.find('.completedSubmissionItemValue').at(1).text()).toEqual('1');
     });
 
     it('should display a row for second choice friday night', () => {
-        expect(getRowText(2, 0)).toEqual('Second Choice Friday Night: 2');
+        expect(component.find('.completedSubmissionItemValue').at(2).text()).toEqual('2');
     });
 });
