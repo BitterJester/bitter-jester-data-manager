@@ -5,8 +5,8 @@ import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
 import CardContainer from '../Components/CardContainer';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
-import CompletedSubmissionCard from '../Components/Cards/CompletedSubmissionCard/CompletedSubmissionCard';
 import '../static/submissionContainer.css';
+import CompletedSubmissionCard from '../Components/Cards/CompletedSubmissionCard';
 
 export type PrunedApplication = {
     bandName: string;
@@ -50,7 +50,7 @@ export const SubmissionContainer = () => {
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
-                <CardContainer className={''}>
+                <CardContainer>
                     <Title titleDisplayText={'Completed Submissions'} />
                     <NByMGrid columns={3} gridItems={completedSubmissionCards}/>
                 </CardContainer>
