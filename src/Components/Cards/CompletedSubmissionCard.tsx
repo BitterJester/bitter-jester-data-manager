@@ -21,17 +21,17 @@ const CompletedSubmissionCard = (props: Props) => {
             </Row>
             <Row className={'leftSide'}>
                 <Col>
-                    <div className={'completedSubmissionItemLabel'}>Primary Email Address: </div>
+                    <div className={'completedSubmissionItemLabel'}>Primary Email Address</div>
                     <div className={'completedSubmissionItemValue'} >{completedSubmission.primaryEmailAddress}</div>
                 </Col>
                 <Col>
-                    <div className={'completedSubmissionItemLabel'}>First Choice Friday Night: </div>
+                    <div className={'completedSubmissionItemLabel'}>First Choice Friday Night</div>
                     <div className={'completedSubmissionItemValue'}>{completedSubmission.firstChoiceFridayNight}</div>
                 </Col>
             </Row>
             <Row className={'rightSide'}>
                 <Col>
-                    <div className={'completedSubmissionItemLabel'}>Second Choice Friday Night: </div>
+                    <div className={'completedSubmissionItemLabel'}>{completedSubmission.secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : ''}</div>
                     <div className={'completedSubmissionItemValue'}>{completedSubmission.secondChoiceFridayNight}</div>
                 </Col>
                 <Col></Col>

@@ -25,7 +25,6 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     return (
         <Fragment>
-            <Title titleDisplayText={'Suggested Friday Night Schedule'} />
             <TableHeader tableColumnNamesOrderedFromLeftToRight={fridayNights} />
             <Row><DragAndDropList initialOrderComponentsToDisplay={schedulesInformationForEachNight} /></Row>
         </Fragment>

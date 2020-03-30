@@ -4,6 +4,7 @@ import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedSchedu
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import CardContainer from '../Components/CardContainer';
+import { Title } from '../Components/Title';
 
 type Night = {
     night: number;
@@ -37,6 +38,7 @@ export const ScheduleContainer = () => {
     
     return (
         <Container fluid>
+            <Title titleDisplayText={'Suggested Friday Night Schedule'} />
             <div style={{ padding: '16px' }}>
                 <CardContainer>
                     <SuggestedScheduleDragAndDropLists schedule={schedule} />

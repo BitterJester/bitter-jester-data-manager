@@ -34,3 +34,22 @@ describe('CompletedSubmissionCard', () => {
         expect(component.find('.completedSubmissionItemValue').at(2).text()).toEqual('2');
     });
 });
+
+describe('CompletedSubmissionCard - optional values not sent', () => {
+    const completedSubmission: PrunedApplication = {
+        bandName: 'band1',
+        primaryEmailAddress: 'email',
+        firstChoiceFridayNight: 'Available Every Friday',
+        secondChoiceFridayNight: ''
+    };
+
+    const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission} />);
+
+    it('should display a row for first choice friday night', () => {
+        expect(component.find('.completedSubmissionItemValue').at(1).text()).toEqual('Available Every Friday');
+    });
+
+    it('should display a row for second choice friday night', () => {
+        expect(component.find('.completedSubmissionItemLabel').at(2).text()).toEqual('');
+    });
+});
