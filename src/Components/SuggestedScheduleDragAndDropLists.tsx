@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
-import { Title } from './Title';
 import { TableHeader } from './Table/TableHeader';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 import { Schedule } from '../Containers/ScheduleContainer';
