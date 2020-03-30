@@ -50,7 +50,7 @@ export const SubmissionContainer = () => {
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
-                <CardContainer>
+                <CardContainer className={''}>
                     <Title titleDisplayText={'Completed Submissions'} />
                     <NByMGrid columns={3} gridItems={completedSubmissionCards}/>
                 </CardContainer>

@@ -1,16 +1,29 @@
 .completedSubmissionCardContainer {
-    width: 540px;
-    height: 164px;
-    background: #7b5d97;
+    width: 800px;
+    height: 224px;
+    background: #e79e31;
 }
 
 .completedSubmissionItemLabel {
     color: white;
     font-weight: 300;
     font-size: 16px;
+    padding-left: 16px;
 }
 
 .completedSubmissionItemValue {
     color: white;
     font-size: 16px;
+}
+
+.labelValuePair {
+    background: #7b5d97;
+    height: 48px;
+    padding-top: 16px;
+}
+
+.bandName {
+    color: black;
+    font-size: 32px;
+    text-align: center;
 }

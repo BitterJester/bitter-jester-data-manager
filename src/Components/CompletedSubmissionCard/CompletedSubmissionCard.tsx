@@ -12,19 +12,18 @@ const CompletedSubmissionCard = (props: Props) => {
 
     return (
         <CardContainer className={'completedSubmissionCardContainer'}>
-            <div>
-                <span className={'completedSubmissionItemLabel'}>Band Name: </span>
-                <span className={'completedSubmissionItemValue'}>{completedSubmission.bandName}</span>
+            <div className={'bandName'}>
+                {completedSubmission.bandName}
             </div>
-            <div>
+            <div className={'labelValuePair'}>
                 <span className={'completedSubmissionItemLabel'}>Primary Email Address: </span>
                 <span className={'completedSubmissionItemValue'} >{completedSubmission.primaryEmailAddress}</span>
             </div>
-            <div>
+            <div className={'labelValuePair'}>
                 <span className={'completedSubmissionItemLabel'}>First Choice Friday Night: </span>
                 <span className={'completedSubmissionItemValue'}>{completedSubmission.firstChoiceFridayNight}</span>
             </div>
-            <div>
+            <div className={'labelValuePair'}>
                 <span className={'completedSubmissionItemLabel'}>Second Choice Friday Night: </span>
                 <span className={'completedSubmissionItemValue'}>{completedSubmission.secondChoiceFridayNight}</span>
             </div>

@@ -24,7 +24,7 @@ describe('CompletedSubmissionCard', () => {
     }
 
     it('should display a row for band name', () => {
-        expect(getRowText(0)).toEqual('Band Name: band1');
+        expect(getRowText(0)).toEqual('band1');
     });
 
     it('should display a row for primary email address', () => {
