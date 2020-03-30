@@ -5,15 +5,18 @@
 }
 
 .completedSubmissionItemLabel {
-    color: white;
+    color: rgb(32, 31, 31);
     font-weight: 300;
     font-size: 16px;
     padding-left: 16px;
+    width: 25%;
 }
 
 .completedSubmissionItemValue {
     color: white;
     font-size: 16px;
+    text-align: right;
+    width: 75%;
 }
 
 .labelValuePair {
@@ -23,8 +26,9 @@
 }
 
 .bandName {
-    color: black;
+    color: rgb(97, 96, 96);
     font-size: 32px;
     text-align: center;
     letter-spacing: 8px;
+    font-weight: 300;
 }
