@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
-import CardContainer from '../CardContainer';
+import CardContainer from '../../CardContainer';
 import { Row } from 'reactstrap';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
+import { PrunedApplication } from '../../../Containers/SubmissionContainer';
 
 describe('CompletedSubmissionCard', () => {
     const completedSubmission: PrunedApplication = {

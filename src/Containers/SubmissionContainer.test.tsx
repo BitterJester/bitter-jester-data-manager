@@ -1,5 +1,4 @@
 import React from 'react';
-import { SubmissionContainer } from './SubmissionContainer';
 import { shallow } from 'enzyme';
 
 describe('SubmissionTable', () => {

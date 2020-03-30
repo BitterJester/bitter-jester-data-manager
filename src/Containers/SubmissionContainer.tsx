@@ -5,7 +5,7 @@ import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
 import CardContainer from '../Components/CardContainer';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
-import CompletedSubmissionCard from '../Components/CompletedSubmissionCard/CompletedSubmissionCard';
+import CompletedSubmissionCard from '../Components/Cards/CompletedSubmissionCard/CompletedSubmissionCard';
 import '../static/submissionContainer.css';
 
 export type PrunedApplication = {

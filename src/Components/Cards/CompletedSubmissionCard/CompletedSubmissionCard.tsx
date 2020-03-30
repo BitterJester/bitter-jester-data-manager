@@ -1,6 +1,6 @@
 import React from 'react';
-import CardContainer from '../CardContainer';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
+import CardContainer from '../../CardContainer';
+import { PrunedApplication } from '../../../Containers/SubmissionContainer';
 import '../../static/completedSubmissionCard.css';
 
 type Props = {
