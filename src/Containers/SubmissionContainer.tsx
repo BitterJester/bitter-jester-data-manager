@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
-import { TableHeader } from '../Components/Table/TableHeader';
 import { BitterJesterApplications, BitterJesterApplication } from '../Pages/Submissions/Submissions';
-import { SubmissionTableRow } from '../Components/Table/SubmissionTableRow';
 import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
 import CardContainer from '../Components/CardContainer';
-
+import NByMGrid from '../Components/NByMGrid/NByMGrid';
+import CompletedSubmissionCard from '../Components/CompletedSubmissionCard/CompletedSubmissionCard';
+import '../static/submissionContainer.css';
 
 export type PrunedApplication = {
     bandName: string;
@@ -28,29 +28,23 @@ export const SubmissionContainer = () => {
         fetch();
     }, []);
 
-    const columnNames: SubmissionsTableColumnNames[] = [
-        'Band Name',
-        'Primary Email Address',
-        'First Choice Friday',
-        'Second Choice Friday'
-    ];
     const completedApplications = submissions.completedApplications || [];
 
-    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): string[][] => {
+    const pruneDownApplicationsForDisplay = (applications: BitterJesterApplication[]): PrunedApplication[] => {
         return applications.map((app, index) => {
-            return [
-                app.bandName,
-                app.primaryEmailAddress,
-                app.firstChoiceFridayNight || '',
-                app.secondChoiceFridayNight || ''
-            ];
+            return {
+                bandName: app.bandName,
+                primaryEmailAddress: app.primaryEmailAddress,
+                firstChoiceFridayNight: app.firstChoiceFridayNight || '',
+                secondChoiceFridayNight: app.secondChoiceFridayNight || ''
+            };
         });
     }
 
     const prunedApplications = pruneDownApplicationsForDisplay(completedApplications);
 
-    const submissionRows = prunedApplications.map((prunedApplication, index) => {
-        return <SubmissionTableRow key={index} flattenedDataToDisplay={prunedApplication} />
+    const completedSubmissionCards = prunedApplications.map((prunedApplication, index) => {
+        return <CompletedSubmissionCard key={index} completedSubmission={prunedApplication} />
     });
 
     return (
@@ -58,10 +52,7 @@ export const SubmissionContainer = () => {
             <div style={{ padding: '16px' }}>
                 <CardContainer>
                     <Title titleDisplayText={'Completed Submissions'} />
-                    <TableHeader tableColumnNamesOrderedFromLeftToRight={columnNames} />
-                    {
-                        submissionRows
-                    }
+                    <NByMGrid columns={3} gridItems={completedSubmissionCards}/>
                 </CardContainer>
             </div>
         </Container>

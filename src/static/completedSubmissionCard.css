@@ -1,0 +1,16 @@
+.completedSubmissionCardContainer {
+    width: 540px;
+    height: 164px;
+    background: #7b5d97;
+}
+
+.completedSubmissionItemLabel {
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.completedSubmissionItemValue {
+    color: white;
+    font-size: 16px;
+}

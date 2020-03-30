@@ -19,8 +19,8 @@ describe('CompletedSubmissionCard', () => {
         expect(component.find(CardContainer)).toHaveLength(1);
     });
 
-    const getRowText = (row: number) => {
-        return component.find(Row).at(row).find('span').text();
+    const getRowText = (index: number) => {
+        return component.find('div').at(index).text();
     }
 
     it('should display a row for band name', () => {

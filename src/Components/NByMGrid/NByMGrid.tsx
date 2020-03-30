@@ -1,7 +1,6 @@
 import React from 'react';
-import { Container, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import _ from 'lodash';
-import { start } from 'repl';
 
 type Props = {
     columns: number;
@@ -18,16 +17,14 @@ const NByMGrid = (props: Props) => {
         const itemsForRow = gridItemsCopy.splice(0, numberOfItemsToRemove);
         const row = [];
 
-        itemsForRow.forEach(gridItem => {
-            row.push(<Col>{gridItem}</Col>)
+        itemsForRow.forEach((gridItem, index) => {
+            row.push(<Col key={index} style={{padding: '8px'}}>{gridItem}</Col>)
         });
-        rows.push(<Row>{row}</Row>);
+        rows.push(<Row key={rows.length}>{row}</Row>);
     }
 
     return (
-        <Container>
-            {rows}
-        </Container>
+        <div>{rows}</div>
     );
 };
 
