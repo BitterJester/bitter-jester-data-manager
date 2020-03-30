@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Sidebar />
-      <div className={'content'}>
+      <div id={'content'} className={'content'}>
         <Switch>
           <Redirect from="/" exact to="/completedSubmissions" />
           <Route path="/completedSubmissions">
