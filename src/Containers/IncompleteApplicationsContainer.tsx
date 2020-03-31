@@ -30,6 +30,10 @@ export const IncompleteApplicationsContainer = () => {
         fetch();
     }, []);
 
+    const sortByBandName = () => {
+        return incompleteApplications.incompleteApplications.sort((a, b) => a.bandName < b.bandName ? -1 : 1);
+    };
+
     return (
         <div>
             <Title titleDisplayText='Incomplete Applications'/>
@@ -48,7 +52,7 @@ export const IncompleteApplicationsContainer = () => {
                 </Col>
             </Row>
             {
-                incompleteApplications.incompleteApplications
+                sortByBandName()
                     .map(app => {
                         return (
                             <Row>
