@@ -14,6 +14,7 @@ export type BitterJesterApplication = {
     firstChoiceFridayNight?: string;
     secondChoiceFridayNight?: string;
     isAvailableOnAllFridays: boolean;
+    primaryPhoneNumber: string;
 }
 
 

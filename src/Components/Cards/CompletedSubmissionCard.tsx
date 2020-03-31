@@ -23,12 +23,12 @@ const CompletedSubmissionCard = (props: Props) => {
                 </div>
             </Row>
             <Row className={'leftSide'}>
-                <CardItem label={'First Choice Friday Night'} value={completedSubmission.firstChoiceFridayNight} />
                 <CardItem label={'Primary Email Address'} value={completedSubmission.primaryEmailAddress} />
+                <CardItem label={'First Choice Friday Night'} value={completedSubmission.firstChoiceFridayNight} />
             </Row>
             <Row className={'rightSide'}>
+                <CardItem label={'Phone Number'} value={completedSubmission.primaryPhoneNumber} />
                 <CardItem label={secondChoiceFridayLabel} value={completedSubmission.secondChoiceFridayNight} />
-                <Col></Col>
             </Row>
         </CardContainer>
     );

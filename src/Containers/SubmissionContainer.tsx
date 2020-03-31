@@ -13,9 +13,8 @@ export type PrunedApplication = {
     primaryEmailAddress: string;
     firstChoiceFridayNight: string;
     secondChoiceFridayNight: string;
+    primaryPhoneNumber: string;
 }
-
-export type SubmissionsTableColumnNames = 'Band Name' | 'Primary Email Address' | 'First Choice Friday' | 'Second Choice Friday'
 
 export const SubmissionContainer = () => {
     const initialSubmissions: BitterJesterApplications = {};
@@ -36,7 +35,8 @@ export const SubmissionContainer = () => {
                 bandName: app.bandName,
                 primaryEmailAddress: app.primaryEmailAddress,
                 firstChoiceFridayNight: app.firstChoiceFridayNight || '',
-                secondChoiceFridayNight: app.secondChoiceFridayNight || ''
+                secondChoiceFridayNight: app.secondChoiceFridayNight || '',
+                primaryPhoneNumber: app.primaryPhoneNumber
             };
         });
     }

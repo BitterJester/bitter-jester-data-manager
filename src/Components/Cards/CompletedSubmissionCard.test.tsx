@@ -11,7 +11,8 @@ describe('CompletedSubmissionCard', () => {
         bandName: 'band1',
         primaryEmailAddress: 'email',
         firstChoiceFridayNight: '1',
-        secondChoiceFridayNight: '2'
+        secondChoiceFridayNight: '2',
+        primaryPhoneNumber: 'phone'
     };
 
     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission}/>);
@@ -29,37 +30,18 @@ describe('CompletedSubmissionCard', () => {
     }
 
     it('should display a row for primary email address', () => {
-        expect(getCardItemProps(1).value).toEqual('email');
+        expect(getCardItemProps(0).value).toEqual('email');
     });
 
     it('should display a row for first choice friday night', () => {
-        expect(getCardItemProps(0).value).toEqual('1');
+        expect(getCardItemProps(1).value).toEqual('1');
     });
 
     it('should display a row for second choice friday night', () => {
-        expect(getCardItemProps(2).value).toEqual('2');
-    });
-});
-
-describe('CompletedSubmissionCard - optional values not sent', () => {
-    const completedSubmission: PrunedApplication = {
-        bandName: 'band1',
-        primaryEmailAddress: 'email',
-        firstChoiceFridayNight: 'Available Every Friday',
-        secondChoiceFridayNight: ''
-    };
-
-    const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission} />);
-
-    const getCardItemProps = (index: number) => {
-        return component.find(CardItem).at(index).props();
-    }
-
-    it('should display a row for first choice friday night', () => {
-        expect(getCardItemProps(0).value).toEqual('Available Every Friday');
+        expect(getCardItemProps(3).value).toEqual('2');
     });
 
-    it('should display an empty row for second choice friday night', () => {
-        expect(component.find(Col)).toHaveLength(1);
+    it('should display a column for primary phone number', () => {
+        expect(getCardItemProps(2).value).toEqual('phone');
     });
 });
