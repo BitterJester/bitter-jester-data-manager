@@ -2,9 +2,9 @@ import React from 'react';
 import { Card } from 'reactstrap';
 
 const CardContainer = (props) => {
-    const { className } = props;
+    const { className, style } = props;
     return (
-        <Card className={className}>
+        <Card style={style} className={className}>
             <div style={{ padding: '16px' }}>
                 {props.children}
             </div>

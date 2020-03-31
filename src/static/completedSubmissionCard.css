@@ -1,15 +1,16 @@
 .completedSubmissionCardContainer {
-    height: 360px;
+    height: 376px;
     background: linear-gradient(90deg, rgba(123, 93, 151, 1) 35%, rgba(231, 158, 49, 1) 100%);
     padding: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .leftSide {
-    padding-top: 16px;
+    padding: 16px;
 }
 
 .rightSide {
-    padding-top: 16px;
+    padding: 16px;
 }
 
 .bandName {

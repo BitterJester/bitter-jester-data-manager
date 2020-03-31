@@ -7,6 +7,7 @@ import CardContainer from '../Components/CardContainer';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
 import '../static/submissionContainer.css';
 import CompletedSubmissionCard from '../Components/Cards/CompletedSubmissionCard';
+import { UpdateInfoButton } from '../Components/UpdateInfoButton';
 
 export type PrunedApplication = {
     bandName: string;
@@ -51,10 +52,11 @@ export const SubmissionContainer = () => {
 
     return (
         <Container fluid>
-            <Title titleDisplayText={'Completed Submissions'} />
             <div style={{ padding: '16px' }}>
                 <CardContainer>
-                    <NByMGrid columns={2} gridItems={completedSubmissionCards}/>
+                    <UpdateInfoButton />
+                    <Title titleDisplayText={'Completed Submissions'} />
+                    <NByMGrid columns={2} gridItems={completedSubmissionCards} />
                 </CardContainer>
             </div>
         </Container>

@@ -19,12 +19,12 @@ const NByMGrid = (props: Props) => {
         const row = [];
 
         itemsForRow.forEach((gridItem, index) => {
-            row.push(<Col key={index} style={{padding: '8px'}}>{gridItem}</Col>)
+            row.push(<Col key={index} style={{padding: '24px'}}>{gridItem}</Col>)
         });
 
         const addEmptyColumnssToFillLastRow = () => {
             for(let i = 0; i < columns - numberOfItemsToRemove; i++){
-                row.push(<Col key={`empty${i}`}></Col>)
+                row.push(<Col style={{padding: '24px'}} key={`empty${i}`}></Col>)
             }
         };
 

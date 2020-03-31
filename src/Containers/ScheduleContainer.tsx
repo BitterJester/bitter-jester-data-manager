@@ -35,12 +35,12 @@ export const ScheduleContainer = () => {
         }
         fetch();
     }, []);
-    
+
     return (
         <Container fluid>
-            <Title titleDisplayText={'Suggested Friday Night Schedule'} />
             <div style={{ padding: '16px' }}>
                 <CardContainer>
+                    <Title titleDisplayText={'Suggested Friday Night Schedule'} />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} />
                 </CardContainer>
             </div>
