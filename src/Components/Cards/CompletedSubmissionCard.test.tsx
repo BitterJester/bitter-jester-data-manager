@@ -29,11 +29,11 @@ describe('CompletedSubmissionCard', () => {
     }
 
     it('should display a row for primary email address', () => {
-        expect(getCardItemProps(0).value).toEqual('email');
+        expect(getCardItemProps(1).value).toEqual('email');
     });
 
     it('should display a row for first choice friday night', () => {
-        expect(getCardItemProps(1).value).toEqual('1');
+        expect(getCardItemProps(0).value).toEqual('1');
     });
 
     it('should display a row for second choice friday night', () => {
@@ -56,7 +56,7 @@ describe('CompletedSubmissionCard - optional values not sent', () => {
     }
 
     it('should display a row for first choice friday night', () => {
-        expect(getCardItemProps(1).value).toEqual('Available Every Friday');
+        expect(getCardItemProps(0).value).toEqual('Available Every Friday');
     });
 
     it('should display an empty row for second choice friday night', () => {

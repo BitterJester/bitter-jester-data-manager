@@ -3,6 +3,7 @@ import { getFromS3 } from '../aws/getFromS3';
 import { Title } from '../Components/Title';
 import IncompleteSubmissionCard from '../Components/Cards/IncompleteSubmissionCard';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
+import { CardBody } from 'reactstrap';
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -42,8 +43,10 @@ export const IncompleteApplicationsContainer = () => {
 
     return (
         <div>
-            <Title titleDisplayText='Incomplete Applications'/>
-            <NByMGrid columns={3} gridItems={incompleteSubmissionCards}/>
+            <Title titleDisplayText='Incomplete Applications' />
+            <CardBody>
+                <NByMGrid columns={3} gridItems={incompleteSubmissionCards} />
+            </CardBody>
         </div>
     );
 };
