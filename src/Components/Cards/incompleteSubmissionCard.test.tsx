@@ -1,19 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CompletedSubmissionCard from './CompletedSubmissionCard';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
 import CardItem from './CardItem';
+import IncompleteSubmissionCard from './IncompleteSubmissionCard';
+import { IncompleteApplication } from '../../Containers/IncompleteApplicationsContainer';
 
-describe('CompletedSubmissionCard', () => {
-    const completedSubmission: PrunedApplication = {
+describe('IncompleteSubmissionCard', () => {
+    const incompleteApplication: IncompleteApplication = {
         bandName: 'band1',
         primaryEmailAddress: 'email',
-        firstChoiceFridayNight: '1',
-        secondChoiceFridayNight: '2'
+        applicantName: {
+            first: 'Spencer',
+            last: 'Kasper'
+        },
+        relationshipToBand: 'relationship'
     };
 
-    const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission}/>);
+    const component = shallow(<IncompleteSubmissionCard incompleteApplication={incompleteApplication}/>);
 
     it('should render a cardContainer', () => {
         expect(component.find(CardContainer)).toHaveLength(1);
@@ -23,42 +26,19 @@ describe('CompletedSubmissionCard', () => {
         expect(component.find('.bandName').text()).toEqual('band1');
     });
 
-    // const getCardItemProps = (index: number) => {
-    //     return component.find(CardItem).at(index).props();
-    // }
+    const getCardItemProps = (index: number) => {
+        return component.find(CardItem).at(index).props();
+    }
 
-    // it('should display a row for primary email address', () => {
-    //     expect(getCardItemProps(0).value).toEqual('email');
-    // });
+    it('should have applicant name', () => {
+        expect(getCardItemProps(0).value).toEqual('Spencer Kasper');
+    });
 
-    // it('should display a row for first choice friday night', () => {
-    //     expect(getCardItemProps(1).value).toEqual('1');
-    // });
+    it('should have primary email address', () => {
+        expect(getCardItemProps(1).value).toEqual('email');
+    });
 
-    // it('should display a row for second choice friday night', () => {
-    //     expect(getCardItemProps(2).value).toEqual('2');
-    // });
+    it('should have relationship to band', () => {
+        expect(getCardItemProps(2).value).toEqual('relationship');
+    });
 });
-
-// describe('CompletedSubmissionCard - optional values not sent', () => {
-//     const completedSubmission: PrunedApplication = {
-//         bandName: 'band1',
-//         primaryEmailAddress: 'email',
-//         firstChoiceFridayNight: 'Available Every Friday',
-//         secondChoiceFridayNight: ''
-//     };
-
-//     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission} />);
-
-//     const getCardItemProps = (index: number) => {
-//         return component.find(CardItem).at(index).props();
-//     }
-
-//     it('should display a row for first choice friday night', () => {
-//         expect(getCardItemProps(1).value).toEqual('Available Every Friday');
-//     });
-
-//     it('should display a row for second choice friday night', () => {
-//         expect(component.find('.completedSubmissionItemLabel').at(2).text()).toEqual('');
-//     });
-// });

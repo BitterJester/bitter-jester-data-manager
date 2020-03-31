@@ -1,37 +1,38 @@
 import React from 'react';
 
 import '../../static/completedSubmissionCard.css';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
-import { Row, Col } from 'reactstrap';
+import { Row } from 'reactstrap';
 import CardItem from './CardItem';
+import { IncompleteApplication } from '../../Containers/IncompleteApplicationsContainer';
 
 type Props = {
-    completedSubmission: PrunedApplication;
+    incompleteApplication: IncompleteApplication;
 }
 
-const CompletedSubmissionCard = (props: Props) => {
-    const { completedSubmission } = props;
+const IncompleteSubmissionCard = (props: Props) => {
+    const {applicantName, bandName, primaryEmailAddress, relationshipToBand} = props.incompleteApplication;
 
-    const secondChoiceFridayLabel = completedSubmission.secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
+    const formatApplicantName = () => {
+        const { first, last } = applicantName;
+
+        return `${first} ${last}`;
+    }
 
     return (
         <CardContainer className={'completedSubmissionCardContainer'}>
             <Row>
                 <div className={'bandName'}>
-                    {completedSubmission.bandName}
+                    {bandName}
                 </div>
             </Row>
             <Row className={'leftSide'}>
-                <CardItem label={'Primary Email Address'} value={completedSubmission.primaryEmailAddress} />
-                <CardItem label={'First Choice Friday Night'} value={completedSubmission.firstChoiceFridayNight} />
-            </Row>
-            <Row className={'rightSide'}>
-                <CardItem label={secondChoiceFridayLabel} value={completedSubmission.secondChoiceFridayNight} />
-                <Col></Col>
+                <CardItem label={'Applicant Name'} value={formatApplicantName()} />
+                <CardItem label={'Primary Email Address'} value={primaryEmailAddress} />
+                <CardItem label={'Relationship to Band'} value={relationshipToBand} />
             </Row>
         </CardContainer>
     );
 };
 
-export default CompletedSubmissionCard;
+export default IncompleteSubmissionCard;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../aws/getFromS3';
-import { Row, Col } from 'reactstrap';
 import { Title } from '../Components/Title';
+import IncompleteSubmissionCard from '../Components/Cards/IncompleteSubmissionCard';
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
 }
 
-type IncompleteApplication = {
+export type IncompleteApplication = {
     applicantName?: {
         first: string;
         last: string;
@@ -37,41 +37,11 @@ export const IncompleteApplicationsContainer = () => {
     return (
         <div>
             <Title titleDisplayText='Incomplete Applications'/>
-            <Row>
-                <Col>
-                    <strong>Applicant Name</strong>
-                </Col>
-                <Col>
-                    <strong>Band Name</strong>
-                </Col>
-                <Col>
-                    <strong>Primary Email Address</strong>
-                </Col>
-                <Col>
-                    <strong>Relationship to Band</strong>
-                </Col>
-            </Row>
             {
                 sortByBandName()
                     .map(app => {
                         return (
-                            <Row>
-                                <Col>
-                                    {`${app.applicantName.first} ${app.applicantName.last}`}
-                                </Col>
-
-                                <Col>
-                                    {app.bandName}
-                                </Col>
-
-                                <Col>
-                                    {app.primaryEmailAddress}
-                                </Col>
-
-                                <Col>
-                                    {app.relationshipToBand}
-                                </Col>
-                            </Row>
+                            <IncompleteSubmissionCard incompleteApplication={app}/>
                         );
                     })
             }
