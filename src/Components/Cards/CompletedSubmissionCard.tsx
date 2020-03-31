@@ -3,7 +3,7 @@ import React from 'react';
 import '../../static/completedSubmissionCard.css';
 import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
-import { Row, Col } from 'reactstrap';
+import { Row } from 'reactstrap';
 import CardItem from './CardItem';
 
 type Props = {
