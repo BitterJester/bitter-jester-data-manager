@@ -7,7 +7,7 @@
     display: block;
 }
 
-..cardItemValue {
+.cardItemValue {
     color: white;
     font-size: 16px;
     padding: 0px 0px 8px 16px;

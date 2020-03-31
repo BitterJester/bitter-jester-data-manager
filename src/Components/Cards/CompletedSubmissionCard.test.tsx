@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
 import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
+import CardItem from './CardItem';
+import { Col } from 'reactstrap';
 
 describe('CompletedSubmissionCard', () => {
     const completedSubmission: PrunedApplication = {
@@ -22,16 +24,20 @@ describe('CompletedSubmissionCard', () => {
         expect(component.find('.bandName').text()).toEqual('band1');
     });
 
+    const getCardItemProps = (index: number) => {
+        return component.find(CardItem).at(index).props();
+    }
+
     it('should display a row for primary email address', () => {
-        expect(component.find('.completedSubmissionItemValue').at(0).text()).toEqual('email');
+        expect(getCardItemProps(0).value).toEqual('email');
     });
 
     it('should display a row for first choice friday night', () => {
-        expect(component.find('.completedSubmissionItemValue').at(1).text()).toEqual('1');
+        expect(getCardItemProps(1).value).toEqual('1');
     });
 
     it('should display a row for second choice friday night', () => {
-        expect(component.find('.completedSubmissionItemValue').at(2).text()).toEqual('2');
+        expect(getCardItemProps(2).value).toEqual('2');
     });
 });
 
@@ -45,11 +51,15 @@ describe('CompletedSubmissionCard - optional values not sent', () => {
 
     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission} />);
 
+    const getCardItemProps = (index: number) => {
+        return component.find(CardItem).at(index).props();
+    }
+
     it('should display a row for first choice friday night', () => {
-        expect(component.find('.completedSubmissionItemValue').at(1).text()).toEqual('Available Every Friday');
+        expect(getCardItemProps(1).value).toEqual('Available Every Friday');
     });
 
-    it('should display a row for second choice friday night', () => {
-        expect(component.find('.completedSubmissionItemLabel').at(2).text()).toEqual('');
+    it('should display an empty row for second choice friday night', () => {
+        expect(component.find(Col)).toHaveLength(1);
     });
 });

@@ -4,6 +4,7 @@ import '../../static/completedSubmissionCard.css';
 import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
 import { Row, Col } from 'reactstrap';
+import CardItem from './CardItem';
 
 type Props = {
     completedSubmission: PrunedApplication;
@@ -11,6 +12,8 @@ type Props = {
 
 const CompletedSubmissionCard = (props: Props) => {
     const { completedSubmission } = props;
+
+    const secondChoiceFridayLabel = completedSubmission.secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
 
     return (
         <CardContainer className={'completedSubmissionCardContainer'}>
@@ -20,20 +23,11 @@ const CompletedSubmissionCard = (props: Props) => {
                 </div>
             </Row>
             <Row className={'leftSide'}>
-                <Col>
-                    <div className={'completedSubmissionItemLabel'}>Primary Email Address</div>
-                    <div className={'completedSubmissionItemValue'} >{completedSubmission.primaryEmailAddress}</div>
-                </Col>
-                <Col>
-                    <div className={'completedSubmissionItemLabel'}>First Choice Friday Night</div>
-                    <div className={'completedSubmissionItemValue'}>{completedSubmission.firstChoiceFridayNight}</div>
-                </Col>
+                <CardItem label={'Primary Email Address'} value={completedSubmission.primaryEmailAddress} />
+                <CardItem label={'First Choice Friday Night'} value={completedSubmission.firstChoiceFridayNight} />
             </Row>
             <Row className={'rightSide'}>
-                <Col>
-                    <div className={'completedSubmissionItemLabel'}>{completedSubmission.secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : ''}</div>
-                    <div className={'completedSubmissionItemValue'}>{completedSubmission.secondChoiceFridayNight}</div>
-                </Col>
+                <CardItem label={secondChoiceFridayLabel} value={completedSubmission.secondChoiceFridayNight} />
                 <Col></Col>
             </Row>
         </CardContainer>
