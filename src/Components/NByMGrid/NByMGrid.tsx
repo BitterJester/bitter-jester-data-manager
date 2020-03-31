@@ -13,13 +13,21 @@ const NByMGrid = (props: Props) => {
     const gridItemsCopy = _.cloneDeep(gridItems);
 
     while (gridItemsCopy.length > 0) {
-        const numberOfItemsToRemove = columns < gridItemsCopy.length ? columns : gridItemsCopy.length;
+        const isEnoughToFillRow = columns < gridItemsCopy.length;
+        const numberOfItemsToRemove = isEnoughToFillRow ? columns : gridItemsCopy.length;
         const itemsForRow = gridItemsCopy.splice(0, numberOfItemsToRemove);
         const row = [];
 
         itemsForRow.forEach((gridItem, index) => {
             row.push(<Col key={index} style={{padding: '8px'}}>{gridItem}</Col>)
         });
+
+        if(!isEnoughToFillRow){
+            for(let i = 0; i < columns - numberOfItemsToRemove; i++){
+                row.push(<Col key={`empty${i}`}></Col>)
+            }
+        }
+
         rows.push(<Row key={rows.length}>{row}</Row>);
     }
 

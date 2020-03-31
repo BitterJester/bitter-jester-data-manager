@@ -1,6 +1,5 @@
 .completedSubmissionCardContainer {
-    width: 800px;
-    height: 260px;
+    height: 360px;
     background: linear-gradient(90deg, rgba(123, 93, 151, 1) 35%, rgba(231, 158, 49, 1) 100%);
     padding: 16px;
 }

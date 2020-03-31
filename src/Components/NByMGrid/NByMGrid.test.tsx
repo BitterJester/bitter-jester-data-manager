@@ -10,7 +10,7 @@ describe('NByMGrid', () => {
         <div>3</div>,
         <div>4</div>
     ]
-    const component = shallow(<NByMGrid columns={3} gridItems={gridItems}/>);
+    const component = shallow(<NByMGrid columns={3} gridItems={gridItems} />);
 
     const getGridItem = (row: number, column: number) => {
         return component.find(Row).at(row).find(Col).at(column).find('div').text();
@@ -21,9 +21,9 @@ describe('NByMGrid', () => {
     });
 
     it('should have 1 column in the second row', () => {
-        expect(component.find(Row).at(1).find(Col)).toHaveLength(1);
+        expect(component.find(Row).at(1).find(Col)).toHaveLength(3);
     });
-    
+
     it('should have item 1 in first row', () => {
         expect(getGridItem(0, 0)).toEqual('1');
     });
@@ -38,5 +38,13 @@ describe('NByMGrid', () => {
 
     it('should have item 4 in second row', () => {
         expect(getGridItem(1, 0)).toEqual('4');
+    });
+
+    it('should have item 5 in second row to fill space', () => {
+        expect(component.find(Row).at(1).find(Col).at(1)).toHaveLength(1);
+    });
+
+    it('should have item 6 in second row to fill space', () => {
+        expect(component.find(Row).at(1).find(Col).at(2)).toHaveLength(1);
     });
 });
