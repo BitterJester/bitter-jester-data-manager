@@ -22,10 +22,14 @@ const NByMGrid = (props: Props) => {
             row.push(<Col key={index} style={{padding: '8px'}}>{gridItem}</Col>)
         });
 
-        if(!isEnoughToFillRow){
+        const addEmptyColumnssToFillLastRow = () => {
             for(let i = 0; i < columns - numberOfItemsToRemove; i++){
                 row.push(<Col key={`empty${i}`}></Col>)
             }
+        };
+
+        if(!isEnoughToFillRow){
+          addEmptyColumnssToFillLastRow();  
         }
 
         rows.push(<Row key={rows.length}>{row}</Row>);
