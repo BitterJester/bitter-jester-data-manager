@@ -14,6 +14,7 @@ export type PrunedApplication = {
     firstChoiceFridayNight: string;
     secondChoiceFridayNight: string;
     primaryPhoneNumber: string;
+    citiesRepresented: string;
 }
 
 export const SubmissionContainer = () => {
@@ -36,7 +37,8 @@ export const SubmissionContainer = () => {
                 primaryEmailAddress: app.primaryEmailAddress,
                 firstChoiceFridayNight: app.firstChoiceFridayNight || '',
                 secondChoiceFridayNight: app.secondChoiceFridayNight || '',
-                primaryPhoneNumber: app.primaryPhoneNumber
+                primaryPhoneNumber: app.primaryPhoneNumber,
+                citiesRepresented: app.citiesRepresented
             };
         });
     }

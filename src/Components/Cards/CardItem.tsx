@@ -12,7 +12,7 @@ const CardItem = (props: Props) => {
     const {label, value} = props;
 
     return (
-        <Col>
+        <Col className={'cardItemContainer'}>
             <div className={'cardItemLabel'}>{label}</div>
             <div className={'cardItemValue'} >{value}</div>
         </Col>

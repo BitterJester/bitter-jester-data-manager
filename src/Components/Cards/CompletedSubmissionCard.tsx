@@ -11,24 +11,36 @@ type Props = {
 }
 
 const CompletedSubmissionCard = (props: Props) => {
-    const { completedSubmission } = props;
+    const { 
+        bandName, 
+        primaryEmailAddress, 
+        firstChoiceFridayNight, 
+        secondChoiceFridayNight, 
+        primaryPhoneNumber, 
+        citiesRepresented 
+    } = props.completedSubmission;
 
-    const secondChoiceFridayLabel = completedSubmission.secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
+    const secondChoiceFridayLabel = secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
 
     return (
         <CardContainer className={'completedSubmissionCardContainer'}>
             <Row>
                 <div className={'bandName'}>
-                    {completedSubmission.bandName}
+                    {bandName}
+                </div>
+            </Row>
+            <Row>
+                <div className={'citiesRepresented'}>
+                    {citiesRepresented}
                 </div>
             </Row>
             <Row className={'leftSide'}>
-                <CardItem label={'Primary Email Address'} value={completedSubmission.primaryEmailAddress} />
-                <CardItem label={'First Choice Friday Night'} value={completedSubmission.firstChoiceFridayNight} />
+                <CardItem label={'Primary Email Address'} value={primaryEmailAddress} />
+                <CardItem label={'First Choice Friday Night'} value={firstChoiceFridayNight} />
             </Row>
             <Row className={'rightSide'}>
-                <CardItem label={'Phone Number'} value={completedSubmission.primaryPhoneNumber} />
-                <CardItem label={secondChoiceFridayLabel} value={completedSubmission.secondChoiceFridayNight} />
+                <CardItem label={'Phone Number'} value={primaryPhoneNumber} />
+                <CardItem label={secondChoiceFridayLabel} value={secondChoiceFridayNight} />
             </Row>
         </CardContainer>
     );

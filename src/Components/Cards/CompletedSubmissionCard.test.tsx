@@ -12,7 +12,8 @@ describe('CompletedSubmissionCard', () => {
         primaryEmailAddress: 'email',
         firstChoiceFridayNight: '1',
         secondChoiceFridayNight: '2',
-        primaryPhoneNumber: 'phone'
+        primaryPhoneNumber: 'phone',
+        citiesRepresented: 'city, state city, state'
     };
 
     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission}/>);
@@ -23,6 +24,11 @@ describe('CompletedSubmissionCard', () => {
 
     it('should display a row for band name', () => {
         expect(component.find('.bandName').text()).toEqual('band1');
+    });
+
+
+    it('should display a row for citiesRepresented', () => {
+        expect(component.find('.citiesRepresented').text()).toEqual('city, state city, state');
     });
 
     const getCardItemProps = (index: number) => {

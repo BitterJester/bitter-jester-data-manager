@@ -14,3 +14,7 @@
     display: block;
     height: 32px;
 }
+
+.cardItemContainer {
+    padding: 16px;
+}
