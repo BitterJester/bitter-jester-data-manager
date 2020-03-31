@@ -1,0 +1,16 @@
+.cardItemLabel {
+    color: rgb(204, 204, 204);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 12px;
+    padding-left: 16px;
+    display: block;
+}
+
+..cardItemValue {
+    color: white;
+    font-size: 16px;
+    padding: 0px 0px 8px 16px;
+    display: block;
+    height: 32px;
+}
