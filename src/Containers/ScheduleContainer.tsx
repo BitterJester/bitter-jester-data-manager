@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Button } from 'reactstrap';
+import { Container, Button, Alert } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
@@ -7,6 +7,7 @@ import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
 import { S3Client } from '../aws/s3Client';
 import _ from 'lodash';
+import ScheduleLegendItem from '../Components/ScheduleLegendItem';
 
 export type Night = {
     night: number;
@@ -30,6 +31,7 @@ export const ScheduleContainer = () => {
         nights: []
     };
     const [schedule, setSchedule] = useState(initialSchedule);
+    const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
 
     useEffect(() => {
         async function fetch() {
@@ -42,34 +44,37 @@ export const ScheduleContainer = () => {
         const s3Client = new S3Client(process.env.REACT_APP_AWS_ACCESS_ID, process.env.REACT_APP_AWS_SECRET_KEY);
 
         s3Client.put(s3Client.createPutPublicJsonRequest('bitter-jester-test', 'friday-night-schedule.json', JSON.stringify(schedule)));
+        onAlert();
     }
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex) => {
         const scheduleCopy = _.cloneDeep(schedule);
         const nights = scheduleCopy.nights;
         const bandToMove = nights[columnRemovedFromIndex].bands[rowRemovedFromIndex];
-        console.log(`band to move ${bandToMove.bandName}`)
         let nightToAddTo = nights[columnAddedToIndex];
-        console.log(`night to add to ${nightToAddTo.night}`)
         nightToAddTo.bands.push(bandToMove);
         const nightToRemoveFrom = nights.filter(night => {
             const isNightToRemoveFrom = _.isEqual(night.night, nights[columnRemovedFromIndex].night);
             return isNightToRemoveFrom;
         });
-        console.log(`night to remove from ${nightToRemoveFrom[0].night}`);
         nightToRemoveFrom[0].bands = nightToRemoveFrom[0].bands.filter((band, index) => {
             return index !== rowRemovedFromIndex;
         });
-        console.log(scheduleCopy.nights);
         setSchedule(scheduleCopy);
+    }
+
+    const onAlert = () => {
+        setIsSaveAlertOpen(!isSaveAlertOpen);
     }
 
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
+                    <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{textAlign: 'center'}}>The schedule has been updated!</Alert>
                     <Button onClick={saveSchedule}>Save Schedule</Button>
                     <Title titleDisplayText={'Suggested Friday Night Schedule'} />
+                    <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
             </div>
