@@ -1,11 +1,10 @@
-import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import { BackgroundColor } from './BackgroundColor';
 
 describe('BackgroundColor', () => {
-    const getApplication = (isAvailableOnAllFridays: boolean): BitterJesterApplication => {
+    const getApplication = (isAvailableOnAllFridays: boolean) => {
         return {
             id: 'id',
-            isAvailableOnAllFridays: isAvailableOnAllFridays,
+            isBandAvailableOnAllFridays: isAvailableOnAllFridays,
             bandName: 'band1',
             primaryEmailAddress: 'email',
             primaryPhoneNumber: 'phone',

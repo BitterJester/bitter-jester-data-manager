@@ -16,9 +16,9 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands.map((app, index) => {
-            const backgroundColor = new BackgroundColor(app, night.night).get();
+            const color = new BackgroundColor(app, night.night).get();
 
-            return <Col>{app.bandName}</Col>
+            return <Col style={{color: color}}>{app.bandName}</Col>
         });
 
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);

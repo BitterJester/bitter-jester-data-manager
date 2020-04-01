@@ -47,7 +47,7 @@ export const DragAndDropList = (props: Props) => {
         <DragDropContext onDragEnd={onDragEnd}>
             {
                 orderedItemsForDisplay.map((item, index) => {
-                    return <Col><DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} /></Col>
+                    return <Col style={{background: 'rgb(204, 202, 202)'}}><DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} /></Col>
                 })
             }
         </DragDropContext>

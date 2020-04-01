@@ -16,7 +16,7 @@ const DroppableList = (props: Props) => {
         padding: grid * 2,
         margin: `0 0 ${grid}px 0`,
         font: 'bold 20px helvetica, arial, sans-serif',
-        background: isDragging ? "#8f6daf" : "linear-gradient(90deg, rgba(123, 93, 151, 1) 35%, rgba(231, 158, 49, 1) 100%)",
+        background: isDragging ? "#8f6daf" : "white",
         color: 'white',
         ...draggableStyle
     });
@@ -38,7 +38,7 @@ const DroppableList = (props: Props) => {
                     {orderedItemsForDisplay.map((item, index) => (
                         <Draggable key={index} draggableId={`${droppableId}=${index}`} index={index}>
                             {(provided, snapshot) => {
-                                const itemStyle = props.getItemStyle(snapshot.isDragging, provided.draggableProps.style) || getDefaultItemStyle(snapshot.isDragging, provided.draggableProps.style);
+                                const itemStyle = props.getItemStyle ? props.getItemStyle(snapshot.isDragging, provided.draggableProps.style) : getDefaultItemStyle(snapshot.isDragging, provided.draggableProps.style);
                                 return (
                                     <div
                                         ref={provided.innerRef}
