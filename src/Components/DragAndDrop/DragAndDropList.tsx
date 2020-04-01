@@ -49,13 +49,14 @@ export const DragAndDropList = (props: Props) => {
         return null;
     }
 
+    const columnTitlesCopy = _.cloneDeep(props.orderedColumnTitles);
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             {
                 orderedItemsForDisplay.map((item, index) => {
                     return (
                         <Col style={{ background: 'rgb(204, 202, 202)' }}>
-                            <Title titleDisplayText={props.orderedColumnTitles.shift()}/>
+                            <Title titleDisplayText={columnTitlesCopy.shift()}/>
                             <DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} />
                         </Col>
                     );
