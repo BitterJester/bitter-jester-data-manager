@@ -23,7 +23,7 @@ describe('BackgroundColor', () => {
     });
 
     it('should return light yellow for second choice friday night', () => {
-        expect(new BackgroundColor(getApplication(false), 2).get()).toEqual('lightyellow');
+        expect(new BackgroundColor(getApplication(false), 2).get()).toEqual('rgb(227, 194, 27)');
     });
 
     it('should return red for rest', () => {

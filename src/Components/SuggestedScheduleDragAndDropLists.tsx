@@ -7,6 +7,7 @@ import { BackgroundColor } from './BackgroundColor';
 
 type Props = {
     schedule: Schedule;
+    updateSchedule: Function;
 }
 
 export const SuggestedScheduleDragAndDropLists = (props: Props) => {
@@ -27,7 +28,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     return (
         <Fragment>
             <TableHeader tableColumnNamesOrderedFromLeftToRight={fridayNights} />
-            <Row><DragAndDropList initialOrderComponentsToDisplay={schedulesInformationForEachNight} /></Row>
+            <Row><DragAndDropList initialOrderComponentsToDisplay={schedulesInformationForEachNight} updateState={props.updateSchedule}/></Row>
         </Fragment>
     );
 }

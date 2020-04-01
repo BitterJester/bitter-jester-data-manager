@@ -26,3 +26,7 @@ export const getFromS3 = async (key: string, setStateFunction: Function) => {
 
     getSubmissionsFromS3(key);
 }
+
+export const saveToS3 = async (key: string) => {
+    
+}

@@ -6,6 +6,7 @@ import { Col } from 'reactstrap';
 type Props = {
     initialOrderComponentsToDisplay: any[];
     getItemStyle?: Function;
+    updateState: Function;
 };
 
 export const DragAndDropList = (props: Props) => {
@@ -20,12 +21,15 @@ export const DragAndDropList = (props: Props) => {
         const sourceDroppableIndex = result.source.droppableId.split('-')[1];
         const listToRemoveFrom = listOfLists[sourceDroppableIndex];
         const [removed] = listToRemoveFrom.splice(result.source.index, 1);
-
         const requestedIndexToDropIn = result.destination.droppableId.split('-')[1];
         const destination = result.destination;
         const listToAddTo = listOfLists[requestedIndexToDropIn];
 
         listToAddTo.splice(destination.index, 0, removed);
+        console.log(`source column: ${sourceDroppableIndex}`);
+        console.log(`source row: ${result.source.index}`);
+        console.log(`new column ${requestedIndexToDropIn}`)
+        props.updateState(sourceDroppableIndex, result.source.index, requestedIndexToDropIn);
 
         return listOfLists;
     };

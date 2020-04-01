@@ -25,7 +25,7 @@ export class BackgroundColor {
         const didGetSecondChoice = this.application.secondChoiceFridayNight.includes(nightString);
 
         if(didGetSecondChoice){
-            return 'lightyellow';
+            return 'rgb(227, 194, 27)';
         }
 
         return 'red';
