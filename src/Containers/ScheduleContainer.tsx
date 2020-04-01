@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Button, Alert } from 'reactstrap';
+import { Container, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
-import { S3Client } from '../aws/s3Client';
 import _ from 'lodash';
 import ScheduleLegendItem from '../Components/ScheduleLegendItem';
+import ScheduleDropdown from '../Components/ScheduleDropdown';
 
 export type Night = {
     night: number;
@@ -22,6 +22,8 @@ export type Schedule = {
     nights: Night[]
 }
 
+const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
+const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
 export const ScheduleContainer = () => {
     const initialSchedule: Schedule = {
         fridayNightOne: [],
@@ -32,11 +34,12 @@ export const ScheduleContainer = () => {
     };
     const [schedule, setSchedule] = useState(initialSchedule);
 
+    async function fetch(fileName) {
+        await getFromS3(fileName, setSchedule);
+    }
+
     useEffect(() => {
-        async function fetch() {
-            await getFromS3('friday-night-schedule.json', setSchedule);
-        }
-        fetch();
+        fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE);
     }, []);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
@@ -61,6 +64,12 @@ export const ScheduleContainer = () => {
                 <CardContainer>
                     <Title titleDisplayText={'Suggested Friday Night Schedule'} />
                     <ScheduleLegendItem />
+                    <Row>
+                        <ScheduleDropdown
+                            dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
+                            dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
+                        />
+                    </Row>
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
             </div>

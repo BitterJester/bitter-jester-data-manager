@@ -18,7 +18,7 @@ const SaveScheduleButton = (props: Props) => {
     const saveSchedule = () => {
         const s3Client = new S3Client(process.env.REACT_APP_AWS_ACCESS_ID, process.env.REACT_APP_AWS_SECRET_KEY);
 
-        s3Client.put(s3Client.createPutPublicJsonRequest('bitter-jester-test', 'friday-night-schedule.json', JSON.stringify(schedule)));
+        s3Client.put(s3Client.createPutPublicJsonRequest('bitter-jester-test', 'user-friday-night-schedule.json', JSON.stringify(schedule)));
         onAlert();
     }
 
