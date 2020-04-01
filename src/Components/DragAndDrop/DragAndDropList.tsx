@@ -3,6 +3,7 @@ import { DragDropContext, DropResult, ResponderProvided } from 'react-beautiful-
 import DroppableList from './DroppableList';
 import { Col } from 'reactstrap';
 import { Title } from '../Title';
+import _ from 'lodash';
 
 type Props = {
     initialOrderComponentsToDisplay: any[];
@@ -28,9 +29,6 @@ export const DragAndDropList = (props: Props) => {
         const listToAddTo = listOfLists[requestedIndexToDropIn];
 
         listToAddTo.splice(destination.index, 0, removed);
-        console.log(`source column: ${sourceDroppableIndex}`);
-        console.log(`source row: ${result.source.index}`);
-        console.log(`new column ${requestedIndexToDropIn}`)
         props.updateState(sourceDroppableIndex, result.source.index, requestedIndexToDropIn);
 
         return listOfLists;
