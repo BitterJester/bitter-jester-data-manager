@@ -5,15 +5,16 @@ import { Col } from 'reactstrap';
 
 type Props = {
     initialOrderComponentsToDisplay: any[];
+    getItemStyle?: Function;
 };
 
 export const DragAndDropList = (props: Props) => {
-    const initialItems = props.initialOrderComponentsToDisplay;
-    const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialItems);
+    const {initialOrderComponentsToDisplay, getItemStyle} = props;
+    const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialOrderComponentsToDisplay);
 
     useEffect(() => {
-        setOrderedItemsForDisplay(initialItems);
-    }, [initialItems]);
+        setOrderedItemsForDisplay(initialOrderComponentsToDisplay);
+    }, [initialOrderComponentsToDisplay]);
 
     const reorder = (listOfLists: any[], result: DropResult): any[] => {
         const sourceDroppableIndex = result.source.droppableId.split('-')[1];
@@ -30,8 +31,6 @@ export const DragAndDropList = (props: Props) => {
     };
 
     const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
-
-        console.log(result.destination);
         if (!result.destination) {
             return null;
         }
@@ -48,7 +47,7 @@ export const DragAndDropList = (props: Props) => {
         <DragDropContext onDragEnd={onDragEnd}>
             {
                 orderedItemsForDisplay.map((item, index) => {
-                    return <Col><DroppableList orderInList={index} orderedItemsForDisplay={item} /></Col>
+                    return <Col><DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} /></Col>
                 })
             }
         </DragDropContext>

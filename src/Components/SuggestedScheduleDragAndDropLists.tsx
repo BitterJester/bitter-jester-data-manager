@@ -21,7 +21,6 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
     });
 
-
     return (
         <Fragment>
             <TableHeader tableColumnNamesOrderedFromLeftToRight={fridayNights} />

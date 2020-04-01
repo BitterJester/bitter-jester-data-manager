@@ -2,6 +2,7 @@ import React from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 type Props = {
+    getItemStyle?: Function;
     orderInList: number;
     orderedItemsForDisplay: any[];
 };
@@ -10,7 +11,7 @@ const DroppableList = (props: Props) => {
     const { orderInList, orderedItemsForDisplay } = props;
     const grid = 8;
 
-    const getItemStyle = (isDragging, draggableStyle) => ({
+    const getDefaultItemStyle = (isDragging, draggableStyle) => ({
         userSelect: "none",
         padding: grid * 2,
         margin: `0 0 ${grid}px 0`,
@@ -27,34 +28,35 @@ const DroppableList = (props: Props) => {
 
     const droppableId = `droppable-${orderInList}`;
     return (
-            <Droppable droppableId={droppableId}>
-                {(provided, snapshot) => (
-                    <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={getListStyle(snapshot.isDraggingOver)}
-                    >
-                        {orderedItemsForDisplay.map((item, index) => (
-                            <Draggable key={index} draggableId={`${droppableId}=${index}`} index={index}>
-                                {(provided, snapshot) => (
+        <Droppable droppableId={droppableId}>
+            {(provided, snapshot) => (
+                <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                >
+                    {orderedItemsForDisplay.map((item, index) => (
+                        <Draggable key={index} draggableId={`${droppableId}=${index}`} index={index}>
+                            {(provided, snapshot) => {
+                                const itemStyle = props.getItemStyle(snapshot.isDragging, provided.draggableProps.style) || getDefaultItemStyle(snapshot.isDragging, provided.draggableProps.style);
+                                return (
                                     <div
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
+                                        style={itemStyle}
                                     >
                                         {item}
                                     </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
+                                );
+                            }
+                            }
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </div>
+            )}
+        </Droppable>
     );
 };
 
