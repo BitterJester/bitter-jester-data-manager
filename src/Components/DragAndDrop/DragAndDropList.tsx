@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { DragDropContext, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import DroppableList from './DroppableList';
 import { Col } from 'reactstrap';
+import { Title } from '../Title';
 
 type Props = {
     initialOrderComponentsToDisplay: any[];
     getItemStyle?: Function;
+    orderedColumnTitles: string[];
     updateState: Function;
 };
 
 export const DragAndDropList = (props: Props) => {
-    const {initialOrderComponentsToDisplay, getItemStyle} = props;
+    const { initialOrderComponentsToDisplay, getItemStyle } = props;
     const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialOrderComponentsToDisplay);
 
     useEffect(() => {
@@ -51,7 +53,12 @@ export const DragAndDropList = (props: Props) => {
         <DragDropContext onDragEnd={onDragEnd}>
             {
                 orderedItemsForDisplay.map((item, index) => {
-                    return <Col style={{background: 'rgb(204, 202, 202)'}}><DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} /></Col>
+                    return (
+                        <Col style={{ background: 'rgb(204, 202, 202)' }}>
+                            <Title titleDisplayText={props.orderedColumnTitles.shift()}/>
+                            <DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} />
+                        </Col>
+                    );
                 })
             }
         </DragDropContext>

@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
-import { TableHeader } from './Table/TableHeader';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 import { Schedule } from '../Containers/ScheduleContainer';
 import { BackgroundColor } from './BackgroundColor';
@@ -19,7 +18,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         const submissionTableRowBandsForOneNight = night.bands.map((app, index) => {
             const color = new BackgroundColor(app, night.night).get();
 
-            return <Col style={{color: color}}>{app.bandName}</Col>
+            return <Col style={{ color: color }}>{app.bandName}</Col>
         });
 
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
@@ -27,8 +26,13 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     return (
         <Fragment>
-            <TableHeader tableColumnNamesOrderedFromLeftToRight={fridayNights} />
-            <Row><DragAndDropList initialOrderComponentsToDisplay={schedulesInformationForEachNight} updateState={props.updateSchedule}/></Row>
+            <Row>
+                <DragAndDropList
+                    initialOrderComponentsToDisplay={schedulesInformationForEachNight}
+                    updateState={props.updateSchedule}
+                    orderedColumnTitles={fridayNights}
+                />
+            </Row>
         </Fragment>
     );
 }

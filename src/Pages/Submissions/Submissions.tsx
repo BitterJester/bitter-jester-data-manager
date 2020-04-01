@@ -21,8 +21,8 @@ export type BitterJesterApplication = {
 export const Submissions = () => {
     return (
         <div style={{background: '#e8e7e4'}}>
-            <SubmissionContainer />
             <ScheduleContainer />
+            <SubmissionContainer />
         </div>
     );
 }
