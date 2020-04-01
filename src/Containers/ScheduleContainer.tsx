@@ -31,7 +31,6 @@ export const ScheduleContainer = () => {
         nights: []
     };
     const [schedule, setSchedule] = useState(initialSchedule);
-    const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
 
     useEffect(() => {
         async function fetch() {
@@ -39,13 +38,6 @@ export const ScheduleContainer = () => {
         }
         fetch();
     }, []);
-
-    const saveSchedule = () => {
-        const s3Client = new S3Client(process.env.REACT_APP_AWS_ACCESS_ID, process.env.REACT_APP_AWS_SECRET_KEY);
-
-        s3Client.put(s3Client.createPutPublicJsonRequest('bitter-jester-test', 'friday-night-schedule.json', JSON.stringify(schedule)));
-        onAlert();
-    }
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
         const scheduleCopy = _.cloneDeep(schedule);
@@ -63,16 +55,10 @@ export const ScheduleContainer = () => {
         setSchedule(scheduleCopy);
     }
 
-    const onAlert = () => {
-        setIsSaveAlertOpen(!isSaveAlertOpen);
-    }
-
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
-                    <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{textAlign: 'center'}}>The schedule has been updated!</Alert>
-                    <Button onClick={saveSchedule}>Save Schedule</Button>
                     <Title titleDisplayText={'Suggested Friday Night Schedule'} />
                     <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />

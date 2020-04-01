@@ -3,6 +3,7 @@ import { Row, Col } from 'reactstrap';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 import { Schedule } from '../Containers/ScheduleContainer';
 import { BackgroundColor } from './BackgroundColor';
+import SaveScheduleButton from './SaveScheduleButton';
 
 type Props = {
     schedule: Schedule;
@@ -26,6 +27,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     return (
         <Fragment>
+            <SaveScheduleButton schedule={schedule}/>
             <Row>
                 <DragAndDropList
                     initialOrderComponentsToDisplay={schedulesInformationForEachNight}
