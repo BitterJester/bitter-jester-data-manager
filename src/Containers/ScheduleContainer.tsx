@@ -6,7 +6,7 @@ import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
 
-type Night = {
+export type Night = {
     night: number;
     bands: BitterJesterApplication[]
 }

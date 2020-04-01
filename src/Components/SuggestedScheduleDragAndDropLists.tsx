@@ -3,6 +3,7 @@ import { Row, Col } from 'reactstrap';
 import { TableHeader } from './Table/TableHeader';
 import { DragAndDropList } from './DragAndDrop/DragAndDropList';
 import { Schedule } from '../Containers/ScheduleContainer';
+import { BackgroundColor } from './BackgroundColor';
 
 type Props = {
     schedule: Schedule;
@@ -15,9 +16,11 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands.map((app, index) => {
-        return <Col>{app.bandName}</Col>
+            const backgroundColor = new BackgroundColor(app, night.night).get();
+
+            return <Col>{app.bandName}</Col>
         });
-        
+
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
     });
 
