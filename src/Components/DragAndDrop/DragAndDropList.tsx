@@ -29,7 +29,7 @@ export const DragAndDropList = (props: Props) => {
         const listToAddTo = listOfLists[requestedIndexToDropIn];
 
         listToAddTo.splice(destination.index, 0, removed);
-        props.updateState(sourceDroppableIndex, result.source.index, requestedIndexToDropIn);
+        props.updateState(sourceDroppableIndex, result.source.index, requestedIndexToDropIn, destination.index);
 
         return listOfLists;
     };

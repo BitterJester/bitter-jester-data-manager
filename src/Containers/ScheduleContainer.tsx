@@ -47,12 +47,12 @@ export const ScheduleContainer = () => {
         onAlert();
     }
 
-    const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex) => {
+    const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
         const scheduleCopy = _.cloneDeep(schedule);
         const nights = scheduleCopy.nights;
         const bandToMove = nights[columnRemovedFromIndex].bands[rowRemovedFromIndex];
         let nightToAddTo = nights[columnAddedToIndex];
-        nightToAddTo.bands.push(bandToMove);
+        nightToAddTo.bands.splice(rowAddedToIndex, 0, bandToMove);
         const nightToRemoveFrom = nights.filter(night => {
             const isNightToRemoveFrom = _.isEqual(night.night, nights[columnRemovedFromIndex].night);
             return isNightToRemoveFrom;
