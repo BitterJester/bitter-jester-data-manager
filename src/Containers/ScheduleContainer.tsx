@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Alert } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
@@ -24,7 +24,7 @@ export type Schedule = {
     version: string
 }
 
-export const USER_SAVE_VERSION = 'user_saved';
+export const LAST_SAVE_VERSION = 'last_saved';
 
 const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
 const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
@@ -35,9 +35,11 @@ export const ScheduleContainer = () => {
         fridayNightThree: [],
         fridayNightFour: [],
         nights: [],
-        version: USER_SAVE_VERSION
+        version: LAST_SAVE_VERSION
     };
     const [schedule, setSchedule] = useState(initialSchedule);
+    const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
+
 
     async function fetch(fileName) {
         await getFromS3(fileName, setSchedule);
@@ -76,16 +78,21 @@ export const ScheduleContainer = () => {
         return `${schedule ? formatVersionForTitle(schedule.version) : 'Suggested'} Friday Night Schedule`;
     }
 
+    const onAlert = () => {
+        setIsSaveAlertOpen(!isSaveAlertOpen);
+    }
+
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
+                <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
                     <Row>
                         <ScheduleDropdown
                             dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
                             dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
                         />
-                        <SaveScheduleButton schedule={schedule} />
+                        <SaveScheduleButton schedule={schedule} onAlert={onAlert}/>
                     </Row>
                     <Title titleDisplayText={formatTitle()} />
                     <ScheduleLegendItem />
