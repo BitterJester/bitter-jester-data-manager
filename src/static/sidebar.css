@@ -29,10 +29,6 @@
     color: #818181;
 }
 
-span:hover {
-    cursor: pointer;
-}
-
 #homeLogo:hover {
     cursor: pointer;
 }
