@@ -17,7 +17,7 @@ const UpdateScheduleButton = (props: Props) => {
     
     return (
         <div className={'buttonContainer'}>
-            <Button className={'button'} onClick={updateSchdule}>Update Schedule</Button>
+            <Button className={'button'} onClick={updateSchdule}>Update Suggested Schedule</Button>
         </div>
     )
 }
