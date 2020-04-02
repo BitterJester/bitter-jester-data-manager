@@ -1,3 +1,7 @@
 .saveScheduleButtonContainer {
     padding: 16px;
 }
+
+.saveScheduleButton {
+    background: rgb(123, 93, 151);
+}

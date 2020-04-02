@@ -30,7 +30,7 @@ const SaveScheduleButton = (props: Props) => {
     return (
         <Fragment>
             <div className={'saveScheduleButtonContainer'}>
-                <Button onClick={saveSchedule}>Save Schedule</Button>
+                <Button className={'saveScheduleButton'} onClick={saveSchedule}>Save Schedule</Button>
             </div>
         </Fragment>
     );

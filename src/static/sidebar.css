@@ -9,6 +9,9 @@
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
+    -moz-box-shadow: 6px 0 8px 0 #555;
+    -webkit-box-shadow: 6px 0 8px 0 #555;
+    box-shadow: 6px 0 8px 0 #555;
 }
 
 .openSidebarComponent {
@@ -30,6 +33,10 @@
 }
 
 #homeLogo:hover {
+    cursor: pointer;
+}
+
+.closebtn {
     cursor: pointer;
 }
 

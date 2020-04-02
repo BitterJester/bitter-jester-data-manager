@@ -1,3 +1,7 @@
 .scheduleDropdownContainer {
     padding: 16px;
 }
+
+.toggle {
+    background: rgb(123, 93, 151);
+}

@@ -18,7 +18,7 @@ const ScheduleDropdown = (props: Props) => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
     return (
         <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle caret>
+            <DropdownToggle className={'toggle'} caret>
                 Switch Version
             </DropdownToggle>
             <DropdownMenu>
