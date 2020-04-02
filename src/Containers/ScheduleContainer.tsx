@@ -85,14 +85,14 @@ export const ScheduleContainer = () => {
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
-                <CardContainer>
-                <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
+                <CardContainer style={{ padding: '16px' }}>
+                    <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
                     <Row>
                         <ScheduleDropdown
                             dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
                             dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
                         />
-                        <SaveScheduleButton schedule={schedule} onAlert={onAlert}/>
+                        <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
                     </Row>
                     <Title titleDisplayText={formatTitle()} />
                     <ScheduleLegendItem />
