@@ -9,6 +9,7 @@ import _ from 'lodash';
 import ScheduleLegendItem from '../Components/ScheduleLegendItem';
 import ScheduleDropdown from '../Components/ScheduleDropdown';
 import SaveScheduleButton from '../Components/SaveScheduleButton';
+import UpdateScheduleButton from '../UpdateScheduleButton';
 
 export type Night = {
     night: number;
@@ -93,6 +94,7 @@ export const ScheduleContainer = () => {
                             dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
                         />
                         <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
+                        <UpdateScheduleButton onAlert={onAlert}/>
                     </Row>
                     <Title titleDisplayText={formatTitle()} />
                     <ScheduleLegendItem />
