@@ -19,7 +19,7 @@ export const UpdateInfoButton = () => {
     return (
         <div style={{padding:'15px'}}>
             <Alert color="success" isOpen={showAlert} toggle={onAlertStatusChange}>
-                Info update has been commenced in the background.
+                Info update has been commenced in the background. Refresh page to see change.
             </Alert>
             <Button style={{background: 'rgb(123, 93, 151)'}} onClick={updateInfo}>Update Submissions in Background</Button>
         </div>
