@@ -8,6 +8,7 @@ import { Title } from '../Components/Title';
 import _ from 'lodash';
 import ScheduleLegendItem from '../Components/ScheduleLegendItem';
 import ScheduleDropdown from '../Components/ScheduleDropdown';
+import SaveScheduleButton from '../Components/SaveScheduleButton';
 
 export type Night = {
     night: number;
@@ -19,8 +20,11 @@ export type Schedule = {
     fridayNightTwo: BitterJesterApplication[],
     fridayNightThree: BitterJesterApplication[],
     fridayNightFour: BitterJesterApplication[],
-    nights: Night[]
+    nights: Night[],
+    version: string
 }
+
+export const USER_SAVE_VERSION = 'user_saved';
 
 const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
 const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
@@ -30,7 +34,8 @@ export const ScheduleContainer = () => {
         fridayNightTwo: [],
         fridayNightThree: [],
         fridayNightFour: [],
-        nights: []
+        nights: [],
+        version: USER_SAVE_VERSION
     };
     const [schedule, setSchedule] = useState(initialSchedule);
 
@@ -58,18 +63,32 @@ export const ScheduleContainer = () => {
         setSchedule(scheduleCopy);
     }
 
+    const formatVersionForTitle = (version: string): string => {
+        return version.split('_').map(part =>
+            part.replace(
+                /^./,
+                part[0].toUpperCase()
+            )
+        ).join(' ');
+    };
+
+    const formatTitle = (): string => {
+        return `${schedule ? formatVersionForTitle(schedule.version) : 'Suggested'} Friday Night Schedule`;
+    }
+
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
-                    <Title titleDisplayText={'Suggested Friday Night Schedule'} />
-                    <ScheduleLegendItem />
                     <Row>
                         <ScheduleDropdown
                             dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
                             dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
                         />
+                        <SaveScheduleButton schedule={schedule} />
                     </Row>
+                    <Title titleDisplayText={formatTitle()} />
+                    <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
             </div>
