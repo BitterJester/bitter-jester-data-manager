@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Alert } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
-import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplication, Submissions } from '../Pages/Submissions/Submissions';
 import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
 import _ from 'lodash';
@@ -83,6 +83,10 @@ export const ScheduleContainer = () => {
         setIsSaveAlertOpen(!isSaveAlertOpen);
     }
 
+    const getTotalBands = (): number => {
+        return schedule.nights.reduce((count, night) => count + night.bands.length, 0);
+    }
+
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
@@ -94,7 +98,15 @@ export const ScheduleContainer = () => {
                             dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
                         />
                         <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
-                        <UpdateScheduleButton onAlert={onAlert}/>
+                        <UpdateScheduleButton onAlert={onAlert} />
+                        <div style={{ textAlign: 'right', width: '100%', paddingRight: '32px' }}>
+                            <span style={{ paddingRight: '8px', fontStyle: 'italic', fontSize: '24px' }}>
+                                Total Bands
+                            </span>
+                            <span style={{fontSize: '24px'}}>
+                                {getTotalBands()}
+                            </span>
+                        </div>
                     </Row>
                     <Title titleDisplayText={formatTitle()} />
                     <ScheduleLegendItem />
