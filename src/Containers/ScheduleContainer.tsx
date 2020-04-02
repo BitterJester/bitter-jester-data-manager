@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Alert } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
-import { BitterJesterApplication, Submissions } from '../Pages/Submissions/Submissions';
+import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
 import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
 import _ from 'lodash';
