@@ -8,11 +8,12 @@ import UpdateScheduleButton from '../UpdateScheduleButton';
 const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
 
 type Props = {
-    schedule: Schedule
+    schedule: Schedule;
+    updateSchedule: Function;
 }
 
 const ScheduleToolbar = (props: Props) => {
-    const { schedule } = props;
+    const { schedule, updateSchedule } = props;
 
     const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
 
@@ -30,8 +31,8 @@ const ScheduleToolbar = (props: Props) => {
             <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
             <Row>
                 <ScheduleDropdown
-                    dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
-                    dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
+                    dropdownItemOnClick={() => updateSchedule(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
+                    dropdownItemOnClick2={() => updateSchedule(USER_FRIDAY_NIGHT_SCHEDULE)}
                 />
                 <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
                 <UpdateScheduleButton onAlert={onAlert} />

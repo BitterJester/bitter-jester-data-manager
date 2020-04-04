@@ -79,7 +79,7 @@ export const ScheduleContainer = () => {
             <div style={{ padding: '16px' }}>
                 <CardContainer style={{ padding: '16px' }}>                   
                     <Title titleDisplayText={formatTitle()} />
-                    <ScheduleToolbar schedule={schedule}/>
+                    <ScheduleToolbar schedule={schedule} updateSchedule={fetch}/>
                     <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
