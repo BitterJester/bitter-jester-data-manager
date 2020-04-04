@@ -27,6 +27,6 @@ describe('BackgroundColor', () => {
     });
 
     it('should return red for rest', () => {
-        expect(new BackgroundColor(getApplication(false), 3).get()).toEqual('red');
+        expect(new BackgroundColor(getApplication(false), 3).get()).toEqual('orange');
     });
 });

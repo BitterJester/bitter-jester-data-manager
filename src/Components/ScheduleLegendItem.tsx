@@ -14,8 +14,12 @@ const ScheduleLegendItem = () => {
                 <p>Band is scheduled on a second choice night.</p>
             </Col>
             <Col>
-                <div className={'coloredKey'} style={{background: 'red'}}/>
+                <div className={'coloredKey'} style={{background: 'orange'}}/>
                 <p>Band is scheduled on a night that wasn't their first or second choice.</p>
+            </Col>
+            <Col>
+                <div className={'coloredKey'} style={{background: 'red'}}/>
+                <p>Band is scheduled on a night that they are not available.</p>
             </Col>
         </Row>
     );

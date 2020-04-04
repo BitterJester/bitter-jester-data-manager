@@ -28,6 +28,14 @@ export class BackgroundColor {
             return 'rgb(227, 194, 27)';
         }
 
-        return 'red';
+        const isUnavailable = this.application.unavailableFridayNights ? 
+            Boolean(this.application.unavailableFridayNights.map(night => night.includes(nightString)).filter(item => item === true).length) :
+            false;
+
+        if(isUnavailable){
+            return 'red';
+        }
+
+        return 'orange';
     }
 }

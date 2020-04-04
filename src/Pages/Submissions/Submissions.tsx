@@ -15,6 +15,7 @@ export type BitterJesterApplication = {
     isAvailableOnAllFridays: boolean;
     primaryPhoneNumber: string;
     citiesRepresented: string;
+    unavailableFridayNights?: string[];
 }
 
 
