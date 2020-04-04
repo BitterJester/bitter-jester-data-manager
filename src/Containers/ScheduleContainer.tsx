@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Alert } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
@@ -7,9 +7,7 @@ import CardContainer from '../Components/CardContainer';
 import { Title } from '../Components/Title';
 import _ from 'lodash';
 import ScheduleLegendItem from '../Components/ScheduleLegendItem';
-import ScheduleDropdown from '../Components/ScheduleDropdown';
-import SaveScheduleButton from '../Components/SaveScheduleButton';
-import UpdateScheduleButton from '../UpdateScheduleButton';
+import ScheduleToolbar from '../Components/ScheduleToolbar';
 
 export type Night = {
     night: number;
@@ -26,9 +24,8 @@ export type Schedule = {
 }
 
 export const LAST_SAVE_VERSION = 'last_saved';
+export const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
 
-const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
-const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
 export const ScheduleContainer = () => {
     const initialSchedule: Schedule = {
         fridayNightOne: [],
@@ -39,8 +36,6 @@ export const ScheduleContainer = () => {
         version: LAST_SAVE_VERSION
     };
     const [schedule, setSchedule] = useState(initialSchedule);
-    const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
-
 
     async function fetch(fileName) {
         await getFromS3(fileName, setSchedule);
@@ -79,36 +74,12 @@ export const ScheduleContainer = () => {
         return `${schedule ? formatVersionForTitle(schedule.version) : 'Suggested'} Friday Night Schedule`;
     }
 
-    const onAlert = () => {
-        setIsSaveAlertOpen(!isSaveAlertOpen);
-    }
-
-    const getTotalBands = (): number => {
-        return schedule.nights.reduce((count, night) => count + night.bands.length, 0);
-    }
-
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
-                <CardContainer style={{ padding: '16px' }}>
-                    <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
-                    <Row>
-                        <ScheduleDropdown
-                            dropdownItemOnClick={() => fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
-                            dropdownItemOnClick2={() => fetch(USER_FRIDAY_NIGHT_SCHEDULE)}
-                        />
-                        <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
-                        <UpdateScheduleButton onAlert={onAlert} />
-                        <div style={{ textAlign: 'right', width: '100%', paddingRight: '32px' }}>
-                            <span style={{ paddingRight: '8px', fontStyle: 'italic', fontSize: '24px' }}>
-                                Total Bands
-                            </span>
-                            <span style={{fontSize: '24px'}}>
-                                {getTotalBands()}
-                            </span>
-                        </div>
-                    </Row>
+                <CardContainer style={{ padding: '16px' }}>                   
                     <Title titleDisplayText={formatTitle()} />
+                    <ScheduleToolbar schedule={schedule}/>
                     <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
