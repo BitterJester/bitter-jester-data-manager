@@ -15,7 +15,7 @@ describe('ScheduleToolbar', () => {
         nights: [],
         version: 'aVersion'        
     };
-    const component = shallow(<ScheduleToolbar schedule={schedule}/>);
+    const component = shallow(<ScheduleToolbar schedule={schedule} updateSchedule={() => 'foo'}/>);
 
     it('should render a ScheduleDropdown', () => {
         expect(component.find(ScheduleDropdown)).toHaveLength(1);
