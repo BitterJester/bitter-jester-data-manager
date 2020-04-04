@@ -50,14 +50,27 @@ export const ScheduleContainer = () => {
         const nights = scheduleCopy.nights;
         const bandToMove = nights[columnRemovedFromIndex].bands[rowRemovedFromIndex];
         let nightToAddTo = nights[columnAddedToIndex];
-        nightToAddTo.bands.splice(rowAddedToIndex, 0, bandToMove);
-        const nightToRemoveFrom = nights.filter(night => {
-            const isNightToRemoveFrom = _.isEqual(night.night, nights[columnRemovedFromIndex].night);
-            return isNightToRemoveFrom;
-        });
-        nightToRemoveFrom[0].bands = nightToRemoveFrom[0].bands.filter((band, index) => {
-            return index !== rowRemovedFromIndex;
-        });
+
+        const getNightToRemoveFrom = () => {
+            return nights.filter(night => {
+                const isNightToRemoveFrom = _.isEqual(night.night, nights[columnRemovedFromIndex].night);
+                return isNightToRemoveFrom;
+            });
+        };
+        const nightToRemoveFrom = getNightToRemoveFrom();
+
+        const removeBandFromPreviousLocation = () => {
+            nightToRemoveFrom[0].bands = nightToRemoveFrom[0].bands.filter((band, index) => {
+                return index !== rowRemovedFromIndex;
+            });
+        };
+        removeBandFromPreviousLocation();
+
+        const addBandToNewLocation = () => {
+            nightToAddTo.bands.splice(rowAddedToIndex, 0, bandToMove);
+        };
+        addBandToNewLocation();
+
         setSchedule(scheduleCopy);
     }
 
@@ -77,9 +90,9 @@ export const ScheduleContainer = () => {
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
-                <CardContainer style={{ padding: '16px' }}>                   
+                <CardContainer style={{ padding: '16px' }}>
                     <Title titleDisplayText={formatTitle()} />
-                    <ScheduleToolbar schedule={schedule} updateSchedule={fetch}/>
+                    <ScheduleToolbar schedule={schedule} updateSchedule={fetch} />
                     <ScheduleLegendItem />
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
                 </CardContainer>
