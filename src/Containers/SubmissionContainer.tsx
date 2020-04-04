@@ -8,6 +8,7 @@ import NByMGrid from '../Components/NByMGrid/NByMGrid';
 import '../static/submissionContainer.css';
 import CompletedSubmissionCard from '../Components/Cards/CompletedSubmissionCard';
 import { UpdateInfoButton } from '../Components/UpdateInfoButton';
+import TotalCount from '../Components/TotalCount';
 
 export type PrunedApplication = {
     bandName: string;
@@ -50,11 +51,16 @@ export const SubmissionContainer = () => {
         return <CompletedSubmissionCard key={index} completedSubmission={prunedApplication} />
     });
 
+    const getTotalCount = () => {
+        return submissions.completedApplications ? submissions.completedApplications.length : 0;
+    }
+
     return (
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
                     <UpdateInfoButton />
+                    <TotalCount count={getTotalCount()}/>
                     <Title titleDisplayText={'Completed Submissions'} />
                     <NByMGrid columns={2} gridItems={completedSubmissionCards} />
                 </CardContainer>

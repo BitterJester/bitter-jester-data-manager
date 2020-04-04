@@ -4,6 +4,8 @@ import { Title } from '../Components/Title';
 import IncompleteSubmissionCard from '../Components/Cards/IncompleteSubmissionCard';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
 import { CardBody } from 'reactstrap';
+import UpdateIncompleteInfoButton from '../Components/UpdateIncompleteInfoButton';
+import TotalCount from '../Components/TotalCount';
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -43,6 +45,8 @@ export const IncompleteApplicationsContainer = () => {
 
     return (
         <div>
+            <UpdateIncompleteInfoButton />
+            <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0}/>
             <Title titleDisplayText='Incomplete Applications' />
             <CardBody>
                 <NByMGrid columns={3} gridItems={incompleteSubmissionCards} />

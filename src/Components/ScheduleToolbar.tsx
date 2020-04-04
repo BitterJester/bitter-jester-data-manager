@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Row, Alert } from 'reactstrap';
 import ScheduleDropdown from './ScheduleDropdown';
-import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../Containers/ScheduleContainer';
+import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE, SUGGESTED_VERSION } from '../Containers/ScheduleContainer';
 import SaveScheduleButton from './SaveScheduleButton';
 import UpdateScheduleButton from '../UpdateScheduleButton';
 import TotalCount from './TotalCount';
@@ -26,7 +26,7 @@ const ScheduleToolbar = (props: Props) => {
     const getTotalBands = (): number => {
         return schedule.nights.reduce((count, night) => count + night.bands.length, 0);
     }
-
+    console.log(schedule.version);
     return (
         <Fragment>
             <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
@@ -35,8 +35,9 @@ const ScheduleToolbar = (props: Props) => {
                     dropdownItemOnClick={() => updateSchedule(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
                     dropdownItemOnClick2={() => updateSchedule(USER_FRIDAY_NIGHT_SCHEDULE)}
                 />
-                <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
-                <UpdateScheduleButton onAlert={onAlert} />
+                {
+                    schedule.version === SUGGESTED_VERSION.toLowerCase() ? <UpdateScheduleButton onAlert={onAlert} /> : <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
+                }
                 <TotalCount count={getTotalBands()}/>
             </Row>
         </Fragment>

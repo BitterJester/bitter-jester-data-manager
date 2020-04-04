@@ -25,6 +25,7 @@ export type Schedule = {
 
 export const LAST_SAVE_VERSION = 'last_saved';
 export const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
+export const SUGGESTED_VERSION = 'Suggested';
 
 export const ScheduleContainer = () => {
     const initialSchedule: Schedule = {
@@ -84,7 +85,7 @@ export const ScheduleContainer = () => {
     };
 
     const formatTitle = (): string => {
-        return `${schedule ? formatVersionForTitle(schedule.version) : 'Suggested'} Friday Night Schedule`;
+        return `${schedule ? formatVersionForTitle(schedule.version) : SUGGESTED_VERSION} Friday Night Schedule`;
     }
 
     return (
