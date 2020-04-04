@@ -4,6 +4,7 @@ import ScheduleDropdown from './ScheduleDropdown';
 import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../Containers/ScheduleContainer';
 import SaveScheduleButton from './SaveScheduleButton';
 import UpdateScheduleButton from '../UpdateScheduleButton';
+import TotalCount from './TotalCount';
 
 const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
 
@@ -36,14 +37,7 @@ const ScheduleToolbar = (props: Props) => {
                 />
                 <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
                 <UpdateScheduleButton onAlert={onAlert} />
-                <div style={{ textAlign: 'right', width: '100%', paddingRight: '32px' }}>
-                    <span style={{ paddingRight: '8px', fontStyle: 'italic', fontSize: '24px' }}>
-                        Total Bands
-                            </span>
-                    <span style={{ fontSize: '24px' }}>
-                        {getTotalBands()}
-                    </span>
-                </div>
+                <TotalCount count={getTotalBands()}/>
             </Row>
         </Fragment>
     );
