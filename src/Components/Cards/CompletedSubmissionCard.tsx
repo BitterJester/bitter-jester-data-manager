@@ -1,13 +1,13 @@
 import React from 'react';
 
 import '../../static/completedSubmissionCard.css';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
 import { Row } from 'reactstrap';
 import CardItem from './CardItem';
+import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 
 type Props = {
-    completedSubmission: PrunedApplication;
+    completedSubmission: BitterJesterApplication;
 }
 
 const CompletedSubmissionCard = (props: Props) => {
