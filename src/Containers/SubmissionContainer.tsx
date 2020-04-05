@@ -59,9 +59,9 @@ export const SubmissionContainer = () => {
         <Container fluid>
             <div style={{ padding: '16px' }}>
                 <CardContainer>
+                    <Title titleDisplayText={'Completed Submissions'} />
                     <UpdateInfoButton />
                     <TotalCount count={getTotalCount()}/>
-                    <Title titleDisplayText={'Completed Submissions'} />
                     <NByMGrid columns={2} gridItems={completedSubmissionCards} />
                 </CardContainer>
             </div>
