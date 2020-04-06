@@ -12,7 +12,7 @@ export const Sidebar = () => {
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
     }
-    console.log(`isAuthenticated: ${isAuthenticated}`);
+    
     return (
         <div>
             <div id='homeLogo' className={'openSidebarComponent'}>
