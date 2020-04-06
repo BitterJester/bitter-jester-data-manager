@@ -1,19 +1,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
-import { PrunedApplication } from '../../Containers/SubmissionContainer';
 import CardContainer from '../CardContainer';
 import CardItem from './CardItem';
-import { Col } from 'reactstrap';
+import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 
 describe('CompletedSubmissionCard', () => {
-    const completedSubmission: PrunedApplication = {
+    const completedSubmission: BitterJesterApplication = {
         bandName: 'band1',
         primaryEmailAddress: 'email',
         firstChoiceFridayNight: '1',
         secondChoiceFridayNight: '2',
         primaryPhoneNumber: 'phone',
-        citiesRepresented: 'city, state city, state'
+        citiesRepresented: 'city, state city, state',
+        id: 'id',
+        isAvailableOnAllFridays: true
     };
 
     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission}/>);

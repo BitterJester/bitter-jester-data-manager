@@ -11,7 +11,7 @@ describe('DragAndDropContainer', () => {
             somethingElse
         </div>
     ]
-    const component = shallow(<DragAndDropList initialOrderComponentsToDisplay={mockItems} />);
+    const component = shallow(<DragAndDropList initialOrderComponentsToDisplay={mockItems} orderedColumnTitles={['1','2']} updateState={jest.fn()}/>);
 
     it('should write tests', () => {
         expect(component).toBeDefined();
