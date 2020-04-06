@@ -11,7 +11,6 @@ function App() {
       <Sidebar />
       <div id={'content'} className={'content'}>
         <Switch>
-          <Redirect from="/" exact to="/completedSubmissions" />
           <Route path="/completedSubmissions">
             <Submissions />
           </Route>
