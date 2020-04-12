@@ -1,25 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Redirect, Route } from 'react-router-dom';
-import { useAuth0 } from '../react-auth0-spa';
+import * as React from 'react';
+import { Redirect, Route, RouteProps } from 'react-router';
 
-type Props = {
-    path: string;
-    component: React.ReactElement;
+export interface ProtectedRouteProps extends RouteProps {
+  isAuthenticated: boolean;
+  authenticationPath: string;
 }
 
-const ProtectedRoute = (props: Props) => {
-    const { path, component } = props;
-    const { isAuthenticated } = useAuth0();
-
-    return (
-        <Route path={path} 
-            render={props => (
-            isAuthenticated ?
-                component :
-                <Redirect to='/' />
-        )}
-        />
-    )
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
+  let redirectPath = '';
+  if (!props.isAuthenticated) {
+    redirectPath = props.authenticationPath;
+  }
+  if (redirectPath) {
+    const renderComponent = () => <Redirect to={{ pathname: redirectPath }} />;
+    return <Route {...props} component={renderComponent} render={undefined} />;
+  } else {
+    return <Route {...props} />;
+  }
 };
 
 export default ProtectedRoute;
