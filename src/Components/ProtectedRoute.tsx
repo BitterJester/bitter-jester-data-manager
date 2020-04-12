@@ -1,22 +1,20 @@
-import * as React from 'react';
-import { Redirect, Route, RouteProps } from 'react-router';
+import React from 'react';
+import { BrowserRouter as Route } from 'react-router-dom';
 
-export interface ProtectedRouteProps extends RouteProps {
+export interface ProtectedRouteProps {
   isAuthenticated: boolean;
-  authenticationPath: string;
+  path: string;
+  component: any;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
-  let redirectPath = '';
-  if (!props.isAuthenticated) {
-    redirectPath = props.authenticationPath;
-  }
-  if (redirectPath) {
-    const renderComponent = () => <Redirect to={{ pathname: redirectPath }} />;
-    return <Route {...props} component={renderComponent} render={undefined} />;
-  } else {
-    return <Route {...props} />;
-  }
+  const { component, path, isAuthenticated } = props;
+  console.log(`isAuth: in route:  ${isAuthenticated}`);
+  return (
+    <Route path={path}>
+      {!isAuthenticated ? component : component}
+    </Route>
+  );
 };
 
 export default ProtectedRoute;
