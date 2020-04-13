@@ -12,7 +12,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
   console.log(`asdf: ${isAuthenticated}`);
   return (
     <Route path={path}>
-      {!isAuthenticated ? <Redirect to='/'/> : component}
+      {!isAuthenticated ? component : component}
     </Route>
   );
 };
