@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Route } from 'react-router-dom';
 
 export interface ProtectedRouteProps {
   isAuthenticated: boolean;
