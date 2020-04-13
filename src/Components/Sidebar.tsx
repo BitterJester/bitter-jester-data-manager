@@ -4,6 +4,7 @@ import { Button } from 'reactstrap';
 
 export const Sidebar = () => {
     const domain = window.location.href.split('/')[2];
+    const protocol = window.location.protocol;
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     function openNav() {
@@ -25,9 +26,9 @@ export const Sidebar = () => {
                 <a href='/completedSubmissions' >Completed Submissions</a>
                 <a href='/incompleteApplications' >Incomplete Applications</a>
                 {!isAuthenticated && (
-                    <Button onClick={() => loginWithRedirect({redirect_uri: `http://${domain}/completedSubmissions`})}>Log In</Button>
+                    <Button onClick={() => loginWithRedirect({redirect_uri: `${protocol}//${domain}/completedSubmissions`})}>Log In</Button>
                 )}
-                {isAuthenticated && <Button onClick={() => logout({returnTo: `http://${domain}/`})}>Log Out</Button>}
+                {isAuthenticated && <Button onClick={() => logout({returnTo: `${protocol}//${domain}/`})}>Log Out</Button>}
             </div>
         </div>
     );
