@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Route } from 'react-router-dom';
+import { BrowserRouter as Route, Redirect } from 'react-router-dom';
 
 export interface ProtectedRouteProps {
   isAuthenticated: boolean;
@@ -9,10 +9,10 @@ export interface ProtectedRouteProps {
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
   const { component, path, isAuthenticated } = props;
-  console.log(`isAuth: in route:  ${isAuthenticated}`);
+  console.log(`asdf: ${isAuthenticated}`);
   return (
     <Route path={path}>
-      {!isAuthenticated ? component : component}
+      {!isAuthenticated ? <Redirect to='/'/> : component}
     </Route>
   );
 };

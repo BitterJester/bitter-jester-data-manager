@@ -26,7 +26,7 @@ export const Sidebar = () => {
                 <a href='/completedSubmissions' >Completed Submissions</a>
                 <a href='/incompleteApplications' >Incomplete Applications</a>
                 {!isAuthenticated && (
-                    <Button onClick={() => loginWithRedirect({redirect_uri: `${protocol}//${domain}/completedSubmissions`})}>Log In</Button>
+                    <Button onClick={() => loginWithRedirect({redirect_uri: `${protocol}//${domain}/`})}>Log In</Button>
                 )}
                 {isAuthenticated && <Button onClick={() => logout({returnTo: `${protocol}//${domain}/`})}>Log Out</Button>}
             </div>

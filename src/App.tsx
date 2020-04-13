@@ -12,6 +12,7 @@ function App() {
   const { isAuthenticated, isInitializing } = useAuth0();
 
   useEffect(() => {
+    console.log(`isInitial ${isInitializing}`)
     if(isInitializing){
       return;
     }
@@ -23,7 +24,7 @@ function App() {
       <div id={'content'} className={'content'}>
         <Switch>
           <Route exact path='/'>
-            Hi
+            Please click on the Bitter Jester logo to get access to login button.
           </Route>
           <ProtectedRoute
             isAuthenticated={isAuthenticated}
