@@ -12,7 +12,6 @@ function App() {
   const { isAuthenticated, isInitializing } = useAuth0();
 
   useEffect(() => {
-    console.log(`isInitial ${isInitializing}`)
     if(isInitializing){
       return;
     }

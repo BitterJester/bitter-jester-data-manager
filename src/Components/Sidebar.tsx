@@ -15,7 +15,6 @@ export const Sidebar = () => {
         document.getElementById("mySidenav").style.width = "0";
     }
 
-    console.log(`isAuth ${isAuthenticated}`)
     return (
         <div>
             <div id='homeLogo' className={'openSidebarComponent'}>
