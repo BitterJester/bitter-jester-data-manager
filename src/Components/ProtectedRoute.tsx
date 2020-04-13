@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 export interface ProtectedRouteProps {
   isAuthenticated: boolean;
@@ -12,7 +13,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
   console.log(`asdf: ${isAuthenticated}`);
   return (
     <Route path={path}>
-      {!isAuthenticated ? component : component}
+      {!isAuthenticated ? <Redirect to='/'/> : component}
     </Route>
   );
 };
