@@ -24,7 +24,7 @@ function App() {
       <div id={'content'} className={'content'}>
         <Switch>
           <Route exact path='/'>
-            Please click on the Bitter Jester logo to get access to login button.
+            {isAuthenticated ? 'Please click on the Bitter Jester logo to get access to the rest of the site' : 'Please click on the Bitter Jester logo to get access to login button.'}
           </Route>
           <ProtectedRoute
             isAuthenticated={isAuthenticated}
