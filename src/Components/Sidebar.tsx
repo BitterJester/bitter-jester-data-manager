@@ -15,6 +15,20 @@ export const Sidebar = () => {
         document.getElementById("mySidenav").style.width = "0";
     }
 
+    const getURI = (path: string) => {
+        const fullDomain = `${protocol}//${domain}`;
+
+        return `${fullDomain}${path}`
+    }
+
+    const getAuthenticationButtonText = () => {
+        return isAuthenticated ? 'Log Out' : 'Log In';
+    }
+
+    const authenticate = isAuthenticated ?
+        () => logout({ returnTo: getURI('/') }) :
+        () => loginWithRedirect({ redirect_uri: getURI('/') });
+
     return (
         <div>
             <div id='homeLogo' className={'openSidebarComponent'}>
@@ -24,10 +38,7 @@ export const Sidebar = () => {
                 <span className="closebtn" onClick={() => closeNav()}>&times;</span>
                 <a href='/completedSubmissions' >Completed Submissions</a>
                 <a href='/incompleteApplications' >Incomplete Applications</a>
-                {!isAuthenticated && (
-                    <Button onClick={() => loginWithRedirect({redirect_uri: `${protocol}//${domain}/`})}>Log In</Button>
-                )}
-                {isAuthenticated && <Button onClick={() => logout({returnTo: `${protocol}//${domain}/`})}>Log Out</Button>}
+                <Button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</Button>
             </div>
         </div>
     );

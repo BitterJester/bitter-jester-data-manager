@@ -19,6 +19,22 @@
     background: rgb(123, 93, 151);
 }
 
+.sidenavButton {
+    width: 100%;
+    border-radius: 0px;
+    background: none;
+    border: none;
+    color: black;
+    font-size: 25px;
+    text-align: left;
+    padding: 8px 8px 8px 32px;
+}
+
+.sidenavButton:hover {
+    background: none;
+    color: #818181;
+}
+
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
@@ -57,7 +73,7 @@
     .sidenav {
         padding-top: 15px;
     }
-    .sidenav a {
+    .sidenav .sidenavButton a {
         font-size: 18px;
     }
 }
