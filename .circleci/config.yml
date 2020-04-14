@@ -33,6 +33,7 @@ jobs:
             - run:
                 name: Invalidate cloudfront caches
                 command: |
+                  chmod 777 ./invalidateCloudfrontCaches.sh
                   npm run invalidateCloudfrontCaches
 workflows:
   build-and-test:
