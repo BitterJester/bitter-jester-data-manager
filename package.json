@@ -40,7 +40,8 @@
         "deploy": "npm run build && aws s3 sync build/ s3://bitter-jester-data-manager",
         "test": "jest",
         "eject": "react-scripts eject",
-        "buildEnv": "./buildEnv.sh"
+        "buildEnv": "./buildEnv.sh",
+        "invalidateCloudfrontCaches": "./invalidateCloudfrontCaches.sh"
     },
     "eslintConfig": {
         "extends": "react-app"

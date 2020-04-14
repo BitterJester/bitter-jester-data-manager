@@ -30,6 +30,10 @@ jobs:
                 name: Deploy to s3 bucket
                 command: |
                   npm run deploy
+            - run:
+                name: Invalidate cloudfront caches
+                command: |
+                  npm run invalidateCloudfrontCaches
 workflows:
   build-and-test:
     jobs:
