@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
-import '../static/scheduleLegend.css';
+import '../../static/scheduleLegend.css';
 
 const ScheduleLegendItem = () => {
     return (

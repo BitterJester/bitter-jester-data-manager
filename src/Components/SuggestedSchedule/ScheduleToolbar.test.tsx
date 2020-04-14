@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import ScheduleToolbar from './ScheduleToolbar';
 import ScheduleDropdown from './ScheduleDropdown';
 import SaveScheduleButton from './SaveScheduleButton';
-import { Schedule } from '../Containers/ScheduleContainer';
-import UpdateScheduleButton from '../UpdateScheduleButton';
+import { Schedule } from '../../Containers/ScheduleContainer';
+import UpdateScheduleButton from '../../UpdateScheduleButton';
 
 describe('ScheduleToolbar', () => {
     const schedule: Schedule = {

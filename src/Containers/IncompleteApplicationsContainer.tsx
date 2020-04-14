@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../aws/getFromS3';
 import { Title } from '../Components/Title';
-import IncompleteSubmissionCard from '../Components/Cards/IncompleteSubmissionCard';
+import IncompleteSubmissionCard from '../Components/IncompleteApplications/IncompleteSubmissionCard';
 import NByMGrid from '../Components/NByMGrid/NByMGrid';
 import { CardBody } from 'reactstrap';
-import UpdateIncompleteInfoButton from '../Components/UpdateIncompleteInfoButton';
+import UpdateIncompleteInfoButton from '../Components/IncompleteApplications/UpdateIncompleteInfoButton';
 import TotalCount from '../Components/TotalCount';
 
 type IncompleteApplications = {

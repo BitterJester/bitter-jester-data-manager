@@ -16,7 +16,7 @@ function App() {
       return;
     }
   }, [isInitializing]);
-
+  console.log(isInitializing);
   return (
     <Router>
       <Sidebar />

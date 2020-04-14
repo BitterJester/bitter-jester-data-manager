@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'reactstrap';
-import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedScheduleDragAndDropLists';
+import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedSchedule/SuggestedScheduleDragAndDropLists';
 import { getFromS3 } from '../aws/getFromS3';
 import { BitterJesterApplication } from '../Pages/Submissions/Submissions';
-import CardContainer from '../Components/CardContainer';
+import CardContainer from '../Components/Cards/CardContainer';
 import { Title } from '../Components/Title';
 import _ from 'lodash';
-import ScheduleLegendItem from '../Components/ScheduleLegendItem';
-import ScheduleToolbar from '../Components/ScheduleToolbar';
+import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendItem';
+import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
 
 export type Night = {
     night: number;

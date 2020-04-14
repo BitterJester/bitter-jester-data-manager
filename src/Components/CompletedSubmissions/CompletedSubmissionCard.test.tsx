@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
-import CardContainer from '../CardContainer';
-import CardItem from './CardItem';
+import CardContainer from '../Cards/CardContainer';
+import CardItem from '../Cards/CardItem';
 import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 
 describe('CompletedSubmissionCard', () => {

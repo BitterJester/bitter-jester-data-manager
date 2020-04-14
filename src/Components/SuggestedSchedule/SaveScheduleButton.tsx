@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Button } from 'reactstrap';
-import { S3Client } from '../aws/s3Client';
-import { Schedule, LAST_SAVE_VERSION } from '../Containers/ScheduleContainer';
-import '../static/saveScheduleButton.css';
+import { S3Client } from '../../aws/s3Client';
+import { Schedule, LAST_SAVE_VERSION } from '../../Containers/ScheduleContainer';
+import '../..//static/saveScheduleButton.css';
 import _ from 'lodash';
 
 type Props = {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Row, Col } from 'reactstrap';
-import { DragAndDropList } from './DragAndDrop/DragAndDropList';
-import { Schedule } from '../Containers/ScheduleContainer';
+import { DragAndDropList } from '../DragAndDrop/DragAndDropList';
+import { Schedule } from '../../Containers/ScheduleContainer';
 import { BackgroundColor } from './BackgroundColor';
 
 type Props = {

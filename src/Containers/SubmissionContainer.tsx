@@ -3,11 +3,11 @@ import { Container } from 'reactstrap';
 import { BitterJesterApplications } from '../Pages/Submissions/Submissions';
 import { Title } from '../Components/Title';
 import { getFromS3 } from '../aws/getFromS3';
-import CardContainer from '../Components/CardContainer';
+import CardContainer from '../Components/Cards/CardContainer';
 import '../static/submissionContainer.css';
-import { UpdateInfoButton } from '../Components/UpdateInfoButton';
+import { UpdateInfoButton } from '../Components/CompletedSubmissions/UpdateInfoButton';
 import TotalCount from '../Components/TotalCount';
-import CompletedSubmissionCardsTable from '../Components/CompletedSubmissionCardsTable';
+import CompletedSubmissionCardsTable from '../Components/CompletedSubmissions/CompletedSubmissionCardsTable';
 
 export const SubmissionContainer = () => {
     const initialSubmissions: BitterJesterApplications = {};

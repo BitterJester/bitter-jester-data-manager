@@ -28,11 +28,18 @@
     font-size: 25px;
     text-align: left;
     padding: 8px 8px 8px 32px;
+    transition: none;
 }
 
 .sidenavButton:hover {
     background: none;
     color: #818181;
+}
+
+.sidenavButton:focus {
+    border: none;
+    background: none;
+    outline: 0;
 }
 
 .sidenav a {

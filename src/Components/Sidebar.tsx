@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth0 } from '../react-auth0-spa';
-import { Button } from 'reactstrap';
 
 export const Sidebar = () => {
     const domain = window.location.href.split('/')[2];
@@ -38,7 +37,7 @@ export const Sidebar = () => {
                 <span className="closebtn" onClick={() => closeNav()}>&times;</span>
                 <a href='/completedSubmissions' >Completed Submissions</a>
                 <a href='/incompleteApplications' >Incomplete Applications</a>
-                <Button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</Button>
+                <button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
             </div>
         </div>
     );

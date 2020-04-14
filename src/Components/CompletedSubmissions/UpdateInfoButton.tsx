@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { publishSNS } from '../aws/publishSNS';
+import { publishSNS } from '../../aws/publishSNS';
 import { Alert, Button } from 'reactstrap';
 
 const UpdateInfoTopicArn = 'arn:aws:sns:us-east-1:771384749710:CheckJotFormForUpdatesSnsTopic';

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import '../../static/completedSubmissionCard.css';
-import CardContainer from '../CardContainer';
+import CardContainer from '../Cards/CardContainer';
 import { Row } from 'reactstrap';
-import CardItem from './CardItem';
+import CardItem from '../Cards/CardItem';
 import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
 
 type Props = {

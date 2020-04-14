@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CardContainer from '../CardContainer';
-import CardItem from './CardItem';
+import CardContainer from '../Cards/CardContainer';
+import CardItem from '../Cards/CardItem';
 import IncompleteSubmissionCard from './IncompleteSubmissionCard';
 import { IncompleteApplication } from '../../Containers/IncompleteApplicationsContainer';
 
