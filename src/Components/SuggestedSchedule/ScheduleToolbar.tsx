@@ -34,8 +34,9 @@ const ScheduleToolbar = (props: Props) => {
                     dropdownItemOnClick={() => updateSchedule(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
                     dropdownItemOnClick2={() => updateSchedule(USER_FRIDAY_NIGHT_SCHEDULE)}
                 />
+                <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
                 {
-                    schedule.version === SUGGESTED_VERSION.toLowerCase() ? <UpdateScheduleButton onAlert={onAlert} /> : <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
+                    schedule.version === SUGGESTED_VERSION.toLowerCase() ? <UpdateScheduleButton onAlert={onAlert} /> : null
                 }
                 <TotalCount count={getTotalBands()}/>
             </Row>

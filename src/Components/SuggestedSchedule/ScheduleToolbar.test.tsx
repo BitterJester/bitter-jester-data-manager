@@ -25,8 +25,8 @@ describe('ScheduleToolbar', () => {
         expect(component.find(UpdateScheduleButton)).toHaveLength(1);
     });
 
-    it('shoul=d not render a save schedule button', () => {
-        expect(component.find(SaveScheduleButton)).toHaveLength(0);
+    it('should render a save schedule button', () => {
+        expect(component.find(SaveScheduleButton)).toHaveLength(1);
     })
 });
 
