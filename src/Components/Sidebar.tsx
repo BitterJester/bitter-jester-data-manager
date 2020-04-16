@@ -34,12 +34,12 @@ const Sidebar = (props: Props) => {
     }
 
     const loginOnClick = () => {
-        loginWithRedirect({redirect_uri: getURI('/completedSubmissions')});
+        loginWithRedirect({ redirect_uri: getURI('/'), appState: props.history });
     }
 
-    const authenticate = isAuthenticated ?
-        () => logout({returnTo: getURI('/')}) :
-        loginOnClick;
+    const logoutOnClick = () => logout({ returnTo: getURI('/') });
+
+    const authenticate = isAuthenticated ? logoutOnClick : loginOnClick;
 
     return (
         <div>

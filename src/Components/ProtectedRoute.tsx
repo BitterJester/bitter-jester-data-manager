@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Route } from 'react-router-dom';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter, Redirect } from 'react-router';
 
 export interface ProtectedRouteProps extends RouteComponentProps<any> {
   isAuthenticated: boolean;
@@ -9,12 +9,12 @@ export interface ProtectedRouteProps extends RouteComponentProps<any> {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = props => {
-  const { component, path, isAuthenticated, history } = props;
+  const { component, path, isAuthenticated } = props;
   
   
   return (
     <Route path={path}>
-      {!isAuthenticated ? history.push('/login') : component}
+      {!isAuthenticated ? <Redirect push to='/login'/> : component}
     </Route>
   );
 };
