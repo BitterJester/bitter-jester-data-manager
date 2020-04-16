@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Submissions } from './Pages/Submissions/Submissions';
 import { IncompleteApplications } from './Pages/Submissions/IncompleteApplications';
 import './static/sidebar.css';
-import { Sidebar } from './Components/Sidebar';
 import { useAuth0 } from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
+import Sidebar from './Components/Sidebar';
 
 function App() {
   const { isAuthenticated, isInitializing } = useAuth0();
@@ -16,7 +16,7 @@ function App() {
       return;
     }
   }, [isInitializing]);
-  console.log(isInitializing);
+  
   return (
     <Router>
       <Sidebar />

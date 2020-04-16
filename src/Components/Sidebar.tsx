@@ -1,7 +1,12 @@
 import React from 'react';
 import { useAuth0 } from '../react-auth0-spa';
+import { withRouter, RouteComponentProps } from 'react-router';
 
-export const Sidebar = () => {
+interface Props extends RouteComponentProps {
+
+}
+
+const Sidebar = (props: Props) => {
     const domain = window.location.href.split('/')[2];
     const protocol = window.location.protocol;
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -20,13 +25,21 @@ export const Sidebar = () => {
         return `${fullDomain}${path}`
     }
 
+    const redirect = (path: string) => {
+        props.history.push(path);
+    }
+
     const getAuthenticationButtonText = () => {
         return isAuthenticated ? 'Log Out' : 'Log In';
     }
 
+    const loginOnClick = () => {
+        loginWithRedirect({redirect_uri: getURI('/completedSubmissions')});
+    }
+
     const authenticate = isAuthenticated ?
-        () => logout({ returnTo: getURI('/') }) :
-        () => loginWithRedirect({ redirect_uri: getURI('/') });
+        () => logout({returnTo: getURI('/')}) :
+        loginOnClick;
 
     return (
         <div>
@@ -35,10 +48,12 @@ export const Sidebar = () => {
             </div>
             <div id='mySidenav' className={'sidenav'}>
                 <span className="closebtn" onClick={() => closeNav()}>&times;</span>
-                <a href='/completedSubmissions' >Completed Submissions</a>
-                <a href='/incompleteApplications' >Incomplete Applications</a>
+                <button className={'sidenavButton'} onClick={() => redirect('/completedSubmissions')} >Completed Submissions</button>
+                <button className={'sidenavButton'} onClick={() => redirect('/incompleteApplications')} >Incomplete Applications</button>
                 <button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
             </div>
         </div>
     );
 };
+
+export default withRouter(Sidebar);
