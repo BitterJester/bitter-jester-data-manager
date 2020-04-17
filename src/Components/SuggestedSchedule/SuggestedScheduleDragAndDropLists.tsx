@@ -31,6 +31,9 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                         {`Second Choice: ${app.secondChoiceFridayNight}`}
                     </div>
                     <div className={'suggestedScheduleItemInfo'}>
+                        {`Unavailable Nights: ${app.unavailableFridayNights}`}
+                    </div>
+                    <div className={'suggestedScheduleItemInfo'}>
                         {`Cities Represented: ${app.citiesRepresented}`}
                     </div>
                 </Col>

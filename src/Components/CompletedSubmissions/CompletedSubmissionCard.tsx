@@ -18,7 +18,7 @@ const CompletedSubmissionCard = (props: Props) => {
         secondChoiceFridayNight,
         primaryPhoneNumber,
         citiesRepresented,
-        referencedBands: referenceBands
+        referencedBands
     } = props.completedSubmission;
 
     const secondChoiceFridayLabel = secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
@@ -45,7 +45,7 @@ const CompletedSubmissionCard = (props: Props) => {
             </Row>
             <Row>
                 <div className={'references'}>
-                    <CardItem label={'References'} value={referenceBands} />
+                    <CardItem label={'References'} value={referencedBands} />
                 </div>
             </Row>
         </CardContainer>
