@@ -19,7 +19,7 @@ export class BackgroundColor {
         const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(nightString);
 
         if(this.application.isBandAvailableOnAllFridays || didGetFirstChoice) {
-            return 'lightgreen';
+            return 'darkgreen';
         }
 
         const didGetSecondChoice = this.application.secondChoiceFridayNight.includes(nightString);

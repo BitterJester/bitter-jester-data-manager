@@ -6,7 +6,7 @@ const ScheduleLegendItem = () => {
     return (
         <Row className={'scheduleLegendContainer'}>
             <Col>
-                <div className={'coloredKey'} style={{background: 'lightgreen'}}/>
+                <div className={'coloredKey'} style={{background: 'darkgreen'}}/>
                 <p>Band is scheduled on a first choice night or they don't care.</p>
             </Col>
             <Col>
