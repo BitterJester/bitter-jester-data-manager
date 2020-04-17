@@ -4,7 +4,7 @@ import ScheduleToolbar from './ScheduleToolbar';
 import ScheduleDropdown from './ScheduleDropdown';
 import SaveScheduleButton from './SaveScheduleButton';
 import { Schedule } from '../../Containers/ScheduleContainer';
-import UpdateScheduleButton from '../../UpdateScheduleButton';
+import TotalCount from '../TotalCount';
 
 describe('ScheduleToolbar', () => {
     const schedule: Schedule = {
@@ -13,43 +13,19 @@ describe('ScheduleToolbar', () => {
         fridayNightThree: [],
         fridayNightFour: [],
         nights: [],
-        version: 'suggested'        
+        version: 'suggested'
     };
-    const component = shallow(<ScheduleToolbar schedule={schedule} updateSchedule={() => 'foo'}/>);
+    const component = shallow(<ScheduleToolbar schedule={schedule} updateSchedule={() => 'foo'} />);
 
     it('should render a ScheduleDropdown', () => {
         expect(component.find(ScheduleDropdown)).toHaveLength(1);
-    });
-
-    it('should render an updateSCheduleButton', () => {
-        expect(component.find(UpdateScheduleButton)).toHaveLength(1);
     });
 
     it('should render a save schedule button', () => {
         expect(component.find(SaveScheduleButton)).toHaveLength(1);
     })
+
+    it('should pass count of bands to totalCount', () => {
+        expect(component.find(TotalCount).props().count).toEqual(0);
+    });
 });
-
-describe('ScheduleToolbar', () => {
-    const schedule: Schedule = {
-        fridayNightOne: [],
-        fridayNightTwo: [],
-        fridayNightThree: [],
-        fridayNightFour: [],
-        nights: [],
-        version: 'Last_version'        
-    };
-    const component = shallow(<ScheduleToolbar schedule={schedule} updateSchedule={() => 'foo'}/>);
-    it('should render a ScheduleDropdown', () => {
-        expect(component.find(ScheduleDropdown)).toHaveLength(1);
-    });
-
-    it('should render a save Schedule button', () => {
-        expect(component.find(SaveScheduleButton)).toHaveLength(1);
-    });
-
-
-    it('should not render an updateSCheduleButton', () => {
-        expect(component.find(UpdateScheduleButton)).toHaveLength(0);
-    });
-})

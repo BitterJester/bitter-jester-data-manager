@@ -1,9 +1,8 @@
 import React, { useState, Fragment } from 'react';
 import { Row, Alert } from 'reactstrap';
 import ScheduleDropdown from './ScheduleDropdown';
-import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE, SUGGESTED_VERSION } from '../../Containers/ScheduleContainer';
+import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../../Containers/ScheduleContainer';
 import SaveScheduleButton from './SaveScheduleButton';
-import UpdateScheduleButton from '../../UpdateScheduleButton';
 import TotalCount from '../TotalCount';
 
 const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
@@ -35,9 +34,6 @@ const ScheduleToolbar = (props: Props) => {
                     dropdownItemOnClick2={() => updateSchedule(USER_FRIDAY_NIGHT_SCHEDULE)}
                 />
                 <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
-                {
-                    schedule.version === SUGGESTED_VERSION.toLowerCase() ? <UpdateScheduleButton onAlert={onAlert} /> : null
-                }
                 <TotalCount count={getTotalBands()}/>
             </Row>
         </Fragment>
