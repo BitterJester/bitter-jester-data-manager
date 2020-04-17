@@ -16,6 +16,7 @@ export type BitterJesterApplication = {
     primaryPhoneNumber: string;
     citiesRepresented: string;
     unavailableFridayNights?: string[];
+    referencedBands?: string | undefined;
 }
 
 

@@ -11,13 +11,14 @@ type Props = {
 }
 
 const CompletedSubmissionCard = (props: Props) => {
-    const { 
-        bandName, 
-        primaryEmailAddress, 
-        firstChoiceFridayNight, 
-        secondChoiceFridayNight, 
-        primaryPhoneNumber, 
-        citiesRepresented 
+    const {
+        bandName,
+        primaryEmailAddress,
+        firstChoiceFridayNight,
+        secondChoiceFridayNight,
+        primaryPhoneNumber,
+        citiesRepresented,
+        referencedBands: referenceBands
     } = props.completedSubmission;
 
     const secondChoiceFridayLabel = secondChoiceFridayNight !== '' ? 'Second Choice Friday Night' : '';
@@ -41,6 +42,9 @@ const CompletedSubmissionCard = (props: Props) => {
             <Row className={'rightSide'}>
                 <CardItem label={'Phone Number'} value={primaryPhoneNumber} />
                 <CardItem label={secondChoiceFridayLabel} value={secondChoiceFridayNight} />
+            </Row>
+            <Row>
+                <CardItem label={'References'} value={referenceBands} />
             </Row>
         </CardContainer>
     );

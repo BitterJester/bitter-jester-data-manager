@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Submissions } from './Pages/Submissions/Submissions';
 import { IncompleteApplications } from './Pages/Submissions/IncompleteApplications';
@@ -11,12 +11,10 @@ import Sidebar from './Components/Sidebar';
 function App() {
   const { isAuthenticated, isInitializing } = useAuth0();
 
-  useEffect(() => {
-    if(isInitializing){
-      return;
-    }
-  }, [isInitializing]);
-  
+  if (isInitializing) {
+    return null;
+  }
+
   return (
     <Router>
       <Sidebar />

@@ -14,7 +14,8 @@ describe('CompletedSubmissionCard', () => {
         primaryPhoneNumber: 'phone',
         citiesRepresented: 'city, state city, state',
         id: 'id',
-        isAvailableOnAllFridays: true
+        isAvailableOnAllFridays: true,
+        referencedBands: 'ref'
     };
 
     const component = shallow(<CompletedSubmissionCard completedSubmission={completedSubmission}/>);
@@ -50,5 +51,9 @@ describe('CompletedSubmissionCard', () => {
 
     it('should display a column for primary phone number', () => {
         expect(getCardItemProps(2).value).toEqual('phone');
+    });
+
+    it('should display a row column for reference bands', () => {
+        expect(getCardItemProps(4).value).toEqual('ref');
     });
 });
