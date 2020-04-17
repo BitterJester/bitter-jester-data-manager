@@ -44,7 +44,9 @@ const CompletedSubmissionCard = (props: Props) => {
                 <CardItem label={secondChoiceFridayLabel} value={secondChoiceFridayNight} />
             </Row>
             <Row>
-                <CardItem label={'References'} value={referenceBands} />
+                <div className={'references'}>
+                    <CardItem label={'References'} value={referenceBands} />
+                </div>
             </Row>
         </CardContainer>
     );

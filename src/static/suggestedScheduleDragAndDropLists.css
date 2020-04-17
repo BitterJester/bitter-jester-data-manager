@@ -1,0 +1,12 @@
+.suggestedScheduleItemInfo {
+    color: black;
+    font-size: 12px;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.suggestedScheduleBandName {
+    width: 100%;
+    text-align: center;
+    color: white;
+}
