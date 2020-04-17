@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { getFromS3 } from '../aws/getFromS3';
 import { Title } from '../Components/Title';
-import IncompleteSubmissionCard from '../Components/IncompleteApplications/IncompleteSubmissionCard';
-import NByMGrid from '../Components/NByMGrid/NByMGrid';
-import { CardBody } from 'reactstrap';
+import { CardBody, Row, Col } from 'reactstrap';
 import UpdateIncompleteInfoButton from '../Components/IncompleteApplications/UpdateIncompleteInfoButton';
 import TotalCount from '../Components/TotalCount';
+import SortIncompleteApplicationsDropdown from '../Components/SortIncompleteApplicationsDropdown';
+import _ from 'lodash';
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -26,6 +26,7 @@ export const IncompleteApplicationsContainer = () => {
         incompleteApplications: []
     };
     const [incompleteApplications, setIncompleteApplications] = useState(initialIncompleteApplications);
+    const [isSortedByBandName, setIsSortedByBandName] = useState(false);
 
     useEffect(() => {
         async function fetch() {
@@ -35,21 +36,38 @@ export const IncompleteApplicationsContainer = () => {
     }, []);
 
     const sortByBandName = () => {
-        return incompleteApplications.incompleteApplications.sort((a, b) => a.bandName.toLowerCase() < b.bandName.toLowerCase() ? -1 : 1);
+        const incompleteApplicationsCopy = _.cloneDeep(incompleteApplications.incompleteApplications);
+
+        return incompleteApplicationsCopy.sort((a, b) => a.bandName.toLowerCase() < b.bandName.toLowerCase() ? -1 : 1);
     };
 
-    const incompleteSubmissionCards = sortByBandName()
+    const orderedApplications = isSortedByBandName ? sortByBandName() : incompleteApplications.incompleteApplications;
+
+    const incompleteSubmissionCards = orderedApplications
         .map(app => {
-            return (<IncompleteSubmissionCard incompleteApplication={app} />);
+            return (
+                <Row>
+                    <Col>{app.bandName}</Col>
+                    <Col>{`${app.applicantName.first} ${app.applicantName.last}`}</Col>
+                    <Col>{app.primaryEmailAddress}</Col>
+                    <Col>{app.relationshipToBand}</Col>
+                </Row>
+            );
         });
 
     return (
         <div>
-            <UpdateIncompleteInfoButton />
-            <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0}/>
             <Title titleDisplayText='Incomplete Applications' />
+            <Row>
+                <SortIncompleteApplicationsDropdown
+                    dropdownItemOnClick={() => setIsSortedByBandName(false)}
+                    dropdownItemOnClick2={() => setIsSortedByBandName(true)}
+                />
+                <UpdateIncompleteInfoButton />
+            </Row>
+            <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0} />
             <CardBody>
-                <NByMGrid columns={3} gridItems={incompleteSubmissionCards} />
+                {incompleteSubmissionCards}
             </CardBody>
         </div>
     );
