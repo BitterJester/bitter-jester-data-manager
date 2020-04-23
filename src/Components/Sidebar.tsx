@@ -26,6 +26,7 @@ const Sidebar = (props: Props) => {
     }
 
     const redirect = (path: string) => {
+        closeNav();
         props.history.push(path);
     }
 
