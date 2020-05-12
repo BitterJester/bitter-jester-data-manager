@@ -51,6 +51,7 @@ const Sidebar = (props: Props) => {
                 <span className="closebtn" onClick={() => closeNav()}>&times;</span>
                 <button className={'sidenavButton'} onClick={() => redirect('/completedSubmissions')} >Completed Submissions</button>
                 <button className={'sidenavButton'} onClick={() => redirect('/incompleteApplications')} >Incomplete Applications</button>
+                <button className={'sidenavButton'} onClick={() => redirect('/originalSong')}>Original Song Submissions</button>
                 <button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
             </div>
         </div>
