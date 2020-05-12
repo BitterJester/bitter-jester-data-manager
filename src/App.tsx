@@ -7,6 +7,7 @@ import './static/sidebar.css';
 import { useAuth0 } from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar';
+import OriginalSongCompetition from './Pages/OriginalSongCompetition';
 
 function App() {
   const { isAuthenticated, isInitializing } = useAuth0();
@@ -32,6 +33,11 @@ function App() {
             isAuthenticated={isAuthenticated}
             path='/incompleteApplications'
             component={<IncompleteApplications />}
+          />
+          <ProtectedRoute
+            isAuthenticated={isAuthenticated}
+            path='/originalSong'
+            component={<OriginalSongCompetition />}
           />
         </Switch>
       </div>

@@ -95,7 +95,7 @@ export const ScheduleContainer = () => {
                     <Title titleDisplayText={formatTitle()} />
                     <ScheduleToolbar schedule={schedule} updateSchedule={fetch} />
                     <ScheduleLegendItem />
-                    <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule} />
+                    <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule}/>
                 </CardContainer>
             </div>
         </Container>

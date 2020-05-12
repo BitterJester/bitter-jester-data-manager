@@ -58,20 +58,20 @@ export const IncompleteApplicationsContainer = () => {
     return (
         <div>
             <Title titleDisplayText='Incomplete Applications' />
-            <Row>
-                <SortIncompleteApplicationsDropdown
-                    dropdownItemOnClick={() => setIsSortedByBandName(false)}
-                    dropdownItemOnClick2={() => setIsSortedByBandName(true)}
-                />
-                <UpdateIncompleteInfoButton />
-            </Row>
+            <UpdateIncompleteInfoButton />
             <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0} />
             <CardBody>
                 <Row>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Band Name</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Applicant Name</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Primary Email Address</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Relationship To Band</Col>
+                    <SortIncompleteApplicationsDropdown
+                        dropdownItemOnClick={() => setIsSortedByBandName(false)}
+                        dropdownItemOnClick2={() => setIsSortedByBandName(true)}
+                    />
+                </Row>
+                <Row>
+                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Band Name</Col>
+                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Applicant Name</Col>
+                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Primary Email Address</Col>
+                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Relationship To Band</Col>
                 </Row>
                 {incompleteSubmissionCards}
             </CardBody>
