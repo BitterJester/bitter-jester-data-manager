@@ -1,20 +1,20 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { getFromS3 } from '../aws/getFromS3';
-import ReactAudioPlayer from 'react-audio-player';
+import React, {useEffect, useState} from 'react';
+import {getFromS3} from '../aws/getFromS3';
+import OriginalSongContainer from '../Containers/OriginalSongContainer';
+
+type OriginalSong = {
+    songName: string,
+    bandName: string,
+    primaryEmailAddress: string,
+    songUrl: string,
+    bandPhotoUrl: string
+}
+
+export type OriginalSongs = {
+    originalSongs: OriginalSong[]
+}
 
 const OriginalSongCompetition = () => {
-    type OriginalSong = {
-        songName: string,
-        bandName: string,
-        primaryEmailAddress: string,
-        songUrl: string,
-        bandPhotoUrl: string
-    }
-
-    type OriginalSongs = {
-        originalSongs: OriginalSong[]
-    }
-
     const initialOriginalSongs: OriginalSongs = {
         originalSongs: []
     }
@@ -28,28 +28,10 @@ const OriginalSongCompetition = () => {
     useEffect(() => {
         fetch('original-song-submissions.json');
     }, []);
-    
-return (
-    <Fragment>
-        {
-            originalSongs.originalSongs.map(song => {
-                return <div>
-                    <div>
-                        {song.songName}
-                    </div>
-        
-                    <div>
-                        {song.bandName}
-                    </div>
-        
-                    <div>
-                        <ReactAudioPlayer src={song.songUrl} controls/>
-                    </div>
-                </div>
-            })
-        }
-    </Fragment>
-)
+
+    return (
+        <OriginalSongContainer originalSongs={originalSongs}/>
+    );
 }
 
 export default OriginalSongCompetition;
