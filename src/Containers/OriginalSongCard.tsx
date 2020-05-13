@@ -32,7 +32,6 @@ const OriginalSongCard = (props: Props) => {
 
     return (
         <Card style={{width: '100%'}}>
-            <Title titleDisplayText={hasSongs ? originalSongs[songIndex].bandName : ''}/>
             <Row>
                 <Col style={{
                     display: 'flex',
@@ -40,6 +39,7 @@ const OriginalSongCard = (props: Props) => {
                     justifyContent: "center",
                     flexDirection: "column"
                 }}>
+                    <Title titleDisplayText={hasSongs ? originalSongs[songIndex].bandName : ''}/>
                     <div style={{display: 'block'}}>
                         <div style={{display: 'inline-block', padding: '0px 16px'}}>
                             <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
