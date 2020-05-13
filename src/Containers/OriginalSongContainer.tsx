@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {Title} from "../Components/Title";
 import ReactAudioPlayer from 'react-audio-player';
+import {Card} from "reactstrap";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -20,38 +21,35 @@ const OriginalSongContainer = (props: Props) => {
 
         if (newSongIndex > maximumSongIndex) {
             setSongIndex(0);
-        }
-
-        else if (newSongIndex < 0){
+        } else if (newSongIndex < 0) {
             setSongIndex(maximumSongIndex);
-        }
-
-        else {
+        } else {
             setSongIndex(newSongIndex);
         }
     };
 
     return (
-        <div style={{textAlign: 'center'}}>
-            <Title titleDisplayText={'Original Song Submissions'}/>
+        <Card style={{width: '35%'}}>
+            <Title titleDisplayText={hasSongs ? originalSongs[songIndex].bandName : ''}/>
             <div>
-                <div style={{display: "inline-block"}}>
+                <div style={{display: "inline-block", padding: '0px 16px'}}>
                     <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
                 </div>
                 <div style={{display: "inline-block"}}>
-                    <img height={400} src={bandPhotoUrl} alt={'Band Photo could not be loaded'}/>
+                    <img height={400} src={bandPhotoUrl} alt={'Band could not be loaded'}/>
                 </div>
-                <div style={{display: "inline-block"}}>
+                <div style={{display: "inline-block", padding: '0px 16px'}}>
                     <button onClick={() => updateSongIndex(1)}>{'>'}</button>
                 </div>
             </div>
-            <div className={'band-name-text-container'}>
-                {hasSongs ? originalSongs[songIndex].bandName : ''}
+            <div style={{padding: '8px', textTransform: "uppercase", fontSize: '20px'}}
+                 className={'band-name-text-container'}>
+
             </div>
-            <div>
+            <div style={{padding: '8px'}}>
                 <ReactAudioPlayer src={songUrl} controls/>
             </div>
-        </div>
+        </Card>
     );
 };
 
