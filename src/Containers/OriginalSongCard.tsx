@@ -8,7 +8,7 @@ type Props = {
     originalSongs: OriginalSongs;
 }
 
-const OriginalSongContainer = (props: Props) => {
+const OriginalSongCard = (props: Props) => {
     const [songIndex, setSongIndex] = useState(0);
     const originalSongs = props.originalSongs.originalSongs;
     const hasSongs = originalSongs.length;
@@ -42,10 +42,6 @@ const OriginalSongContainer = (props: Props) => {
                     <button onClick={() => updateSongIndex(1)}>{'>'}</button>
                 </div>
             </div>
-            <div style={{padding: '8px', textTransform: "uppercase", fontSize: '20px'}}
-                 className={'band-name-text-container'}>
-
-            </div>
             <div style={{padding: '8px'}}>
                 <ReactAudioPlayer src={songUrl} controls/>
             </div>
@@ -53,4 +49,4 @@ const OriginalSongContainer = (props: Props) => {
     );
 };
 
-export default OriginalSongContainer;
+export default OriginalSongCard;

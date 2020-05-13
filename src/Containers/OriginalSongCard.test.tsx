@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import OriginalSongContainer from "./OriginalSongContainer";
+import OriginalSongCard from "./OriginalSongCard";
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {Title} from "../Components/Title";
 import ReactAudioPlayer from 'react-audio-player';
 
-describe('OriginalSongContainer', () => {
+describe('OriginalSongCard', () => {
     const originalSongs: OriginalSongs = {
         originalSongs: [
             {
@@ -18,11 +18,7 @@ describe('OriginalSongContainer', () => {
         ]
     };
 
-    const component = shallow(<OriginalSongContainer originalSongs={originalSongs}/>);
-
-    it('should render a title', () => {
-        expect(component.find(Title).props().titleDisplayText).toEqual('Original Song Submissions');
-    });
+    const component = shallow(<OriginalSongCard originalSongs={originalSongs}/>);
 
     describe('Band Photo', () => {
         it('should pass bandPhotoUrl', () => {
@@ -35,7 +31,7 @@ describe('OriginalSongContainer', () => {
     });
 
     it('should display band name', function () {
-        expect(component.find('.band-name-text-container').text()).toEqual('bandName');
+        expect(component.find(Title).props().titleDisplayText).toEqual('bandName');
     });
 
     it('should render the band song', () => {
