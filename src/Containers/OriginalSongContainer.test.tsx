@@ -30,7 +30,7 @@ describe('OriginalSongContainer', () => {
         });
 
         it('should pass height', () => {
-            expect(component.find('img').props().height).toEqual(800);
+            expect(component.find('img').props().height).toEqual(400);
         });
     });
 
