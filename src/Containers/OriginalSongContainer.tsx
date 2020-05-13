@@ -39,7 +39,7 @@ const OriginalSongContainer = (props: Props) => {
                     <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
                 </div>
                 <div style={{display: "inline-block"}}>
-                    <img height={800} src={bandPhotoUrl} alt={'failed'}/>
+                    <img height={400} src={bandPhotoUrl} alt={'Band Photo could not be loaded'}/>
                 </div>
                 <div style={{display: "inline-block"}}>
                     <button onClick={() => updateSongIndex(1)}>{'>'}</button>
