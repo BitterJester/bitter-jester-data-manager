@@ -4,6 +4,7 @@ import OriginalSongCard from '../Containers/OriginalSongCard';
 import {Alert} from "reactstrap";
 
 type OriginalSong = {
+    lyricsUrl: string;
     songName: string,
     bandName: string,
     primaryEmailAddress: string,

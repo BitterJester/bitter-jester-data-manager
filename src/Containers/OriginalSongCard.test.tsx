@@ -13,7 +13,8 @@ describe('OriginalSongCard', () => {
                 bandPhotoUrl: 'url',
                 songName: 'songName',
                 songUrl: 'songUrl',
-                primaryEmailAddress: 'email'
+                primaryEmailAddress: 'email',
+                lyricsUrl: 'lyricsUrl'
             }
         ]
     };
