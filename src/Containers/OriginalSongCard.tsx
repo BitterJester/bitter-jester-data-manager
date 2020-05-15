@@ -3,7 +3,7 @@ import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {Title} from "../Components/Title";
 import ReactAudioPlayer from 'react-audio-player';
 import {Card, Col, Row} from "reactstrap";
-import {Document, Page, pdfjs} from 'react-pdf/dist/entry.webpack';
+import {Document, Page, pdfjs} from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
