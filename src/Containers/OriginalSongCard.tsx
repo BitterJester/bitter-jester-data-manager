@@ -3,7 +3,10 @@ import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {Title} from "../Components/Title";
 import ReactAudioPlayer from 'react-audio-player';
 import {Card, Col, Row} from "reactstrap";
-import {Document, Page} from 'react-pdf/dist/entry.webpack';
+import {Document, Page, pdfjs} from 'react-pdf/dist/entry.webpack';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -59,7 +62,6 @@ const OriginalSongCard = (props: Props) => {
                     display: 'flex',
                     alignContent: "center",
                     justifyContent: "center",
-                    flexDirection: "column"
                 }}>
                     <Document file={lyricsUrl}
                               onLoadError={console.error}
