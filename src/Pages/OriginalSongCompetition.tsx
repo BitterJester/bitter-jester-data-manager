@@ -3,7 +3,7 @@ import {getFromS3} from '../aws/getFromS3';
 import OriginalSongCard from '../Containers/OriginalSongCard';
 import {Alert} from "reactstrap";
 
-type OriginalSong = {
+export type OriginalSong = {
     lyricsUrl: string;
     songName: string,
     bandName: string,
