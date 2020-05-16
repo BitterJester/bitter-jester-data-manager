@@ -1,11 +1,11 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import OriginalSongCard from "./OriginalSongCard";
+import OriginalSongContainer from "./OriginalSongContainer";
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {Title} from "../Components/Title";
 import ReactAudioPlayer from 'react-audio-player';
 
-describe('OriginalSongCard', () => {
+describe('OriginalSongContainer', () => {
     const originalSongs: OriginalSongs = {
         originalSongs: [
             {
@@ -14,12 +14,13 @@ describe('OriginalSongCard', () => {
                 songName: 'songName',
                 songUrl: 'songUrl',
                 primaryEmailAddress: 'email',
-                lyricsUrl: 'lyricsUrl'
+                lyricsUrl: 'lyricsUrl',
+                songDescription: 'songDescription'
             }
         ]
     };
 
-    const component = shallow(<OriginalSongCard originalSongs={originalSongs}/>);
+    const component = shallow(<OriginalSongContainer originalSongs={originalSongs}/>);
 
     describe('Band Photo', () => {
         it('should pass bandPhotoUrl', () => {
