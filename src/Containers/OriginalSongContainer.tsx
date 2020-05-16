@@ -17,7 +17,7 @@ const OriginalSongContainer = (props: Props) => {
 
     return (
         <Fragment>
-            <Row style={{padding: '0 16px'}}>
+            <Row className={'original-song-info-row'}>
                 <OriginalSongInfoCard originalSongs={props.originalSongs}
                                       updateSelectedSong={setSongIndex}
                                       selectedIndex={songIndex}

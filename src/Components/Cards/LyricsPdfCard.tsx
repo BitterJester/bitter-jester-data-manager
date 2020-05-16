@@ -1,5 +1,5 @@
-import React from 'react';
-import {Card} from "reactstrap";
+import React, {useState} from 'react';
+import {Card, Collapse} from "reactstrap";
 import {Title} from "../Title";
 import {OriginalSong} from "../../Pages/OriginalSongCompetition";
 import {Document, Page, pdfjs} from 'react-pdf';
@@ -11,22 +11,46 @@ type Props = {
 };
 
 const LyricsPdfCard = (props: Props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
+
     const {originalSong} = props;
-    const songName = originalSong ? originalSong.songName : '';
     const lyricsUrl = originalSong ? originalSong.lyricsUrl : '';
 
     return (
-        <div style={{padding: '16px'}}>
-            <Card>
+        <div style={{padding: '16px', width: '100%'}}>
+            <Card onClick={toggle}>
                 <div>
-                    <Title titleDisplayText={songName}/>
+                    <span style={{display: "inline-block", position: "absolute", left: 0, padding: '16px'}}>
+                        {
+                            isOpen ?
+                                <svg className="bi bi-chevron-up" width="1em" height="1em" viewBox="0 0 16 16"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M7.646 4.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 5.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z"
+                                          clip-rule="evenodd"/>
+                                </svg> :
+                                <svg className="bi bi-chevron-down" width="1em" height="1em" viewBox="0 0 16 16"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd"
+                                          d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                        }
+                    </span>
+                    <div style={{display: "inline-block", paddingLeft: '16px'}}>
+                        <Title titleDisplayText={'LYRICS'}/>
+                    </div>
                 </div>
-                <Document file={lyricsUrl}
-                          onLoadError={console.error}
-                          onLoadSuccess={({numPages}) => console.log(numPages)}
-                >
-                    <Page pageNumber={1}/>
-                </Document>
+                <Collapse isOpen={isOpen}>
+                    <Document file={lyricsUrl}
+                              onLoadError={console.error}
+                              onLoadSuccess={({numPages}) => console.log(numPages)}
+                    >
+                        <Page pageNumber={1}/>
+                    </Document>
+                </Collapse>
             </Card>
         </div>
     );

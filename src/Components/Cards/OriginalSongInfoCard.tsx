@@ -31,26 +31,24 @@ const OriginalSongInfoCard = (props: Props) => {
         }
     };
     return (
-        <Card style={{width: '50%'}}>
-            <div style={{padding: '16px'}}>
+        <Card className={'original-song-info-card'}>
+            <div className={'original-song-selection-button'}>
+                <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
+            </div>
+            <div className={'original-song-info-content'}>
                 <Title titleDisplayText={hasSongs ? originalSong.bandName : ''}/>
-                <div style={{padding: '8px', display: 'block'}}>
+                <div className={'audio-player'}>
                     <ReactAudioPlayer src={songUrl} controls/>
                 </div>
-                <div style={{textAlign: "left"}}>
+                <div className={'song-description'}>
                     <h5>SONG DESCRIPTION</h5>
                     <p>
                         {songDescription}
                     </p>
                 </div>
-                <div style={{display: 'block'}}>
-                    <div style={{display: 'inline-block', padding: '0px 16px'}}>
-                        <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
-                    </div>
-                    <div style={{display: 'inline-block', padding: '0px 16px'}}>
-                        <button onClick={() => updateSongIndex(1)}>{'>'}</button>
-                    </div>
-                </div>
+            </div>
+            <div className={'original-song-selection-button'}>
+                <button onClick={() => updateSongIndex(1)}>{'>'}</button>
             </div>
         </Card>
     );

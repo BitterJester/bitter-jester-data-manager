@@ -1,0 +1,42 @@
+.original-song-competition-container {
+  background: rgb(232, 231, 228);
+
+  .judging-reminder-alert {
+    text-align: center;
+  }
+
+  .original-song-container {
+    text-align: center;
+    padding: 16px;
+
+    .original-song-info-row {
+      padding: 0 16px;
+
+      .original-song-info-card {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        align-content: center;
+        justify-content: center;
+
+        .original-song-selection-button {
+          padding: 0 16px;
+        }
+
+        .original-song-info-content {
+          padding: 16px;
+
+          .audio-player {
+            padding: 8px;
+            display: block;
+          }
+
+          .song-description {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

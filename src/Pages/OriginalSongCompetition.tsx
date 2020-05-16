@@ -33,12 +33,12 @@ const OriginalSongCompetition = () => {
     }, []);
 
     return (
-        <div style={{background: 'rgb(232, 231, 228)'}}>
-            <Alert style={{textAlign: "center"}} color={'danger'}>
+        <div className={'original-song-competition-container'}>
+            <Alert className={'judging-reminder-alert'} color={'danger'}>
                 Reminder: You are not providing feedback on the recording quality of submissions. Please focus on the
                 music, lyrics, performance, etc.
             </Alert>
-            <div style={{textAlign: 'center', padding: '16px'}}>
+            <div className={'original-song-container'}>
                 <OriginalSongContainer originalSongs={originalSongs}/>
             </div>
         </div>
