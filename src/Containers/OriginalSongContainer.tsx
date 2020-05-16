@@ -29,7 +29,7 @@ const OriginalSongContainer = (props: Props) => {
                     <OriginalSongJudgingFormCard/>
                 </Col>
             </Row>
-            <Row>
+            <Row className={'lyrics-card-row'}>
                 <Col>
                     <LyricsPdfCard originalSong={originalSong}/>
                 </Col>

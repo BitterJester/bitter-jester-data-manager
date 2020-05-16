@@ -18,10 +18,10 @@ const LyricsPdfCard = (props: Props) => {
     const lyricsUrl = originalSong ? originalSong.lyricsUrl : '';
 
     return (
-        <div style={{padding: '16px', width: '100%'}}>
+        <div className={'lyrics-card-container'}>
             <Card onClick={toggle}>
                 <div>
-                    <span style={{display: "inline-block", position: "absolute", left: 0, padding: '16px'}}>
+                    <span className={'dropdown-chevron'}>
                         {
                             isOpen ?
                                 <svg className="bi bi-chevron-up" width="1em" height="1em" viewBox="0 0 16 16"
@@ -39,7 +39,7 @@ const LyricsPdfCard = (props: Props) => {
                                 </svg>
                         }
                     </span>
-                    <div style={{display: "inline-block", paddingLeft: '16px'}}>
+                    <div className={'title-container'}>
                         <Title titleDisplayText={'LYRICS'}/>
                     </div>
                 </div>
