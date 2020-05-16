@@ -15,6 +15,7 @@ const OriginalSongContainer = (props: Props) => {
     const [songIndex, setSongIndex] = useState(0);
     const originalSongs = props.originalSongs.originalSongs;
     const originalSong = originalSongs[songIndex];
+    const bandName = originalSong ? originalSong.bandName : '';
 
     return (
         <Fragment>
@@ -26,7 +27,7 @@ const OriginalSongContainer = (props: Props) => {
                     />
                 </Col>
                 <Col>
-                    <OriginalSongJudgingFormCard/>
+                    <OriginalSongJudgingFormCard bandName={bandName}/>
                 </Col>
             </Row>
             <Row className={'lyrics-card-row'}>
