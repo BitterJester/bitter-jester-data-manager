@@ -32,8 +32,8 @@ const OriginalSongInfoCard = (props: Props) => {
     };
     return (
         <Card className={'original-song-info-card'}>
-            <div className={'original-song-selection-button'}>
-                <button onClick={() => updateSongIndex(-1)}>{'<'}</button>
+            <div className={'original-song-selection-button-container'}>
+                <button className={'original-song-selection-button'} onClick={() => updateSongIndex(-1)}>{'<'}</button>
             </div>
             <div className={'original-song-info-content'}>
                 <Title titleDisplayText={hasSongs ? originalSong.bandName : ''}/>
@@ -47,8 +47,8 @@ const OriginalSongInfoCard = (props: Props) => {
                     </p>
                 </div>
             </div>
-            <div className={'original-song-selection-button'}>
-                <button onClick={() => updateSongIndex(1)}>{'>'}</button>
+            <div className={'original-song-selection-button-container'}>
+                <button className={'original-song-selection-button'} onClick={() => updateSongIndex(1)}>{'>'}</button>
             </div>
         </Card>
     );
