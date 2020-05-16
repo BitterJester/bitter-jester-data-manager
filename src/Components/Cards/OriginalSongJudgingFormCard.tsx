@@ -1,10 +1,13 @@
 import React from 'react';
 import {Card} from "reactstrap";
+import {Title} from "../Title";
 
 const OriginalSongJudgingFormCard = () => {
     return (
         <Card className={'original-song-judging-form-card'}>
-            <p>hi</p>
+            <div>
+                <Title titleDisplayText={'JUDGING FORM'}/>
+            </div>
         </Card>
     );
 };

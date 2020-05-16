@@ -32,23 +32,27 @@ const OriginalSongInfoCard = (props: Props) => {
     };
     return (
         <Card className={'original-song-info-card'}>
-            <div className={'original-song-selection-button-container'}>
-                <button className={'original-song-selection-button'} onClick={() => updateSongIndex(-1)}>{'<'}</button>
-            </div>
-            <div className={'original-song-info-content'}>
-                <Title titleDisplayText={hasSongs ? originalSong.bandName : ''}/>
-                <div className={'audio-player'}>
-                    <ReactAudioPlayer src={songUrl} controls/>
+            <Title titleDisplayText={'SONG INFO'}/>
+            <div className={'original-song-info-container'}>
+                <div className={'original-song-selection-button-container'}>
+                    <button className={'original-song-selection-button'}
+                            onClick={() => updateSongIndex(-1)}>{'<'}</button>
                 </div>
-                <div className={'song-description'}>
-                    <h5>SONG DESCRIPTION</h5>
-                    <p>
-                        {songDescription}
-                    </p>
+                <div className={'original-song-info-content'}>
+                    <div className={'audio-player'}>
+                        <ReactAudioPlayer src={songUrl} controls/>
+                    </div>
+                    <div className={'song-description'}>
+                        <h5>SONG DESCRIPTION</h5>
+                        <p>
+                            {songDescription}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div className={'original-song-selection-button-container'}>
-                <button className={'original-song-selection-button'} onClick={() => updateSongIndex(1)}>{'>'}</button>
+                <div className={'original-song-selection-button-container'}>
+                    <button className={'original-song-selection-button'}
+                            onClick={() => updateSongIndex(1)}>{'>'}</button>
+                </div>
             </div>
         </Card>
     );

@@ -17,26 +17,30 @@
 
       .original-song-info-card {
         padding: 16px;
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        align-content: center;
-        justify-content: center;
+        height: 100%;
 
-        .original-song-selection-button-container {
-          padding: 0 16px;
-        }
+        .original-song-info-container {
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
+          align-content: center;
+          justify-content: center;
 
-        .original-song-info-content {
-          padding: 16px;
-
-          .audio-player {
-            padding: 8px;
-            display: block;
+          .original-song-selection-button-container {
+            padding: 0 16px;
           }
 
-          .song-description {
-            text-align: left;
+          .original-song-info-content {
+            padding: 16px;
+
+            .audio-player {
+              padding: 8px;
+              display: block;
+            }
+
+            .song-description {
+              text-align: left;
+            }
           }
         }
       }
