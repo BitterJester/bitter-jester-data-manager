@@ -1,9 +1,10 @@
 import React, {Fragment, useState} from 'react';
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 
-import {Row} from "reactstrap";
+import {Col, Row} from "reactstrap";
 import LyricsPdfCard from "../Components/Cards/LyricsPdfCard";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
+import OriginalSongJudgingFormCard from "../Components/Cards/OriginalSongJudgingFormCard";
 
 
 type Props = {
@@ -18,13 +19,20 @@ const OriginalSongContainer = (props: Props) => {
     return (
         <Fragment>
             <Row className={'original-song-info-row'}>
-                <OriginalSongInfoCard originalSongs={props.originalSongs}
-                                      updateSelectedSong={setSongIndex}
-                                      selectedIndex={songIndex}
-                />
+                <Col>
+                    <OriginalSongInfoCard originalSongs={props.originalSongs}
+                                          updateSelectedSong={setSongIndex}
+                                          selectedIndex={songIndex}
+                    />
+                </Col>
+                <Col>
+                    <OriginalSongJudgingFormCard/>
+                </Col>
             </Row>
             <Row>
-                <LyricsPdfCard originalSong={originalSong}/>
+                <Col>
+                    <LyricsPdfCard originalSong={originalSong}/>
+                </Col>
             </Row>
         </Fragment>
     );

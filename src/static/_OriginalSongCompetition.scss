@@ -11,9 +11,12 @@
 
     .original-song-info-row {
       padding: 0 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
 
       .original-song-info-card {
-        width: 50%;
+        padding: 16px;
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -36,6 +39,10 @@
             text-align: left;
           }
         }
+      }
+
+      .original-song-judging-form-card {
+        height: 100%;
       }
     }
   }
