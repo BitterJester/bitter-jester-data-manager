@@ -26,7 +26,7 @@ describe('OriginalSongContainer', () => {
     describe('OriginalSongInfoCard', () => {
         const props = component.find(OriginalSongInfoCard).props();
         it('should pass originalSong', () => {
-            expect(props.originalSongs).toEqual(originalSongs.originalSongs);
+            expect(props.originalSongs).toEqual(originalSongs);
         });
 
         it('should pass selectedIndex', () => {

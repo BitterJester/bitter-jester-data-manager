@@ -3,6 +3,7 @@ import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import ReactAudioPlayer from 'react-audio-player';
+import {Player} from 'video-react';
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -39,6 +40,15 @@ const OriginalSongInfoCard = (props: Props) => {
                             onClick={() => updateSongIndex(-1)}>{'<'}</button>
                 </div>
                 <div className={'original-song-info-content'}>
+                    <div className={'video'}>
+                        <Player
+                            playInLine
+                            src={'videos/test.mp4'}
+                            height={600}
+                            width={600}
+                            fluid={false}
+                        />
+                    </div>
                     <div className={'audio-player'}>
                         <ReactAudioPlayer src={songUrl} controls/>
                     </div>
