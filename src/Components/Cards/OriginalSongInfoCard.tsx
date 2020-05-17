@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
-import {ControlBar, CurrentTimeDisplay, Player, ReplayControl, TimeDivider, VolumeMenuButton} from 'video-react';
 import BandSelectionDropDown from "../BandSelectionDropDown";
+import VideoPlayer from "../VideoPlayer";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -45,21 +45,7 @@ const OriginalSongInfoCard = (props: Props) => {
             />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
-                    <div className={'video'}>
-                        <Player
-                            playInLine
-                            src={'videos/test_169.mp4'}
-                            poster={'images/video-poster.png'}
-                        >
-                            <ControlBar>
-                                <ReplayControl seconds={10} order={1.1}/>
-                                <ReplayControl seconds={30} order={1.2}/>
-                                <CurrentTimeDisplay order={4.1}/>
-                                <TimeDivider order={4.2}/>
-                                <VolumeMenuButton disabled/>
-                            </ControlBar>
-                        </Player>
-                    </div>
+                    <VideoPlayer src={'videos/test_169.mp4'} poster={'images/video-poster.png'}/>
                     <div className={'subtitle'}>
                         <h3>{formattedTitle}</h3>
                     </div>
