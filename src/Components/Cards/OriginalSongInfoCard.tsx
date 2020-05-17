@@ -3,7 +3,7 @@ import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import ReactAudioPlayer from 'react-audio-player';
-import {Player} from 'video-react';
+import {ControlBar, CurrentTimeDisplay, Player, ReplayControl, TimeDivider, VolumeMenuButton} from 'video-react';
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -43,11 +43,16 @@ const OriginalSongInfoCard = (props: Props) => {
                     <div className={'video'}>
                         <Player
                             playInLine
-                            src={'videos/test.mp4'}
-                            height={600}
-                            width={600}
-                            fluid={false}
-                        />
+                            src={'videos/test_169.mp4'}
+                        >
+                            <ControlBar>
+                                <ReplayControl seconds={10} order={1.1}/>
+                                <ReplayControl seconds={30} order={1.2}/>
+                                <CurrentTimeDisplay order={4.1}/>
+                                <TimeDivider order={4.2}/>
+                                <VolumeMenuButton disabled/>
+                            </ControlBar>
+                        </Player>
                     </div>
                     <div className={'audio-player'}>
                         <ReactAudioPlayer src={songUrl} controls/>
