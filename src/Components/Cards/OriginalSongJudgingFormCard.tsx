@@ -66,7 +66,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             const formattedBandName = handleSpacesAndUppercase(bandName);
             const formattedSongName = handleSpacesAndUppercase(songName);
 
-            return `judges/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
+            return `judges-comment/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
         };
 
         const s3Client = new S3Client();
