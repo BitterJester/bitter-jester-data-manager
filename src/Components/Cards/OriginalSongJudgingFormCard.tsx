@@ -45,7 +45,6 @@ const OriginalSongJudgingFormCard = (props: Props) => {
     useEffect(() => {
         const getJudgesComments = async () => {
             const previousComments = bandName ? await new S3Client().getObject(fileName) as JudgeFeedback : {} as JudgeFeedback;
-            console.log(previousComments)
             if (previousComments) {
                 setJudgesComments(previousComments);
             } else {
@@ -68,6 +67,10 @@ const OriginalSongJudgingFormCard = (props: Props) => {
 
         getJudgesComments();
     }, [fileName, bandName, songName, user.nickname, user.email]);
+
+    useEffect(() => {
+        setIsAlertOpen(false);
+    }, [bandName]);
 
     const updateJudgesComments = (fieldToUpdate: keyof JudgeFeedback, value: string) => {
         setJudgesComments({...judgesComments, [fieldToUpdate]: value})
@@ -107,7 +110,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                 JSON.stringify(judgeFeedback)
             )
         );
-        toggle();
+        setIsAlertOpen(true);
     };
 
     const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -119,8 +122,8 @@ const OriginalSongJudgingFormCard = (props: Props) => {
     return (
         <Card className={'original-song-judging-form-card'}>
             <div>
-                <Title titleDisplayText={'JUDGING FORM'}/>
                 <Alert isOpen={isAlertOpen} toggle={toggle} color={'success'}>Successfully saved your changes!</Alert>
+                <Title titleDisplayText={'JUDGING FORM'}/>
                 <Form>
                     <TextAreaFormInput label={'What were your initial impressions?'}
                                        id={'initialImpressions'}
@@ -131,7 +134,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                                        id={'feedback'}
                                        updateParent={updateFeedback}
                                        textAreaValue={judgesComments.feedback || ''}/>
-                    <TextAreaFormInput label={'What did you like most about what you heard? Please keep this positive'}
+                    <TextAreaFormInput label={'What did you like most about what you heard? Please keep this positive.'}
                                        id={'favoriteAspect'}
                                        updateParent={updateFavoriteAspect}
                                        textAreaValue={judgesComments.favoriteAspect || ''}/>
