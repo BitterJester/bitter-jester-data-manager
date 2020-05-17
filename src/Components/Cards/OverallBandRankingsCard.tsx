@@ -1,18 +1,35 @@
 import React, {useState} from 'react';
 import {Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import {Title} from "../Title";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
 
 type Props = {
     originalSongs: OriginalSongs;
 }
 
+type SongRanking = {
+    firstPlace: {
+        songName: string;
+        bandName: string;
+    }
+}
+
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
     const [isOpen, setIsOpen] = useState(false);
+    const [songRankings, setSongRankings] = useState({} as SongRanking);
 
     const toggle = () => {
         setIsOpen(!isOpen);
+    };
+
+    const updateSongRankings = (song: OriginalSong) => {
+        setSongRankings(
+            {
+                ...songRankings,
+                firstPlace: {songName: song.songName, bandName: song.bandName}
+            }
+        );
     };
 
     return (
@@ -20,17 +37,21 @@ const OverallBandRankingsCard = (props: Props) => {
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
             <div className={'ranking-dropdown-container'}>
                 <h4 className={'ranking-title'}>
-                    FIRST PLACE
+                    1st PLACE
                 </h4>
                 <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
                     <DropdownToggle className={'toggle'} caret>
-                        First Place
+                        {
+                            songRankings.firstPlace ?
+                                `${songRankings.firstPlace.songName} - ${songRankings.firstPlace.bandName}` :
+                                'Please select your first place choice.'
+                        }
                     </DropdownToggle>
                     <DropdownMenu>
                         {
                             originalSongs.originalSongs.map(song => {
                                 return (
-                                    <DropdownItem onClick={() => null}>
+                                    <DropdownItem onClick={() => updateSongRankings(song)}>
                                         {`${song.songName} - ${song.bandName}`}
                                     </DropdownItem>
                                 );
