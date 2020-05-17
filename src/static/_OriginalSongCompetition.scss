@@ -19,6 +19,10 @@
         padding: 16px;
         height: 100%;
 
+        .band-selection-dropdown {
+          text-align: left;
+        }
+
         .original-song-info-container {
           display: flex;
           flex-direction: row;

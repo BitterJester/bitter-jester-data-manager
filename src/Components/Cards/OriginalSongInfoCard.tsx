@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Title} from "../Title";
 import {Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
-import ReactAudioPlayer from 'react-audio-player';
 import {ControlBar, CurrentTimeDisplay, Player, ReplayControl, TimeDivider, VolumeMenuButton} from 'video-react';
 
 type Props = {
@@ -17,7 +16,6 @@ const OriginalSongInfoCard = (props: Props) => {
     const hasSongs = unwrappedOriginalSongs.length;
     const originalSong = unwrappedOriginalSongs[selectedIndex];
     const songDescription = hasSongs ? originalSong.songDescription : '';
-    const songUrl = hasSongs ? originalSong.songUrl : '';
 
     const updateSongIndex = (event) => {
         const selectedBandName = event.target.innerText.split(' - ')[1];
@@ -34,10 +32,10 @@ const OriginalSongInfoCard = (props: Props) => {
 
     return (
         <Card className={'original-song-info-card'}>
-            <div>
+            <div className={'band-selection-dropdown'}>
                 <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle className={'toggle'} caret>
-                        Bands
+                        Songs
                     </DropdownToggle>
                     <DropdownMenu>
                         {
@@ -69,9 +67,6 @@ const OriginalSongInfoCard = (props: Props) => {
                                 <VolumeMenuButton disabled/>
                             </ControlBar>
                         </Player>
-                    </div>
-                    <div className={'audio-player'}>
-                        <ReactAudioPlayer src={songUrl} controls/>
                     </div>
                     <div className={'song-description'}>
                         <h5>SONG DESCRIPTION</h5>
