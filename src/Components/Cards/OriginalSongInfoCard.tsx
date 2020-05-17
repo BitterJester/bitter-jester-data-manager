@@ -47,7 +47,7 @@ const OriginalSongInfoCard = (props: Props) => {
             />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
-                    <VideoPlayer src={'videos/test_169.mp4'} poster={'images/video-poster.png'}/>
+                    <VideoPlayer src={'videos/test_full_compressed.mp4'} poster={'images/video-poster.png'}/>
                     <div className={'subtitle'}>
                         <h3>{formattedTitle}</h3>
                     </div>

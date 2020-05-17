@@ -11,8 +11,8 @@ const VideoPlayer = (props: Props) => {
         <div className={'video'}>
             <Player
                 playInLine
-                src={'videos/test_169.mp4'}
-                poster={'images/video-poster.png'}
+                src={props.src}
+                poster={props.poster}
             >
                 <ControlBar>
                     <ReplayControl seconds={10} order={1.1}/>
