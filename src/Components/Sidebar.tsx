@@ -45,9 +45,9 @@ const Sidebar = (props: Props) => {
         require('../static/bj-14-5-logo.png') :
         require('../static/bj15ylogo.png');
     return (
-        <div>
+        <div className={'sidebar-container'} style={{width: '10%', background: 'rgb(123, 93, 151)'}}>
             <div id='homeLogo' className={'openSidebarComponent'}>
-                <img height={300} src={logoUrl} alt='BJ15Years' onClick={() => openNav()}/>
+                <img height={200} src={logoUrl} alt='BJ15Years' onClick={() => openNav()}/>
             </div>
             <div id='mySidenav' className={'sidenav'}>
                 <span className="closebtn" onClick={() => closeNav()}>&times;</span>
