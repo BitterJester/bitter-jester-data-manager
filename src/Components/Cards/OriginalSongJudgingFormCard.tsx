@@ -124,6 +124,13 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             <div>
                 <Alert isOpen={isAlertOpen} toggle={toggle} color={'success'}>Successfully saved your changes!</Alert>
                 <Title titleDisplayText={'JUDGING FORM'}/>
+                <div className={'judging-reminder-alert-container'}>
+                    <p className={'judging-reminder-alert'}>
+                        Reminder: You are not providing feedback on the recording quality of submissions. Please focus
+                        on the
+                        music, lyrics, performance, etc.
+                    </p>
+                </div>
                 <Form>
                     <TextAreaFormInput label={'What were your initial impressions?'}
                                        id={'initialImpressions'}

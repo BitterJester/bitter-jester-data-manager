@@ -43,7 +43,7 @@ describe('OverallBandRankingsCard', () => {
     });
 
     it('should render a dropdownItem for each original song', () => {
-        expect(component.find(DropdownItem).children().text()).toEqual('songName - bandName');
+        expect(component.find(DropdownItem).children().text()).toEqual('"songName" by bandName');
     });
 
     it('should open the dropdown on toggle', () => {
@@ -55,6 +55,6 @@ describe('OverallBandRankingsCard', () => {
     it('should update title when item is selected', () => {
         component.find(DropdownItem).simulate('click');
         component.update();
-        expect(component.find(DropdownToggle).children().text()).toEqual('songName - bandName')
+        expect(component.find(DropdownToggle).children().text()).toEqual('"songName" by bandName')
     });
 });

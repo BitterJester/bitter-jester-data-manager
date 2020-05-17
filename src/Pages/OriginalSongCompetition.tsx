@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getFromS3} from '../aws/getFromS3';
 import OriginalSongContainer from '../Containers/OriginalSongContainer';
-import {Alert} from "reactstrap";
 
 export type OriginalSong = {
     songDescription: string;
@@ -34,10 +33,6 @@ const OriginalSongCompetition = () => {
 
     return (
         <div className={'original-song-competition-container'}>
-            <Alert className={'judging-reminder-alert'} color={'danger'}>
-                Reminder: You are not providing feedback on the recording quality of submissions. Please focus on the
-                music, lyrics, performance, etc.
-            </Alert>
             <div className={'original-song-container'}>
                 <OriginalSongContainer originalSongs={originalSongs}/>
             </div>

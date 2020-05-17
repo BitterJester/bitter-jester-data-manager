@@ -1,8 +1,14 @@
 .original-song-competition-container {
   background: rgb(232, 231, 228);
 
-  .judging-reminder-alert {
-    text-align: center;
+  .judging-reminder-alert-container {
+    padding: 16px;
+
+    .judging-reminder-alert {
+      text-align: left;
+      color: red;
+      font-weight: bold;
+    }
   }
 
   .original-song-container {
