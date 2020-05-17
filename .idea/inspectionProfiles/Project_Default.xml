@@ -2,6 +2,7 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="JSLint" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="SSBasedInspection" enabled="true" level="INFORMATION" enabled_by_default="true">
       <replaceConfiguration name="Convert to arrow function" text="function $functionName$ ( $parameterNames$ ) {&#10;        $content$&#10;        }" recursive="false" caseInsensitive="true" type="TypeScript JSX" reformatAccordingToStyle="false" shortenFQN="false" replacement="const $functionName$ ( $parameterNames$ ) =&gt; {&#10;        $content$&#10;        }">
         <constraint name="__context__" within="" contains="" />

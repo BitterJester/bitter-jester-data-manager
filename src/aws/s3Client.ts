@@ -53,8 +53,7 @@ export class S3Client {
                             const s3Object = await this.getObject(item.Key);
                             s3Objects.push(s3Object);
                         }
-                    })
-
+                    });
 
                     return resolve(s3Objects);
                 }

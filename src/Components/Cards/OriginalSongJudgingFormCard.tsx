@@ -3,9 +3,11 @@ import {Card, Form} from "reactstrap";
 import {Title} from "../Title";
 import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
+import {S3Client} from "../../aws/s3Client";
 
 type Judge = {
     email: string;
+    nickname: string;
 }
 
 type JudgeFeedback = {
@@ -13,16 +15,19 @@ type JudgeFeedback = {
     initialImpression: string;
     feedback: string;
     favoriteAspect: string;
-    bandName: string;
+    songInfo: {
+        songName: string;
+    }
 }
 
 type Props = {
     bandName: string;
+    songName: string;
 }
 
 const OriginalSongJudgingFormCard = (props: Props) => {
     const {user} = useAuth0();
-    const {bandName} = props;
+    const {bandName, songName} = props;
 
     const [initialImpressions, setInitialImpressions] = useState('');
 
@@ -40,20 +45,38 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         setFavoriteAspect(event.target.value);
     };
 
-    const combine = (): JudgeFeedback => {
-        const newVar = {
+    const combineAndSave = async (): Promise<void> => {
+        const judgeFeedback: JudgeFeedback = {
             initialImpression: initialImpressions,
             feedback: feedback,
             favoriteAspect: favoriteAspect,
             judge: {
-                email: user.email
+                email: user.email,
+                nickname: user.nickname
             },
-            bandName
+            songInfo: {
+                songName: songName
+            }
         };
 
-        console.log(newVar);
+        const formatFileName = () => {
+            const handleSpacesAndUppercase = (value: string) => {
+                return value.replace(' ', '_').toLowerCase();
+            };
+            const formattedBandName = handleSpacesAndUppercase(bandName);
+            const formattedSongName = handleSpacesAndUppercase(songName);
 
-        return newVar
+            return `judges/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
+        };
+
+        const s3Client = new S3Client();
+        await s3Client.put(
+            s3Client.createPutPublicJsonRequest(
+                'bitter-jester-test',
+                formatFileName(),
+                JSON.stringify(judgeFeedback)
+            )
+        );
     };
 
     return (
@@ -75,7 +98,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                                        updateParent={updateFavoriteAspect}
                                        textAreaValue={favoriteAspect}/>
                 </Form>
-                <button onClick={combine}>
+                <button onClick={combineAndSave}>
                     Save
                 </button>
             </div>
