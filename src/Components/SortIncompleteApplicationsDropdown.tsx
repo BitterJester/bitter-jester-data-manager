@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import React, {useState} from 'react';
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import '../static/scheduleDropdown.css';
 
-type DropdownItemOnClick = {
+export type DropdownItemOnClick = {
     (event: React.MouseEvent<Element, MouseEvent>): void;
 }
 
 type Props = {
-    dropdownItemOnClick:  DropdownItemOnClick;
+    dropdownItemOnClick: DropdownItemOnClick;
     dropdownItemOnClick2: DropdownItemOnClick;
 }
 

@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Title} from "../Title";
-import {Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
+import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import {ControlBar, CurrentTimeDisplay, Player, ReplayControl, TimeDivider, VolumeMenuButton} from 'video-react';
+import BandSelectionDropDown from "../BandSelectionDropDown";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -36,24 +37,12 @@ const OriginalSongInfoCard = (props: Props) => {
     return (
         <Card className={'original-song-info-card'}>
             <Title titleDisplayText={'SONG INFO'}/>
-            <div className={'band-selection-dropdown'}>
-                <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle className={'toggle'} caret>
-                        Songs
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        {
-                            originalSongs.originalSongs.map(song => {
-                                return (
-                                    <DropdownItem onClick={updateSongIndex}>
-                                        {`${song.songName} - ${song.bandName}`}
-                                    </DropdownItem>
-                                );
-                            })
-                        }
-                    </DropdownMenu>
-                </Dropdown>
-            </div>
+            <BandSelectionDropDown
+                originalSongs={originalSongs}
+                dropdownOpen={dropdownOpen}
+                toggle={toggle}
+                updateSongIndex={updateSongIndex}
+            />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
                     <div className={'video'}>
