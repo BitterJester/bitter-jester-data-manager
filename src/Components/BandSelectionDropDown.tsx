@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import {OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {OriginalSong, OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {DropdownItemOnClick} from "./SortIncompleteApplicationsDropdown";
 
 type Props = {
@@ -8,23 +8,24 @@ type Props = {
     toggle: DropdownItemOnClick;
     originalSongs: OriginalSongs;
     updateSongIndex: DropdownItemOnClick;
+    selected: OriginalSong;
 }
 
 const BandSelectionDropDown = (props: Props) => {
-    const {originalSongs, dropdownOpen, toggle, updateSongIndex} = props;
+    const {originalSongs, dropdownOpen, toggle, updateSongIndex, selected} = props;
 
     return (
         <div className={'band-selection-dropdown'}>
             <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle className={'toggle'} caret>
-                    Songs
+                    {selected ? `"${selected.songName}" by ${selected.bandName}` : ''}
                 </DropdownToggle>
                 <DropdownMenu>
                     {
                         originalSongs.originalSongs.map(song => {
                             return (
                                 <DropdownItem onClick={updateSongIndex}>
-                                    {`${song.songName} - ${song.bandName}`}
+                                    {`"${song.songName}" by ${song.bandName}`}
                                 </DropdownItem>
                             );
                         })

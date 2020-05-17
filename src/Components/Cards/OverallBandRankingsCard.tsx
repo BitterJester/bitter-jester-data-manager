@@ -43,7 +43,7 @@ const OverallBandRankingsCard = (props: Props) => {
                     <DropdownToggle className={'toggle'} caret>
                         {
                             songRankings.firstPlace ?
-                                `${songRankings.firstPlace.songName} - ${songRankings.firstPlace.bandName}` :
+                                `"${songRankings.firstPlace.songName}" by ${songRankings.firstPlace.bandName}` :
                                 'Please select your first place choice.'
                         }
                     </DropdownToggle>
@@ -52,7 +52,7 @@ const OverallBandRankingsCard = (props: Props) => {
                             originalSongs.originalSongs.map(song => {
                                 return (
                                     <DropdownItem onClick={() => updateSongRankings(song)}>
-                                        {`${song.songName} - ${song.bandName}`}
+                                        {`"${song.songName}" by ${song.bandName}`}
                                     </DropdownItem>
                                 );
                             })

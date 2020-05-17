@@ -21,9 +21,9 @@ const OriginalSongInfoCard = (props: Props) => {
     const bandName = hasSongs ? originalSong.bandName : '';
 
     const updateSongIndex = (event) => {
-        const selectedBandName = event.target.innerText.split(' - ')[1];
+        const selectedBandName = event.target.innerText;
         const newIndex = originalSongs.originalSongs.findIndex(song => {
-            return song.bandName === selectedBandName;
+            return selectedBandName.includes(song.bandName) && selectedBandName.includes(song.songName);
         });
 
         updateSelectedSong(newIndex);
@@ -35,7 +35,7 @@ const OriginalSongInfoCard = (props: Props) => {
         setDropdownOpen(!dropdownOpen);
     };
 
-    const formattedTitle = `${songName} - ${bandName}`;
+    const formattedTitle = `"${songName}" by ${bandName}`;
     return (
         <Card className={'original-song-info-card'}>
             <Title titleDisplayText={'SONG INFO'}/>
@@ -44,6 +44,7 @@ const OriginalSongInfoCard = (props: Props) => {
                 dropdownOpen={dropdownOpen}
                 toggle={toggle}
                 updateSongIndex={updateSongIndex}
+                selected={originalSong}
             />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
