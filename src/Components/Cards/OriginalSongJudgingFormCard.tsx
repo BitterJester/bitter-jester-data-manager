@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, Form} from "reactstrap";
+import {Alert, Card, Form} from "reactstrap";
 import {Title} from "../Title";
 import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
@@ -37,17 +37,15 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         };
         const formattedBandName = handleSpacesAndUppercase(bandName);
         const formattedSongName = handleSpacesAndUppercase(songName);
-        const s = `judges-comments/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
-        console.log(s);
-        return s;
+        return `judges-comments/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
     };
 
     const fileName = formatFileName();
 
     useEffect(() => {
         const getJudgesComments = async () => {
-            const previousComments = await new S3Client().getObject(fileName) as JudgeFeedback;
-            console.log(previousComments)
+            const previousComments = bandName ? await new S3Client().getObject(fileName) as JudgeFeedback : {} as JudgeFeedback;
+
             if (previousComments) {
                 setJudgesComments(previousComments);
             }
@@ -56,27 +54,27 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         getJudgesComments();
     }, [fileName]);
 
-    const [initialImpressions, setInitialImpressions] = useState('');
+    const updateJudgesComments = (fieldToUpdate: keyof JudgeFeedback, value: string) => {
+        setJudgesComments({...judgesComments, [fieldToUpdate]: value})
+    };
 
     const updateInitialImpressions = (event) => {
-        setInitialImpressions(event.target.value);
+        updateJudgesComments('initialImpression', event.target.value);
     };
-    const [feedback, setFeedback] = useState('');
 
     const updateFeedback = (event) => {
-        setFeedback(event.target.value);
+        updateJudgesComments('feedback', event.target.value);
     };
-    const [favoriteAspect, setFavoriteAspect] = useState('');
 
     const updateFavoriteAspect = (event) => {
-        setFavoriteAspect(event.target.value);
+        updateJudgesComments('favoriteAspect', event.target.value);
     };
 
     const combineAndSave = async (): Promise<void> => {
         const judgeFeedback: JudgeFeedback = {
-            initialImpression: initialImpressions,
-            feedback: feedback,
-            favoriteAspect: favoriteAspect,
+            initialImpression: judgesComments.initialImpression,
+            feedback: judgesComments.feedback,
+            favoriteAspect: judgesComments.favoriteAspect,
             judge: {
                 email: user.email,
                 nickname: user.nickname
@@ -94,26 +92,34 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                 JSON.stringify(judgeFeedback)
             )
         );
+        toggle();
+    };
+
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+    const toggle = () => {
+        setIsAlertOpen(!isAlertOpen);
     };
 
     return (
         <Card className={'original-song-judging-form-card'}>
             <div>
                 <Title titleDisplayText={'JUDGING FORM'}/>
+                <Alert isOpen={isAlertOpen} toggle={toggle} color={'success'}>Successfully saved your changes!</Alert>
                 <Form>
                     <TextAreaFormInput label={'What were your initial impressions?'}
                                        id={'initialImpressions'}
                                        updateParent={updateInitialImpressions}
-                                       textAreaValue={judgesComments.initialImpression}
+                                       textAreaValue={judgesComments.initialImpression || ''}
                     />
                     <TextAreaFormInput label={'What feedback or suggestions would you give the artist(s)?'}
                                        id={'feedback'}
                                        updateParent={updateFeedback}
-                                       textAreaValue={judgesComments.feedback}/>
+                                       textAreaValue={judgesComments.feedback || ''}/>
                     <TextAreaFormInput label={'What did you like most about what you heard? Please keep this positive'}
                                        id={'favoriteAspect'}
                                        updateParent={updateFavoriteAspect}
-                                       textAreaValue={judgesComments.favoriteAspect}/>
+                                       textAreaValue={judgesComments.favoriteAspect || ''}/>
                 </Form>
                 <button onClick={combineAndSave}>
                     Save
