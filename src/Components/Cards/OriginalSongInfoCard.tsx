@@ -31,7 +31,9 @@ const OriginalSongInfoCard = (props: Props) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const toggle = () => setDropdownOpen(prevState => !prevState);
+    const toggle = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
 
     const formattedTitle = `${songName} - ${bandName}`;
     return (
