@@ -6,7 +6,6 @@ import LyricsPdfCard from "../Components/Cards/LyricsPdfCard";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
 import OriginalSongJudgingFormCard from "../Components/Cards/OriginalSongJudgingFormCard";
 
-
 type Props = {
     originalSongs: OriginalSongs;
 }
