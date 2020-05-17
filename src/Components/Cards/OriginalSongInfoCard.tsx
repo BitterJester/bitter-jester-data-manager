@@ -44,6 +44,7 @@ const OriginalSongInfoCard = (props: Props) => {
                         <Player
                             playInLine
                             src={'videos/test_169.mp4'}
+                            poster={'images/video-poster.png'}
                         >
                             <ControlBar>
                                 <ReplayControl seconds={10} order={1.1}/>
