@@ -16,6 +16,8 @@ const OriginalSongInfoCard = (props: Props) => {
     const hasSongs = unwrappedOriginalSongs.length;
     const originalSong = unwrappedOriginalSongs[selectedIndex];
     const songDescription = hasSongs ? originalSong.songDescription : '';
+    const songName = hasSongs ? originalSong.songName : '';
+    const bandName = hasSongs ? originalSong.bandName : '';
 
     const updateSongIndex = (event) => {
         const selectedBandName = event.target.innerText.split(' - ')[1];
@@ -30,8 +32,10 @@ const OriginalSongInfoCard = (props: Props) => {
 
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
+    const formattedTitle = `${songName} - ${bandName}`;
     return (
         <Card className={'original-song-info-card'}>
+            <Title titleDisplayText={'SONG INFO'}/>
             <div className={'band-selection-dropdown'}>
                 <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle className={'toggle'} caret>
@@ -50,7 +54,6 @@ const OriginalSongInfoCard = (props: Props) => {
                     </DropdownMenu>
                 </Dropdown>
             </div>
-            <Title titleDisplayText={'SONG INFO'}/>
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
                     <div className={'video'}>
@@ -67,6 +70,9 @@ const OriginalSongInfoCard = (props: Props) => {
                                 <VolumeMenuButton disabled/>
                             </ControlBar>
                         </Player>
+                    </div>
+                    <div className={'subtitle'}>
+                        <h3>{formattedTitle}</h3>
                     </div>
                     <div className={'song-description'}>
                         <h5>SONG DESCRIPTION</h5>

@@ -42,9 +42,9 @@
               text-align: center;
             }
 
-            .audio-player {
-              padding: 8px;
-              display: block;
+            .subtitle {
+              text-transform: uppercase;
+              font-weight: bold;
             }
 
             .song-description {
@@ -56,6 +56,7 @@
 
       .original-song-judging-form-card {
         height: 100%;
+        padding: 16px;
       }
     }
 
