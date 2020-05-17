@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Title} from "../Title";
-import {Card} from "reactstrap";
+import {Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import ReactAudioPlayer from 'react-audio-player';
 import {ControlBar, CurrentTimeDisplay, Player, ReplayControl, TimeDivider, VolumeMenuButton} from 'video-react';
@@ -19,26 +19,41 @@ const OriginalSongInfoCard = (props: Props) => {
     const songDescription = hasSongs ? originalSong.songDescription : '';
     const songUrl = hasSongs ? originalSong.songUrl : '';
 
-    const updateSongIndex = (plusOrMinusOne: 1 | -1) => {
-        const newSongIndex = selectedIndex + plusOrMinusOne;
-        const maximumSongIndex = unwrappedOriginalSongs.length - 1;
+    const updateSongIndex = (event) => {
+        const selectedBandName = event.target.innerText.split(' - ')[1];
+        const newIndex = originalSongs.originalSongs.findIndex(song => {
+            return song.bandName === selectedBandName;
+        });
 
-        if (newSongIndex > maximumSongIndex) {
-            updateSelectedSong(0);
-        } else if (newSongIndex < 0) {
-            updateSelectedSong(maximumSongIndex);
-        } else {
-            updateSelectedSong(newSongIndex);
-        }
+        updateSelectedSong(newIndex);
     };
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
+    const toggle = () => setDropdownOpen(prevState => !prevState);
+
     return (
         <Card className={'original-song-info-card'}>
+            <div>
+                <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle className={'toggle'} caret>
+                        Bands
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        {
+                            originalSongs.originalSongs.map(song => {
+                                return (
+                                    <DropdownItem onClick={updateSongIndex}>
+                                        {`${song.songName} - ${song.bandName}`}
+                                    </DropdownItem>
+                                );
+                            })
+                        }
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
             <Title titleDisplayText={'SONG INFO'}/>
             <div className={'original-song-info-container'}>
-                <div className={'original-song-selection-button-container'}>
-                    <button className={'original-song-selection-button'}
-                            onClick={() => updateSongIndex(-1)}>{'<'}</button>
-                </div>
                 <div className={'original-song-info-content'}>
                     <div className={'video'}>
                         <Player
@@ -64,10 +79,6 @@ const OriginalSongInfoCard = (props: Props) => {
                             {songDescription}
                         </p>
                     </div>
-                </div>
-                <div className={'original-song-selection-button-container'}>
-                    <button className={'original-song-selection-button'}
-                            onClick={() => updateSongIndex(1)}>{'>'}</button>
                 </div>
             </div>
         </Card>
