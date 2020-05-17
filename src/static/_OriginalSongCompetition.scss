@@ -9,6 +9,25 @@
     text-align: center;
     padding: 16px;
 
+    .overall-band-rankings-row {
+      padding: 0 16px 16px 16px;
+
+      .overall-band-rankings-card {
+
+        .ranking-dropdown-container {
+          text-align: left;
+          padding: 16px;
+
+          .ranking-title {
+            font-weight: bold;
+          }
+
+          .ranking-dropdown {
+          }
+        }
+      }
+    }
+
     .original-song-info-row {
       padding: 0 16px;
       display: flex;
@@ -56,6 +75,16 @@
       .original-song-judging-form-card {
         height: 100%;
         padding: 16px;
+
+        .button-container {
+          padding-left: 16px;
+          text-align: left;
+
+          .submit-button {
+            background: rgb(123, 93, 151);
+          }
+        }
+
       }
     }
 

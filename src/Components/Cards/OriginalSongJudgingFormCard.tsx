@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Card, Form} from "reactstrap";
+import {Alert, Button, Card, Form} from "reactstrap";
 import {Title} from "../Title";
 import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
@@ -139,9 +139,11 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                                        updateParent={updateFavoriteAspect}
                                        textAreaValue={judgesComments.favoriteAspect || ''}/>
                 </Form>
-                <button onClick={combineAndSave}>
-                    Save
-                </button>
+                <div className={'button-container'}>
+                    <Button className={'submit-button'} onClick={combineAndSave}>
+                        Save
+                    </Button>
+                </div>
             </div>
         </Card>
     );
