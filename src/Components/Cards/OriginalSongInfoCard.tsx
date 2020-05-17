@@ -48,7 +48,9 @@ const OriginalSongInfoCard = (props: Props) => {
             />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
-                    <VideoPlayer src={'videos/test_full_compressed.mp4'} poster={'images/video-poster.png'}/>
+                    <VideoPlayer
+                        src={'https://www.jotform.com/uploads/BitterJester/201218940610142/4655632049115241457/MP4%20TEST%20v4.0_FB-720_VBR-2_10-12MBs_1920-1080.mp4'}
+                        poster={'images/video-poster.png'}/>
                     <div className={'subtitle'}>
                         <h3>{formattedTitle}</h3>
                     </div>
