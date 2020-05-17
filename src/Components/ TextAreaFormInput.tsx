@@ -17,8 +17,8 @@ const TextAreaFormInput = (props: Props) => {
                 {label}
             </Label>
             <Input
-                onBlur={updateParent}
-                defaultValue={textAreaValue}
+                onChange={updateParent}
+                value={textAreaValue}
                 className={'text-area'}
                 type={'textarea'}
                 name={id}

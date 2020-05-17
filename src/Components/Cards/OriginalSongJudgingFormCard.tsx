@@ -45,14 +45,29 @@ const OriginalSongJudgingFormCard = (props: Props) => {
     useEffect(() => {
         const getJudgesComments = async () => {
             const previousComments = bandName ? await new S3Client().getObject(fileName) as JudgeFeedback : {} as JudgeFeedback;
-
+            console.log(previousComments)
             if (previousComments) {
                 setJudgesComments(previousComments);
+            } else {
+                const initialJudgesComments: JudgeFeedback = {
+                    initialImpression: '',
+                    songInfo: {
+                        songName: songName
+                    },
+                    favoriteAspect: '',
+                    feedback: '',
+                    judge: {
+                        nickname: user.nickname,
+                        email: user.email
+                    }
+                };
+
+                setJudgesComments(initialJudgesComments);
             }
         };
 
         getJudgesComments();
-    }, [fileName]);
+    }, [fileName, bandName, songName, user.nickname, user.email]);
 
     const updateJudgesComments = (fieldToUpdate: keyof JudgeFeedback, value: string) => {
         setJudgesComments({...judgesComments, [fieldToUpdate]: value})

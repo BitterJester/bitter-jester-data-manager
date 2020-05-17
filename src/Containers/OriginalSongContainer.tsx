@@ -16,6 +16,7 @@ const OriginalSongContainer = (props: Props) => {
     const originalSong = originalSongs[songIndex];
     const bandName = originalSong ? originalSong.bandName : '';
     const songName = originalSong ? originalSong.songName : '';
+    console.log(songName);
 
     return (
         <Fragment>
