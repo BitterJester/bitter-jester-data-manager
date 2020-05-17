@@ -37,7 +37,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         };
         const formattedBandName = handleSpacesAndUppercase(bandName);
         const formattedSongName = handleSpacesAndUppercase(songName);
-        return `judges-comments/${user.nickname}/${formattedSongName}-${formattedBandName}.json`;
+        return `judges-comments/${formattedSongName}-${formattedBandName}/${user.nickname.replace('.', '_')}.json`;
     };
 
     const fileName = formatFileName();
