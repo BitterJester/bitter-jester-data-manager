@@ -18,7 +18,8 @@ const BandSelectionDropDown = (props: Props) => {
         <div className={'band-selection-dropdown'}>
             <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle className={'toggle'} caret>
-                    {selected ? `"${selected.songName}" by ${selected.bandName}` : ''}
+                    {selected ? `"${selected.songName}" by ${selected.bandName}` : '' +
+                        ''}
                 </DropdownToggle>
                 <DropdownMenu>
                     {

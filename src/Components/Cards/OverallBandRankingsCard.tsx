@@ -1,14 +1,23 @@
 import React, {useState} from 'react';
-import {Card, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
+import {Card} from 'reactstrap';
 import {Title} from "../Title";
 import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import RankingDropdown from "../RankingDropdown";
 
 type Props = {
     originalSongs: OriginalSongs;
 }
 
-type SongRanking = {
-    firstPlace: {
+export type SongRanking = {
+    firstPlace?: {
+        songName: string;
+        bandName: string;
+    },
+    secondPlace?: {
+        songName: string;
+        bandName: string;
+    },
+    thirdPlace?: {
         songName: string;
         bandName: string;
     }
@@ -16,18 +25,28 @@ type SongRanking = {
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
-    const [isOpen, setIsOpen] = useState(false);
+    const [isFirstPlaceOpen, setIsFirstPlaceOpen] = useState(false);
+    const [isSecondPlaceOpen, setIsSecondPlaceOpen] = useState(false);
+    const [isThirdPlaceOpen, setIsThirdPlaceOpen] = useState(false);
     const [songRankings, setSongRankings] = useState({} as SongRanking);
 
-    const toggle = () => {
-        setIsOpen(!isOpen);
+    const toggleFirst = () => {
+        setIsFirstPlaceOpen(!isFirstPlaceOpen);
     };
 
-    const updateSongRankings = (song: OriginalSong) => {
+    const toggleSecond = () => {
+        setIsSecondPlaceOpen(!isSecondPlaceOpen);
+    };
+
+    const toggleThird = () => {
+        setIsThirdPlaceOpen(!isThirdPlaceOpen);
+    };
+
+    const updateSongRankings = (song: OriginalSong, placeToUpdate: keyof SongRanking) => {
         setSongRankings(
             {
                 ...songRankings,
-                firstPlace: {songName: song.songName, bandName: song.bandName}
+                [placeToUpdate]: {songName: song.songName, bandName: song.bandName}
             }
         );
     };
@@ -39,26 +58,34 @@ const OverallBandRankingsCard = (props: Props) => {
                 <h4 className={'ranking-title'}>
                     1st PLACE
                 </h4>
-                <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
-                    <DropdownToggle className={'toggle'} caret>
-                        {
-                            songRankings.firstPlace ?
-                                `"${songRankings.firstPlace.songName}" by ${songRankings.firstPlace.bandName}` :
-                                'Please select your first place choice.'
-                        }
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        {
-                            originalSongs.originalSongs.map(song => {
-                                return (
-                                    <DropdownItem onClick={() => updateSongRankings(song)}>
-                                        {`"${song.songName}" by ${song.bandName}`}
-                                    </DropdownItem>
-                                );
-                            })
-                        }
-                    </DropdownMenu>
-                </Dropdown>
+                <RankingDropdown originalSongs={originalSongs}
+                                 isOpen={isFirstPlaceOpen}
+                                 toggle={toggleFirst}
+                                 updateSongRankings={updateSongRankings}
+                                 songRankings={songRankings}
+                                 placeToUpdate={'firstPlace'}/>
+            </div>
+            <div className={'ranking-dropdown-container'}>
+                <h4 className={'ranking-title'}>
+                    2nd PLACE
+                </h4>
+                <RankingDropdown originalSongs={originalSongs}
+                                 isOpen={isSecondPlaceOpen}
+                                 toggle={toggleSecond}
+                                 updateSongRankings={updateSongRankings}
+                                 songRankings={songRankings}
+                                 placeToUpdate={'secondPlace'}/>
+            </div>
+            <div className={'ranking-dropdown-container'}>
+                <h4 className={'ranking-title'}>
+                    3rd PLACE
+                </h4>
+                <RankingDropdown originalSongs={originalSongs}
+                                 isOpen={isThirdPlaceOpen}
+                                 toggle={toggleThird}
+                                 updateSongRankings={updateSongRankings}
+                                 songRankings={songRankings}
+                                 placeToUpdate={'thirdPlace'}/>
             </div>
         </Card>
     );
