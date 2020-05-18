@@ -34,24 +34,30 @@ const RankingDropdown = (props: Props) => {
             secondFilteredOut;
     };
 
+    const dropdownItems = filterOutAlreadyPlacedSongs().map(song => {
+        return (
+            <DropdownItem onClick={() => updateSongRankings(song, placeToUpdate)}>
+                {`"${song.songName}" by ${song.bandName}`}
+            </DropdownItem>
+        );
+    });
+
+    const defaultDropdownItemTitle = `Please select your ${convertFromCamelCaseToLowercaseWithASpace(placeToUpdate)} choice.`;
+    dropdownItems.unshift(<DropdownItem onClick={() => updateSongRankings(undefined, placeToUpdate)}>
+        <div style={{padding: '8px'}}></div>
+    </DropdownItem>)
     return (
         <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
             <DropdownToggle className={'toggle'} caret>
                 {
                     songRankingPlace ?
                         `"${songRankingPlace.songName}" by ${songRankingPlace.bandName}` :
-                        `Please select your ${convertFromCamelCaseToLowercaseWithASpace(placeToUpdate)} choice.`
+                        defaultDropdownItemTitle
                 }
             </DropdownToggle>
             <DropdownMenu>
                 {
-                    filterOutAlreadyPlacedSongs().map(song => {
-                        return (
-                            <DropdownItem onClick={() => updateSongRankings(song, placeToUpdate)}>
-                                {`"${song.songName}" by ${song.bandName}`}
-                            </DropdownItem>
-                        );
-                    })
+                    dropdownItems
                 }
             </DropdownMenu>
         </Dropdown>

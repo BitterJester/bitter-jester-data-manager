@@ -46,7 +46,7 @@ const OverallBandRankingsCard = (props: Props) => {
         setSongRankings(
             {
                 ...songRankings,
-                [placeToUpdate]: {songName: song.songName, bandName: song.bandName}
+                [placeToUpdate]: song ? {songName: song.songName, bandName: song.bandName} : undefined
             }
         );
     };
