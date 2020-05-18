@@ -22,19 +22,7 @@ const RankingDropdown = (props: Props) => {
             .join(' ');
     };
 
-    const filterOutAlreadyPlacedSongs = () => {
-        const firstFilteredOut = songRankings.firstPlace ?
-            originalSongs.originalSongs.filter(song => song.songName !== songRankings.firstPlace.songName) :
-            originalSongs.originalSongs;
-        const secondFilteredOut = songRankings.secondPlace ?
-            firstFilteredOut.filter(song => song.songName !== songRankings.secondPlace.songName) :
-            firstFilteredOut;
-        return songRankings.thirdPlace ?
-            secondFilteredOut.filter(song => song.songName !== songRankings.thirdPlace.songName) :
-            secondFilteredOut;
-    };
-
-    const dropdownItems = filterOutAlreadyPlacedSongs().map(song => {
+    const dropdownItems = originalSongs.originalSongs.map(song => {
         return (
             <DropdownItem onClick={() => updateSongRankings(song, placeToUpdate)}>
                 {`"${song.songName}" by ${song.bandName}`}
@@ -43,9 +31,11 @@ const RankingDropdown = (props: Props) => {
     });
 
     const defaultDropdownItemTitle = `Please select your ${convertFromCamelCaseToLowercaseWithASpace(placeToUpdate)} choice.`;
-    dropdownItems.unshift(<DropdownItem onClick={() => updateSongRankings(undefined, placeToUpdate)}>
-        <div style={{padding: '8px'}}></div>
-    </DropdownItem>)
+    dropdownItems.unshift(
+        <DropdownItem onClick={() => updateSongRankings(undefined, placeToUpdate)}>
+            <div style={{padding: '8px'}}></div>
+        </DropdownItem>
+    );
     return (
         <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
             <DropdownToggle className={'toggle'} caret>

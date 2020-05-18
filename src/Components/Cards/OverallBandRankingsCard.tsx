@@ -60,7 +60,7 @@ const OverallBandRankingsCard = (props: Props) => {
         await s3Client.put(
             s3Client.createPutPublicJsonRequest(
                 'bitter-jester-test',
-                `overall-song-rankings/${user.nickname}.json`,
+                `overall-song-rankings/${user.nickname.replace('.', '_')}.json`,
                 JSON.stringify(songRankings)
             )
         );
@@ -76,15 +76,6 @@ const OverallBandRankingsCard = (props: Props) => {
                 {'Successfully submitted your rankings.'}
             </Alert>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
-            <div className={'judging-reminder-alert-container'}>
-                <p className={'judging-reminder-alert'}>
-                    This is where you can select the overall winners for the week you are judging.
-                    Once you have selected a band in one of the drop downs, they will be removed
-                    from the other drop downs. Feel free to update this as many times as you wish
-                    while you are going through the different submissions. Once you
-                    are ready to lock in your rankings, click submit.
-                </p>
-            </div>
             <Row>
                 <Col>
                     <div className={'ranking-dropdown-container'}>
