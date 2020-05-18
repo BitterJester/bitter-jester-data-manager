@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {Card, Col, Row} from 'reactstrap';
+import {Alert, Button, Card, Col, Row} from 'reactstrap';
 import {Title} from "../Title";
 import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import RankingDropdown from "../RankingDropdown";
+import {S3Client} from "../../aws/s3Client";
+import {useAuth0} from "../../react-auth0-spa";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -30,6 +32,8 @@ const OverallBandRankingsCard = (props: Props) => {
     const [isThirdPlaceOpen, setIsThirdPlaceOpen] = useState(false);
     const [songRankings, setSongRankings] = useState({} as SongRanking);
 
+    const {user} = useAuth0();
+
     const toggleFirst = () => {
         setIsFirstPlaceOpen(!isFirstPlaceOpen);
     };
@@ -51,8 +55,26 @@ const OverallBandRankingsCard = (props: Props) => {
         );
     };
 
+    const submitBandRankings = async () => {
+        const s3Client = new S3Client();
+        await s3Client.put(
+            s3Client.createPutPublicJsonRequest(
+                'bitter-jester-test',
+                `overall-song-rankings/${user.nickname}.json`,
+                JSON.stringify(songRankings)
+            )
+        );
+
+        setIsAlertOpen(true);
+    };
+
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+
     return (
         <Card className={'overall-band-rankings-card'}>
+            <Alert isOpen={isAlertOpen} toggle={() => setIsAlertOpen(!isAlertOpen)}>
+                {'Successfully submitted your rankings.'}
+            </Alert>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
             <div className={'judging-reminder-alert-container'}>
                 <p className={'judging-reminder-alert'}>
@@ -101,6 +123,15 @@ const OverallBandRankingsCard = (props: Props) => {
                                          updateSongRankings={updateSongRankings}
                                          songRankings={songRankings}
                                          placeToUpdate={'thirdPlace'}/>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <div className={'button-container'}>
+                        <Button className={'submit-button'} onClick={submitBandRankings}>
+                            Submit
+                        </Button>
                     </div>
                 </Col>
             </Row>

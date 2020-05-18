@@ -62,12 +62,12 @@ export class S3Client {
     }
 
     createPutPublicJsonRequest(
-        location,
+        bucket,
         filename,
         contents
     ) {
         return {
-            Bucket: location,
+            Bucket: bucket,
             Key: filename,
             Body: contents,
             ContentType: 'application/json; charset=utf-8',

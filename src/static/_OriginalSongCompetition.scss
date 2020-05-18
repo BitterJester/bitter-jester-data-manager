@@ -1,6 +1,15 @@
 .original-song-competition-container {
   background: rgb(232, 231, 228);
 
+  .button-container {
+    padding-left: 16px;
+    text-align: left;
+
+    .submit-button {
+      background: rgb(123, 93, 151);
+    }
+  }
+
   .judging-reminder-alert-container {
     padding: 16px;
 
@@ -81,16 +90,6 @@
       .original-song-judging-form-card {
         height: 100%;
         padding: 16px;
-
-        .button-container {
-          padding-left: 16px;
-          text-align: left;
-
-          .submit-button {
-            background: rgb(123, 93, 151);
-          }
-        }
-
       }
     }
 
