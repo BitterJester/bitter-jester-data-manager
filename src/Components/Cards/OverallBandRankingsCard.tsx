@@ -54,6 +54,15 @@ const OverallBandRankingsCard = (props: Props) => {
     return (
         <Card className={'overall-band-rankings-card'}>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
+            <div className={'judging-reminder-alert-container'}>
+                <p className={'judging-reminder-alert'}>
+                    This is where you can select the overall winners for the week you are judging.
+                    Once you have selected a band in one of the drop downs, they will be removed
+                    from the other drop downs. Feel free to update this as many times as you wish
+                    while you are going through the different submissions. Once you
+                    are ready to lock in your rankings, click submit.
+                </p>
+            </div>
             <Row>
                 <Col>
                     <div className={'ranking-dropdown-container'}>
