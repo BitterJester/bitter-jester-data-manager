@@ -8,7 +8,8 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar';
 import OriginalSongCompetition from './Pages/OriginalSongCompetition';
 import './App.scss';
-import {Row} from "reactstrap";
+import {Card, Row} from "reactstrap";
+import {Title} from "./Components/Title";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
@@ -29,9 +30,12 @@ function App() {
                                      className={'original-song-competition-container'}>
                                     <div style={{textAlign: "center", padding: '16px'}}
                                          className={'original-song-container'}>
-                                        {isAuthenticated ?
-                                            'Please click on the Bitter Jester logo to get access to the rest of the site' :
-                                            'Please click on the Bitter Jester logo to get access to login button.'}
+                                        <Card>
+                                            <Title titleDisplayText={'WELCOME TO THE BITTER JESTER DATA MANAGER'}/>
+                                            {isAuthenticated ?
+                                                'Please click on the Bitter Jester logo to get access to the rest of the site' :
+                                                'Please click on the Bitter Jester logo to get access to login button.'}
+                                        </Card>
                                     </div>
                                 </div>
                             </Route>
