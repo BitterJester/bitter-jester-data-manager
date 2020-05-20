@@ -2,6 +2,7 @@ import React from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {OriginalSong, OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {DropdownItemOnClick} from "./SortIncompleteApplicationsDropdown";
+import {dropdownMenuModifiers} from '../utils/dropdownMenuModifiers';
 
 type Props = {
     dropdownOpen: boolean;
@@ -21,7 +22,7 @@ const BandSelectionDropDown = (props: Props) => {
                     {selected ? `"${selected.songName}" by ${selected.bandName}` : '' +
                         ''}
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu modifiers={dropdownMenuModifiers}>
                     {
                         originalSongs.originalSongs.map(song => {
                             return (

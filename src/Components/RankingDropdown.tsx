@@ -3,6 +3,7 @@ import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import {DropdownItemOnClick} from "./SortIncompleteApplicationsDropdown";
 import {SongRanking} from "./Cards/OverallBandRankingsCard";
+import {dropdownMenuModifiers} from "../utils/dropdownMenuModifiers";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -45,7 +46,7 @@ const RankingDropdown = (props: Props) => {
                         defaultDropdownItemTitle
                 }
             </DropdownToggle>
-            <DropdownMenu>
+            <DropdownMenu modifiers={dropdownMenuModifiers}>
                 {
                     dropdownItems
                 }
