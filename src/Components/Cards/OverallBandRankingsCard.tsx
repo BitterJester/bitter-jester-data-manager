@@ -46,6 +46,7 @@ const OverallBandRankingsCard = (props: Props) => {
         setIsThirdPlaceOpen(!isThirdPlaceOpen);
     };
 
+
     const updateSongRankings = (song: OriginalSong, placeToUpdate: keyof SongRanking) => {
         setSongRankings(
             {
@@ -55,25 +56,61 @@ const OverallBandRankingsCard = (props: Props) => {
         );
     };
 
-    const submitBandRankings = async () => {
-        const s3Client = new S3Client();
-        await s3Client.put(
-            s3Client.createPutPublicJsonRequest(
-                'bitter-jester-test',
-                `overall-song-rankings/${user.nickname.replace('.', '_')}.json`,
-                JSON.stringify(songRankings)
-            )
-        );
+    const generateAnyNecessaryErrors = () => {
+        const songPlacements = Object.values(songRankings)
+            .filter(placement => placement);
 
-        setIsAlertOpen(true);
+        const duplicateSongs = songPlacements
+            .map(placement => placement.songName)
+            .filter((value, index, array) => array.indexOf(value) === index)
+            .length !== songPlacements.length;
+
+        const NUMBER_OF_PLACES = 3;
+        const emptyPlaces = songPlacements.length < NUMBER_OF_PLACES;
+
+        const errorMessages = ['NOT SUBMITTED']
+
+        if (duplicateSongs) {
+            errorMessages.push('You may not choose a song more than once.');
+        }
+
+        if (emptyPlaces) {
+            errorMessages.push('You may not leave any places empty.');
+        }
+
+        return duplicateSongs || emptyPlaces ? errorMessages : [];
     };
 
-    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const submitBandRankings = async () => {
+        const errorMessages = generateAnyNecessaryErrors();
+        console.log(errorMessages)
+        if (errorMessages.length === 0) {
+            const s3Client = new S3Client();
+            await s3Client.put(
+                s3Client.createPutPublicJsonRequest(
+                    'bitter-jester-test',
+                    `overall-song-rankings/${user.nickname.replace('.', '_')}.json`,
+                    JSON.stringify(songRankings)
+                )
+            );
+            setAlert({color: 'success', isOpen: true, message: ['Successfully submitted your rankings.']});
+        } else {
+            setAlert({color: 'danger', isOpen: true, message: errorMessages});
+        }
+    };
+
+    const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []})
 
     return (
         <Card className={'overall-band-rankings-card'}>
-            <Alert isOpen={isAlertOpen} toggle={() => setIsAlertOpen(!isAlertOpen)}>
-                {'Successfully submitted your rankings.'}
+            <Alert isOpen={alert.isOpen} color={alert.color} toggle={() => setAlert({...alert, isOpen: !alert.isOpen})}>
+                {alert.message.map((messageItem, index) => {
+                    return (
+                        <div key={index}>
+                            {messageItem}
+                        </div>
+                    )
+                })}
             </Alert>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
             <Row>
