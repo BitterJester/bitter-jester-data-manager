@@ -17,6 +17,18 @@ const LyricsPdfCard = (props: Props) => {
     const {originalSong} = props;
     const lyricsUrl = originalSong ? originalSong.lyricsUrl : '';
 
+    const [pages, setPages] = useState(0);
+
+    const getPages = () => {
+        const pageComponents = [];
+
+        for (let page = 0; page < pages; page++) {
+            pageComponents.push(<div style={{display: "inline-block"}}><Page pageNumber={page + 1}/></div>)
+        }
+
+        return pageComponents;
+    };
+
     return (
         <div className={'lyrics-card-container'}>
             <Card onClick={toggle}>
@@ -46,9 +58,11 @@ const LyricsPdfCard = (props: Props) => {
                 <Collapse isOpen={isOpen}>
                     <Document file={lyricsUrl}
                               onLoadError={console.error}
-                              onLoadSuccess={({numPages}) => console.log(numPages)}
+                              onLoadSuccess={({numPages}) => setPages(numPages)}
                     >
-                        <Page pageNumber={1}/>
+                        {
+                            getPages()
+                        }
                     </Document>
                 </Collapse>
             </Card>
