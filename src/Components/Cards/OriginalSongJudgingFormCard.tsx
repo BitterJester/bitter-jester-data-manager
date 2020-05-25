@@ -69,7 +69,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
     }, [fileName, bandName, songName, user.nickname, user.email]);
 
     useEffect(() => {
-        setIsAlertOpen(false);
+        setAlert({...alert, isAlertOpen: false});
     }, [bandName]);
 
     const updateJudgesComments = (fieldToUpdate: keyof JudgeFeedback, value: string) => {
@@ -110,19 +110,19 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                 JSON.stringify(judgeFeedback)
             )
         );
-        setIsAlertOpen(true);
+        setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.'});
     };
 
-    const [isAlertOpen, setIsAlertOpen] = useState(false);
+    const [alert, setAlert] = useState({isAlertOpen: false, message: '', color: 'success'});
 
     const toggle = () => {
-        setIsAlertOpen(!isAlertOpen);
+        setAlert({...alert, isAlertOpen: !alert.isAlertOpen});
     };
 
     return (
         <Card className={'original-song-judging-form-card'}>
             <div>
-                <Alert isOpen={isAlertOpen} toggle={toggle} color={'success'}>Successfully saved your changes!</Alert>
+                <Alert isOpen={alert.isAlertOpen} toggle={toggle} color={alert.color}>{alert.message}</Alert>
                 <Title titleDisplayText={'JUDGING FORM'}/>
                 <div className={'judging-reminder-alert-container'}>
                     <p className={'judging-reminder-alert'}>
