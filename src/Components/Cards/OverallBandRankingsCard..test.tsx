@@ -4,6 +4,7 @@ import OverallBandRankingsCard from "./OverallBandRankingsCard";
 import {Card} from "reactstrap";
 import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import * as auth0 from '../../react-auth0-spa';
 
 describe('OverallBandRankingsCard', () => {
     const originalSongs: OriginalSongs = {
@@ -19,6 +20,16 @@ describe('OverallBandRankingsCard', () => {
             }
         ]
     };
+
+    // @ts-ignore
+    jest.spyOn(auth0, 'useAuth0').mockImplementation(x => ({
+        user: {
+            nickname: 'nickname'
+        },
+        isAuthenticated: true,
+        isInitializing: false,
+        isPopupOpen: false
+    }));
 
     const component = shallow(<OverallBandRankingsCard originalSongs={originalSongs}/>);
 
