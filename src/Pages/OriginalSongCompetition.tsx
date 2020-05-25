@@ -35,6 +35,9 @@ const OriginalSongCompetition = () => {
         <div className={'original-song-competition-container'}>
             <div className={'original-song-container'}>
                 <OriginalSongContainer originalSongs={originalSongs}/>
+                <p>
+                    {'This tool was built by Spencer Kasper'}
+                </p>
             </div>
         </div>
     );
