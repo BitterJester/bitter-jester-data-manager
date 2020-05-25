@@ -1,96 +1,37 @@
 .sidebar-container {
-  width: 10%;
+  max-width: 250px;
   background: rgb(123, 93, 151);
+  display: inline-block;
 
   #homeLogo:hover {
     cursor: pointer;
   }
 
-  .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #e79e31;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.5s;
-    -moz-box-shadow: 6px 0 8px 0 #555;
-    -webkit-box-shadow: 6px 0 8px 0 #555;
-    box-shadow: 6px 0 8px 0 #555;
-
-    .sidenavButton {
-      width: 100%;
-      border-radius: 0px;
-      background: none;
-      border: none;
-      color: black;
-      font-size: 25px;
-      text-align: left;
-      padding: 8px 8px 8px 32px;
-      transition: none;
-    }
-
-    .sidenavButton:hover {
-      background: none;
-      color: #818181;
-    }
-
-    .sidenavButton:focus {
-      border: none;
-      background: none;
-      outline: 0;
-    }
-  }
-
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
+  .sidenavButton {
+    width: 100%;
+    border-radius: 0px;
+    background: none;
+    border: none;
+    color: white;
     font-size: 25px;
-    color: #000000;
-    display: block;
-    transition: 0.3s;
+    text-align: left;
+    padding: 8px 8px 8px 32px;
+    transition: none;
   }
 
-  .sidenav a:hover {
+  .sidenavButton:hover {
+    background: none;
     color: #818181;
+  }
+
+  .sidenavButton:focus {
+    border: none;
+    background: none;
+    outline: 0;
   }
 
   .openSidebarComponent {
     text-align: center;
     background: rgb(123, 93, 151);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 10%;
-  }
-
-  .closebtn {
-    cursor: pointer;
-  }
-
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-  }
-}
-
-#main {
-  transition: margin-left .5s;
-  padding: 20px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav .sidenavButton a {
-    font-size: 18px;
   }
 }

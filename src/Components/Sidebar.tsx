@@ -1,6 +1,7 @@
 import React from 'react';
 import {useAuth0} from '../react-auth0-spa';
 import {RouteComponentProps, withRouter} from 'react-router';
+import {Col} from "reactstrap";
 
 interface Props extends RouteComponentProps {
 
@@ -11,14 +12,6 @@ const Sidebar = (props: Props) => {
     const protocol = window.location.protocol;
     const {isAuthenticated, loginWithRedirect, logout} = useAuth0();
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-
     const getURI = (path: string) => {
         const fullDomain = `${protocol}//${domain}`;
 
@@ -26,7 +19,6 @@ const Sidebar = (props: Props) => {
     }
 
     const redirect = (path: string) => {
-        closeNav();
         props.history.push(path);
     }
 
@@ -45,12 +37,11 @@ const Sidebar = (props: Props) => {
         require('../static/bj-14-5-logo.png') :
         require('../static/bj15ylogo.png');
     return (
-        <div className={'sidebar-container'}>
+        <Col className={'sidebar-container'}>
             <div id='homeLogo' className={'openSidebarComponent'}>
-                <img height={200} src={logoUrl} alt='BJ15Years' onClick={() => openNav()}/>
+                <img height={200} src={logoUrl} alt='BJ15Years'/>
             </div>
             <div id='mySidenav' className={'sidenav'}>
-                <span className="closebtn" onClick={() => closeNav()}>&times;</span>
                 {/*<button className={'sidenavButton'} onClick={() => redirect('/completedSubmissions')}>Completed*/}
                 {/*    Submissions*/}
                 {/*</button>*/}
@@ -62,7 +53,7 @@ const Sidebar = (props: Props) => {
                 </button>
                 <button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
             </div>
-        </div>
+        </Col>
     );
 };
 
