@@ -38,20 +38,20 @@ const Sidebar = (props: Props) => {
         require('../static/bj15ylogo.png');
     return (
         <Col className={'sidebar-container'}>
-            <div id='homeLogo' className={'openSidebarComponent'}>
+            <div className={'sidebar-logo'}>
                 <img height={200} src={logoUrl} alt='BJ15Years'/>
             </div>
-            <div id='mySidenav' className={'sidenav'}>
+            <div className={'sidebar'}>
                 {/*<button className={'sidenavButton'} onClick={() => redirect('/completedSubmissions')}>Completed*/}
                 {/*    Submissions*/}
                 {/*</button>*/}
                 {/*<button className={'sidenavButton'} onClick={() => redirect('/incompleteApplications')}>Incomplete*/}
                 {/*    Applications*/}
                 {/*</button>*/}
-                <button className={'sidenavButton'} onClick={() => redirect('/originalSong')}>Original Song
+                <button className={'sidebar-button'} onClick={() => redirect('/originalSong')}>Original Song
                     Submissions
                 </button>
-                <button className={'sidenavButton'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
+                <button className={'sidebar-button'} onClick={authenticate}>{getAuthenticationButtonText()}</button>
             </div>
         </Col>
     );

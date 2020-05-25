@@ -20,7 +20,7 @@ function App() {
 
     return (
         <Router>
-            <Row>
+            <Row style={{minHeight: '100vh'}}>
                 <Sidebar/>
                 <Col className={'main-content'}>
                     <Switch>
