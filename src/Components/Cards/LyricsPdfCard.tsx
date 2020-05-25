@@ -52,7 +52,7 @@ const LyricsPdfCard = (props: Props) => {
                         }
                     </span>
                     <div className={'title-container'}>
-                        <Title titleDisplayText={'LYRICS'}/>
+                        <Title titleDisplayText={'CLICK HERE TO VIEW LYRICS'}/>
                     </div>
                 </div>
                 <Collapse isOpen={isOpen}>
