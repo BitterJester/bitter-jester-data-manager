@@ -88,6 +88,11 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         updateJudgesComments('favoriteAspect', event.target.value);
     };
 
+    function validateComments() {
+        const {initialImpression, feedback, favoriteAspect} = judgesComments;
+        return initialImpression && feedback && favoriteAspect;
+    }
+
     const combineAndSave = async (): Promise<void> => {
         const judgeFeedback: JudgeFeedback = {
             initialImpression: judgesComments.initialImpression,
@@ -102,15 +107,23 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             }
         };
 
-        const s3Client = new S3Client();
-        await s3Client.put(
-            s3Client.createPutPublicJsonRequest(
-                'bitter-jester-test',
-                fileName,
-                JSON.stringify(judgeFeedback)
-            )
-        );
-        setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.'});
+        if (validateComments()) {
+            const s3Client = new S3Client();
+            await s3Client.put(
+                s3Client.createPutPublicJsonRequest(
+                    'bitter-jester-test',
+                    fileName,
+                    JSON.stringify(judgeFeedback)
+                )
+            );
+            setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.'});
+        } else {
+            setAlert({
+                isAlertOpen: true,
+                message: 'NOT SUBMITTED: You must enter a comment in each text box.',
+                color: 'danger'
+            })
+        }
     };
 
     const [alert, setAlert] = useState({isAlertOpen: false, message: '', color: 'success'});
