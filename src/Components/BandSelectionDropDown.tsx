@@ -15,14 +15,6 @@ type Props = {
 const BandSelectionDropDown = (props: Props) => {
     const {originalSongs, dropdownOpen, toggle, updateSongIndex, selected} = props;
 
-    const getFormattedSongBandCombo = (songName, bandName) => {
-        return (
-            <div>
-                <strong>{`"${songName}"`}</strong>{` by ${bandName}`}
-            </div>
-        )
-    };
-
     return (
         <div className={'band-selection-dropdown'}>
             <Dropdown className={'scheduleDropdownContainer'} isOpen={dropdownOpen} toggle={toggle}>
@@ -35,7 +27,7 @@ const BandSelectionDropDown = (props: Props) => {
                         originalSongs.originalSongs.map(song => {
                             return (
                                 <DropdownItem onClick={updateSongIndex}>
-                                    {getFormattedSongBandCombo(song.songName, song.bandName)}
+                                    {`"${song.songName}" by ${song.bandName}`}
                                 </DropdownItem>
                             );
                         })
