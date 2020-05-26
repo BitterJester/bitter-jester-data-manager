@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getFromS3} from '../aws/getFromS3';
 import OriginalSongContainer from '../Containers/OriginalSongContainer';
+import Page from "../Components/Page";
 
 export type OriginalSong = {
     songDescription: string;
@@ -32,14 +33,12 @@ const OriginalSongCompetition = () => {
     }, []);
 
     return (
-        <div className={'original-song-competition-container'}>
-            <div className={'original-song-container'}>
-                <OriginalSongContainer originalSongs={originalSongs}/>
-                <p>
-                    {'This tool was built by Spencer Kasper'}
-                </p>
-            </div>
-        </div>
+        <Page>
+            <OriginalSongContainer originalSongs={originalSongs}/>
+            <p>
+                {'This tool was built by Spencer Kasper'}
+            </p>
+        </Page>
     );
 };
 

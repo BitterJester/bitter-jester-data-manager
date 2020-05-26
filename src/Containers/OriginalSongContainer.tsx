@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 
 import {Col, Row} from "reactstrap";
@@ -19,7 +19,7 @@ const OriginalSongContainer = (props: Props) => {
     const songName = originalSong ? originalSong.songName : '';
 
     return (
-        <Fragment>
+        <div className={'original-song-competition-container'}>
             <Row className={'overall-band-rankings-row'}>
                 <Col>
                     <OverallBandRankingsCard originalSongs={props.originalSongs}/>
@@ -41,7 +41,7 @@ const OriginalSongContainer = (props: Props) => {
                     <LyricsPdfCard originalSong={originalSong}/>
                 </Col>
             </Row>
-        </Fragment>
+        </div>
     );
 };
 

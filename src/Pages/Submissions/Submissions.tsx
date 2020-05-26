@@ -1,6 +1,7 @@
 import React from 'react';
-import { SubmissionContainer } from '../../Containers/SubmissionContainer';
-import { ScheduleContainer } from '../../Containers/ScheduleContainer';
+import {SubmissionContainer} from '../../Containers/SubmissionContainer';
+import {ScheduleContainer} from '../../Containers/ScheduleContainer';
+import Page from "../../Components/Page";
 
 export type BitterJesterApplications = {
     completedApplications?: BitterJesterApplication[];
@@ -22,9 +23,9 @@ export type BitterJesterApplication = {
 
 export const Submissions = () => {
     return (
-        <div style={{background: '#e8e7e4'}}>
-            <ScheduleContainer />
-            <SubmissionContainer />
-        </div>
+        <Page>
+            <ScheduleContainer/>
+            <SubmissionContainer/>
+        </Page>
     );
 }

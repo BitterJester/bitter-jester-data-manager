@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { DragDropContext, DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import React, {useEffect, useState} from 'react';
+import {DragDropContext, DropResult, ResponderProvided} from 'react-beautiful-dnd';
 import DroppableList from './DroppableList';
-import { Col } from 'reactstrap';
-import { Title } from '../Title';
+import {Col} from 'reactstrap';
+import {Title} from '../Title';
 import _ from 'lodash';
 
 type Props = {
@@ -53,13 +53,14 @@ export const DragAndDropList = (props: Props) => {
             {
                 orderedItemsForDisplay.map((item, index) => {
                     return (
-                        <Col style={{ background: 'rgb(204, 202, 202)' }}>
+                        <Col style={{background: 'rgb(204, 202, 202)'}}>
                             <Title titleDisplayText={columnTitlesCopy.shift()}/>
-                            <DroppableList orderInList={index} orderedItemsForDisplay={item} getItemStyle={getItemStyle} />
+                            <DroppableList orderInList={index} orderedItemsForDisplay={item}
+                                           getItemStyle={getItemStyle}/>
                         </Col>
                     );
                 })
             }
         </DragDropContext>
     )
-}
+};
