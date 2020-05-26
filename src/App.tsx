@@ -32,8 +32,8 @@ function App() {
                                     <Card>
                                         <Title titleDisplayText={'WELCOME TO THE BITTER JESTER DATA MANAGER'}/>
                                         {isAuthenticated ?
-                                            'Please click on the Bitter Jester logo to get access to the rest of the site' :
-                                            'Please click on the Bitter Jester logo to get access to login button.'}
+                                            'If you are a judge, please go to the Original Song Submissions tab.' :
+                                            'Please log in to gain access to the rest of the site.'}
                                     </Card>
                                 </div>
                             </div>
