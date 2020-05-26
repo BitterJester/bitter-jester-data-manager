@@ -57,7 +57,7 @@ function App() {
                 </Col>
             </Row>
         </Router>
-    )
+    );
 }
 
 export default App;

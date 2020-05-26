@@ -135,7 +135,6 @@ const OriginalSongJudgingFormCard = (props: Props) => {
     return (
         <Card className={'original-song-judging-form-card'}>
             <div>
-                <Alert isOpen={alert.isAlertOpen} toggle={toggle} color={alert.color}>{alert.message}</Alert>
                 <Title titleDisplayText={'JUDGING FORM'}/>
                 <div className={'judging-reminder-alert-container'}>
                     <p className={'judging-reminder-alert'}>
@@ -159,6 +158,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                                        updateParent={updateFavoriteAspect}
                                        textAreaValue={judgesComments.favoriteAspect || ''}/>
                 </Form>
+                <Alert isOpen={alert.isAlertOpen} toggle={toggle} color={alert.color}>{alert.message}</Alert>
                 <div className={'button-container'}>
                     <Button className={'submit-button'} onClick={combineAndSave}>
                         Save
