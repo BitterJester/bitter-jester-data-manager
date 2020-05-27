@@ -3,7 +3,6 @@ import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import BandSelectionDropDown from "../BandSelectionDropDown";
-import VideoPlayer from "../VideoPlayer";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -49,9 +48,10 @@ const OriginalSongInfoCard = (props: Props) => {
             />
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
-                    <VideoPlayer
-                        src={songUrl}
-                        poster={'images/video-poster.png'}/>
+                    <div>
+                        <iframe src="https://player.vimeo.com/video/423015352?title=0&byline=0&portrait=0" width="640"
+                                height="360" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
+                    </div>
                     <div className={'subtitle'}>
                         <h3>{formattedTitle}</h3>
                     </div>
