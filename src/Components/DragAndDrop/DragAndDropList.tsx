@@ -15,7 +15,7 @@ type Props = {
 export const DragAndDropList = (props: Props) => {
     const { initialOrderComponentsToDisplay, getItemStyle } = props;
     const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialOrderComponentsToDisplay);
-
+    console.log('we are in here')
     useEffect(() => {
         setOrderedItemsForDisplay(initialOrderComponentsToDisplay);
     }, [initialOrderComponentsToDisplay]);
@@ -48,6 +48,8 @@ export const DragAndDropList = (props: Props) => {
     }
 
     const columnTitlesCopy = _.cloneDeep(props.orderedColumnTitles);
+    console.log(columnTitlesCopy);
+    console.log(orderedItemsForDisplay);
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             {

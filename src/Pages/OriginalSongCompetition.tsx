@@ -6,11 +6,11 @@ import Page from "../Components/Page";
 export type OriginalSong = {
     songDescription: string;
     lyricsUrl: string;
-    songName: string,
-    bandName: string,
-    primaryEmailAddress: string,
-    songUrl: string,
-    bandPhotoUrl: string
+    songName: string;
+    bandName: string;
+    primaryEmailAddress: string;
+    songUrl: string;
+    bandPhotoUrl: string;
 }
 
 export type OriginalSongs = {
