@@ -19,6 +19,7 @@ const OriginalSongInfoCard = (props: Props) => {
     const songDescription = hasSongs ? originalSong.songDescription : '';
     const songName = hasSongs ? originalSong.songName : '';
     const bandName = hasSongs ? originalSong.bandName : '';
+    const songUrl = hasSongs && originalSong.songUrl.includes('.mp4') ? originalSong.songUrl : '';
 
     const updateSongIndex = (event) => {
         const selectedBandName = event.target.innerText;
@@ -49,7 +50,7 @@ const OriginalSongInfoCard = (props: Props) => {
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
                     <VideoPlayer
-                        src={'https://www.jotform.com/uploads/BitterJester/201218940610142/4655632049115241457/MP4%20TEST%20v4.0_FB-720_VBR-2_10-12MBs_1920-1080.mp4'}
+                        src={songUrl}
                         poster={'images/video-poster.png'}/>
                     <div className={'subtitle'}>
                         <h3>{formattedTitle}</h3>
