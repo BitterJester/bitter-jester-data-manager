@@ -18,6 +18,19 @@ export type OriginalSongs = {
     originalSongs: OriginalSong[]
 }
 
+type JudgesInfo = {
+    week: number;
+    firstName: string;
+    lastName: string;
+    emailAddress: string;
+    phoneNumber: string;
+    theirDeal: string;
+}
+
+export type JudgesInfos = {
+    judges: JudgesInfo[];
+}
+
 const OriginalSongCompetition = () => {
     const initialOriginalSongs: OriginalSongs = {
         originalSongs: []
@@ -25,17 +38,28 @@ const OriginalSongCompetition = () => {
 
     const [originalSongs, setOriginalSongs] = useState(initialOriginalSongs);
 
-    async function fetch(fileName) {
-        await getFromS3(fileName, setOriginalSongs);
+    const initialJudgesInfo: JudgesInfos = {
+        judges: []
+    };
+
+    const [judgesInfo, setJudgesInfo] = useState(initialJudgesInfo);
+
+    async function fetch(fileName, setState) {
+        await getFromS3(fileName, setState);
     }
 
     useEffect(() => {
-        fetch('original-song-submissions.json');
+        fetch('original-song-submissions.json', setOriginalSongs);
+    }, []);
+
+    useEffect(() => {
+        fetch('judges-info.json', setJudgesInfo);
     }, []);
 
     return (
         <Page>
-            <OriginalSongContainer originalSongs={originalSongs}/>
+            <OriginalSongContainer originalSongs={originalSongs} judgesInfo={judgesInfo}
+                                   setOriginalSongs={setOriginalSongs}/>
             <p>
                 {'This tool was built by Spencer Kasper'}
             </p>

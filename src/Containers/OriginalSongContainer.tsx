@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
-import {OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {JudgesInfos, OriginalSongs} from "../Pages/OriginalSongCompetition";
 
 import {Col, Row} from "reactstrap";
 import LyricsPdfCard from "../Components/Cards/LyricsPdfCard";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
 import OriginalSongJudgingFormCard from "../Components/Cards/OriginalSongJudgingFormCard";
 import OverallBandRankingsCard from "../Components/Cards/OverallBandRankingsCard";
+import {useAuth0} from "../react-auth0-spa";
 
 type Props = {
     originalSongs: OriginalSongs;
+    judgesInfo: JudgesInfos;
+    setOriginalSongs: Function;
 }
 
 const OriginalSongContainer = (props: Props) => {
@@ -17,6 +20,21 @@ const OriginalSongContainer = (props: Props) => {
     const originalSong = originalSongs[songIndex];
     const bandName = originalSong ? originalSong.bandName : '';
     const songName = originalSong ? originalSong.songName : '';
+    const {user} = useAuth0();
+
+    const judge = props.judgesInfo.judges.filter(judge => judge.emailAddress === user.email)[0];
+    if (judge && originalSongs) {
+        const songsForJudgesWeek = originalSongs.filter(song => {
+            return song.scheduledWeek === judge.week;
+        });
+        if (originalSongs.length > songsForJudgesWeek.length) {
+            props.setOriginalSongs(
+                {
+                    originalSongs: songsForJudgesWeek
+                }
+            );
+        }
+    }
 
     return (
         <div className={'original-song-competition-container'}>
