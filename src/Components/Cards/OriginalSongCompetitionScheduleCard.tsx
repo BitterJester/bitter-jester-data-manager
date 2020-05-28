@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Card, Col, Row} from "reactstrap";
+import {Alert, Card, Col, Row} from "reactstrap";
 import {DragAndDropList} from "../DragAndDrop/DragAndDropList";
 import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import _ from 'lodash';
+import SaveOriginalSongScheduleButton from "../SaveOriginalSongScheduleButton";
 
 type Props = {
     originalSongSubmissions: OriginalSongs;
@@ -61,8 +62,20 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
         }
     }, [originalSongSubmissions]);
 
+    const [alert, setAlert] = useState({isOpen: false, color: 'success', message: ''});
+
+    const toggle = () => {
+        setAlert({...alert, isOpen: !alert.isOpen});
+    };
+
     return (
         <Card className={'original-song-card'}>
+            <Alert isOpen={alert.isOpen} color={alert.color} toggle={toggle}>
+                {alert.message}
+            </Alert>
+            <SaveOriginalSongScheduleButton
+                onAlert={() => setAlert({...alert, message: 'Successfully updated the schedule.', isOpen: true})}
+                originalSongs={originalSongSubmissions}/>
             <Title titleDisplayText={'ORIGINAL SONG COMPETITION SCHEDULE'}/>
             <Row>
                 <DragAndDropList initialOrderComponentsToDisplay={orderedDragAndDropItems}
