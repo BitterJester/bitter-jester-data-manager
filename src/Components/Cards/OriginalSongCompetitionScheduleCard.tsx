@@ -1,22 +1,73 @@
-import React, {useState} from 'react';
-import {Card, Row} from "reactstrap";
+import React, {useEffect, useState} from 'react';
+import {Card, Col, Row} from "reactstrap";
 import {DragAndDropList} from "../DragAndDrop/DragAndDropList";
 import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import _ from 'lodash';
 
 type Props = {
     originalSongSubmissions: OriginalSongs;
+    setOriginalSongSubmissions: Function;
 }
 
 const OriginalSongCompetitionScheduleCard = (props: Props) => {
+    const {originalSongSubmissions, setOriginalSongSubmissions} = props;
     const [orderedDragAndDropItems, setOrderedDragAndDropItems] = useState([[]]);
+
+    const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
+        const weekSongIsRemovedFrom = Number(columnRemovedFromIndex) + 1;
+        const newWeekForSong = Number(columnAddedToIndex) + 1;
+
+        const originalSongs = _.cloneDeep(originalSongSubmissions).originalSongs;
+        const songBeingMoved = originalSongs
+            .filter(song => song.scheduledWeek === weekSongIsRemovedFrom)[rowRemovedFromIndex];
+        songBeingMoved.scheduledWeek = newWeekForSong;
+
+        const indexOfSongToUpdate = originalSongs.findIndex(song => song.songName === songBeingMoved.songName);
+
+        originalSongs[indexOfSongToUpdate] = songBeingMoved;
+        setOriginalSongSubmissions({originalSongs});
+    };
+
+    const formatSongsForDisplay = (week: number) => {
+        const originalSongs = originalSongSubmissions.originalSongs;
+        const songFromWeek = originalSongs.filter(song => song.scheduledWeek === week);
+        return songFromWeek.map(song => {
+            return (
+                <Col>
+                    <div className={'song-title'}>
+                        {`"${song.songName}"`}
+                    </div>
+
+                    <div className={'band-name'}>
+                        {`by ${song.bandName}`}
+                    </div>
+                </Col>
+            )
+        })
+    };
+
+    useEffect(() => {
+        const originalSongs = originalSongSubmissions.originalSongs;
+        if (originalSongs.length > 0) {
+            const updatedOrderedDragAndDropItems = [];
+
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(1));
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(2));
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(3));
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(4));
+            setOrderedDragAndDropItems(updatedOrderedDragAndDropItems);
+
+        }
+    }, [originalSongSubmissions]);
+
     return (
         <Card className={'original-song-card'}>
             <Title titleDisplayText={'ORIGINAL SONG COMPETITION SCHEDULE'}/>
             <Row>
                 <DragAndDropList initialOrderComponentsToDisplay={orderedDragAndDropItems}
                                  orderedColumnTitles={['Week 1', 'Week 2', 'Week 3', 'Week 4']}
-                                 updateState={setOrderedDragAndDropItems}/>
+                                 updateState={updateSchedule}/>
             </Row>
         </Card>
     );

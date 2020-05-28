@@ -11,7 +11,7 @@ export type OriginalSong = {
     primaryEmailAddress: string;
     songUrl: string;
     bandPhotoUrl: string;
-    scheduledWeek?: string | undefined;
+    scheduledWeek?: number | undefined;
 }
 
 export type OriginalSongs = {

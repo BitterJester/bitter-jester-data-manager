@@ -20,7 +20,9 @@ const OriginalSongCompetitionScheduleContainer = () => {
 
     return (
         <Container fluid>
-            <OriginalSongCompetitionScheduleCard originalSongSubmissions={originalSongSubmissions}/>
+            <OriginalSongCompetitionScheduleCard
+                setOriginalSongSubmissions={setOriginalSongSubmissions}
+                originalSongSubmissions={originalSongSubmissions}/>
         </Container>
     );
 };

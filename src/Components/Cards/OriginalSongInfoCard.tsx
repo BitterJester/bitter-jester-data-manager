@@ -57,7 +57,7 @@ const OriginalSongInfoCard = (props: Props) => {
                     </div>
                     <div className={'song-description'}>
                         <h5>SONG DESCRIPTION</h5>
-                        <p>
+                        <p style={{whiteSpace: "pre-wrap"}}>
                             {songDescription}
                         </p>
                     </div>
