@@ -5,6 +5,7 @@ import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import RankingDropdown from "../RankingDropdown";
 import {S3Client} from "../../aws/s3Client";
 import {useAuth0} from "../../react-auth0-spa";
+import ConfirmationCheckbox from "../ConfirmationCheckbox";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -109,17 +110,21 @@ const OverallBandRankingsCard = (props: Props) => {
         return duplicateSongs || emptyPlaces ? errorMessages : [];
     };
 
+    const save = async () => {
+        await s3Client.put(
+            s3Client.createPutPublicJsonRequest(
+                'bitter-jester-test',
+                bandRankingsS3Key,
+                JSON.stringify(songRankings)
+            )
+        );
+        setAlert({color: 'success', isOpen: true, message: ['Successfully submitted your rankings.']});
+    };
+
     const submitBandRankings = async () => {
         const errorMessages = generateAnyNecessaryErrors();
         if (errorMessages.length === 0) {
-            await s3Client.put(
-                s3Client.createPutPublicJsonRequest(
-                    'bitter-jester-test',
-                    bandRankingsS3Key,
-                    JSON.stringify(songRankings)
-                )
-            );
-            setAlert({color: 'success', isOpen: true, message: ['Successfully submitted your rankings.']});
+            await save();
         } else {
             setAlert({color: 'danger', isOpen: true, message: errorMessages});
         }
@@ -180,15 +185,21 @@ const OverallBandRankingsCard = (props: Props) => {
                     </div>
                 </Col>
             </Row>
-            <Row>
-                <Col>
+            <div style={{paddingTop: '48px'}}>
+                <ConfirmationCheckbox/>
+                <Row style={{padding: '16px 0 0 32px'}}>
+                    <div>
+                        <Button className={'submit-button'} onClick={save} style={{paddingRight: '8px'}}>
+                            Save
+                        </Button>
+                    </div>
                     <div className={'button-container'}>
                         <Button className={'submit-button'} onClick={submitBandRankings}>
                             Submit
                         </Button>
                     </div>
-                </Col>
-            </Row>
+                </Row>
+            </div>
         </Card>
     );
 };

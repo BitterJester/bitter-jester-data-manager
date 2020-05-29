@@ -2,6 +2,10 @@
     background: rgb(123, 93, 151);
 }
 
+.btn-secondary:hover {
+    background: rgb(123, 93, 151);
+}
+
 .buttonContainer {
     padding: 16px;
 }
