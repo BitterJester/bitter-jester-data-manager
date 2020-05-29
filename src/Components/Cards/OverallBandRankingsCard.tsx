@@ -67,8 +67,10 @@ const OverallBandRankingsCard = (props: Props) => {
                 originalSongs={originalSongs}
                 songRankings={songRankings}
                 setSongRankings={setSongRankings}/>
-            <OverallSongRankingsPersistanceRow bandRankingsS3Key={bandRankingsS3Key} setAlert={setAlert}
-                                               songRankings={songRankings}/>
+            <OverallSongRankingsPersistanceRow
+                bandRankingsS3Key={bandRankingsS3Key}
+                setAlert={setAlert}
+                songRankings={songRankings}/>
         </Card>
     );
 };
