@@ -10,30 +10,24 @@ type Props = {
     isOpen: boolean;
     toggle: DropdownItemOnClick;
     updateSongRankings: Function;
-    songRankings: SongRanking;
-    placeToUpdate: keyof SongRanking;
+    selectedSong: SongRanking;
 }
 
 const RankingDropdown = (props: Props) => {
-    const {originalSongs, isOpen, toggle, songRankings, updateSongRankings, placeToUpdate} = props;
-    const songRankingPlace = songRankings[placeToUpdate];
-    const convertFromCamelCaseToLowercaseWithASpace = (camelCaseString: string) => {
-        return camelCaseString.split(/(?=[A-Z])/)
-            .map(x => x.toLowerCase())
-            .join(' ');
-    };
+    const {originalSongs, isOpen, toggle, updateSongRankings, selectedSong} = props;
+    const {songName, bandName, placementName} = selectedSong;
 
     const dropdownItems = originalSongs.originalSongs.map(song => {
         return (
-            <DropdownItem onClick={() => updateSongRankings(song, placeToUpdate)}>
+            <DropdownItem onClick={() => updateSongRankings(song, selectedSong)}>
                 {`"${song.songName}" by ${song.bandName}`}
             </DropdownItem>
         );
     });
 
-    const defaultDropdownItemTitle = `Please select your ${convertFromCamelCaseToLowercaseWithASpace(placeToUpdate)} choice.`;
+    const defaultDropdownItemTitle = `Please select your ${placementName} choice.`;
     dropdownItems.unshift(
-        <DropdownItem onClick={() => updateSongRankings(undefined, placeToUpdate)}>
+        <DropdownItem onClick={() => updateSongRankings(undefined, selectedSong)}>
             <div style={{padding: '8px'}}></div>
         </DropdownItem>
     );
@@ -41,8 +35,8 @@ const RankingDropdown = (props: Props) => {
         <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
             <DropdownToggle className={'toggle'} caret>
                 {
-                    songRankingPlace ?
-                        `"${songRankingPlace.songName}" by ${songRankingPlace.bandName}` :
+                    songName && bandName ?
+                        `"${songName}" by ${bandName}` :
                         defaultDropdownItemTitle
                 }
             </DropdownToggle>

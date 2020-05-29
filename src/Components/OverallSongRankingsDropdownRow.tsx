@@ -2,18 +2,17 @@ import React, {useState} from 'react';
 import {Col, Row} from "reactstrap";
 import RankingDropdown from "./RankingDropdown";
 import {OriginalSong, OriginalSongs} from "../Pages/OriginalSongCompetition";
-import {SongRanking} from "./Cards/OverallBandRankingsCard";
+import {SongRanking, SongRankings} from "./Cards/OverallBandRankingsCard";
+import _ from 'lodash';
 
 type Props = {
     originalSongs: OriginalSongs;
-    songRankings: SongRanking;
+    songRankings: SongRankings;
     setSongRankings: Function;
 }
 
 const OverallSongRankingsDropdownRow = (props: Props) => {
     const {originalSongs, songRankings, setSongRankings} = props;
-
-
     const [isFirstPlaceOpen, setIsFirstPlaceOpen] = useState(false);
     const [isSecondPlaceOpen, setIsSecondPlaceOpen] = useState(false);
     const [isThirdPlaceOpen, setIsThirdPlaceOpen] = useState(false);
@@ -31,24 +30,36 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
     };
 
 
-    const updateSongRankings = (song: OriginalSong, placeToUpdate: keyof SongRanking) => {
-        const placeValueMap = {
-            firstPlace: 3,
-            secondPlace: 2,
-            thirdPlace: 1
-        };
+    const updateSongRankings = (song: OriginalSong, placeToUpdate: SongRanking) => {
+        const newPlacement: SongRanking = {...placeToUpdate, songName: song.songName, bandName: song.bandName};
 
-        setSongRankings(
-            {
-                ...songRankings,
-                [placeToUpdate]: song ? {
-                    songName: song.songName,
-                    bandName: song.bandName,
-                    value: placeValueMap[placeToUpdate]
-                } : undefined
-            }
-        );
+        const songRankingsCopy = _.cloneDeep(songRankings.rankings);
+        const rankingHasBeenPopulatedBefore = songRankings.rankings.filter(ranking => ranking.placement === placeToUpdate.placement).length === 1;
+
+        if (rankingHasBeenPopulatedBefore) {
+            const updatedSongRankings = rankingHasBeenPopulatedBefore &&
+                songRankingsCopy.map(ranking => {
+                    if (ranking.placement === newPlacement.placement) {
+                        return newPlacement;
+                    }
+                    return ranking;
+                });
+            setSongRankings({...songRankings, rankings: updatedSongRankings});
+        } else {
+            songRankingsCopy.push(newPlacement);
+            console.log(songRankingsCopy)
+
+            setSongRankings({...songRankings, rankings: songRankingsCopy})
+        }
     };
+
+    const defaultFirstPlace = {placement: 1, placementName: 'first place', value: 3};
+    const defaultSecondPlace = {placement: 2, placementName: 'second place', value: 2};
+    const defaultThirdPlace = {placement: 3, placementName: 'third place', value: 1};
+
+    const getSelectedPlacement = (placement) => {
+        return songRankings.rankings.filter(ranking => ranking.placement === placement)[0];
+    }
 
     return (
         <Row>
@@ -61,8 +72,7 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isFirstPlaceOpen}
                                      toggle={toggleFirst}
                                      updateSongRankings={updateSongRankings}
-                                     songRankings={songRankings}
-                                     placeToUpdate={'firstPlace'}/>
+                                     selectedSong={getSelectedPlacement(defaultFirstPlace.placement) || defaultFirstPlace}/>
                 </div>
             </Col>
             <Col>
@@ -74,8 +84,7 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isSecondPlaceOpen}
                                      toggle={toggleSecond}
                                      updateSongRankings={updateSongRankings}
-                                     songRankings={songRankings}
-                                     placeToUpdate={'secondPlace'}/>
+                                     selectedSong={getSelectedPlacement(defaultSecondPlace.placement) || defaultSecondPlace}/>
                 </div>
             </Col>
             <Col>
@@ -87,8 +96,7 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isThirdPlaceOpen}
                                      toggle={toggleThird}
                                      updateSongRankings={updateSongRankings}
-                                     songRankings={songRankings}
-                                     placeToUpdate={'thirdPlace'}/>
+                                     selectedSong={getSelectedPlacement(defaultThirdPlace.placement) || defaultThirdPlace}/>
                 </div>
             </Col>
         </Row>

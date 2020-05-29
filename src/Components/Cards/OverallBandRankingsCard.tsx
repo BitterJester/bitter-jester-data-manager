@@ -12,27 +12,23 @@ type Props = {
 }
 
 export type SongRanking = {
-    firstPlace?: {
-        songName: string;
-        bandName: string;
-        value: 3;
-    },
-    secondPlace?: {
-        songName: string;
-        bandName: string;
-        value: 2;
-    },
-    thirdPlace?: {
-        songName: string;
-        bandName: string;
-        value: 1;
-    }
+    placement: number;
+    placementName: string;
+    songName?: string | undefined;
+    bandName?: string | undefined;
+    value: number;
+}
+
+export type SongRankings = {
+    rankings: SongRanking[];
+    isFinalRanking: boolean;
 }
 const s3Client = new S3Client();
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
-    const [songRankings, setSongRankings] = useState({} as SongRanking);
+    const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false};
+    const [songRankings, setSongRankings] = useState(initialSongRankings);
 
     const {user} = useAuth0();
     const bandRankingsS3Key = `overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
@@ -41,9 +37,7 @@ const OverallBandRankingsCard = (props: Props) => {
         const fetch = async () => {
             const loadedSongRankings = await s3Client.getObject(bandRankingsS3Key);
 
-            if (loadedSongRankings) {
-                setSongRankings(loadedSongRankings)
-            }
+            setSongRankings(loadedSongRankings ? loadedSongRankings as SongRankings : initialSongRankings)
         };
 
         fetch();

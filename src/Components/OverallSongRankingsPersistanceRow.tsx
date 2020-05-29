@@ -2,12 +2,12 @@ import React from 'react';
 import ConfirmationCheckbox from "./ConfirmationCheckbox";
 import {Button, Row} from "reactstrap";
 import {S3Client} from "../aws/s3Client";
-import {SongRanking} from "./Cards/OverallBandRankingsCard";
+import {SongRankings} from "./Cards/OverallBandRankingsCard";
 
 const s3Client = new S3Client();
 
 type Props = {
-    songRankings: SongRanking;
+    songRankings: SongRankings;
     setAlert: Function;
     bandRankingsS3Key: string;
 }
@@ -16,28 +16,26 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
     const {songRankings, setAlert, bandRankingsS3Key} = props;
 
     const generateAnyNecessaryErrors = () => {
-        const songPlacements = Object.values(songRankings)
-            .filter(placement => placement);
-
-        const duplicateSongs = songPlacements
+        const rankings = songRankings.rankings;
+        const hasDuplicateSongs = rankings
             .map(placement => placement.songName)
             .filter((value, index, array) => array.indexOf(value) === index)
-            .length !== songPlacements.length;
+            .length !== rankings.length;
 
         const NUMBER_OF_PLACES = 3;
-        const emptyPlaces = songPlacements.length < NUMBER_OF_PLACES;
+        const hasEmptyPlaces = rankings.length < NUMBER_OF_PLACES;
 
-        const errorMessages = ['NOT SUBMITTED']
+        const errorMessages = ['NOT SUBMITTED'];
 
-        if (duplicateSongs) {
+        if (hasDuplicateSongs) {
             errorMessages.push('You may not choose a song more than once.');
         }
 
-        if (emptyPlaces) {
+        if (hasEmptyPlaces) {
             errorMessages.push('You may not leave any places empty.');
         }
 
-        return duplicateSongs || emptyPlaces ? errorMessages : [];
+        return hasDuplicateSongs || hasEmptyPlaces ? errorMessages : [];
     };
 
     const save = async () => {

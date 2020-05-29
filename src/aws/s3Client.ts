@@ -28,7 +28,7 @@ export class S3Client {
         };
         return new Promise((resolve, reject) => {
             this.client.getObject(params, function (err, data) {
-                if (err) resolve({});
+                if (err) resolve(undefined);
                 else {
                     const jsonStringReturn = data.Body.toString();
                     return resolve(JSON.parse(jsonStringReturn));
