@@ -68,8 +68,8 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
         <div style={{paddingTop: '48px'}}>
             <ConfirmationCheckbox toggleCheckBox={() => setHasListenedToAllSongs(!hasListenedToAllSongs)}
                                   isChecked={hasListenedToAllSongs}/>
-            <Row style={{padding: '16px 0 0 32px'}}>
-                <div>
+            <Row style={{paddingLeft: '12px'}}>
+                <div className={'button-container'}>
                     <Button className={'submit-button'} onClick={() => save(songRankings)}
                             style={{paddingRight: '8px'}}>
                         Save
