@@ -29,6 +29,15 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
         setIsThirdPlaceOpen(!isThirdPlaceOpen);
     };
 
+    const updatePreviouslyPopulatedRanking = (rankings: SongRanking[], newPlacement: SongRanking) => {
+        const updatedSongRankings = rankings.map(ranking => {
+            if (ranking.placement === newPlacement.placement) {
+                return newPlacement;
+            }
+            return ranking;
+        });
+        setSongRankings({...songRankings, rankings: updatedSongRankings});
+    };
 
     const updateSongRankings = (song: OriginalSong, placeToUpdate: SongRanking) => {
         const newPlacement: SongRanking = {...placeToUpdate, songName: song.songName, bandName: song.bandName};
@@ -37,18 +46,9 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
         const rankingHasBeenPopulatedBefore = songRankings.rankings.filter(ranking => ranking.placement === placeToUpdate.placement).length === 1;
 
         if (rankingHasBeenPopulatedBefore) {
-            const updatedSongRankings = rankingHasBeenPopulatedBefore &&
-                songRankingsCopy.map(ranking => {
-                    if (ranking.placement === newPlacement.placement) {
-                        return newPlacement;
-                    }
-                    return ranking;
-                });
-            setSongRankings({...songRankings, rankings: updatedSongRankings});
+            updatePreviouslyPopulatedRanking(songRankingsCopy, newPlacement);
         } else {
             songRankingsCopy.push(newPlacement);
-            console.log(songRankingsCopy)
-
             setSongRankings({...songRankings, rankings: songRankingsCopy})
         }
     };
@@ -59,7 +59,7 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
 
     const getSelectedPlacement = (placement) => {
         return songRankings.rankings.filter(ranking => ranking.placement === placement)[0];
-    }
+    };
 
     return (
         <Row>
