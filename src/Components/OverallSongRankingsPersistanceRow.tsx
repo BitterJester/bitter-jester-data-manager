@@ -35,15 +35,19 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
             errorMessages.push('You may not leave any places empty.');
         }
 
-        return hasDuplicateSongs || hasEmptyPlaces ? errorMessages : [];
+        if (!hasListenedToAllSongs) {
+            errorMessages.push('You must confirm you have listened to all songs before clicking "Submit".')
+        }
+
+        return hasDuplicateSongs || hasEmptyPlaces || !hasListenedToAllSongs ? errorMessages : [];
     };
 
-    const save = async () => {
+    const save = async (updatedSongRankings) => {
         await s3Client.put(
             s3Client.createPutPublicJsonRequest(
                 'bitter-jester-test',
                 bandRankingsS3Key,
-                JSON.stringify(songRankings)
+                JSON.stringify(updatedSongRankings)
             )
         );
         setAlert({color: 'success', isOpen: true, message: ['Successfully submitted your rankings.']});
@@ -52,7 +56,7 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
     const submitBandRankings = async () => {
         const errorMessages = generateAnyNecessaryErrors();
         if (errorMessages.length === 0) {
-            await save();
+            await save({...songRankings, isFinalRanking: true});
         } else {
             setAlert({color: 'danger', isOpen: true, message: errorMessages});
         }
@@ -66,7 +70,8 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
                                   isChecked={hasListenedToAllSongs}/>
             <Row style={{padding: '16px 0 0 32px'}}>
                 <div>
-                    <Button className={'submit-button'} onClick={save} style={{paddingRight: '8px'}}>
+                    <Button className={'submit-button'} onClick={() => save(songRankings)}
+                            style={{paddingRight: '8px'}}>
                         Save
                     </Button>
                 </div>
