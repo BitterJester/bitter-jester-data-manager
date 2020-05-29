@@ -13,7 +13,7 @@ type Props = {
 
 const OriginalSongCompetitionScheduleCard = (props: Props) => {
     const {originalSongSubmissions, setOriginalSongSubmissions} = props;
-    const [orderedDragAndDropItems, setOrderedDragAndDropItems] = useState([[]]);
+    const [orderedDragAndDropItems, setOrderedDragAndDropItems] = useState([[], [], [], []]);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
         const weekSongIsRemovedFrom = Number(columnRemovedFromIndex) + 1;
@@ -68,6 +68,12 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
         setAlert({...alert, isOpen: !alert.isOpen});
     };
 
+    const orderedColumnTitles = [
+        `Week 1 - ${orderedDragAndDropItems[0].length} bands`,
+        `Week 2 - ${orderedDragAndDropItems[1].length} bands`,
+        `Week 3 - ${orderedDragAndDropItems[2].length} bands`,
+        `Week 4 - ${orderedDragAndDropItems[3].length} bands`
+    ];
     return (
         <Card className={'original-song-card'}>
             <Alert isOpen={alert.isOpen} color={alert.color} toggle={toggle}>
@@ -79,7 +85,7 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
             <Title titleDisplayText={'ORIGINAL SONG COMPETITION SCHEDULE'}/>
             <Row>
                 <DragAndDropList initialOrderComponentsToDisplay={orderedDragAndDropItems}
-                                 orderedColumnTitles={['Week 1', 'Week 2', 'Week 3', 'Week 4']}
+                                 orderedColumnTitles={orderedColumnTitles}
                                  updateState={updateSchedule}/>
             </Row>
         </Card>
