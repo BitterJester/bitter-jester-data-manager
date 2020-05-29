@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Button, Card, Col, Row} from 'reactstrap';
 import {Title} from "../Title";
 import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
@@ -27,6 +27,7 @@ export type SongRanking = {
         value: 1;
     }
 }
+const s3Client = new S3Client();
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
@@ -36,6 +37,20 @@ const OverallBandRankingsCard = (props: Props) => {
     const [songRankings, setSongRankings] = useState({} as SongRanking);
 
     const {user} = useAuth0();
+    const bandRankingsS3Key = `overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
+
+    useEffect(() => {
+        const fetch = async () => {
+            const loadedSongRankings = await s3Client.getObject(bandRankingsS3Key);
+
+            if (loadedSongRankings) {
+                setSongRankings(loadedSongRankings)
+            }
+        };
+
+        fetch();
+    }, []);
+
 
     const toggleFirst = () => {
         setIsFirstPlaceOpen(!isFirstPlaceOpen);
@@ -96,13 +111,11 @@ const OverallBandRankingsCard = (props: Props) => {
 
     const submitBandRankings = async () => {
         const errorMessages = generateAnyNecessaryErrors();
-        console.log(errorMessages)
         if (errorMessages.length === 0) {
-            const s3Client = new S3Client();
             await s3Client.put(
                 s3Client.createPutPublicJsonRequest(
                     'bitter-jester-test',
-                    `overall-song-rankings/${user.nickname.replace('.', '_')}.json`,
+                    bandRankingsS3Key,
                     JSON.stringify(songRankings)
                 )
             );
