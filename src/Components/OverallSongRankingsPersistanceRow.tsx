@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ConfirmationCheckbox from "./ConfirmationCheckbox";
 import {Button, Row} from "reactstrap";
 import {S3Client} from "../aws/s3Client";
@@ -58,9 +58,12 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
         }
     };
 
+    const [hasListenedToAllSongs, setHasListenedToAllSongs] = useState(false);
+
     return (
         <div style={{paddingTop: '48px'}}>
-            <ConfirmationCheckbox/>
+            <ConfirmationCheckbox toggleCheckBox={() => setHasListenedToAllSongs(!hasListenedToAllSongs)}
+                                  isChecked={hasListenedToAllSongs}/>
             <Row style={{padding: '16px 0 0 32px'}}>
                 <div>
                     <Button className={'submit-button'} onClick={save} style={{paddingRight: '8px'}}>

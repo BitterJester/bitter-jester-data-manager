@@ -1,14 +1,14 @@
 import React from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {OriginalSong, OriginalSongs} from "../Pages/OriginalSongCompetition";
-import {DropdownItemOnClick} from "./SortIncompleteApplicationsDropdown";
+import {OnClickFunction} from "./SortIncompleteApplicationsDropdown";
 import {dropdownMenuModifiers} from '../utils/dropdownMenuModifiers';
 
 type Props = {
     dropdownOpen: boolean;
-    toggle: DropdownItemOnClick;
+    toggle: OnClickFunction;
     originalSongs: OriginalSongs;
-    updateSongIndex: DropdownItemOnClick;
+    updateSongIndex: OnClickFunction;
     selected: OriginalSong;
 }
 

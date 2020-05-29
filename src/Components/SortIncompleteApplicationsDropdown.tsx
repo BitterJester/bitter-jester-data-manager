@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import '../static/scheduleDropdown.css';
 
-export type DropdownItemOnClick = {
+export type OnClickFunction = {
     (event: React.MouseEvent<Element, MouseEvent>): void;
 }
 
 type Props = {
-    dropdownItemOnClick: DropdownItemOnClick;
-    dropdownItemOnClick2: DropdownItemOnClick;
+    dropdownItemOnClick: OnClickFunction;
+    dropdownItemOnClick2: OnClickFunction;
 }
 
 const SortIncompleteApplicationsDropdown = (props: Props) => {
