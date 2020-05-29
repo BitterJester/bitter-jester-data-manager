@@ -14,14 +14,17 @@ export type SongRanking = {
     firstPlace?: {
         songName: string;
         bandName: string;
+        value: 3;
     },
     secondPlace?: {
         songName: string;
         bandName: string;
+        value: 2;
     },
     thirdPlace?: {
         songName: string;
         bandName: string;
+        value: 1;
     }
 }
 
@@ -48,10 +51,20 @@ const OverallBandRankingsCard = (props: Props) => {
 
 
     const updateSongRankings = (song: OriginalSong, placeToUpdate: keyof SongRanking) => {
+        const placeValueMap = {
+            firstPlace: 3,
+            secondPlace: 2,
+            thirdPlace: 1
+        };
+
         setSongRankings(
             {
                 ...songRankings,
-                [placeToUpdate]: song ? {songName: song.songName, bandName: song.bandName} : undefined
+                [placeToUpdate]: song ? {
+                    songName: song.songName,
+                    bandName: song.bandName,
+                    value: placeValueMap[placeToUpdate]
+                } : undefined
             }
         );
     };
