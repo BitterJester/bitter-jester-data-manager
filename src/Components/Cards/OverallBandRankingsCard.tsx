@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Button, Card, Col, Row} from 'reactstrap';
+import {Alert, Button, Card, Row} from 'reactstrap';
 import {Title} from "../Title";
-import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
-import RankingDropdown from "../RankingDropdown";
+import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
 import {useAuth0} from "../../react-auth0-spa";
 import ConfirmationCheckbox from "../ConfirmationCheckbox";
+import OverallSongRankingsDropdownRow from "../OverallSongRankingsDropdownRow";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -32,9 +32,6 @@ const s3Client = new S3Client();
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
-    const [isFirstPlaceOpen, setIsFirstPlaceOpen] = useState(false);
-    const [isSecondPlaceOpen, setIsSecondPlaceOpen] = useState(false);
-    const [isThirdPlaceOpen, setIsThirdPlaceOpen] = useState(false);
     const [songRankings, setSongRankings] = useState({} as SongRanking);
 
     const {user} = useAuth0();
@@ -51,39 +48,6 @@ const OverallBandRankingsCard = (props: Props) => {
 
         fetch();
     }, []);
-
-
-    const toggleFirst = () => {
-        setIsFirstPlaceOpen(!isFirstPlaceOpen);
-    };
-
-    const toggleSecond = () => {
-        setIsSecondPlaceOpen(!isSecondPlaceOpen);
-    };
-
-    const toggleThird = () => {
-        setIsThirdPlaceOpen(!isThirdPlaceOpen);
-    };
-
-
-    const updateSongRankings = (song: OriginalSong, placeToUpdate: keyof SongRanking) => {
-        const placeValueMap = {
-            firstPlace: 3,
-            secondPlace: 2,
-            thirdPlace: 1
-        };
-
-        setSongRankings(
-            {
-                ...songRankings,
-                [placeToUpdate]: song ? {
-                    songName: song.songName,
-                    bandName: song.bandName,
-                    value: placeValueMap[placeToUpdate]
-                } : undefined
-            }
-        );
-    };
 
     const generateAnyNecessaryErrors = () => {
         const songPlacements = Object.values(songRankings)
@@ -144,47 +108,10 @@ const OverallBandRankingsCard = (props: Props) => {
                 })}
             </Alert>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
-            <Row>
-                <Col>
-                    <div className={'ranking-dropdown-container'}>
-                        <h4 className={'ranking-title'}>
-                            1st PLACE
-                        </h4>
-                        <RankingDropdown originalSongs={originalSongs}
-                                         isOpen={isFirstPlaceOpen}
-                                         toggle={toggleFirst}
-                                         updateSongRankings={updateSongRankings}
-                                         songRankings={songRankings}
-                                         placeToUpdate={'firstPlace'}/>
-                    </div>
-                </Col>
-                <Col>
-                    <div className={'ranking-dropdown-container'}>
-                        <h4 className={'ranking-title'}>
-                            2nd PLACE
-                        </h4>
-                        <RankingDropdown originalSongs={originalSongs}
-                                         isOpen={isSecondPlaceOpen}
-                                         toggle={toggleSecond}
-                                         updateSongRankings={updateSongRankings}
-                                         songRankings={songRankings}
-                                         placeToUpdate={'secondPlace'}/>
-                    </div>
-                </Col>
-                <Col>
-                    <div className={'ranking-dropdown-container'}>
-                        <h4 className={'ranking-title'}>
-                            3rd PLACE
-                        </h4>
-                        <RankingDropdown originalSongs={originalSongs}
-                                         isOpen={isThirdPlaceOpen}
-                                         toggle={toggleThird}
-                                         updateSongRankings={updateSongRankings}
-                                         songRankings={songRankings}
-                                         placeToUpdate={'thirdPlace'}/>
-                    </div>
-                </Col>
-            </Row>
+            <OverallSongRankingsDropdownRow
+                originalSongs={originalSongs}
+                songRankings={songRankings}
+                setSongRankings={setSongRankings}/>
             <div style={{paddingTop: '48px'}}>
                 <ConfirmationCheckbox/>
                 <Row style={{padding: '16px 0 0 32px'}}>
