@@ -1,0 +1,11 @@
+#root {
+  font-family: 'Roboto', 'sans-serif';
+  font-stretch: expanded;
+  letter-spacing: 2px;
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled, .btn-secondary:hover, .show > .btn-secondary.dropdown-toggle {
+  background-color: rgb(123, 93, 151);
+  border-color: rgb(123, 93, 151);
+
+}

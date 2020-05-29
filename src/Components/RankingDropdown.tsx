@@ -11,10 +11,11 @@ type Props = {
     toggle: OnClickFunction;
     updateSongRankings: Function;
     selectedSong: SongRanking;
+    disabled?: boolean;
 }
 
 const RankingDropdown = (props: Props) => {
-    const {originalSongs, isOpen, toggle, updateSongRankings, selectedSong} = props;
+    const {originalSongs, isOpen, toggle, updateSongRankings, selectedSong, disabled} = props;
     const {songName, bandName, placementName} = selectedSong;
 
     const dropdownItems = originalSongs.originalSongs.map(song => {
@@ -32,8 +33,8 @@ const RankingDropdown = (props: Props) => {
         </DropdownItem>
     );
     return (
-        <Dropdown className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
-            <DropdownToggle className={'toggle'} caret>
+        <Dropdown disabled={disabled} className={'ranking-dropdown'} isOpen={isOpen} toggle={toggle}>
+            <DropdownToggle disabled={disabled} className={'toggle'} caret>
                 {
                     songName && bandName ?
                         `"${songName}" by ${bandName}` :

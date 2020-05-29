@@ -62,21 +62,28 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
         }
     };
 
-    const [hasListenedToAllSongs, setHasListenedToAllSongs] = useState(false);
+    const isFinalRanking = songRankings.isFinalRanking;
+    const [hasListenedToAllSongs, setHasListenedToAllSongs] = useState(isFinalRanking);
 
     return (
         <div style={{paddingTop: '48px'}}>
-            <ConfirmationCheckbox toggleCheckBox={() => setHasListenedToAllSongs(!hasListenedToAllSongs)}
-                                  isChecked={hasListenedToAllSongs}/>
+            <ConfirmationCheckbox
+                disabled={isFinalRanking}
+                toggleCheckBox={() => setHasListenedToAllSongs(!hasListenedToAllSongs)}
+                isChecked={hasListenedToAllSongs}/>
             <Row style={{paddingLeft: '12px'}}>
                 <div className={'button-container'}>
-                    <Button className={'submit-button'} onClick={() => save(songRankings)}
+                    <Button className={'submit-button'}
+                            onClick={() => save(songRankings)}
+                            disabled={isFinalRanking}
                             style={{paddingRight: '8px'}}>
                         Save
                     </Button>
                 </div>
                 <div className={'button-container'}>
-                    <Button className={'submit-button'} onClick={submitBandRankings}>
+                    <Button className={'submit-button'}
+                            onClick={submitBandRankings}
+                            disabled={isFinalRanking}>
                         Submit
                     </Button>
                 </div>

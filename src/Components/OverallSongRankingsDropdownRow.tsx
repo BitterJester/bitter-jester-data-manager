@@ -56,6 +56,7 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
     const defaultFirstPlace = {placement: 1, placementName: 'first place', value: 3};
     const defaultSecondPlace = {placement: 2, placementName: 'second place', value: 2};
     const defaultThirdPlace = {placement: 3, placementName: 'third place', value: 1};
+    const isDisabled = songRankings.isFinalRanking;
 
     const getSelectedPlacement = (placement) => {
         return songRankings.rankings.filter(ranking => ranking.placement === placement)[0];
@@ -72,7 +73,8 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isFirstPlaceOpen}
                                      toggle={toggleFirst}
                                      updateSongRankings={updateSongRankings}
-                                     selectedSong={getSelectedPlacement(defaultFirstPlace.placement) || defaultFirstPlace}/>
+                                     selectedSong={getSelectedPlacement(defaultFirstPlace.placement) || defaultFirstPlace}
+                                     disabled={isDisabled}/>
                 </div>
             </Col>
             <Col>
@@ -84,7 +86,8 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isSecondPlaceOpen}
                                      toggle={toggleSecond}
                                      updateSongRankings={updateSongRankings}
-                                     selectedSong={getSelectedPlacement(defaultSecondPlace.placement) || defaultSecondPlace}/>
+                                     selectedSong={getSelectedPlacement(defaultSecondPlace.placement) || defaultSecondPlace}
+                                     disabled={isDisabled}/>
                 </div>
             </Col>
             <Col>
@@ -96,7 +99,8 @@ const OverallSongRankingsDropdownRow = (props: Props) => {
                                      isOpen={isThirdPlaceOpen}
                                      toggle={toggleThird}
                                      updateSongRankings={updateSongRankings}
-                                     selectedSong={getSelectedPlacement(defaultThirdPlace.placement) || defaultThirdPlace}/>
+                                     selectedSong={getSelectedPlacement(defaultThirdPlace.placement) || defaultThirdPlace}
+                                     disabled={isDisabled}/>
                 </div>
             </Col>
         </Row>
