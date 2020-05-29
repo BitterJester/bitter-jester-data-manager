@@ -137,10 +137,24 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             <div>
                 <Title titleDisplayText={'JUDGING FORM'}/>
                 <div className={'judging-reminder-alert-container'}>
+                    <p style={{textAlign: 'left', paddingBottom: '16px'}}>
+                        {
+                            `
+                            You are currently writing comments about the song "${songName}" by the artist ${bandName}.
+                            Be sure to save your comments often! If you change to a different band before saving, you will lost any unsaved changes.
+                            `
+                        }
+                    </p>
+                    <p style={{textAlign: 'left', paddingBottom: '16px'}}>
+                        {
+                            `
+                            Please be thoughtful and thorough with your comments for ALL of the bands.
+                            `
+                        }
+                    </p>
                     <p className={'judging-reminder-alert'}>
                         Reminder: You are not providing feedback on the recording quality of submissions. Please focus
-                        on the
-                        music, lyrics, performance, etc.
+                        on the music, lyrics, performance, etc.
                     </p>
                 </div>
                 <Form>
