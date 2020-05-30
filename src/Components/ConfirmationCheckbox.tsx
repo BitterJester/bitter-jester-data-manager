@@ -10,7 +10,7 @@ type Props = {
 
 const ConfirmationCheckbox = (props: Props) => {
     const {isChecked, toggleCheckBox, disabled} = props;
-    const enabledText = ' Once you submit, you will not be able to change your rankings. By checking this box, you confirm that you have listened to all of the songs in their entirety.';
+    const enabledText = ' By checking this box, you affirm that you have listened to each song in its entirety and provided thoughtful and meaningful feedback to each entrant. Once you click "submit" you will not be able to change your rankings';
     const disabledText = ' Your rankings have been submitted.  If this was a mistake, please contact Spencer Kasper at spencer.kasper@gmail.com to resolve the issue.';
     const color = !disabled ? 'red' : 'green';
     return (

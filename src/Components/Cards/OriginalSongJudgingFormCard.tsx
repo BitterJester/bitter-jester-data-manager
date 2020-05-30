@@ -148,7 +148,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     <p style={{textAlign: 'left', paddingBottom: '16px'}}>
                         {
                             `
-                            Please be thoughtful and thorough with your comments for ALL of the bands.
+                            Please be thoughtful and thorough with your comments for ALL of the entrants.
                             `
                         }
                     </p>
