@@ -18,7 +18,7 @@ const OriginalSongInfoCard = (props: Props) => {
     const songDescription = hasSongs ? originalSong.songDescription : '';
     const songName = hasSongs ? originalSong.songName : '';
     const bandName = hasSongs ? originalSong.bandName : '';
-    const songUrl = hasSongs && originalSong.songUrl.includes('.mp4') ? originalSong.songUrl : '';
+    const vimeoId = hasSongs ? originalSong.vimeoId : '';
 
     const updateSongIndex = (event) => {
         const selectedBandName = event.target.innerText;
@@ -49,7 +49,8 @@ const OriginalSongInfoCard = (props: Props) => {
             <div className={'original-song-info-container'}>
                 <div className={'original-song-info-content'}>
                     <div>
-                        <iframe src="https://player.vimeo.com/video/423015352?title=0&byline=0&portrait=0" width="640"
+                        <iframe src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0`}
+                                width="640"
                                 height="360" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
                     </div>
                     <div className={'subtitle'}>

@@ -12,6 +12,7 @@ export type OriginalSong = {
     songUrl: string;
     bandPhotoUrl: string;
     scheduledWeek?: number | undefined;
+    vimeoId?: number | string | undefined;
 }
 
 export type OriginalSongs = {
