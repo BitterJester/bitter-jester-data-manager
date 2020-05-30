@@ -116,7 +116,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     JSON.stringify(judgeFeedback)
                 )
             );
-            setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.'});
+            setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.', color: 'success'});
         } else {
             setAlert({
                 isAlertOpen: true,
@@ -141,7 +141,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                         {
                             `
                             You are currently writing comments about the song "${songName}" by the artist ${bandName}.
-                            Be sure to save your comments often! If you change to a different band before saving, you will lost any unsaved changes.
+                            Be sure to save your comments often! If you change to a different band before saving, you will lose any unsaved changes.
                             `
                         }
                     </p>
