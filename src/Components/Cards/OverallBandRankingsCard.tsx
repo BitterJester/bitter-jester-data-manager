@@ -57,6 +57,22 @@ const OverallBandRankingsCard = (props: Props) => {
                 })}
             </Alert>
             <Title titleDisplayText={'OVERALL SONG RANKINGS'}/>
+            <div className={'ranking-instructions'}>
+                <p>
+                    {
+                        'This is where you decide your winners for the week you are judging. ' +
+                        'Please save your rankings often! ' +
+                        'Once you have listened to every song and have left all of your comments for all of the songs, ' +
+                        'check the box at the bottom of this card and click "Submit Overall Rankings".'
+                    }
+                </p>
+                <p className={'warning'}>
+                    {
+                        'NOTE: Once you click "Submit Overall Rankings", you will not be able to change your rankings. ' +
+                        'You will, however, be able to come back and update your comments for each of the bands.'
+                    }
+                </p>
+            </div>
             <OverallSongRankingsDropdownRow
                 originalSongs={originalSongs}
                 songRankings={songRankings}
