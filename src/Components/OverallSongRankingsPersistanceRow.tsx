@@ -77,14 +77,14 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
                             onClick={() => save(songRankings)}
                             disabled={isFinalRanking}
                             style={{paddingRight: '8px'}}>
-                        Save
+                        Save Current Rankings
                     </Button>
                 </div>
                 <div className={'button-container'}>
                     <Button className={'submit-button'}
                             onClick={submitBandRankings}
                             disabled={isFinalRanking}>
-                        Submit
+                        Submit Overall Rankings
                     </Button>
                 </div>
             </Row>

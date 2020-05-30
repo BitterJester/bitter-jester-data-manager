@@ -88,11 +88,6 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         updateJudgesComments('favoriteAspect', event.target.value);
     };
 
-    function validateComments() {
-        const {initialImpression, feedback, favoriteAspect} = judgesComments;
-        return initialImpression && feedback && favoriteAspect;
-    }
-
     const combineAndSave = async (): Promise<void> => {
         const judgeFeedback: JudgeFeedback = {
             initialImpression: judgesComments.initialImpression,
@@ -107,23 +102,15 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             }
         };
 
-        if (validateComments()) {
-            const s3Client = new S3Client();
-            await s3Client.put(
-                s3Client.createPutPublicJsonRequest(
-                    'bitter-jester-test',
-                    fileName,
-                    JSON.stringify(judgeFeedback)
-                )
-            );
-            setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.', color: 'success'});
-        } else {
-            setAlert({
-                isAlertOpen: true,
-                message: 'NOT SUBMITTED: You must enter a comment in each text box.',
-                color: 'danger'
-            })
-        }
+        const s3Client = new S3Client();
+        await s3Client.put(
+            s3Client.createPutPublicJsonRequest(
+                'bitter-jester-test',
+                fileName,
+                JSON.stringify(judgeFeedback)
+            )
+        );
+        setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.', color: 'success'});
     };
 
     const [alert, setAlert] = useState({isAlertOpen: false, message: '', color: 'success'});
@@ -132,15 +119,18 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         setAlert({...alert, isAlertOpen: !alert.isAlertOpen});
     };
 
+    const songByArtist = `"${songName}" by ${bandName}`;
+    const songByTheArtist = `"${songName}" by the artist ${bandName}`;
     return (
         <Card className={'original-song-judging-form-card'}>
             <div>
-                <Title titleDisplayText={'JUDGING FORM'}/>
+                <Title titleDisplayText={`JUDGE'S COMMENTS`}/>
+                <h3>{songByArtist}</h3>
                 <div className={'judging-reminder-alert-container'}>
                     <p style={{textAlign: 'left', paddingBottom: '16px'}}>
                         {
                             `
-                            You are currently writing comments about the song "${songName}" by the artist ${bandName}.
+                            You are currently writing comments about the song ${songByTheArtist}.
                             Be sure to save your comments often! If you change to a different band before saving, you will lose any unsaved changes.
                             `
                         }
@@ -157,11 +147,18 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                         on the music, lyrics, performance, etc.
                     </p>
                 </div>
-                <Form>
-                    <TextAreaFormInput label={'What were your initial impressions?'}
-                                       id={'initialImpressions'}
-                                       updateParent={updateInitialImpressions}
-                                       textAreaValue={judgesComments.initialImpression || ''}
+                <Alert isOpen={alert.isAlertOpen} toggle={toggle} color={alert.color}>{alert.message}</Alert>
+                <div className={'button-container'}>
+                    <Button className={'submit-button'} onClick={combineAndSave}>
+                        {`Save comments for "${songName}" by the artist ${bandName}`}
+                    </Button>
+                </div>
+                <Form className={'judges-comments-form'}>
+                    <TextAreaFormInput
+                        label={'What were your initial impressions?'}
+                        id={'initialImpressions'}
+                        updateParent={updateInitialImpressions}
+                        textAreaValue={judgesComments.initialImpression || ''}
                     />
                     <TextAreaFormInput label={'What feedback or suggestions would you give the artist(s)?'}
                                        id={'feedback'}
@@ -172,12 +169,6 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                                        updateParent={updateFavoriteAspect}
                                        textAreaValue={judgesComments.favoriteAspect || ''}/>
                 </Form>
-                <Alert isOpen={alert.isAlertOpen} toggle={toggle} color={alert.color}>{alert.message}</Alert>
-                <div className={'button-container'}>
-                    <Button className={'submit-button'} onClick={combineAndSave}>
-                        Save
-                    </Button>
-                </div>
             </div>
         </Card>
     );
