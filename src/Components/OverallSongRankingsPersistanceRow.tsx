@@ -56,6 +56,12 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
         const errorMessages = generateAnyNecessaryErrors();
         if (errorMessages.length === 0) {
             await save({...songRankings, isFinalRanking: true});
+            setAlert({
+                color: 'success',
+                isOpen: true,
+                message: ['You have successfully submitted your rankings. Thank you for participating.']
+            });
+            window.location.reload();
         } else {
             setAlert({color: 'danger', isOpen: true, message: errorMessages});
         }
