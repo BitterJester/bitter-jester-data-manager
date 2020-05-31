@@ -35,7 +35,6 @@ const OriginalSongInfoCard = (props: Props) => {
         setDropdownOpen(!dropdownOpen);
     };
 
-    const formattedTitle = `"${songName}" by ${bandName}`;
     return (
         <Card className={'original-song-info-card'}>
             <Title titleDisplayText={'SONG INFO'}/>
