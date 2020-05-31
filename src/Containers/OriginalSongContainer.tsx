@@ -38,25 +38,25 @@ const OriginalSongContainer = (props: Props) => {
 
     return (
         <div className={'original-song-competition-container'}>
-            <Row className={'overall-band-rankings-row'}>
-                <Col>
-                    <OverallBandRankingsCard originalSongs={props.originalSongs}/>
-                </Col>
-            </Row>
             <Row className={'original-song-info-row'}>
+                <Col>
+                    <OriginalSongJudgingFormCard bandName={bandName} songName={songName}/>
+                </Col>
                 <Col>
                     <OriginalSongInfoCard originalSongs={props.originalSongs}
                                           updateSelectedSong={setSongIndex}
                                           selectedIndex={songIndex}
                     />
                 </Col>
-                <Col>
-                    <OriginalSongJudgingFormCard bandName={bandName} songName={songName}/>
-                </Col>
             </Row>
             <Row className={'lyrics-card-row'}>
                 <Col>
                     <LyricsPdfCard originalSong={originalSong}/>
+                </Col>
+            </Row>
+            <Row className={'overall-band-rankings-row'}>
+                <Col>
+                    <OverallBandRankingsCard originalSongs={props.originalSongs}/>
                 </Col>
             </Row>
         </div>

@@ -50,7 +50,6 @@ const OverallSongRankingsPersistanceRow = (props: Props) => {
                 JSON.stringify(updatedSongRankings)
             )
         );
-        setAlert({color: 'success', isOpen: true, message: ['Successfully submitted your rankings.']});
     };
 
     const submitBandRankings = async () => {
