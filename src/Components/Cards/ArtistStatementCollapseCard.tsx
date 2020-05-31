@@ -40,7 +40,7 @@ const ArtistStatementCollapseCard = (props: Props) => {
                     </div>
                 </div>
                 <Collapse isOpen={isOpen}>
-                    <div>
+                    <div style={{padding: '16px'}}>
                         <p style={{whiteSpace: "pre-wrap", textAlign: 'left'}}>
                             {originalSong ? originalSong.songDescription : ''}
                         </p>
