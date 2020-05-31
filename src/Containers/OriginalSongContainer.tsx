@@ -39,10 +39,10 @@ const OriginalSongContainer = (props: Props) => {
     return (
         <div className={'original-song-competition-container'}>
             <Row className={'original-song-info-row'}>
-                <Col xs={8}>
+                <Col>
                     <OriginalSongJudgingFormCard bandName={bandName} songName={songName}/>
                 </Col>
-                <Col xs={4}>
+                <Col>
                     <OriginalSongInfoCard originalSongs={props.originalSongs}
                                           updateSelectedSong={setSongIndex}
                                           selectedIndex={songIndex}
