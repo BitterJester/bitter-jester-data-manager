@@ -2,32 +2,16 @@ import React, {useState} from 'react';
 import {Card, Collapse} from "reactstrap";
 import {Title} from "../Title";
 import {OriginalSong} from "../../Pages/OriginalSongCompetition";
-import {Document, Page, pdfjs} from 'react-pdf';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 type Props = {
     originalSong: OriginalSong;
 };
 
-const LyricsPdfCard = (props: Props) => {
+const ArtistStatementCollapseCard = (props: Props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
     const {originalSong} = props;
-    const lyricsUrl = originalSong ? originalSong.lyricsUrl : '';
-
-    const [pages, setPages] = useState(0);
-
-    const getPages = () => {
-        const pageComponents = [];
-
-        for (let page = 0; page < pages; page++) {
-            pageComponents.push(<div style={{display: "inline-block"}}><Page pageNumber={page + 1}/></div>)
-        }
-
-        return pageComponents;
-    };
 
     return (
         <div className={'lyrics-card-container'}>
@@ -52,22 +36,17 @@ const LyricsPdfCard = (props: Props) => {
                         }
                     </span>
                     <div className={'title-container'}>
-                        <Title titleDisplayText={'CLICK HERE TO VIEW LYRICS'}/>
+                        <Title titleDisplayText={'CLICK HERE TO READ ARTIST STATEMENT'}/>
                     </div>
                 </div>
                 <Collapse isOpen={isOpen}>
-                    <Document file={lyricsUrl}
-                              onLoadError={console.error}
-                              onLoadSuccess={({numPages}) => setPages(numPages)}
-                    >
-                        {
-                            getPages()
-                        }
-                    </Document>
+                    <p style={{whiteSpace: "pre-wrap"}}>
+                        {originalSong ? originalSong.songDescription : ''}
+                    </p>
                 </Collapse>
             </Card>
         </div>
     );
 };
 
-export default LyricsPdfCard;
+export default ArtistStatementCollapseCard;

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {JudgesInfos, OriginalSongs} from "../Pages/OriginalSongCompetition";
 
 import {Col, Row} from "reactstrap";
-import LyricsPdfCard from "../Components/Cards/LyricsPdfCard";
+import ArtistStatementCollapseCard from "../Components/Cards/ArtistStatementCollapseCard";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
 import OriginalSongJudgingFormCard from "../Components/Cards/OriginalSongJudgingFormCard";
 import OverallBandRankingsCard from "../Components/Cards/OverallBandRankingsCard";
@@ -51,7 +51,7 @@ const OriginalSongContainer = (props: Props) => {
             </Row>
             <Row className={'lyrics-card-row'}>
                 <Col>
-                    <LyricsPdfCard originalSong={originalSong}/>
+                    <ArtistStatementCollapseCard originalSong={originalSong}/>
                 </Col>
             </Row>
             <Row className={'overall-band-rankings-row'}>

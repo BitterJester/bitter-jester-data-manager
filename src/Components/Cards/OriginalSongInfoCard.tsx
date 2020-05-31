@@ -3,6 +3,7 @@ import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import BandSelectionDropDown from "../BandSelectionDropDown";
+import LyricsPdf from "../LyricsPdf";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -15,7 +16,6 @@ const OriginalSongInfoCard = (props: Props) => {
     const unwrappedOriginalSongs = originalSongs.originalSongs;
     const hasSongs = unwrappedOriginalSongs.length;
     const originalSong = unwrappedOriginalSongs[selectedIndex];
-    const songDescription = hasSongs ? originalSong.songDescription : '';
     const songName = hasSongs ? originalSong.songName : '';
     const bandName = hasSongs ? originalSong.bandName : '';
     const vimeoId = hasSongs ? originalSong.vimeoId : '';
@@ -53,15 +53,7 @@ const OriginalSongInfoCard = (props: Props) => {
                                 width="640"
                                 height="360" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
                     </div>
-                    <div className={'subtitle'}>
-                        <h3>{formattedTitle}</h3>
-                    </div>
-                    <div className={'song-description'}>
-                        <h5>SONG DESCRIPTION</h5>
-                        <p style={{whiteSpace: "pre-wrap"}}>
-                            {songDescription}
-                        </p>
-                    </div>
+                    <LyricsPdf originalSong={originalSong}/>
                 </div>
             </div>
         </Card>

@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import OriginalSongContainer from "./OriginalSongContainer";
 import {OriginalSongs} from "../Pages/OriginalSongCompetition";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
-import LyricsPdfCard from "../Components/Cards/LyricsPdfCard";
+import ArtistStatementCollapseCard from "../Components/Cards/ArtistStatementCollapseCard";
 
 const originalSongs: OriginalSongs = {
     originalSongs: [
@@ -35,6 +35,6 @@ describe('OriginalSongContainer', () => {
     });
 
     it('should pass first song to lyrics pdf card', () => {
-        expect(component.find(LyricsPdfCard).props().originalSong).toEqual(originalSongs.originalSongs[0]);
+        expect(component.find(ArtistStatementCollapseCard).props().originalSong).toEqual(originalSongs.originalSongs[0]);
     });
 });
