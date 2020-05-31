@@ -49,7 +49,7 @@ const OriginalSongContainer = (props: Props) => {
                     />
                 </Col>
             </Row>
-            <Row className={'lyrics-card-row'}>
+            <Row className={'artist-statement-card-row'}>
                 <Col>
                     <ArtistStatementCollapseCard originalSong={originalSong}/>
                 </Col>
