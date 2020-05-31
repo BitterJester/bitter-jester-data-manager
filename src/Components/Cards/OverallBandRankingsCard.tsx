@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, Card} from 'reactstrap';
+import {Alert, Button, Card} from 'reactstrap';
 import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
@@ -45,6 +45,16 @@ const OverallBandRankingsCard = (props: Props) => {
 
     const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []});
 
+    const save = async (updatedSongRankings) => {
+        await s3Client.put(
+            s3Client.createPutPublicJsonRequest(
+                'bitter-jester-test',
+                bandRankingsS3Key,
+                JSON.stringify(updatedSongRankings)
+            )
+        );
+    };
+
     return (
         <Card className={'overall-band-rankings-card'}>
             <Alert isOpen={alert.isOpen} color={alert.color} toggle={() => setAlert({...alert, isOpen: !alert.isOpen})}>
@@ -73,12 +83,20 @@ const OverallBandRankingsCard = (props: Props) => {
                     }
                 </p>
             </div>
+            <div className={'button-container'}>
+                <Button className={'submit-button'}
+                        onClick={() => save(songRankings)}
+                        disabled={songRankings.isFinalRanking}
+                        style={{padding: '8px'}}>
+                    Save Current Rankings
+                </Button>
+            </div>
             <OverallSongRankingsDropdownRow
                 originalSongs={originalSongs}
                 songRankings={songRankings}
                 setSongRankings={setSongRankings}/>
             <OverallSongRankingsPersistanceRow
-                bandRankingsS3Key={bandRankingsS3Key}
+                save={save}
                 setAlert={setAlert}
                 songRankings={songRankings}/>
         </Card>
