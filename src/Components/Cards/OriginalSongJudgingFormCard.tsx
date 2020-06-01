@@ -110,7 +110,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                 JSON.stringify(judgeFeedback)
             )
         );
-        setAlert({...alert, isAlertOpen: true, message: 'Successfully submitted your comments.', color: 'success'});
+        setAlert({...alert, isAlertOpen: true, message: 'Successfully saved your comments.', color: 'success'});
     };
 
     const [alert, setAlert] = useState({isAlertOpen: false, message: '', color: 'success'});

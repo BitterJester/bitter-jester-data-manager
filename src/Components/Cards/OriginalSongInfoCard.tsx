@@ -16,8 +16,6 @@ const OriginalSongInfoCard = (props: Props) => {
     const unwrappedOriginalSongs = originalSongs.originalSongs;
     const hasSongs = unwrappedOriginalSongs.length;
     const originalSong = unwrappedOriginalSongs[selectedIndex];
-    const songName = hasSongs ? originalSong.songName : '';
-    const bandName = hasSongs ? originalSong.bandName : '';
     const vimeoId = hasSongs ? originalSong.vimeoId : '';
 
     const updateSongIndex = (event) => {
@@ -49,8 +47,7 @@ const OriginalSongInfoCard = (props: Props) => {
                 <div className={'original-song-info-content'}>
                     <div>
                         <iframe src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0`}
-                                width="640"
-                                height="360" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
+                                width="400" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
                     </div>
                     <LyricsPdf originalSong={originalSong}/>
                 </div>

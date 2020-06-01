@@ -85,7 +85,10 @@ const OverallBandRankingsCard = (props: Props) => {
             </div>
             <div className={'button-container'}>
                 <Button className={'submit-button'}
-                        onClick={() => save(songRankings)}
+                        onClick={async () => {
+                            await save(songRankings);
+                            setAlert({isOpen: true, color: 'success', message: ['Successfully saved your rankings.']})
+                        }}
                         disabled={songRankings.isFinalRanking}
                         style={{padding: '8px'}}>
                     Save Current Rankings
