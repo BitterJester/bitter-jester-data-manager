@@ -10,7 +10,7 @@ type Judge = {
     nickname: string;
 }
 
-type JudgeFeedback = {
+export type JudgeFeedback = {
     judge: Judge;
     initialImpression: string;
     feedback: string;
@@ -25,22 +25,22 @@ type Props = {
     songName: string;
 }
 
+export const formatJudgesCommentsFilePath = (bandName: string, songName: string) => {
+    const handleSpacesAndUppercase = (value: string) => {
+        return value.replace(' ', '_').toLowerCase();
+    };
+    const formattedBandName = handleSpacesAndUppercase(bandName);
+    const formattedSongName = handleSpacesAndUppercase(songName);
+    return `judges-comments/${formattedSongName}-${formattedBandName}/`;
+};
+
 const OriginalSongJudgingFormCard = (props: Props) => {
     const {user} = useAuth0();
     const {bandName, songName} = props;
 
     const [judgesComments, setJudgesComments] = useState({} as JudgeFeedback);
 
-    const formatFileName = () => {
-        const handleSpacesAndUppercase = (value: string) => {
-            return value.replace(' ', '_').toLowerCase();
-        };
-        const formattedBandName = handleSpacesAndUppercase(bandName);
-        const formattedSongName = handleSpacesAndUppercase(songName);
-        return `judges-comments/${formattedSongName}-${formattedBandName}/${user.nickname.replace('.', '_')}.json`;
-    };
-
-    const fileName = formatFileName();
+    const fileName = `${formatJudgesCommentsFilePath(bandName, songName)}${user.nickname.replace('.', '_')}.json`;
 
     useEffect(() => {
         const getJudgesComments = async () => {
