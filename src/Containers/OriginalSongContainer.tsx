@@ -22,7 +22,7 @@ const OriginalSongContainer = (props: Props) => {
     const songName = originalSong ? originalSong.songName : '';
     const {user} = useAuth0();
 
-    const judge = props.judgesInfo.judges.filter(judge => judge.emailAddress === user.email)[0];
+    const judge = props.judgesInfo.judges.filter(judge => judge.emailAddress.toLowerCase() === user.email.toLowerCase())[0];
     if (judge && originalSongs) {
         const songsForJudgesWeek = originalSongs.filter(song => {
             return song.scheduledWeek === judge.week;
