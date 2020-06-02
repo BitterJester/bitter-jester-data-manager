@@ -5,7 +5,6 @@ import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import _ from 'lodash';
 import SaveOriginalSongScheduleButton from "../SaveOriginalSongScheduleButton";
-import JudgesFeedbackDisplay from "../JudgesFeedbackDisplay";
 
 type Props = {
     originalSongSubmissions: OriginalSongs;
@@ -88,9 +87,6 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
                 <DragAndDropList initialOrderComponentsToDisplay={orderedDragAndDropItems}
                                  orderedColumnTitles={orderedColumnTitles}
                                  updateState={updateSchedule}/>
-            </Row>
-            <Row>
-                <JudgesFeedbackDisplay originalSongs={originalSongSubmissions.originalSongs}/>
             </Row>
         </Card>
     );
