@@ -43,7 +43,7 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
 
         const series: BarChartSeriesItem[] = [
             {
-                name: "series-1",
+                name: 'Total Points From Judges',
                 data: totalPointsArray
             }
         ];
