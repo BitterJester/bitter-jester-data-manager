@@ -8,7 +8,7 @@ type SongRankingTotal = {
     totalPoints: number;
 }
 
-type SongRankingTotals = {
+export type SongRankingTotals = {
     totalScores: SongRankingTotal[];
 };
 
@@ -27,7 +27,7 @@ const WeeklyRankingScoreBarChartContainer = () => {
 
     return (
         <div className={'original-song-competition-container'}>
-            <WeeklyRankingScoreBarChart/>
+            <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
         </div>
     );
 };

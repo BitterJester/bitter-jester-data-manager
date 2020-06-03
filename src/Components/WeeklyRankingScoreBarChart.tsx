@@ -1,34 +1,70 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Chart from "react-apexcharts";
+import {SongRankingTotals} from "./WeeklyRankingScoreBarChartContainer";
 
-const WeeklyRankingScoreBarChart = () => {
+type Props = {
+    songRankingTotals: SongRankingTotals;
+}
 
-    const [options, setOptions] = useState({
-        chart: {
-            id: "basic-bar"
-        },
-        xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        }
-    });
+type BarChartOptions = {
+    chart: {
+        id: string;
+    },
+    xaxis: {
+        categories: any[];
+    }
+}
 
-    const [series, setSeries] = useState([
-        {
-            name: "series-1",
-            data: [30, 40, 45, 50, 49, 60, 70, 91]
-        }
-    ]);
+type BarChartSeriesItem = {
+    name: string;
+    data: number[];
+};
+
+type BarChartData = {
+    options: BarChartOptions;
+    series: BarChartSeriesItem[];
+}
+
+const WeeklyRankingScoreBarChart = (props: Props) => {
+    const {songRankingTotals} = props;
+
+    useEffect(() => {
+        const graphLabels = songRankingTotals.totalScores.map(score => `"${score.songName}" by ${score.bandName}`);
+        const totalPointsArray = songRankingTotals.totalScores.map(score => score.totalPoints);
+        console.log(totalPointsArray);
+        const options: BarChartOptions = {
+            chart: {
+                id: "basic-bar"
+            },
+            xaxis: {
+                categories: graphLabels
+            }
+        };
+
+        const series: BarChartSeriesItem[] = [
+            {
+                name: "series-1",
+                data: totalPointsArray
+            }
+        ];
+
+        const updatedChartData = {options, series};
+
+        setChartData(updatedChartData)
+    }, [songRankingTotals]);
+
+    const [chartData, setChartData] = useState({} as BarChartData);
 
     return (
         <div className="app">
             <div className="row">
                 <div className="mixed-chart">
-                    <Chart
-                        options={options}
-                        series={series}
+                    {chartData.series && <Chart
+                        options={chartData.options}
+                        series={chartData.series}
                         type="bar"
-                        width="500"
-                    />
+                        width="1000"
+                    />}
                 </div>
             </div>
         </div>
