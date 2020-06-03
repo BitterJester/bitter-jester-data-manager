@@ -11,6 +11,7 @@ import './App.scss';
 import {Card, Col, Row} from "reactstrap";
 import {Title} from "./Components/Title";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
+import OriginalSongResults from "./OriginalSongResults";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
@@ -58,6 +59,11 @@ function App() {
                             isAuthenticated={isAuthenticated}
                             path='/bjmf145auth'
                             component={<OriginalSongCompetitionSchedulePage/>}
+                        />
+                        <ProtectedRoute
+                            isAuthenticated={isAuthenticated}
+                            path='/bjmf145results'
+                            component={<OriginalSongResults/>}
                         />
                     </Switch>
                 </Col>
