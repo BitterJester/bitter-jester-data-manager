@@ -6,6 +6,7 @@ import {S3Client} from "../../aws/s3Client";
 import {useAuth0} from "../../react-auth0-spa";
 import OverallSongRankingsDropdownRow from "../OverallSongRankingsDropdownRow";
 import OverallSongRankingsPersistanceRow from "../OverallSongRankingsPersistanceRow";
+import {publishSNS} from "../../aws/publishSNS";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -25,12 +26,15 @@ export type SongRankings = {
 }
 const s3Client = new S3Client();
 
+const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:CalculateScoresForEachOriginalSongInWeekSnsTopic';
+
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs} = props;
     const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false};
-    const [songRankings, setSongRankings] = useState(initialSongRankings);
 
+    const [songRankings, setSongRankings] = useState(initialSongRankings);
     const {user} = useAuth0();
+
     const bandRankingsS3Key = `overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
 
     useEffect(() => {
@@ -44,8 +48,8 @@ const OverallBandRankingsCard = (props: Props) => {
     }, []);
 
     const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []});
-
     const save = async (updatedSongRankings) => {
+
         await s3Client.put(
             s3Client.createPutPublicJsonRequest(
                 'bitter-jester-test',
@@ -53,6 +57,7 @@ const OverallBandRankingsCard = (props: Props) => {
                 JSON.stringify(updatedSongRankings)
             )
         );
+        await publishSNS({Message: 'Overall Rankings have been updated.', TopicArn: CALCULATE_SCORES_TOPIC_ARN});
     };
 
     return (
