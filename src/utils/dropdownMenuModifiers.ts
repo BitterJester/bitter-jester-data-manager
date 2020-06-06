@@ -7,8 +7,9 @@ export const dropdownMenuModifiers = {
                 ...data,
                 styles: {
                     ...data.styles,
-                    overflow: 'auto',
+                    overflow: 'scroll',
                     maxHeight: '400px',
+                    maxWidth: '400px'
                 },
             };
         },
