@@ -67,7 +67,7 @@ const WeeklyJudgesCommentsContainer = () => {
                                         </h3>
                                     }
                                     <p style={{fontWeight: 'bold'}}>
-                                        {`Song Name: ${comment.songInfo.songName}`}
+                                        {`"${comment.songInfo.songName}"`}
                                     </p>
                                     <p>
                                         {`Initial Impression: ${comment.initialImpression}`}
