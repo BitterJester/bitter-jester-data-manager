@@ -47,7 +47,7 @@ const OriginalSongInfoCard = (props: Props) => {
                 <div className={'original-song-info-content'}>
                     <div>
                         <iframe src={`https://player.vimeo.com/video/${vimeoId}?title=0&byline=0&portrait=0`}
-                                width="400" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
+                                width="560" height="350" frameBorder="0" allow="autoplay; fullscreen" allowFullScreen/>
                     </div>
                     <LyricsPdf originalSong={originalSong}/>
                 </div>
