@@ -4,6 +4,7 @@ import {Title} from "../Title";
 import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
 import {S3Client} from "../../aws/s3Client";
+import {publishSNS} from "../../aws/publishSNS";
 
 export type Judge = {
     email: string;
@@ -110,6 +111,11 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                 JSON.stringify(judgeFeedback)
             )
         );
+
+        await publishSNS({
+            Message: 'update comment info',
+            TopicArn: 'arn:aws:sns:us-east-1:771384749710:AggregateCommentsForWeekSnsTopic'
+        });
         setAlert({...alert, isAlertOpen: true, message: 'Successfully saved your comments.', color: 'success'});
     };
 
