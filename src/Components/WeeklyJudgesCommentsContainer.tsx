@@ -42,51 +42,48 @@ const WeeklyJudgesCommentsContainer = () => {
 
     return (
         <div style={{textAlign: 'left'}}>
-            <h3>
-                Judges Missing Comments
-            </h3>
-            {
-                judgesComments && judgesComments.judgesWhoHaveNotSubmittedAllComments.map(judge => {
-                    return (
-                        <div>
+            <Title titleDisplayText={'JUDGES MISSING COMMENTS'}/>
+            <div style={{textAlign: 'center'}}>
+                {
+                    judgesComments && judgesComments.judgesWhoHaveNotSubmittedAllComments.map(judge => {
+                        return (
                             <p>
-                                {judge.judge.emailAddress}
+                                {`${judge.judge.emailAddress} has completed comments for ${judge.numberOfSongsWithAllComments} of 14 songs.`}
                             </p>
-                            <p>
-                                {`Number of songs with complete comments: ${judge.numberOfSongsWithAllComments}`}
-                            </p>
-                        </div>
 
-                    )
-                })
-            }
-            <Title titleDisplayText={'Judges Feedback'}/>
-            {
-                judgesComments && judgesComments.comments.map((comment) => {
-                    return (
-                        <div>
-                            {
-                                <h3 style={{fontWeight: 'bold'}}>
-                                    {`Judge: ${comment.judge.nickname}`}
-                                </h3>
-                            }
-                            <p style={{fontWeight: 'bold'}}>
-                                {`Song Name: ${comment.songInfo.songName}`}
-                            </p>
-                                <p>
-                                    {`Initial Impression: ${comment.initialImpression}`}
-                                </p>
-                                <p>
-                                    {`Feedback: ${comment.feedback}`}
-                                </p>
-                                <p>
-                                    {`Favorite Aspect: ${comment.favoriteAspect}`}
-                                </p>
-                            </div>
                         )
-                    }
-                )
-            }
+                    })
+                }
+            </div>
+            <Title titleDisplayText={'JUDGES FEEDBACK'}/>
+            <div style={{overflowY: 'scroll', maxHeight: '800px'}}>
+                {
+                    judgesComments && judgesComments.comments.map((comment) => {
+                            return (
+                                <div>
+                                    {
+                                        <h3 style={{fontWeight: 'bold'}}>
+                                            {`Judge: ${comment.judge.nickname}`}
+                                        </h3>
+                                    }
+                                    <p style={{fontWeight: 'bold'}}>
+                                        {`Song Name: ${comment.songInfo.songName}`}
+                                    </p>
+                                    <p>
+                                        {`Initial Impression: ${comment.initialImpression}`}
+                                    </p>
+                                    <p>
+                                        {`Feedback: ${comment.feedback}`}
+                                    </p>
+                                    <p>
+                                        {`Favorite Aspect: ${comment.favoriteAspect}`}
+                                    </p>
+                                </div>
+                            )
+                        }
+                    )
+                }
+            </div>
         </div>
     );
 };
