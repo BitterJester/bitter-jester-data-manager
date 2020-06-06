@@ -62,17 +62,17 @@ const WeeklyJudgesCommentsContainer = () => {
             }
             <Title titleDisplayText={'Judges Feedback'}/>
             {
-                judgesComments && judgesComments.comments.map((comment, index) => {
+                judgesComments && judgesComments.comments.map((comment) => {
                     return (
                         <div>
-                            {index === 0 &&
-                            <h3 style={{fontWeight: 'bold'}}>
-                                {`Judge: ${comment.judge.nickname}`}
-                            </h3>
+                            {
+                                <h3 style={{fontWeight: 'bold'}}>
+                                    {`Judge: ${comment.judge.nickname}`}
+                                </h3>
                             }
                             <p style={{fontWeight: 'bold'}}>
-                                    {`Song Name: ${comment.songInfo.songName}`}
-                                </p>
+                                {`Song Name: ${comment.songInfo.songName}`}
+                            </p>
                                 <p>
                                     {`Initial Impression: ${comment.initialImpression}`}
                                 </p>
