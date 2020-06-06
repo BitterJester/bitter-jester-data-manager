@@ -13,7 +13,7 @@ type Props = {
 
 const OriginalSongCompetitionScheduleCard = (props: Props) => {
     const {originalSongSubmissions, setOriginalSongSubmissions} = props;
-    const [orderedDragAndDropItems, setOrderedDragAndDropItems] = useState([[], [], [], []]);
+    const [orderedDragAndDropItems, setOrderedDragAndDropItems] = useState([[], [], [], [], [], []]);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
         const weekSongIsRemovedFrom = Number(columnRemovedFromIndex) + 1;
@@ -57,6 +57,8 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
             updatedOrderedDragAndDropItems.push(formatSongsForDisplay(2));
             updatedOrderedDragAndDropItems.push(formatSongsForDisplay(3));
             updatedOrderedDragAndDropItems.push(formatSongsForDisplay(4));
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(5));
+            updatedOrderedDragAndDropItems.push(formatSongsForDisplay(6));
             setOrderedDragAndDropItems(updatedOrderedDragAndDropItems);
 
         }
@@ -72,7 +74,9 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
         `Week 1 - ${orderedDragAndDropItems[0].length} bands`,
         `Week 2 - ${orderedDragAndDropItems[1].length} bands`,
         `Week 3 - ${orderedDragAndDropItems[2].length} bands`,
-        `Week 4 - ${orderedDragAndDropItems[3].length} bands`
+        `Week 4 - ${orderedDragAndDropItems[3].length} bands`,
+        `Finalists - ${orderedDragAndDropItems[4].length} bands`,
+        `Noncompeting Bands`
     ];
     return (
         <Card className={'original-song-card'}>

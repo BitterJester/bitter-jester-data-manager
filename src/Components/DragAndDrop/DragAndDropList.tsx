@@ -41,11 +41,6 @@ export const DragAndDropList = (props: Props) => {
         setOrderedItemsForDisplay(reorderedSubmissions);
     };
 
-    // Temporary hack to make this not break when this loads without the proper list
-    if (orderedItemsForDisplay.length !== 4) {
-        return null;
-    }
-
     const columnTitlesCopy = _.cloneDeep(props.orderedColumnTitles);
     return (
         <DragDropContext onDragEnd={onDragEnd}>
