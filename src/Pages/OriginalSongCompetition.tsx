@@ -19,7 +19,7 @@ export type OriginalSongs = {
     originalSongs: OriginalSong[]
 }
 
-type JudgesInfo = {
+export type JudgesInfo = {
     week: number;
     firstName: string;
     lastName: string;
