@@ -5,7 +5,7 @@ import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
 import {S3Client} from "../../aws/s3Client";
 
-type Judge = {
+export type Judge = {
     email: string;
     nickname: string;
 }
