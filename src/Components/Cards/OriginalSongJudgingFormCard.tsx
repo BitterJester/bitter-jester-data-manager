@@ -24,6 +24,7 @@ export type JudgeFeedback = {
 type Props = {
     bandName: string;
     songName: string;
+    week: number;
 }
 
 export const formatJudgesCommentsFilePath = (bandName: string, songName: string) => {
@@ -113,7 +114,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         );
 
         await publishSNS({
-            Message: 'update comment info',
+            Message: `week=${props.week}`,
             TopicArn: 'arn:aws:sns:us-east-1:771384749710:AggregateCommentsForWeekSnsTopic'
         });
         setAlert({...alert, isAlertOpen: true, message: 'Successfully saved your comments.', color: 'success'});

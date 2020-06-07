@@ -40,7 +40,7 @@ const OriginalSongContainer = (props: Props) => {
         <div className={'original-song-competition-container'}>
             <Row className={'original-song-info-row'}>
                 <Col>
-                    <OriginalSongJudgingFormCard bandName={bandName} songName={songName}/>
+                    <OriginalSongJudgingFormCard week={judge ? judge.week : 0} bandName={bandName} songName={songName}/>
                 </Col>
                 <Col>
                     <OriginalSongInfoCard originalSongs={props.originalSongs}

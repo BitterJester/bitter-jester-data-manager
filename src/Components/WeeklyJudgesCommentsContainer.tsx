@@ -31,7 +31,7 @@ const WeeklyJudgesCommentsContainer = () => {
         const s3Client = new S3Client();
 
         const fetch = async () => {
-            const aggregatedJudgesComments = await s3Client.getObject('aggregated-judges-comments.json') as AggregatedJudgesComments;
+            const aggregatedJudgesComments = await s3Client.getObject('week=2/aggregated-judges-comments.json') as AggregatedJudgesComments;
 
             aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
             setJudgesComments(aggregatedJudgesComments);
