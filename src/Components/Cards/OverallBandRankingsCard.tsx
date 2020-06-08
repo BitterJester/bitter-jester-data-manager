@@ -10,6 +10,7 @@ import {publishSNS} from "../../aws/publishSNS";
 
 type Props = {
     originalSongs: OriginalSongs;
+    week: number;
 }
 
 export type SongRanking = {
@@ -29,13 +30,13 @@ const s3Client = new S3Client();
 const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:CalculateScoresForEachOriginalSongInWeekSnsTopic';
 
 const OverallBandRankingsCard = (props: Props) => {
-    const {originalSongs} = props;
+    const {originalSongs, week} = props;
     const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false};
 
     const [songRankings, setSongRankings] = useState(initialSongRankings);
     const {user} = useAuth0();
 
-    const bandRankingsS3Key = `overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
+    const bandRankingsS3Key = `week=${week}/overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
 
     useEffect(() => {
         const fetch = async () => {
@@ -45,7 +46,7 @@ const OverallBandRankingsCard = (props: Props) => {
         };
 
         fetch();
-    }, []);
+    }, [week]);
 
     const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []});
     const save = async (updatedSongRankings) => {

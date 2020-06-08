@@ -36,11 +36,12 @@ const OriginalSongContainer = (props: Props) => {
         }
     }
 
+    const week = judge ? judge.week : 0;
     return (
         <div className={'original-song-competition-container'}>
             <Row className={'original-song-info-row'}>
                 <Col>
-                    <OriginalSongJudgingFormCard week={judge ? judge.week : 0} bandName={bandName} songName={songName}/>
+                    <OriginalSongJudgingFormCard week={week} bandName={bandName} songName={songName}/>
                 </Col>
                 <Col>
                     <OriginalSongInfoCard originalSongs={props.originalSongs}
@@ -56,7 +57,7 @@ const OriginalSongContainer = (props: Props) => {
             </Row>
             <Row className={'overall-band-rankings-row'}>
                 <Col>
-                    <OverallBandRankingsCard originalSongs={props.originalSongs}/>
+                    <OverallBandRankingsCard week={week} originalSongs={props.originalSongs}/>
                 </Col>
             </Row>
         </div>
