@@ -58,7 +58,8 @@ const OverallBandRankingsCard = (props: Props) => {
                 JSON.stringify(updatedSongRankings)
             )
         );
-        await publishSNS({Message: 'Overall Rankings have been updated.', TopicArn: CALCULATE_SCORES_TOPIC_ARN});
+
+        await publishSNS({Message: `week=${week}`, TopicArn: CALCULATE_SCORES_TOPIC_ARN});
     };
 
     return (

@@ -25,7 +25,7 @@ const WeeklyRankingScoreBarChartContainer = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            const fetchedSongRankingTotals = await new S3Client().getObject('song-ranking-totals.json') as SongRankingTotals;
+            const fetchedSongRankingTotals = await new S3Client().getObject('week=2/song-ranking-totals.json') as SongRankingTotals;
             fetchedSongRankingTotals.totalScores = fetchedSongRankingTotals.totalScores.sort((a, b) => a.totalPoints > b.totalPoints ? -1 : 1);
             setSongRankingTotals(fetchedSongRankingTotals);
         };
