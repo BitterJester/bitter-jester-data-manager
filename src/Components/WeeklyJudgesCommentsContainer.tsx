@@ -18,7 +18,11 @@ type AggregatedJudgesComments = {
     judge?: Judge;
 }
 
-const WeeklyJudgesCommentsContainer = () => {
+type Props = {
+    week: number;
+}
+
+const WeeklyJudgesCommentsContainer = (props: Props) => {
     const initialJudgesComments: AggregatedJudgesComments = {
         comments: [],
         allCommentsAreSubmitted: false,
@@ -31,14 +35,14 @@ const WeeklyJudgesCommentsContainer = () => {
         const s3Client = new S3Client();
 
         const fetch = async () => {
-            const aggregatedJudgesComments = await s3Client.getObject('week=1/aggregated-judges-comments.json') as AggregatedJudgesComments;
+            const aggregatedJudgesComments = await s3Client.getObject(`week=${props.week}/aggregated-judges-comments.json`) as AggregatedJudgesComments;
 
             aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
             setJudgesComments(aggregatedJudgesComments);
         };
 
         fetch();
-    }, []);
+    }, [props.week]);
 
     return (
         <div style={{textAlign: 'left'}}>

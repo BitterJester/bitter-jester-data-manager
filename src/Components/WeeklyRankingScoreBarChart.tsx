@@ -31,7 +31,6 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
     useEffect(() => {
         const graphLabels = songRankingTotals.totalScores.map(score => `"${score.songName}" by ${score.bandName}`);
         const totalPointsArray = songRankingTotals.totalScores.map(score => score.totalPoints);
-        console.log(totalPointsArray);
         const options: BarChartOptions = {
             chart: {
                 id: "basic-bar"
