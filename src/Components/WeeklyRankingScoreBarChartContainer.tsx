@@ -42,9 +42,7 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
     return (
         <div className={'original-song-competition-container'}>
             <WeeklyRankingsHeader songRankingTotals={songRankingTotals}/>
-            <div>
-                <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
-            </div>
+            <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
             <WeeklyJudgesCommentsContainer week={week}/>
         </div>
     );
