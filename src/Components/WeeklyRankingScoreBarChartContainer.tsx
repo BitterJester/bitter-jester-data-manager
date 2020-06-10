@@ -15,15 +15,18 @@ export type SongRankingTotals = {
     totalScores: SongRankingTotal[];
 };
 
-const WeeklyRankingScoreBarChartContainer = () => {
+type Props = {
+    week: number;
+}
+
+const WeeklyRankingScoreBarChartContainer = (props: Props) => {
+    const {week} = props;
     const initialSongRankingTotals: SongRankingTotals = {
         totalScores: [],
         totalFinalRankings: 0,
         allSongsAreSubmitted: false
     };
     const [songRankingTotals, setSongRankingTotals] = useState(initialSongRankingTotals);
-
-    const week = 2;
 
     useEffect(() => {
         const fetch = async () => {
