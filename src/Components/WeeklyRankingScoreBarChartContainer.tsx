@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {S3Client} from "../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
+import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
 
 type SongRankingTotal = {
     songName: string;
@@ -40,16 +41,7 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     return (
         <div className={'original-song-competition-container'}>
-            <div style={{textAlign: "center"}}>
-                <p>
-                    {`Total Final Rankings: ${songRankingTotals.totalFinalRankings}`}
-                </p>
-                {songRankingTotals.allSongsAreSubmitted &&
-                <p>
-                    {'All rankings have been submitted for this week.'}
-                </p>
-                }
-            </div>
+            <WeeklyRankingsHeader songRankingTotals={songRankingTotals}/>
             <div>
                 <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
             </div>
