@@ -36,7 +36,7 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
         };
 
         fetch();
-    }, []);
+    }, [week]);
 
     return (
         <div className={'original-song-competition-container'}>
