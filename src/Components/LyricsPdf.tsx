@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {OriginalSong} from "../Pages/OriginalSongCompetition";
 import {Document, Page, pdfjs} from 'react-pdf';
 import {Button} from "reactstrap";
@@ -17,12 +17,16 @@ const LyricsPdf = (props: Props) => {
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [originalSong]);
+
     return (
         <div>
             <h3>Lyrics</h3>
             <div>
                 <div style={{display: 'inline-block'}}>
-                    <Button onClick={() => setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1)}>
+                    <Button onClick={() => setCurrentPage(currentPage ? totalPages : currentPage - 1)}>
                         {'<'}
                     </Button>
                 </div>
