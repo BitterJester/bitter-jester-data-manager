@@ -18,7 +18,13 @@ const RankingDropdown = (props: Props) => {
     const {originalSongs, isOpen, toggle, updateSongRankings, selectedSong, disabled} = props;
     const {songName, bandName, placementName} = selectedSong;
 
-    const dropdownItems = originalSongs.originalSongs.map(song => {
+    const removeThatOneSongThatIsntAllowedToBeVotedFor = () => {
+        return originalSongs.originalSongs.filter(song => song.songName.toLowerCase() !== 'song for fina');
+    };
+
+    const filteredOriginalSongs = removeThatOneSongThatIsntAllowedToBeVotedFor();
+
+    const dropdownItems = filteredOriginalSongs.map(song => {
         return (
             <DropdownItem onClick={() => updateSongRankings(song, selectedSong)}>
                 {`"${song.songName}" by ${song.bandName}`}
