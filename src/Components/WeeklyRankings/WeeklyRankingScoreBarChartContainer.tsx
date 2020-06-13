@@ -40,7 +40,7 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
     }, [week]);
 
     return (
-        <div className={'original-song-competition-container'}>
+        <div className={'weekly-results-container'}>
             <WeeklyRankingsHeader songRankingTotals={songRankingTotals}/>
             <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
             <WeeklyJudgesCommentsContainer week={week}/>

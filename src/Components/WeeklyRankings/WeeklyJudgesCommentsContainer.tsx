@@ -5,6 +5,8 @@ import _ from 'lodash';
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
 import WeeklyJudgesFeedback from "./WeeklyJudgesFeedback";
 import JudgesMissingComments from "./JudgesMissingComments";
+import {Alert} from "reactstrap";
+import CardContainer from "../Cards/CardContainer";
 
 type JudgesWhoHaveNotSubmittedAllComments = {
     judge: JudgesInfo;
@@ -46,13 +48,16 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
     }, [props.week]);
 
     return (
-        <div style={{textAlign: 'left'}}>
+        <CardContainer style={{textAlign: 'left'}}>
+            <Alert isOpen={judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments === 0} color={'success'}>
+                {'All judges have submitted their comments for this week!'}
+            </Alert>
             {
                 judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments > 0 &&
                 <JudgesMissingComments judgesComments={judgesComments}/>
             }
             <WeeklyJudgesFeedback judgesComments={judgesComments}/>
-        </div>
+        </CardContainer>
     );
 };
 

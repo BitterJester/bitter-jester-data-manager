@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Chart from "react-apexcharts";
 import {SongRankingTotals} from "./WeeklyRankingScoreBarChartContainer";
+import CardContainer from "../Cards/CardContainer";
+import {Title} from "../Title";
 
 type Props = {
     songRankingTotals: SongRankingTotals;
@@ -55,18 +57,17 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
     const [chartData, setChartData] = useState({} as BarChartData);
 
     return (
-        <div className="app">
-            <div className="row">
-                <div className="mixed-chart">
-                    {chartData.series && <Chart
-                        options={chartData.options}
-                        series={chartData.series}
-                        type="bar"
-                        width="1000"
-                    />}
-                </div>
+        <CardContainer className="weekly-ranking-bar-chart-container">
+            <Title titleDisplayText={'SONG RANKINGS'}/>
+            <div className="weekly-ranking-bar-chart">
+                {chartData.series && <Chart
+                    options={chartData.options}
+                    series={chartData.series}
+                    type="bar"
+                    height={'500'}
+                />}
             </div>
-        </div>
+        </CardContainer>
     );
 };
 
