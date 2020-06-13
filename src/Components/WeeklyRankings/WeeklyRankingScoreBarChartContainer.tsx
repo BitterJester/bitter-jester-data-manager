@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {S3Client} from "../aws/s3Client";
+import {S3Client} from "../../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";

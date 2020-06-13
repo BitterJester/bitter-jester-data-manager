@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Page from "./Components/Page";
-import WeeklyRankingScoreBarChartContainer from "./Components/WeeklyRankingScoreBarChartContainer";
+import WeeklyRankingScoreBarChartContainer from "./Components/WeeklyRankings/WeeklyRankingScoreBarChartContainer";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import CardContainer from "./Components/Cards/CardContainer";
 

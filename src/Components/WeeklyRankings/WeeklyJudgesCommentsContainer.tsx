@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {S3Client} from "../aws/s3Client";
-import {Judge, JudgeFeedback} from "./Cards/OriginalSongJudgingFormCard";
+import {S3Client} from "../../aws/s3Client";
+import {Judge, JudgeFeedback} from "../Cards/OriginalSongJudgingFormCard";
 import _ from 'lodash';
-import {JudgesInfo} from "../Pages/OriginalSongCompetition";
-import {Title} from "./Title";
+import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
+import {Title} from "../Title";
 
 type JudgesWhoHaveNotSubmittedAllComments = {
     judge: JudgesInfo;
