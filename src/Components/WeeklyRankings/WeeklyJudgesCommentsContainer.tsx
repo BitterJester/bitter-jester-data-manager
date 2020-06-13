@@ -5,6 +5,7 @@ import _ from 'lodash';
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
 import {Title} from "../Title";
 import WeeklyJudgesFeedback from "./WeeklyJudgesFeedback";
+import JudgesMissingComments from "./JudgesMissingComments";
 
 type JudgesWhoHaveNotSubmittedAllComments = {
     judge: JudgesInfo;
@@ -48,18 +49,7 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
     return (
         <div style={{textAlign: 'left'}}>
             <Title titleDisplayText={'JUDGES MISSING COMMENTS'}/>
-            <div style={{textAlign: 'center'}}>
-                {
-                    judgesComments && judgesComments.judgesWhoHaveNotSubmittedAllComments.map(judge => {
-                        return (
-                            <p>
-                                {`${judge.judge.emailAddress} has completed comments for ${judge.numberOfSongsWithAllComments} of 14 songs.`}
-                            </p>
-
-                        )
-                    })
-                }
-            </div>
+            <JudgesMissingComments judgesComments={judgesComments}/>
             <WeeklyJudgesFeedback judgesComments={judgesComments}/>
         </div>
     );
