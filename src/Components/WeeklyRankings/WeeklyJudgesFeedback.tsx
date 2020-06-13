@@ -11,17 +11,17 @@ const WeeklyJudgesFeedback = (props: Props) => {
     return (
         <Fragment>
             <Title titleDisplayText={'JUDGES FEEDBACK'}/>
-            <div style={{overflowY: 'scroll', maxHeight: '800px'}}>
+            <div className={'weekly-judges-feedback-container'}>
                 {
                     judgesComments && judgesComments.comments.map((comment) => {
-                            return (
-                                <div>
-                                    {
-                                        <h3 style={{fontWeight: 'bold'}}>
-                                            {`Judge: ${comment.judge.nickname}`}
-                                        </h3>
-                                    }
-                                    <p style={{fontWeight: 'bold'}}>
+                        return (
+                            <div>
+                                {
+                                    <h3 style={{fontWeight: 'bold'}}>
+                                        {`Judge: ${comment.judge.nickname}`}
+                                    </h3>
+                                }
+                                <p style={{fontWeight: 'bold'}}>
                                         {`"${comment.songInfo.songName}"`}
                                     </p>
                                     <p>

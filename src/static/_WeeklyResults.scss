@@ -14,5 +14,11 @@
     .all-judges-have-submitted-alert {
       text-align: center;
     }
+
+    .weekly-judges-feedback-container {
+      border: 1px solid black;
+      overflow-y: scroll;
+      max-height: 800px;
+    }
   }
 }
