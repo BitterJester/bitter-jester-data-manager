@@ -3,7 +3,6 @@ import {S3Client} from "../../aws/s3Client";
 import {Judge, JudgeFeedback} from "../Cards/OriginalSongJudgingFormCard";
 import _ from 'lodash';
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
-import {Title} from "../Title";
 import WeeklyJudgesFeedback from "./WeeklyJudgesFeedback";
 import JudgesMissingComments from "./JudgesMissingComments";
 
@@ -48,8 +47,10 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
 
     return (
         <div style={{textAlign: 'left'}}>
-            <Title titleDisplayText={'JUDGES MISSING COMMENTS'}/>
-            <JudgesMissingComments judgesComments={judgesComments}/>
+            {
+                judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments > 0 &&
+                <JudgesMissingComments judgesComments={judgesComments}/>
+            }
             <WeeklyJudgesFeedback judgesComments={judgesComments}/>
         </div>
     );
