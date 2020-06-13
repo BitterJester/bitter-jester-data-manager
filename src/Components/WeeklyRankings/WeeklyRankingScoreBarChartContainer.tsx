@@ -18,10 +18,11 @@ export type SongRankingTotals = {
 
 type Props = {
     week: number;
+    setWeek: Function;
 }
 
 const WeeklyRankingScoreBarChartContainer = (props: Props) => {
-    const {week} = props;
+    const {week, setWeek} = props;
     const initialSongRankingTotals: SongRankingTotals = {
         totalScores: [],
         totalFinalRankings: 0,
@@ -41,7 +42,7 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     return (
         <div className={'weekly-results-container'}>
-            <WeeklyRankingsHeader songRankingTotals={songRankingTotals}/>
+            <WeeklyRankingsHeader week={week} setWeek={setWeek} songRankingTotals={songRankingTotals}/>
             <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
             <WeeklyJudgesCommentsContainer week={week}/>
         </div>
