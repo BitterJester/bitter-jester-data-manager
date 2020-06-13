@@ -48,10 +48,12 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
     }, [props.week]);
 
     return (
-        <CardContainer style={{textAlign: 'left'}}>
-            <Alert isOpen={judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments === 0} color={'success'}>
-                {'All judges have submitted their comments for this week!'}
-            </Alert>
+        <CardContainer className={'weekly-judges-comments-container'} style={{textAlign: 'left'}}>
+            <div className={'all-judges-have-submitted-alert'}>
+                <Alert isOpen={judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments === 0} color={'success'}>
+                    {'All judges have submitted their comments for this week!'}
+                </Alert>
+            </div>
             {
                 judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments > 0 &&
                 <JudgesMissingComments judgesComments={judgesComments}/>

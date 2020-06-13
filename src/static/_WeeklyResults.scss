@@ -1,9 +1,18 @@
 .weekly-results-container {
+  max-width: 100%;
+
   .weekly-ranking-bar-chart-container {
-    padding: 16px;
+    margin: 16px 0;
 
     .weekly-ranking-bar-chart {
-      margin: 0 auto;
+    }
+  }
+
+  .weekly-judges-comments-container {
+    padding: 16px;
+
+    .all-judges-have-submitted-alert {
+      text-align: center;
     }
   }
 }
