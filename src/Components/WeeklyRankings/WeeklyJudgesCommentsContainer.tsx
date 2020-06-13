@@ -4,13 +4,14 @@ import {Judge, JudgeFeedback} from "../Cards/OriginalSongJudgingFormCard";
 import _ from 'lodash';
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
 import {Title} from "../Title";
+import WeeklyJudgesFeedback from "./WeeklyJudgesFeedback";
 
 type JudgesWhoHaveNotSubmittedAllComments = {
     judge: JudgesInfo;
     numberOfSongsWithAllComments: number;
 }
 
-type AggregatedJudgesComments = {
+export type AggregatedJudgesComments = {
     comments: JudgeFeedback[];
     allCommentsAreSubmitted: boolean;
     judgesWhoHaveNotSubmittedAllComments: JudgesWhoHaveNotSubmittedAllComments[];
@@ -59,35 +60,7 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
                     })
                 }
             </div>
-            <Title titleDisplayText={'JUDGES FEEDBACK'}/>
-            <div style={{overflowY: 'scroll', maxHeight: '800px'}}>
-                {
-                    judgesComments && judgesComments.comments.map((comment) => {
-                            return (
-                                <div>
-                                    {
-                                        <h3 style={{fontWeight: 'bold'}}>
-                                            {`Judge: ${comment.judge.nickname}`}
-                                        </h3>
-                                    }
-                                    <p style={{fontWeight: 'bold'}}>
-                                        {`"${comment.songInfo.songName}"`}
-                                    </p>
-                                    <p>
-                                        {`Initial Impression: ${comment.initialImpression}`}
-                                    </p>
-                                    <p>
-                                        {`Feedback: ${comment.feedback}`}
-                                    </p>
-                                    <p>
-                                        {`Favorite Aspect: ${comment.favoriteAspect}`}
-                                    </p>
-                                </div>
-                            )
-                        }
-                    )
-                }
-            </div>
+            <WeeklyJudgesFeedback judgesComments={judgesComments}/>
         </div>
     );
 };
