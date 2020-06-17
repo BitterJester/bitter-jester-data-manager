@@ -26,7 +26,7 @@ const LyricsPdf = (props: Props) => {
             <h3>Lyrics</h3>
             <div>
                 <div style={{display: 'inline-block'}}>
-                    <Button onClick={() => setCurrentPage(currentPage ? totalPages : currentPage - 1)}>
+                    <Button onClick={() => setCurrentPage(currentPage === 1 ? totalPages : currentPage - 1)}>
                         {'<'}
                     </Button>
                 </div>

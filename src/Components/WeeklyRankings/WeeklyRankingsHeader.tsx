@@ -21,7 +21,6 @@ const WeeklyRankingsHeader = (props: Props) => {
         <div style={{textAlign: "center"}}>
             <Alert isOpen={songRankingTotals.allSongsAreSubmitted} color={'success'}>
                 {'All rankings have been submitted for this week.'}
-
             </Alert>
             <Dropdown isOpen={dropdownState.isOpen}
                       toggle={() => setDropdownState({...dropdownState, isOpen: !dropdownState.isOpen})}>
