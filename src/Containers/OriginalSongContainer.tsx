@@ -25,7 +25,7 @@ const OriginalSongContainer = (props: Props) => {
     const judge = props.judgesInfo.judges.filter(judge => judge.emailAddress.toLowerCase() === user.email.toLowerCase())[0];
     if (judge && originalSongs) {
         const songsForJudgesWeek = originalSongs.filter(song => {
-            return song.scheduledWeek === judge.week;
+            return song.scheduledWeeks ? song.scheduledWeeks.includes(judge.week) : [];
         });
         if (originalSongs.length > songsForJudgesWeek.length) {
             props.setOriginalSongs(
