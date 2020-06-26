@@ -7,6 +7,7 @@ import {useAuth0} from "../../react-auth0-spa";
 import OverallSongRankingsDropdownRow from "../OverallSongRankingsDropdownRow";
 import OverallSongRankingsPersistanceRow from "../OverallSongRankingsPersistanceRow";
 import {publishSNS} from "../../aws/publishSNS";
+import {Judge} from "./OriginalSongJudgingFormCard";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -24,6 +25,7 @@ export type SongRanking = {
 export type SongRankings = {
     rankings: SongRanking[];
     isFinalRanking: boolean;
+    judge: Judge;
 }
 const s3Client = new S3Client();
 
@@ -31,10 +33,11 @@ const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:Calculate
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs, week} = props;
-    const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false};
-
-    const [songRankings, setSongRankings] = useState(initialSongRankings);
     const {user} = useAuth0();
+    const judge = {email: user.email, nickname: user.nickname};
+
+    const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false, judge};
+    const [songRankings, setSongRankings] = useState(initialSongRankings);
 
     const bandRankingsS3Key = `week=${week}/overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
 
