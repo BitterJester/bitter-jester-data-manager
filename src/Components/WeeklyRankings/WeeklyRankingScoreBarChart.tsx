@@ -67,6 +67,20 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
                     height={'500'}
                 />}
             </div>
+            <p>
+                Judges Who Haven't Submitted Rankings
+            </p>
+            {
+                songRankingTotals.judgesWhoHaveNotSubmittedAllRankings && songRankingTotals.judgesWhoHaveNotSubmittedAllRankings.map(judge => {
+                    return (
+                        <div>
+                            <div>
+                                {`${judge.email}`}
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </CardContainer>
     );
 };

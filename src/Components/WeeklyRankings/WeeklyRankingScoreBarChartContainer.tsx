@@ -3,6 +3,7 @@ import {S3Client} from "../../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
+import {Judge} from "../Cards/OriginalSongJudgingFormCard";
 
 type SongRankingTotal = {
     songName: string;
@@ -14,6 +15,7 @@ export type SongRankingTotals = {
     allSongsAreSubmitted: boolean;
     totalFinalRankings: number;
     totalScores: SongRankingTotal[];
+    judgesWhoHaveNotSubmittedAllRankings: Judge[]
 };
 
 type Props = {
@@ -26,7 +28,8 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
     const initialSongRankingTotals: SongRankingTotals = {
         totalScores: [],
         totalFinalRankings: 0,
-        allSongsAreSubmitted: false
+        allSongsAreSubmitted: false,
+        judgesWhoHaveNotSubmittedAllRankings: []
     };
     const [songRankingTotals, setSongRankingTotals] = useState(initialSongRankingTotals);
 
@@ -42,7 +45,10 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     return (
         <div className={'weekly-results-container'}>
-            <WeeklyRankingsHeader week={week} setWeek={setWeek} songRankingTotals={songRankingTotals}/>
+            <WeeklyRankingsHeader
+                week={week}
+                setWeek={setWeek}
+                songRankingTotals={songRankingTotals}/>
             <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
             <WeeklyJudgesCommentsContainer week={week}/>
         </div>

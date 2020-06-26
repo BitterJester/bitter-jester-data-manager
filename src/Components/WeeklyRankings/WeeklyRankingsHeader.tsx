@@ -40,6 +40,9 @@ const WeeklyRankingsHeader = (props: Props) => {
                     <DropdownItem onClick={() => setWeek(4)}>
                         4
                     </DropdownItem>
+                    <DropdownItem onClick={() => setWeek(5)}>
+                        Finals
+                    </DropdownItem>
                 </DropdownMenu>
             </Dropdown>
             <p>
