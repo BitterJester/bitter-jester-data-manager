@@ -3,7 +3,7 @@ import {S3Client} from "../../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
-import {Judge} from "../Cards/OriginalSongJudgingFormCard";
+import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
 
 type SongRankingTotal = {
     songName: string;
@@ -15,7 +15,7 @@ export type SongRankingTotals = {
     allSongsAreSubmitted: boolean;
     totalFinalRankings: number;
     totalScores: SongRankingTotal[];
-    judgesWhoHaveNotSubmittedAllRankings: Judge[]
+    judgesWhoHaveNotSubmittedAllRankings: JudgesInfo[]
 };
 
 type Props = {

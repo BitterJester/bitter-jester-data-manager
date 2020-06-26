@@ -75,7 +75,7 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
                     return (
                         <div>
                             <div>
-                                {`${judge.email}`}
+                                {`${judge.emailAddress}`}
                             </div>
                         </div>
                     )
