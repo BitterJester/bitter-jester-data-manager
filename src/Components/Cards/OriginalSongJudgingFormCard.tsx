@@ -18,7 +18,8 @@ export type JudgeFeedback = {
     favoriteAspect: string;
     songInfo: {
         songName: string;
-    }
+    },
+    week: number;
 }
 
 type Props = {
@@ -38,7 +39,7 @@ export const formatJudgesCommentsFilePath = (bandName: string, songName: string)
 
 const OriginalSongJudgingFormCard = (props: Props) => {
     const {user} = useAuth0();
-    const {bandName, songName} = props;
+    const {bandName, songName, week} = props;
 
     const [judgesComments, setJudgesComments] = useState({} as JudgeFeedback);
 
@@ -60,7 +61,8 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     judge: {
                         nickname: user.nickname,
                         email: user.email
-                    }
+                    },
+                    week
                 };
 
                 setJudgesComments(initialJudgesComments);
@@ -101,7 +103,8 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             },
             songInfo: {
                 songName: songName
-            }
+            },
+            week
         };
 
         const s3Client = new S3Client();
@@ -114,7 +117,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         );
 
         await publishSNS({
-            Message: `week=${props.week}`,
+            Message: `week=${week}`,
             TopicArn: 'arn:aws:sns:us-east-1:771384749710:AggregateCommentsForWeekSnsTopic'
         });
         setAlert({...alert, isAlertOpen: true, message: 'Successfully saved your comments.', color: 'success'});
