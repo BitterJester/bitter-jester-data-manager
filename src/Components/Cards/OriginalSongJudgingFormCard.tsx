@@ -82,18 +82,6 @@ const OriginalSongJudgingFormCard = (props: Props) => {
         setJudgesComments({...judgesComments, [fieldToUpdate]: value})
     };
 
-    const updateInitialImpressions = (event) => {
-        updateJudgesComments('initialImpression', event.target.value);
-    };
-
-    const updateFeedback = (event) => {
-        updateJudgesComments('feedback', event.target.value);
-    };
-
-    const updateFavoriteAspect = (event) => {
-        updateJudgesComments('favoriteAspect', event.target.value);
-    };
-
     const combineAndSave = async (): Promise<void> => {
         const judgeFeedback: JudgeFeedback = {
             initialImpression: judgesComments.initialImpression,
@@ -146,10 +134,8 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     songName={songName}
                     bandName={bandName}/>
                 <JudgesCommentsForm
-                    updateParent={updateInitialImpressions}
-                    judgesComments={judgesComments}
-                    updateParent1={updateFeedback}
-                    updateParent2={updateFavoriteAspect}/>
+                    updateJudgesComments={updateJudgesComments}
+                    judgesComments={judgesComments}/>
             </div>
         </Card>
     );
