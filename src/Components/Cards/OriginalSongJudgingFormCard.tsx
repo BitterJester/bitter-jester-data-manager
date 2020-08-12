@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Card, Form} from "reactstrap";
+import {Card} from "reactstrap";
 import {Title} from "../Title";
-import TextAreaFormInput from "../ TextAreaFormInput";
 import {useAuth0} from "../../react-auth0-spa";
 import {S3Client} from "../../aws/s3Client";
 import {publishSNS} from "../../aws/publishSNS";
 import {JudgingReminderAlert} from "./JudgingReminderAlert";
 import {SaveCommentsButton} from "./SaveCommentsButton";
+import {JudgesCommentsForm} from "./JudgesCommentsForm";
 
 export type Judge = {
     email: string;
@@ -145,22 +145,8 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     onClick={combineAndSave}
                     songName={songName}
                     bandName={bandName}/>
-                <Form className={'judges-comments-form'}>
-                    <TextAreaFormInput
-                        label={'What were your initial impressions?'}
-                        id={'initialImpressions'}
-                        updateParent={updateInitialImpressions}
-                        textAreaValue={judgesComments.initialImpression || ''}
-                    />
-                    <TextAreaFormInput label={'What feedback or suggestions would you give the artist(s)?'}
-                                       id={'feedback'}
-                                       updateParent={updateFeedback}
-                                       textAreaValue={judgesComments.feedback || ''}/>
-                    <TextAreaFormInput label={'What did you like most about what you heard? Please keep this positive.'}
-                                       id={'favoriteAspect'}
-                                       updateParent={updateFavoriteAspect}
-                                       textAreaValue={judgesComments.favoriteAspect || ''}/>
-                </Form>
+                <JudgesCommentsForm updateParent={updateInitialImpressions} judgesComments={judgesComments}
+                                    updateParent1={updateFeedback} updateParent2={updateFavoriteAspect}/>
             </div>
         </Card>
     );
