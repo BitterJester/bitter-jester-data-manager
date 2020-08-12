@@ -145,8 +145,11 @@ const OriginalSongJudgingFormCard = (props: Props) => {
                     onClick={combineAndSave}
                     songName={songName}
                     bandName={bandName}/>
-                <JudgesCommentsForm updateParent={updateInitialImpressions} judgesComments={judgesComments}
-                                    updateParent1={updateFeedback} updateParent2={updateFavoriteAspect}/>
+                <JudgesCommentsForm
+                    updateParent={updateInitialImpressions}
+                    judgesComments={judgesComments}
+                    updateParent1={updateFeedback}
+                    updateParent2={updateFavoriteAspect}/>
             </div>
         </Card>
     );
