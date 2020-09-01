@@ -3,7 +3,7 @@ import {S3Client} from "../../aws/s3Client";
 import {Judge, JudgeFeedback} from "../Cards/OriginalSongJudgingFormCard";
 import _ from 'lodash';
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
-import WeeklyJudgesFeedback from "./WeeklyJudgesFeedback";
+import JudgesFeedbackForWeekContent from "./JudgesFeedbackForWeekContent";
 import JudgesMissingComments from "./JudgesMissingComments";
 import {Alert} from "reactstrap";
 import CardContainer from "../Cards/CardContainer";
@@ -58,7 +58,7 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
                 judgesComments.numberOfJudgesWhoHaveNotSubmittedAllComments > 0 &&
                 <JudgesMissingComments judgesComments={judgesComments}/>
             }
-            <WeeklyJudgesFeedback judgesComments={judgesComments}/>
+            <JudgesFeedbackForWeekContent judgesComments={judgesComments}/>
         </CardContainer>
     );
 };

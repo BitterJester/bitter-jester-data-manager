@@ -7,7 +7,7 @@ type Props = {
     judgesComments: AggregatedJudgesComments;
 }
 
-const WeeklyJudgesFeedback = (props: Props) => {
+const JudgesFeedbackForWeekContent = (props: Props) => {
     const {judgesComments} = props;
     return (
         <Fragment>
@@ -17,7 +17,7 @@ const WeeklyJudgesFeedback = (props: Props) => {
                     judgesComments && judgesComments.comments.map((comment) => {
                         return (
                             <JudgesFeedbackItem comment={comment}/>
-                            )
+                        )
                         }
                     )
                 }
@@ -26,4 +26,4 @@ const WeeklyJudgesFeedback = (props: Props) => {
     );
 };
 
-export default WeeklyJudgesFeedback;
+export default JudgesFeedbackForWeekContent;
