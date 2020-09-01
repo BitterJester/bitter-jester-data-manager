@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import {Title} from "../Title";
 import {AggregatedJudgesComments} from "./WeeklyJudgesCommentsContainer";
+import {JudgesFeedbackItem} from "./JudgesFeedbackItem";
 
 type Props = {
     judgesComments: AggregatedJudgesComments;
@@ -15,25 +16,7 @@ const WeeklyJudgesFeedback = (props: Props) => {
                 {
                     judgesComments && judgesComments.comments.map((comment) => {
                         return (
-                            <div>
-                                {
-                                    <h3 style={{fontWeight: 'bold'}}>
-                                        {`Judge: ${comment.judge.nickname}`}
-                                    </h3>
-                                }
-                                <p style={{fontWeight: 'bold'}}>
-                                        {`"${comment.songInfo.songName}"`}
-                                    </p>
-                                    <p>
-                                        {`Initial Impression: ${comment.initialImpression}`}
-                                    </p>
-                                    <p>
-                                        {`Feedback: ${comment.feedback}`}
-                                    </p>
-                                    <p>
-                                        {`Favorite Aspect: ${comment.favoriteAspect}`}
-                                    </p>
-                                </div>
+                            <JudgesFeedbackItem comment={comment}/>
                             )
                         }
                     )
