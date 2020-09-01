@@ -4,8 +4,8 @@ import {Title} from "../Title";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
 import {useAuth0} from "../../react-auth0-spa";
-import OverallSongRankingsDropdownRow from "../OverallSongRankingsDropdownRow";
-import OverallSongRankingsPersistanceRow from "../OverallSongRankingsPersistanceRow";
+import OverallSongRankingsDropdownRow from "../JudgingFormForWeek/OverallSongRankingsDropdownRow";
+import OverallSongRankingsPersistanceRow from "../JudgingFormForWeek/OverallSongRankingsPersistanceRow";
 import {publishSNS} from "../../aws/publishSNS";
 import {Judge} from "./OriginalSongJudgingFormCard";
 

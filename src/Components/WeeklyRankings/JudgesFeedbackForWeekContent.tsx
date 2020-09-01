@@ -14,11 +14,10 @@ const JudgesFeedbackForWeekContent = (props: Props) => {
             <Title titleDisplayText={'JUDGES FEEDBACK'}/>
             <div className={'weekly-judges-feedback-container'}>
                 {
-                    judgesComments && judgesComments.comments.map((comment) => {
-                        return (
+                    judgesComments && judgesComments.comments.map((comment) =>
+                        (
                             <JudgesFeedbackItem comment={comment}/>
                         )
-                        }
                     )
                 }
             </div>

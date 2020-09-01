@@ -3,7 +3,7 @@ import OriginalSongInfoCard from "./OriginalSongInfoCard";
 import {shallow} from "enzyme";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
 import {Title} from "../Title";
-import BandSelectionDropDown from "../BandSelectionDropDown";
+import BandSelectionDropDown from "../JudgingFormForWeek/BandSelectionDropDown";
 
 describe('OriginalSongInfoCard - Initial', () => {
     const originalSongs: OriginalSongs = {

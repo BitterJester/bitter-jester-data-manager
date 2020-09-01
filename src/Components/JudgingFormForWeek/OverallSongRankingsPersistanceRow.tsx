@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import ConfirmationCheckbox from "./ConfirmationCheckbox";
+import ConfirmationCheckbox from "../ConfirmationCheckbox";
 import {Button, Row} from "reactstrap";
-import {SongRankings} from "./Cards/OverallBandRankingsCard";
+import {SongRankings} from "../Cards/OverallBandRankingsCard";
 
 
 type Props = {

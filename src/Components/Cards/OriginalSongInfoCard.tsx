@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {Title} from "../Title";
 import {Card} from "reactstrap";
 import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
-import BandSelectionDropDown from "../BandSelectionDropDown";
-import LyricsPdf from "../LyricsPdf";
+import BandSelectionDropDown from "../JudgingFormForWeek/BandSelectionDropDown";
+import LyricsPdf from "../JudgingFormForWeek/LyricsPdf";
 
 type Props = {
     originalSongs: OriginalSongs;
