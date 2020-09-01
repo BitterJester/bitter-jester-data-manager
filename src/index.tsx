@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
-import './static/_Default.scss';
+import './static/scss/_Default.scss';
 import {Auth0Provider} from "./react-auth0-spa";
 import history from "./utils/history";
 

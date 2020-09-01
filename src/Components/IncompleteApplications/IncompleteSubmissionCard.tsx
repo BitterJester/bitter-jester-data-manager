@@ -1,10 +1,10 @@
 import React from 'react';
 
-import '../../static/completedSubmissionCard.css';
+import '../../static/css/completedSubmissionCard.css';
 import CardContainer from '../Cards/CardContainer';
-import { Row } from 'reactstrap';
+import {Row} from 'reactstrap';
 import CardItem from '../Cards/CardItem';
-import { IncompleteApplication } from '../../Containers/IncompleteApplicationsContainer';
+import {IncompleteApplication} from '../../Containers/IncompleteApplicationsContainer';
 
 type Props = {
     incompleteApplication: IncompleteApplication;

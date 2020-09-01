@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Submissions} from './Pages/Submissions/Submissions';
 import {IncompleteApplications} from './Pages/Submissions/IncompleteApplications';
-import './static/sidebar.css';
+import './static/css/sidebar.css';
 import {useAuth0} from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar';

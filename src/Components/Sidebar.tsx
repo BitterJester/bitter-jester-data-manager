@@ -34,8 +34,8 @@ const Sidebar = (props: Props) => {
 
     const authenticate = isAuthenticated ? logoutOnClick : loginOnClick;
     const logoUrl = window.location.pathname === '/originalSong' ?
-        require('../static/bj-14-5-logo.png') :
-        require('../static/bj15ylogo.png');
+        require('../static/images/bj-14-5-logo.png') :
+        require('../static/images/bj15ylogo.png');
     return (
         <Col className={'sidebar-container'}>
             <div className={'sidebar-logo'}>

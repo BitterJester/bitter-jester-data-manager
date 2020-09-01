@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Row, Col } from 'reactstrap';
-import { DragAndDropList } from '../DragAndDrop/DragAndDropList';
-import { Schedule } from '../../Containers/ScheduleContainer';
-import { BackgroundColor } from './BackgroundColor';
-import '../../static/suggestedScheduleDragAndDropLists.css';
+import React, {Fragment} from 'react';
+import {Col, Row} from 'reactstrap';
+import {DragAndDropList} from '../DragAndDrop/DragAndDropList';
+import {Schedule} from '../../Containers/ScheduleContainer';
+import {BackgroundColor} from './BackgroundColor';
+import '../../static/css/suggestedScheduleDragAndDropLists.css';
 
 type Props = {
     schedule: Schedule;
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const SuggestedScheduleDragAndDropLists = (props: Props) => {
-    const { schedule } = props;
+    const {schedule} = props;
     const fridayNights = ['6/5', '6/12', '6/19', '6/26'];
     const schedulesInformationForEachNight = [];
 

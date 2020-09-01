@@ -1,7 +1,7 @@
 import React from 'react';
 
-import '../../static/card.css';
-import { Col } from 'reactstrap';
+import '../../static/css/card.css';
+import {Col} from 'reactstrap';
 
 type Props = {
     label: string;

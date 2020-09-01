@@ -1,5 +1,5 @@
 import React from 'react';
-import '../static/title.css';
+import '../static/css/title.css';
 
 type Props = {
     className?: string;

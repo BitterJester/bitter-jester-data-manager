@@ -1,13 +1,13 @@
 import React from 'react';
-import { Row, Col } from 'reactstrap';
-import '../../static/tableHeader.css';
+import {Col, Row} from 'reactstrap';
+import '../../static/css/tableHeader.css';
 
 type Props = {
     tableColumnNamesOrderedFromLeftToRight: string[];
 }
 
 export const TableHeader = (props: Props) => {
-    const { tableColumnNamesOrderedFromLeftToRight } = props;
+    const {tableColumnNamesOrderedFromLeftToRight} = props;
 
     return (
         <Row>

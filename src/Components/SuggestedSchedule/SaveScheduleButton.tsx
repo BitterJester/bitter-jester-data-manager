@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Button} from 'reactstrap';
 import {S3Client} from '../../aws/s3Client';
 import {LAST_SAVE_VERSION, Schedule} from '../../Containers/ScheduleContainer';
-import '../../static/saveScheduleButton.css';
+import '../../static/css/saveScheduleButton.css';
 import _ from 'lodash';
 
 type Props = {

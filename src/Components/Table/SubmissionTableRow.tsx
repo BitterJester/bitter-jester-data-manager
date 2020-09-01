@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import { Row, Col } from 'reactstrap';
-import '../../static/tableRow.css';
+import React, {Fragment} from 'react';
+import {Col, Row} from 'reactstrap';
+import '../../static/css/tableRow.css';
 
 type Props = {
     flattenedDataToDisplay: any[];
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const SubmissionTableRow = (props: Props) => {
-    const { flattenedDataToDisplay } = props;
+    const {flattenedDataToDisplay} = props;
 
     return (
         <Row>

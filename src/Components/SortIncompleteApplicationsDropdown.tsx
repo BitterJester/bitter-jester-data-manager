@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
-import '../static/scheduleDropdown.css';
+import '../static/css/scheduleDropdown.css';
 
 export type OnClickFunction = {
     (event: React.MouseEvent<Element, MouseEvent>): void;
