@@ -13,22 +13,28 @@ type Props = {
 };
 
 export const DragAndDropList = (props: Props) => {
-    const { initialOrderComponentsToDisplay, getItemStyle } = props;
+    const {initialOrderComponentsToDisplay, getItemStyle} = props;
     const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialOrderComponentsToDisplay);
     useEffect(() => {
         setOrderedItemsForDisplay(initialOrderComponentsToDisplay);
     }, [initialOrderComponentsToDisplay]);
 
+    const getDroppableIndex = (droppableId) => droppableId.split('-')[1];
+
     const reorder = (listOfLists: any[], result: DropResult): any[] => {
-        const sourceDroppableIndex = result.source.droppableId.split('-')[1];
-        const listToRemoveFrom = listOfLists[sourceDroppableIndex];
-        const [removed] = listToRemoveFrom.splice(result.source.index, 1);
-        const requestedIndexToDropIn = result.destination.droppableId.split('-')[1];
-        const destination = result.destination;
+        const {source, destination} = result;
+        const {droppableId: sourceDroppableId, index: sourceIndex} = source;
+        const {droppableId: destinationDroppableId, index: destinationIndex} = destination;
+
+        const sourceListIndex = getDroppableIndex(sourceDroppableId);
+        const listToRemoveFrom = listOfLists[sourceListIndex];
+        const [itemToMove] = listToRemoveFrom.splice(sourceIndex, 1);
+
+        const requestedIndexToDropIn = getDroppableIndex(destinationDroppableId);
         const listToAddTo = listOfLists[requestedIndexToDropIn];
 
-        listToAddTo.splice(destination.index, 0, removed);
-        props.updateState(sourceDroppableIndex, result.source.index, requestedIndexToDropIn, destination.index);
+        listToAddTo.splice(destinationIndex, 0, itemToMove);
+        props.updateState(sourceListIndex, sourceIndex, requestedIndexToDropIn, destination.index);
 
         return listOfLists;
     };
@@ -49,8 +55,11 @@ export const DragAndDropList = (props: Props) => {
                     return (
                         <Col style={{background: 'rgb(204, 202, 202)'}}>
                             <Title titleDisplayText={columnTitlesCopy.shift()}/>
-                            <DroppableList orderInList={index} orderedItemsForDisplay={item}
-                                           getItemStyle={getItemStyle}/>
+                            <DroppableList
+                                orderInList={index}
+                                orderedItemsForDisplay={item}
+                                getItemStyle={getItemStyle}
+                            />
                         </Col>
                     );
                 })
