@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 
-type Competition = {
+export type Competition = {
     id: string;
     name: string;
 }
@@ -22,18 +22,20 @@ const CompetitionSelectionDropDown = (props: Props) => {
     const {selectedCompetition} = props;
 
     return (
-        <Dropdown toggle={() => updateIsOpen(!isOpen)} isOpen={isOpen} disabled={false}>
-            <DropdownToggle disabled={false} className={'toggle'} caret>
-                {selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
-            </DropdownToggle>
-            <DropdownMenu>
-                {competitions.map(competition =>
-                    <DropdownItem
-                        onClick={() => props.setSelectedCompetition(competition)}>
-                        {competition.name}
-                    </DropdownItem>)}
-            </DropdownMenu>
-        </Dropdown>
+        <div className={'competition-selection-drop-down'}>
+            <Dropdown toggle={() => updateIsOpen(!isOpen)} isOpen={isOpen} disabled={false}>
+                <DropdownToggle disabled={false} className={'toggle'} caret>
+                    {selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
+                </DropdownToggle>
+                <DropdownMenu>
+                    {competitions.map(competition =>
+                        <DropdownItem
+                            onClick={() => props.setSelectedCompetition(competition)}>
+                            {competition.name}
+                        </DropdownItem>)}
+                </DropdownMenu>
+            </Dropdown>
+        </div>
     );
 };
 
