@@ -4,6 +4,7 @@ import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
 import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
+import {getFromS3} from "../../aws/getFromS3";
 
 type SongRankingTotal = {
     songName: string;
@@ -35,9 +36,10 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const fetchedSongRankingTotals = await new S3Client().getObject(`week=${week}/song-ranking-totals.json`) as SongRankingTotals;
-            fetchedSongRankingTotals.totalScores = fetchedSongRankingTotals.totalScores.sort((a, b) => a.totalPoints > b.totalPoints ? -1 : 1);
-            setSongRankingTotals(fetchedSongRankingTotals);
+            await getFromS3(`week=${week}/song-ranking-totals.json`, (fetchedSongRankingTotals) => {
+                fetchedSongRankingTotals.totalScores = fetchedSongRankingTotals.totalScores.sort((a, b) => a.totalPoints > b.totalPoints ? -1 : 1);
+                setSongRankingTotals(fetchedSongRankingTotals);
+            });
         };
 
         fetch();

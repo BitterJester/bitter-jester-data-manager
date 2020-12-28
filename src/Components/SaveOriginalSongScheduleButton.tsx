@@ -12,13 +12,13 @@ type Props = {
 const SaveOriginalSongScheduleButton = (props: Props) => {
     const {originalSongs, onAlert} = props;
 
-    const saveSchedule = () => {
+    const saveSchedule = async () => {
         const s3Client = new S3Client();
         const originalSongsCopy = _.cloneDeep(originalSongs);
-        s3Client.put(
+        await s3Client.put(
             s3Client.createPutPublicJsonRequest(
                 'bitter-jester-test',
-                'original-song-submissions.json',
+                `original-song-submissions.json`,
                 JSON.stringify(originalSongsCopy)
             )
         );

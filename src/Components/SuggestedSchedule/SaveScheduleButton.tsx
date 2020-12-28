@@ -13,11 +13,11 @@ type Props = {
 const SaveScheduleButton = (props: Props) => {
     const {schedule, onAlert} = props;
 
-    const saveSchedule = () => {
+    const saveSchedule = async () => {
         const s3Client = new S3Client();
         const scheduleCopy = _.cloneDeep(schedule);
         scheduleCopy.version = LAST_SAVE_VERSION;
-        s3Client.put(
+        await s3Client.put(
             s3Client.createPutPublicJsonRequest(
                 'bitter-jester-test',
                 'user-friday-night-schedule.json',

@@ -11,7 +11,7 @@ import './App.scss';
 import {Card, Col, Row} from "reactstrap";
 import {Title} from "./Components/Title";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
-import OriginalSongResults from "./OriginalSongResults";
+import OriginalSongResults from "./Pages/OriginalSongResults";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();

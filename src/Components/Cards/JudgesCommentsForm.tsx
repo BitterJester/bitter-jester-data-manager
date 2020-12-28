@@ -1,5 +1,5 @@
 import {Form} from "reactstrap";
-import TextAreaFormInput from "../ TextAreaFormInput";
+import TextAreaFormInput from "../TextAreaFormInput";
 import React from "react";
 import {JudgeFeedback} from "./OriginalSongJudgingFormCard";
 

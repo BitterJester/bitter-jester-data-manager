@@ -8,6 +8,7 @@ import OverallSongRankingsDropdownRow from "../JudgingFormForWeek/OverallSongRan
 import OverallSongRankingsPersistanceRow from "../JudgingFormForWeek/OverallSongRankingsPersistanceRow";
 import {publishSNS} from "../../aws/publishSNS";
 import {Judge} from "./OriginalSongJudgingFormCard";
+import {getFromS3} from "../../aws/getFromS3";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -43,9 +44,7 @@ const OverallBandRankingsCard = (props: Props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const loadedSongRankings = await s3Client.getObject(bandRankingsS3Key);
-
-            setSongRankings(loadedSongRankings ? loadedSongRankings as SongRankings : initialSongRankings)
+            await getFromS3(bandRankingsS3Key, setSongRankings);
         };
 
         fetch();

@@ -1,5 +1,7 @@
 import aws from 'aws-sdk';
-import { GetObjectRequest } from 'aws-sdk/clients/s3';
+import {GetObjectRequest} from 'aws-sdk/clients/s3';
+
+export const COMPETITION_FOLDER = 'competitions/competition=BJMF_Summer_2020/';
 
 export const getFromS3 = async (key: string, setStateFunction: Function) => {
     const s3 = new aws.S3({
@@ -10,23 +12,18 @@ export const getFromS3 = async (key: string, setStateFunction: Function) => {
     async function getSubmissionsFromS3(key: string): Promise<void> {
         const s3ReadInfo: GetObjectRequest = {
             Bucket: 'bitter-jester-test',
-            Key: key
+            Key: `${COMPETITION_FOLDER}${key}`
         };
 
         await s3.getObject(s3ReadInfo, (error, data) => {
             if (error) {
                 console.error(error);
                 throw error;
-            }
-            else {
+            } else {
                 setStateFunction(JSON.parse(data.Body ? data.Body.toString() : ''));
             }
         });
     }
 
-    getSubmissionsFromS3(key);
-}
-
-export const saveToS3 = async (key: string) => {
-    
+    await getSubmissionsFromS3(key);
 }

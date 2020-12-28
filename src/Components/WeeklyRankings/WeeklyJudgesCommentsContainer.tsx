@@ -7,6 +7,7 @@ import JudgesFeedbackForWeekContent from "./JudgesFeedbackForWeekContent";
 import JudgesMissingComments from "./JudgesMissingComments";
 import {Alert} from "reactstrap";
 import CardContainer from "../Cards/CardContainer";
+import {getFromS3} from "../../aws/getFromS3";
 
 type JudgesWhoHaveNotSubmittedAllComments = {
     judge: JudgesInfo;
@@ -35,13 +36,11 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
     const [judgesComments, setJudgesComments] = useState(initialJudgesComments);
 
     useEffect(() => {
-        const s3Client = new S3Client();
-
         const fetch = async () => {
-            const aggregatedJudgesComments = await s3Client.getObject(`week=${props.week}/aggregated-judges-comments.json`) as AggregatedJudgesComments;
-
-            aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
-            setJudgesComments(aggregatedJudgesComments);
+            await getFromS3(`week=${props.week}/aggregated-judges-comments.json`, (aggregatedJudgesComments) => {
+                aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
+                setJudgesComments(aggregatedJudgesComments);
+            });
         };
 
         fetch();

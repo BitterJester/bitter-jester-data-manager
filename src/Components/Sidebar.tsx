@@ -14,7 +14,6 @@ const Sidebar = (props: Props) => {
 
     const getURI = (path: string) => {
         const fullDomain = `${protocol}//${domain}`;
-
         return `${fullDomain}${path}`
     }
 
@@ -26,8 +25,8 @@ const Sidebar = (props: Props) => {
         return isAuthenticated ? 'Log Out' : 'Log In';
     }
 
-    const loginOnClick = () => {
-        loginWithRedirect({redirect_uri: getURI('/'), appState: props.history});
+    const loginOnClick = async () => {
+        await loginWithRedirect({redirect_uri: getURI('/'), appState: props.history});
     }
 
     const logoutOnClick = () => logout({returnTo: getURI('/')});

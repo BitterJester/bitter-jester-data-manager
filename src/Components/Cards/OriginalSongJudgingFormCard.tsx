@@ -7,6 +7,7 @@ import {publishSNS} from "../../aws/publishSNS";
 import {JudgingReminderAlert} from "./JudgingReminderAlert";
 import {SaveCommentsButton} from "./SaveCommentsButton";
 import {JudgesCommentsForm} from "./JudgesCommentsForm";
+import {getFromS3} from "../../aws/getFromS3";
 
 export type Judge = {
     email: string;
@@ -49,26 +50,7 @@ const OriginalSongJudgingFormCard = (props: Props) => {
 
     useEffect(() => {
         const getJudgesComments = async () => {
-            const previousComments = bandName ? await new S3Client().getObject(fileName) as JudgeFeedback : {} as JudgeFeedback;
-            if (previousComments) {
-                setJudgesComments(previousComments);
-            } else {
-                const initialJudgesComments: JudgeFeedback = {
-                    initialImpression: '',
-                    songInfo: {
-                        songName: songName
-                    },
-                    favoriteAspect: '',
-                    feedback: '',
-                    judge: {
-                        nickname: user.nickname,
-                        email: user.email
-                    },
-                    week
-                };
-
-                setJudgesComments(initialJudgesComments);
-            }
+            await getFromS3(fileName, setJudgesComments);
         };
 
         getJudgesComments();
