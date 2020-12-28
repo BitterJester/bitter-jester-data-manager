@@ -2,10 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import createAuth0Client from '@auth0/auth0-spa-js'
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client'
 
-export interface Auth0RedirectState {
-  targetUrl?: string
-}
-
 export interface Auth0User extends Omit<IdToken, '__raw'> {}
 
 interface Auth0Context {

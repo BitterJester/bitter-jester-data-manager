@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {getFromS3} from '../aws/getFromS3';
 import OriginalSongContainer from '../Containers/OriginalSongContainer';
 import Page from "../Components/Page";
+import {withRouter, useParams} from "react-router-dom";
+import {useLocation} from "react-router";
+import {UrlHelper} from "../utils/url-helper";
 
 export type OriginalSong = {
     songDescription: string;
@@ -69,4 +72,4 @@ const OriginalSongCompetition = () => {
     );
 };
 
-export default OriginalSongCompetition;
+export default withRouter(OriginalSongCompetition);

@@ -5,13 +5,14 @@ import {IncompleteApplications} from './Pages/Submissions/IncompleteApplications
 import './static/css/sidebar.css';
 import {useAuth0} from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
-import Sidebar from './Components/Sidebar';
+import Sidebar from './Components/Sidebar/Sidebar';
 import OriginalSongCompetition from './Pages/OriginalSongCompetition';
 import './App.scss';
 import {Card, Col, Row} from "reactstrap";
 import {Title} from "./Components/Title";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "./Pages/OriginalSongResults";
+import CompetitionSelectionDropDown from "./Components/Sidebar/CompetitionSelectionDropDown";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
@@ -36,6 +37,7 @@ function App() {
                                         {isAuthenticated ?
                                             'If you are a judge, please go to the Original Song Submissions tab.' :
                                             'Please log in to gain access to the rest of the site.'}
+                                        {isAuthenticated && <CompetitionSelectionDropDown/>}
                                     </Card>
                                 </div>
                             </div>
