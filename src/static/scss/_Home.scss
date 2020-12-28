@@ -9,9 +9,11 @@
 
   .home-route-buttons {
     padding: 16px;
+    display: flex;
+    justify-content: space-evenly;
   }
 
   .home-route-button {
-    padding: 16px;
+    width: 200px;
   }
 }
