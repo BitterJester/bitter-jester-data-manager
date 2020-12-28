@@ -1,9 +1,14 @@
 import React, {useState} from 'react';
-import {RouteComponentProps, withRouter} from 'react-router';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 
-interface Props extends RouteComponentProps {
+type Competition = {
+    id: string;
+    name: string;
+}
 
+interface Props {
+    selectedCompetition: Competition;
+    setSelectedCompetition: (selectedCompetition: Competition) => void;
 }
 
 const CompetitionSelectionDropDown = (props: Props) => {
@@ -14,19 +19,17 @@ const CompetitionSelectionDropDown = (props: Props) => {
 
     const [isOpen, updateIsOpen] = useState(false);
 
-    const redirect = (path: string) => {
-        props.history.push(path);
-    };
+    const {selectedCompetition} = props;
 
     return (
         <Dropdown toggle={() => updateIsOpen(!isOpen)} isOpen={isOpen} disabled={false}>
             <DropdownToggle disabled={false} className={'toggle'} caret>
-                Select Your Competition
+                {selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
             </DropdownToggle>
             <DropdownMenu>
                 {competitions.map(competition =>
                     <DropdownItem
-                        onClick={() => redirect(`/originalSong?competition=${competition.id}`)}>
+                        onClick={() => props.setSelectedCompetition(competition)}>
                         {competition.name}
                     </DropdownItem>)}
             </DropdownMenu>
@@ -34,4 +37,4 @@ const CompetitionSelectionDropDown = (props: Props) => {
     );
 };
 
-export default withRouter(CompetitionSelectionDropDown);
+export default CompetitionSelectionDropDown;

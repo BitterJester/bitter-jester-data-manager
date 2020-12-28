@@ -8,11 +8,10 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar/Sidebar';
 import OriginalSongCompetition from './Pages/OriginalSongCompetition';
 import './App.scss';
-import {Card, Col, Row} from "reactstrap";
-import {Title} from "./Components/Title";
+import {Col, Row} from "reactstrap";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "./Pages/OriginalSongResults";
-import CompetitionSelectionDropDown from "./Components/Sidebar/CompetitionSelectionDropDown";
+import HomePage from "./HomePage";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
@@ -28,19 +27,7 @@ function App() {
                 <Col className={'main-content'}>
                     <Switch>
                         <Route exact path='/'>
-                            <div style={{background: 'rgb(232, 231, 228)'}}
-                                 className={'original-song-competition-container'}>
-                                <div style={{textAlign: "center", padding: '16px'}}
-                                     className={'original-song-container'}>
-                                    <Card>
-                                        <Title titleDisplayText={'WELCOME TO THE BITTER JESTER DATA MANAGER'}/>
-                                        {isAuthenticated ?
-                                            'If you are a judge, please go to the Original Song Submissions tab.' :
-                                            'Please log in to gain access to the rest of the site.'}
-                                        {isAuthenticated && <CompetitionSelectionDropDown/>}
-                                    </Card>
-                                </div>
-                            </div>
+                            <HomePage/>
                         </Route>
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
