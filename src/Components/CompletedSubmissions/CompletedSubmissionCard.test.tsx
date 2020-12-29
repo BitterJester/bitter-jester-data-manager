@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
 import CardContainer from '../Cards/CardContainer';
 import CardItem from '../Cards/CardItem';
-import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
+import { BitterJesterApplication } from '../../Pages/Submissions';
 
 describe('CompletedSubmissionCard', () => {
     const completedSubmission: BitterJesterApplication = {

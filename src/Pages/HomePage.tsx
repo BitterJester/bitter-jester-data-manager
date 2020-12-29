@@ -1,9 +1,9 @@
 import {Card} from "reactstrap";
-import {Title} from "./Components/Title";
+import {Title} from "../Components/Title";
 import React from "react";
-import {useAuth0} from "./react-auth0-spa";
+import {useAuth0} from "../react-auth0-spa";
 import {withRouter} from "react-router";
-import AuthenticatedHomePage from "./AuthenticatedHomePage";
+import AuthenticatedHomePage from "../Components/AuthenticatedHomePage";
 
 const HomePage = () => {
     const {isAuthenticated} = useAuth0();

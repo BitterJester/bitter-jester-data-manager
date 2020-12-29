@@ -1,7 +1,7 @@
 import React from 'react';
-import {SubmissionContainer} from '../../Containers/SubmissionContainer';
-import {ScheduleContainer} from '../../Containers/ScheduleContainer';
-import Page from "../../Components/Page";
+import {SubmissionContainer} from '../Containers/SubmissionContainer';
+import {ScheduleContainer} from '../Containers/ScheduleContainer';
+import Page from "../Components/Page";
 
 export type BitterJesterApplications = {
     completedApplications?: BitterJesterApplication[];

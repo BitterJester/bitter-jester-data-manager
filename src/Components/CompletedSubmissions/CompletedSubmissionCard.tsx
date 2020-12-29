@@ -4,7 +4,7 @@ import '../../static/css/completedSubmissionCard.css';
 import CardContainer from '../Cards/CardContainer';
 import {Row} from 'reactstrap';
 import CardItem from '../Cards/CardItem';
-import {BitterJesterApplication} from '../../Pages/Submissions/Submissions';
+import {BitterJesterApplication} from '../../Pages/Submissions';
 
 type Props = {
     completedSubmission: BitterJesterApplication;

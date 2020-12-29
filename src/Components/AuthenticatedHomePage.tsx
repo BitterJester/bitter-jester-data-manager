@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import CompetitionSelectionDropDown from "./Components/Sidebar/CompetitionSelectionDropDown";
+import CompetitionSelectionDropDown from "./Sidebar/CompetitionSelectionDropDown";
 import {Button} from "reactstrap";
 import AdminRouteButtons from "./AdminRouteButtons";
 import {withRouter} from "react-router";
+import {AdminHomePageView} from "./AdminHomePageView";
 
 const AuthenticatedHomePage = (props) => {
     const [selectedCompetition, setSelectedCompetition] = useState({id: '', name: ''});
@@ -34,7 +35,7 @@ const AuthenticatedHomePage = (props) => {
                 Original Song Competition
             </Button>
         </div>
-        <AdminRouteButtons
+        <AdminHomePageView
             disabled={areButtonsDisabled}
             selectedCompetition={selectedCompetition}
         />

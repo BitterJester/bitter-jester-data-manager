@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import NByMGrid from '../NByMGrid/NByMGrid';
-import { BitterJesterApplication } from '../../Pages/Submissions/Submissions';
+import { BitterJesterApplication } from '../../Pages/Submissions';
 import CompletedSubmissionCard from './CompletedSubmissionCard';
 
 type Props = {

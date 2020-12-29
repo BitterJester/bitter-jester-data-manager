@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Submissions} from './Pages/Submissions/Submissions';
-import {IncompleteApplications} from './Pages/Submissions/IncompleteApplications';
+import {Submissions} from './Pages/Submissions';
+import {IncompleteApplications} from './Pages/IncompleteApplications';
 import './static/css/sidebar.css';
 import {useAuth0} from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
@@ -11,7 +11,7 @@ import './App.scss';
 import {Col, Row} from "reactstrap";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "./Pages/OriginalSongResults";
-import HomePage from "./HomePage";
+import HomePage from "./Pages/HomePage";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
