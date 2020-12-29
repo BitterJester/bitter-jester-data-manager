@@ -1,8 +1,12 @@
+import {ROUTES} from "../static/constants/routes";
+
 export class UrlHelper {
     private parsedQueryParams: object;
+    private history;
 
-    constructor() {
+    constructor(history) {
         this.parsedQueryParams = UrlHelper.parseQueryParams();
+        this.history = history;
     }
 
     public static parseQueryParams() {
@@ -17,5 +21,38 @@ export class UrlHelper {
             ...previousValue,
             ...currentValue
         })));
+    }
+
+    public redirectToOriginalSongCompetition(competitionId) {
+        this.redirectWithQueryParams(ROUTES.originalSongCompetition.route, {competition: competitionId});
+    }
+
+    public redirectToCompletedSubmissions(competitionId) {
+        this.redirectWithQueryParams(ROUTES.completedSubmissions.route, {competition: competitionId});
+    }
+
+    public redirectToIncompleteApplications(competitionId) {
+        this.redirectWithQueryParams(ROUTES.incompleteApplications.route, {competition: competitionId});
+    }
+
+
+    public redirectToResults(competitionId) {
+        this.redirectWithQueryParams(ROUTES.originalSongResults.route, {competition: competitionId});
+    }
+
+
+    public redirectToSchedulePage(competitionId) {
+        this.redirectWithQueryParams(ROUTES.fridayNightScheduler.route, {competition: competitionId});
+    }
+
+    private redirectWithQueryParams(path, queryParamMap) {
+        const queryParamString = Object.keys(queryParamMap)
+            .map(queryParam => `${queryParam}=${queryParamMap[queryParam]}`)
+            .join('&');
+        this.redirect(`${path}?${queryParamString}`);
+    }
+
+    private redirect(path) {
+        this.history.push(path);
     }
 }

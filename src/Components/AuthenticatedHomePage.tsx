@@ -4,18 +4,13 @@ import {Button} from "reactstrap";
 import AdminRouteButtons from "./AdminRouteButtons";
 import {withRouter} from "react-router";
 import {AdminHomePageView} from "./AdminHomePageView";
+import {UrlHelper} from "../utils/url-helper";
 
 const AuthenticatedHomePage = (props) => {
     const [selectedCompetition, setSelectedCompetition] = useState({id: '', name: ''});
     const areButtonsDisabled = selectedCompetition.id === '';
 
-    const redirect = (path: string) => {
-        props.history.push(path);
-    };
-
-    const getRedirectWithCompetitionQueryParam = (path) => {
-        return () => redirect(`/${path}?competition=${selectedCompetition.id}`);
-    }
+    const urlHelper = new UrlHelper(props.history);
 
     return <>
         <div>
@@ -30,7 +25,7 @@ const AuthenticatedHomePage = (props) => {
         <div className={"public-route-buttons"}>
             <Button
                 className='home-route-button'
-                onClick={getRedirectWithCompetitionQueryParam('originalSong')}
+                onClick={() => urlHelper.redirectToOriginalSongCompetition(selectedCompetition.id)}
                 disabled={areButtonsDisabled}>
                 Original Song Competition
             </Button>

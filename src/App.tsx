@@ -12,6 +12,7 @@ import {Col, Row} from "reactstrap";
 import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "./Pages/OriginalSongResults";
 import HomePage from "./Pages/HomePage";
+import {ROUTES} from "./static/constants/routes";
 
 function App() {
     const {isAuthenticated, isInitializing} = useAuth0();
@@ -31,27 +32,27 @@ function App() {
                         </Route>
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
-                            path="/completedSubmissions"
+                            path={ROUTES.completedSubmissions.route}
                             component={<Submissions/>}
                         />
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
-                            path='/incompleteApplications'
+                            path={ROUTES.incompleteApplications.route}
                             component={<IncompleteApplications/>}
                         />
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
-                            path='/originalSong'
+                            path={ROUTES.originalSongCompetition.route}
                             component={<OriginalSongCompetition/>}
                         />
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
-                            path='/bjmf145auth'
+                            path={ROUTES.fridayNightScheduler.route}
                             component={<OriginalSongCompetitionSchedulePage/>}
                         />
                         <ProtectedRoute
                             isAuthenticated={isAuthenticated}
-                            path='/bjmf145results'
+                            path={ROUTES.originalSongResults.route}
                             component={<OriginalSongResults/>}
                         />
                     </Switch>

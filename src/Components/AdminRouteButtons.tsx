@@ -2,6 +2,7 @@ import {Button} from "reactstrap";
 import React from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import {Competition} from "./Sidebar/CompetitionSelectionDropDown";
+import {UrlHelper} from "../utils/url-helper";
 
 interface Props extends RouteComponentProps {
     selectedCompetition: Competition;
@@ -9,38 +10,34 @@ interface Props extends RouteComponentProps {
 }
 
 function AdminRouteButtons(props: Props) {
-    const redirect = (path: string) => {
-        props.history.push(path);
-    };
+    const {history, selectedCompetition} = props;
 
-    const getRedirectWithCompetitionQueryParam = (path) => {
-        return () => redirect(`/${path}?competition=${props.selectedCompetition.id}`);
-    }
+    const urlHelper = new UrlHelper(history);
 
     return (<div className={"admin-route-buttons"}>
         <Button
             className={" home-route-button"}
             disabled={props.disabled}
-            onClick={getRedirectWithCompetitionQueryParam('/completedSubmissions')}>
+            onClick={() => urlHelper.redirectToCompletedSubmissions(selectedCompetition.id)}>
             Completed Submissions
         </Button>
         <Button
             className={"home-route-button"}
             disabled={props.disabled}
-            onClick={getRedirectWithCompetitionQueryParam('/incompleteApplications')}>
+            onClick={() => urlHelper.redirectToIncompleteApplications(selectedCompetition.id)}>
             Incomplete Applications
         </Button>
         <Button
             className={"home-route-button"}
             disabled={props.disabled}
-            onClick={getRedirectWithCompetitionQueryParam('/bjmf145results')}>
-            Results
+            onClick={() => urlHelper.redirectToSchedulePage(selectedCompetition.id)}>
+            Friday Night Scheduler
         </Button>
         <Button
             className={"home-route-button"}
             disabled={props.disabled}
-            onClick={getRedirectWithCompetitionQueryParam('/bjmf145auth')}>
-            Friday Night Scheduler
+            onClick={() => urlHelper.redirectToResults(selectedCompetition.id)}>
+            Results
         </Button>
     </div>);
 }
