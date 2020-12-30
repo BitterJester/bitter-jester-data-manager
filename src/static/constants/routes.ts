@@ -3,7 +3,7 @@ import {IncompleteApplications} from "../../Pages/IncompleteApplications";
 import OriginalSongCompetition from "../../Pages/OriginalSongCompetition";
 import OriginalSongCompetitionSchedulePage from "../../Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "../../Pages/OriginalSongResults";
-import CreateCompetition from "../../Pages/CreateCompetition";
+import CreateCompetition from "../../Pages/CreateCompetition/CreateCompetition";
 
 interface RouteInfo {
     route: string;
