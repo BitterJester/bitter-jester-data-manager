@@ -23,6 +23,10 @@ export class UrlHelper {
         })));
     }
 
+    public redirectToCreateACompetition() {
+        this.redirectWithQueryParams(ROUTES.createACompetition.route, {});
+    }
+
     public redirectToOriginalSongCompetition(competitionId) {
         this.redirectWithQueryParams(ROUTES.originalSongCompetition.route, {competition: competitionId});
     }

@@ -37,7 +37,7 @@ const JudgeSelectionTableStep = (props) => {
         updateCompetition({
             judges: {
                 judges: selectedJudges,
-                selectedValue: `${selectedJudges.length} judges selected.`
+                selectedValue: `${selectedJudges.length} judges selected`
             }
         });
     };

@@ -17,6 +17,11 @@ function AdminRouteButtons(props: Props) {
     return (<div className={"admin-route-buttons"}>
         <Button
             className={" home-route-button"}
+            onClick={() => urlHelper.redirectToCreateACompetition()}>
+            Create a Competition
+        </Button>
+        <Button
+            className={" home-route-button"}
             disabled={props.disabled}
             onClick={() => urlHelper.redirectToCompletedSubmissions(selectedCompetition.id)}>
             Completed Submissions
