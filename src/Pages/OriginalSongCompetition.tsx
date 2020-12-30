@@ -24,7 +24,8 @@ export type OriginalSongs = {
 }
 
 export type JudgesInfo = {
-    week: number;
+    id?: number;
+    week?: number;
     firstName: string;
     lastName: string;
     emailAddress: string;
