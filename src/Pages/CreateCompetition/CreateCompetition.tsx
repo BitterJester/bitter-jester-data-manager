@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Step, StepLabel, Stepper} from "@material-ui/core";
-import {Button} from "reactstrap";
+import {Button, Card} from "reactstrap";
 import {SelectCompetitionTypeStep} from "./SelectCompetitionTypeStep";
+import Page from '../../Components/Page';
+import CardContainer from "../../Components/Cards/CardContainer";
+import {Title} from "../../Components/Title";
 
 interface CreateCompetitionStep {
     component: Function;
@@ -24,7 +27,6 @@ const CreateCompetition = () => {
     const [competition, updateCompetition] = useState({} as CompetitionState);
 
     const applyUpdatesToCompetitionState = (updateObject) => {
-        console.log(updateObject);
         updateCompetition({...competition, ...updateObject});
     };
 
@@ -45,7 +47,6 @@ const CreateCompetition = () => {
         competitionStep.component :
         undefined;
     const competitionStepProps = competitionStep.props ? competitionStep.props : {};
-    console.log(competitionStep.props);
 
     const onNextStep = () => {
         updateActiveStepIndex(activeStepIndex + 1);
@@ -58,35 +59,59 @@ const CreateCompetition = () => {
     const allStepsCompleted = activeStepIndex === steps.length - 1;
 
     return (
-        <div>
-            <Stepper activeStep={activeStepIndex}>
-                {steps.map((step) => {
-                    const competitionAttribute = step.stateField ? competition[step.stateField] : undefined;
+        <Page>
+            <div className={'create-competition-container'}>
+                <CardContainer>
+                    <Title titleDisplayText={'Create a Competition'}/>
+                    <p>
+                        This is where you can schedule a competition. Please click through the steps and finalize your
+                        choices at the end. This will add the competition to the home page and allow you to place bands
+                        on the correct night as well as assign judges to a specified battle.
+                    </p>
+                </CardContainer>
+                <Stepper alternativeLabel activeStep={activeStepIndex}>
+                    {steps.map((step) => {
+                        const competitionAttribute = step.stateField ? competition[step.stateField] : undefined;
 
-                    return (
-                        <Step key={step.stepTitle}>
-                            <StepLabel>
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <div>
-                                        {step.stepTitle}:
+                        return (
+                            <Step key={step.stepTitle}>
+                                <StepLabel>
+                                    <div className={'step-label-content'}>
+                                        <div>
+                                            {step.stepTitle}:
+                                        </div>
+                                        <div>
+                                            {competitionAttribute ? competitionAttribute.displayName : '-'}
+                                        </div>
                                     </div>
-                                    <div>
-                                        {competitionAttribute ? competitionAttribute.displayName : '-'}
-                                    </div>
-                                </div>
-                            </StepLabel>
-                        </Step>
-                    )
-                })}
-            </Stepper>
-            {CurrentStepComponentDefinition && <CurrentStepComponentDefinition {...competitionStepProps}/>}
-            <Button disabled={activeStepIndex === 0} onClick={onPreviousStep}>Previous</Button>
-            <Button
-                disabled={activeStepIndex >= steps.length}
-                onClick={onNextStep}>
-                {!allStepsCompleted ? 'Next' : 'Finish'}
-            </Button>
-        </div>
+                                </StepLabel>
+                            </Step>
+                        )
+                    })}
+                </Stepper>
+                <div className={'step-container'}>
+                    <CardContainer>
+                        {CurrentStepComponentDefinition && <CurrentStepComponentDefinition {...competitionStepProps}/>}
+                        <div className={'step-navigation-buttons'}>
+                            <div className={'navigation-button-container'}>
+                                <Button
+                                    disabled={activeStepIndex === 0}
+                                    onClick={onPreviousStep}>
+                                    Previous
+                                </Button>
+                            </div>
+                            <div className={'navigation-button-container'}>
+                                <Button
+                                    disabled={activeStepIndex >= steps.length}
+                                    onClick={onNextStep}>
+                                    {!allStepsCompleted ? 'Next' : 'Finish'}
+                                </Button>
+                            </div>
+                        </div>
+                    </CardContainer>
+                </div>
+            </div>
+        </Page>
     );
 };
 
