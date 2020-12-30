@@ -9,6 +9,7 @@ import CompetitionTimeFrameStep from "./CompetitionTimeFrameStep";
 import JudgeSelectionTableStep from "./JudgeSelectionTableStep";
 import {Judge} from "../../Components/Cards/OriginalSongJudgingFormCard";
 import {JudgesInfo} from "../OriginalSongCompetition";
+import BandSelectionTableStep from "./BandSelectionTableStep";
 
 export interface CreateCompetitionStep {
     component: Function;
@@ -33,15 +34,22 @@ interface CompetitionJudges {
     selectedValue: string;
 }
 
+interface CompetitionBands {
+    bands: object[];
+    selectedValue: string;
+}
+
 interface CompetitionState {
     type?: CompetitionType;
     timeFrame?: CompetitionTimeFrame;
     judges?: CompetitionJudges;
+    bands?: CompetitionBands;
 }
 
 const CreateCompetition = () => {
     const [activeStepIndex, updateActiveStepIndex] = useState(0);
     const [competition, updateCompetition] = useState({} as CompetitionState);
+    console.log(competition);
 
     const applyUpdatesToCompetitionState = (updateObject) => {
         updateCompetition({...competition, ...updateObject});
@@ -75,7 +83,14 @@ const CreateCompetition = () => {
             },
             stateField: 'judges'
         },
-        {component: () => <div>Hey.</div>, stepTitle: 'Select Bands'},
+        {
+            component: BandSelectionTableStep,
+            stepTitle: 'Select Bands',
+            props: {
+                selectedCompetitionBands: competition.bands || [],
+                updateCompetition: applyUpdatesToCompetitionState
+            }, stateField: 'bands'
+        },
     ];
 
     return (
