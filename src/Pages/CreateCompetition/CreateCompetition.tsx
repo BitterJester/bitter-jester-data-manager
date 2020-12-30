@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {Step, StepLabel, Stepper} from "@material-ui/core";
-import {Button, Card} from "reactstrap";
 import {SelectCompetitionTypeStep} from "./SelectCompetitionTypeStep";
 import Page from '../../Components/Page';
 import CardContainer from "../../Components/Cards/CardContainer";
 import {Title} from "../../Components/Title";
+import {CurrentStepWithNavigation} from "./CurrentStepWithNavigation";
 
-interface CreateCompetitionStep {
+export interface CreateCompetitionStep {
     component: Function;
     stepTitle: string;
     props?: object;
@@ -42,22 +42,6 @@ const CreateCompetition = () => {
         {component: () => <div>Hey.</div>, stepTitle: 'Select Bands'},
     ];
 
-    const competitionStep = steps[activeStepIndex];
-    const CurrentStepComponentDefinition = activeStepIndex < steps.length ?
-        competitionStep.component :
-        undefined;
-    const competitionStepProps = competitionStep.props ? competitionStep.props : {};
-
-    const onNextStep = () => {
-        updateActiveStepIndex(activeStepIndex + 1);
-    };
-
-    const onPreviousStep = () => {
-        updateActiveStepIndex(activeStepIndex - 1);
-    };
-
-    const allStepsCompleted = activeStepIndex === steps.length - 1;
-
     return (
         <Page>
             <div className={'create-competition-container'}>
@@ -89,27 +73,11 @@ const CreateCompetition = () => {
                         )
                     })}
                 </Stepper>
-                <div className={'step-container'}>
-                    <CardContainer>
-                        {CurrentStepComponentDefinition && <CurrentStepComponentDefinition {...competitionStepProps}/>}
-                        <div className={'step-navigation-buttons'}>
-                            <div className={'navigation-button-container'}>
-                                <Button
-                                    disabled={activeStepIndex === 0}
-                                    onClick={onPreviousStep}>
-                                    Previous
-                                </Button>
-                            </div>
-                            <div className={'navigation-button-container'}>
-                                <Button
-                                    disabled={activeStepIndex >= steps.length}
-                                    onClick={onNextStep}>
-                                    {!allStepsCompleted ? 'Next' : 'Finish'}
-                                </Button>
-                            </div>
-                        </div>
-                    </CardContainer>
-                </div>
+                <CurrentStepWithNavigation
+                    activeStepIndex={activeStepIndex}
+                    updateActiveStepIndex={updateActiveStepIndex}
+                    steps={steps}
+                />
             </div>
         </Page>
     );
