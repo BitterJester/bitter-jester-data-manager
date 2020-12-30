@@ -3,7 +3,7 @@ import {IncompleteApplications} from "../../Pages/IncompleteApplications";
 import OriginalSongCompetition from "../../Pages/OriginalSongCompetition";
 import OriginalSongCompetitionSchedulePage from "../../Pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "../../Pages/OriginalSongResults";
-import {ReactComponentElement} from "react";
+import CreateCompetition from "../../Pages/CreateCompetition";
 
 interface RouteInfo {
     route: string;
@@ -16,6 +16,7 @@ interface Routes {
     incompleteApplications: RouteInfo;
     fridayNightScheduler: RouteInfo;
     originalSongResults: RouteInfo;
+    createACompetition: RouteInfo;
 }
 
 export const ROUTES: Routes = {
@@ -38,5 +39,9 @@ export const ROUTES: Routes = {
     originalSongResults: {
         route: '/bjmf145results',
         component: OriginalSongResults
+    },
+    createACompetition: {
+        route: '/createCompetition',
+        component: CreateCompetition
     }
 }
