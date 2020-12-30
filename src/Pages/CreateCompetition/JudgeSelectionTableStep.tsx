@@ -23,7 +23,7 @@ const JudgeSelectionTableStep = (props) => {
         {
             field: 'emailAddress',
             headerName: 'Email',
-            width: 180,
+            width: 300,
         },
         {
             field: 'phoneNumber',

@@ -18,12 +18,12 @@ const BandSelectionTableStep = (props) => {
 
     const columns: ColDef[] = [
         {field: 'id', headerName: 'Id', width: 60},
-        {field: 'bandName', headerName: 'Band Name', width: 130},
-        {field: 'primaryEmailAddress', headerName: 'Primary Email Address', width: 130},
+        {field: 'bandName', headerName: 'Band Name', width: 160},
+        {field: 'primaryEmailAddress', headerName: 'Primary Email Address', width: 300},
         {
             field: 'citiesRepresented',
             headerName: 'Cities Represented',
-            width: 180,
+            width: 200,
         },
         {
             field: 'primaryPhoneNumber',
