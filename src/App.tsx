@@ -1,16 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Submissions} from './Pages/Submissions';
-import {IncompleteApplications} from './Pages/IncompleteApplications';
 import './static/css/sidebar.css';
 import {useAuth0} from './react-auth0-spa';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar/Sidebar';
-import OriginalSongCompetition from './Pages/OriginalSongCompetition';
 import './App.scss';
 import {Col, Row} from "reactstrap";
-import OriginalSongCompetitionSchedulePage from "./Pages/OriginalSongCompetitionSchedulePage";
-import OriginalSongResults from "./Pages/OriginalSongResults";
 import HomePage from "./Pages/HomePage";
 import {ROUTES} from "./static/constants/routes";
 
@@ -21,6 +16,17 @@ function App() {
         return null;
     }
 
+    const toProtectedRoute = (route, index) => {
+        const routeInfo = ROUTES[route];
+        const RoutePageComponentDefinition = routeInfo.component;
+        return <ProtectedRoute
+            key={`route-${index}`}
+            isAuthenticated={isAuthenticated}
+            path={routeInfo.route}
+            component={<RoutePageComponentDefinition/>}
+        />;
+    };
+
     return (
         <Router>
             <Row style={{minHeight: '100vh'}}>
@@ -30,31 +36,9 @@ function App() {
                         <Route exact path='/'>
                             <HomePage/>
                         </Route>
-                        <ProtectedRoute
-                            isAuthenticated={isAuthenticated}
-                            path={ROUTES.completedSubmissions.route}
-                            component={<Submissions/>}
-                        />
-                        <ProtectedRoute
-                            isAuthenticated={isAuthenticated}
-                            path={ROUTES.incompleteApplications.route}
-                            component={<IncompleteApplications/>}
-                        />
-                        <ProtectedRoute
-                            isAuthenticated={isAuthenticated}
-                            path={ROUTES.originalSongCompetition.route}
-                            component={<OriginalSongCompetition/>}
-                        />
-                        <ProtectedRoute
-                            isAuthenticated={isAuthenticated}
-                            path={ROUTES.fridayNightScheduler.route}
-                            component={<OriginalSongCompetitionSchedulePage/>}
-                        />
-                        <ProtectedRoute
-                            isAuthenticated={isAuthenticated}
-                            path={ROUTES.originalSongResults.route}
-                            component={<OriginalSongResults/>}
-                        />
+                        {
+                            Object.keys(ROUTES).map(toProtectedRoute)
+                        }
                     </Switch>
                 </Col>
             </Row>
