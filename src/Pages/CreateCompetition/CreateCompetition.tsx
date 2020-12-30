@@ -10,6 +10,7 @@ import JudgeSelectionTableStep from "./JudgeSelectionTableStep";
 import {Judge} from "../../Components/Cards/OriginalSongJudgingFormCard";
 import {JudgesInfo} from "../OriginalSongCompetition";
 import BandSelectionTableStep from "./BandSelectionTableStep";
+import ReviewStep from "./ReviewStep";
 
 export interface CreateCompetitionStep {
     component: Function;
@@ -39,7 +40,7 @@ interface CompetitionBands {
     selectedValue: string;
 }
 
-interface CompetitionState {
+export interface CompetitionState {
     type?: CompetitionType;
     timeFrame?: CompetitionTimeFrame;
     judges?: CompetitionJudges;
@@ -90,6 +91,13 @@ const CreateCompetition = () => {
                 selectedCompetitionBands: competition.bands || [],
                 updateCompetition: applyUpdatesToCompetitionState
             }, stateField: 'bands'
+        },
+        {
+            component: ReviewStep,
+            stepTitle: 'Review',
+            props: {
+                competition
+            }
         },
     ];
 

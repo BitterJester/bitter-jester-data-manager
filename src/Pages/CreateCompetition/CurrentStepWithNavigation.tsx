@@ -11,21 +11,26 @@ type Props = {
 
 export function CurrentStepWithNavigation(props: Props) {
     const {updateActiveStepIndex, activeStepIndex, steps} = props;
-    const onNextStep = () => {
-        updateActiveStepIndex(activeStepIndex + 1);
-    };
+    const isOnReview = activeStepIndex === steps.length - 1;
 
+    const onNextStep = () => {
+        if(!isOnReview) {
+            updateActiveStepIndex(activeStepIndex + 1);
+        } else {
+            // Kick off some process to create the file structure in s3 and fill with relevant files
+        }
+    };
+    
     const onPreviousStep = () => {
         updateActiveStepIndex(activeStepIndex - 1);
-    };
 
+    };
     const competitionStep = steps[activeStepIndex];
     const CurrentStepComponentDefinition = activeStepIndex < steps.length ?
         competitionStep.component :
         undefined;
-    const competitionStepProps = competitionStep.props ? competitionStep.props : {};
 
-    const allStepsCompleted = activeStepIndex === steps.length - 1;
+    const competitionStepProps = competitionStep.props ? competitionStep.props : {};
 
     return <div className={"step-container"}>
         <CardContainer>
@@ -42,7 +47,7 @@ export function CurrentStepWithNavigation(props: Props) {
                     <Button
                         disabled={activeStepIndex >= steps.length}
                         onClick={onNextStep}>
-                        {!allStepsCompleted ? "Next" : "Finish"}
+                        {!isOnReview ? "Next" : "Finish"}
                     </Button>
                 </div>
             </div>
