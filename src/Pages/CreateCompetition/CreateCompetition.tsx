@@ -5,6 +5,7 @@ import Page from '../../Components/Page';
 import CardContainer from "../../Components/Cards/CardContainer";
 import {Title} from "../../Components/Title";
 import {CurrentStepWithNavigation} from "./CurrentStepWithNavigation";
+import CompetitionTimeFrameStep from "./CompetitionTimeFrameStep";
 
 export interface CreateCompetitionStep {
     component: Function;
@@ -15,16 +16,24 @@ export interface CreateCompetitionStep {
 
 export interface CompetitionType {
     id: 'online' | 'inPerson'
-    displayName: string;
+    selectedValue: string;
+}
+
+export interface CompetitionTimeFrame {
+    start: Date;
+    end: Date;
+    selectedValue: string;
 }
 
 interface CompetitionState {
     type?: CompetitionType;
+    timeFrame?: CompetitionTimeFrame;
 }
 
 const CreateCompetition = () => {
     const [activeStepIndex, updateActiveStepIndex] = useState(0);
     const [competition, updateCompetition] = useState({} as CompetitionState);
+    console.log(competition);
 
     const applyUpdatesToCompetitionState = (updateObject) => {
         updateCompetition({...competition, ...updateObject});
@@ -34,10 +43,21 @@ const CreateCompetition = () => {
         {
             component: SelectCompetitionTypeStep,
             stepTitle: 'Select Competition Type',
-            props: {selectedCompetitionType: competition.type, updateCompetition: applyUpdatesToCompetitionState},
+            props: {
+                selectedCompetitionType: competition.type,
+                updateCompetition: applyUpdatesToCompetitionState
+            },
             stateField: 'type'
         },
-        {component: () => <div>Yo.</div>, stepTitle: 'Schedule'},
+        {
+            component: CompetitionTimeFrameStep,
+            stepTitle: 'Schedule',
+            props: {
+                selectedCompetitionTimeFrame: competition.timeFrame,
+                updateCompetition: applyUpdatesToCompetitionState
+            },
+            stateField: 'timeFrame'
+        },
         {component: () => <div>Hello.</div>, stepTitle: 'Select Judges'},
         {component: () => <div>Hey.</div>, stepTitle: 'Select Bands'},
     ];
@@ -65,7 +85,7 @@ const CreateCompetition = () => {
                                             {step.stepTitle}:
                                         </div>
                                         <div>
-                                            {competitionAttribute ? competitionAttribute.displayName : '-'}
+                                            {competitionAttribute ? competitionAttribute.selectedValue : '-'}
                                         </div>
                                     </div>
                                 </StepLabel>
