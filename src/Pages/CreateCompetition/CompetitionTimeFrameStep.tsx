@@ -7,9 +7,10 @@ import {
 
 const CompetitionTimeFrameStep = (props) => {
     const {selectedCompetitionTimeFrame} = props;
-
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
     const selectedStartDate = selectedCompetitionTimeFrame && selectedCompetitionTimeFrame.start ? selectedCompetitionTimeFrame.start : new Date();
-    const selectedEndDate = selectedCompetitionTimeFrame && selectedCompetitionTimeFrame.end ? selectedCompetitionTimeFrame.end : new Date();
+    const selectedEndDate = selectedCompetitionTimeFrame && selectedCompetitionTimeFrame.end ? selectedCompetitionTimeFrame.end : currentDate;
 
     return (
         <div>
