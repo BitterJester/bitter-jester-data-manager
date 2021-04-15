@@ -26,11 +26,12 @@ export class S3Client {
     createPutPublicJsonRequest(
         bucket,
         filename,
-        contents
+        contents,
+        isRoot = false
     ) {
         return {
             Bucket: bucket,
-            Key: `${getCompetitionPrefixFromQueryParams()}/${filename}`,
+            Key: `${!isRoot ? `${getCompetitionPrefixFromQueryParams()}/` : ''}${filename}`,
             Body: contents,
             ContentType: 'application/json; charset=utf-8',
             ACL: 'public-read',

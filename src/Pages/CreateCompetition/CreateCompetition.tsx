@@ -11,6 +11,7 @@ import {Judge} from "../../Components/Cards/OriginalSongJudgingFormCard";
 import {JudgesInfo} from "../OriginalSongCompetition";
 import BandSelectionTableStep from "./BandSelectionTableStep";
 import ReviewStep from "./ReviewStep";
+import CompetitionNameStep from "./CompetitionNameStep";
 
 export interface CreateCompetitionStep {
     component: Function;
@@ -40,23 +41,36 @@ interface CompetitionBands {
     selectedValue: string;
 }
 
+interface CompetitionName {
+    selectedValue: string;
+}
+
 export interface CompetitionState {
     type?: CompetitionType;
     timeFrame?: CompetitionTimeFrame;
     judges?: CompetitionJudges;
     bands?: CompetitionBands;
+    name?: CompetitionName;
 }
 
 const CreateCompetition = () => {
     const [activeStepIndex, updateActiveStepIndex] = useState(0);
     const [competition, updateCompetition] = useState({} as CompetitionState);
-    console.log(competition);
 
     const applyUpdatesToCompetitionState = (updateObject) => {
         updateCompetition({...competition, ...updateObject});
     };
 
     const steps: CreateCompetitionStep[] = [
+        {
+            component: CompetitionNameStep,
+            stepTitle: 'Enter Competition Name',
+            props: {
+                competitionName: competition.name,
+                updateCompetition: applyUpdatesToCompetitionState
+            },
+            stateField: 'name',
+        },
         {
             component: SelectCompetitionTypeStep,
             stepTitle: 'Select Competition Type',
@@ -136,6 +150,7 @@ const CreateCompetition = () => {
                     activeStepIndex={activeStepIndex}
                     updateActiveStepIndex={updateActiveStepIndex}
                     steps={steps}
+                    competition={competition}
                 />
             </div>
         </Page>

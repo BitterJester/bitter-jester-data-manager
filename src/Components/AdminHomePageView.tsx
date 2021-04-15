@@ -1,10 +1,10 @@
 import {useAuth0} from "../react-auth0-spa";
 import React from "react";
-import {Competition} from "./Sidebar/CompetitionSelectionDropDown";
+import {CompetitionDropDownOption} from "./Sidebar/CompetitionSelectionDropDown";
 import AdminRouteButtons from "./AdminRouteButtons";
 
 interface Props {
-    selectedCompetition: Competition;
+    selectedCompetition: CompetitionDropDownOption;
     disabled: boolean;
 }
 

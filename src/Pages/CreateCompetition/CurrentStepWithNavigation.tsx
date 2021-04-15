@@ -1,30 +1,74 @@
 import CardContainer from "../../Components/Cards/CardContainer";
 import {Button} from "reactstrap";
 import React from "react";
-import {CreateCompetitionStep} from "./CreateCompetition";
+import {CompetitionState, CreateCompetitionStep} from "./CreateCompetition";
+import {S3Client} from "../../aws/s3Client";
+import {getFromS3} from "../../aws/getFromS3";
+import {CompetitionDropDownOption} from "../../Components/Sidebar/CompetitionSelectionDropDown";
+import {JudgesInfo} from "../OriginalSongCompetition";
 
 type Props = {
     updateActiveStepIndex: (index: number) => void;
     activeStepIndex: number;
     steps: CreateCompetitionStep[];
+    competition: CompetitionState;
+}
+
+interface Competition {
+    id: string;
+    name: string;
+    judges: JudgesInfo[];
+    bands: object[];
+    type: string;
+    startDate: Date;
+    endDate: Date;
 }
 
 export function CurrentStepWithNavigation(props: Props) {
-    const {updateActiveStepIndex, activeStepIndex, steps} = props;
+    const {updateActiveStepIndex, activeStepIndex, steps, competition} = props;
     const isOnReview = activeStepIndex === steps.length - 1;
 
-    const onNextStep = () => {
-        if(!isOnReview) {
+    const getCompetitionId = (competition: CompetitionState): string => {
+        return `${competition.name.selectedValue.split(' ').join('_').toLowerCase().trim()}`
+    }
+
+    const formatCompetitionForS3 = (competition: CompetitionState): Competition => {
+        return {
+            id: getCompetitionId(competition),
+            name: competition.name.selectedValue,
+            bands: competition.bands.bands,
+            judges: competition.judges.judges,
+            startDate: competition.timeFrame.start,
+            endDate: competition.timeFrame.end,
+            type: competition.type.id,
+        }
+    }
+
+    const onNextStep = async () => {
+        if (!isOnReview) {
             updateActiveStepIndex(activeStepIndex + 1);
         } else {
-            // Kick off some process to create the file structure in s3 and fill with relevant files
+            await getFromS3('all-competitions.json', async (data) => {
+                const {competitions} = data;
+                const updatedCompetitions = [
+                    ...competitions,
+                    formatCompetitionForS3(competition)
+                ];
+                const s3Client = new S3Client();
+                await s3Client.put(s3Client.createPutPublicJsonRequest(
+                    'bitter-jester-test',
+                    'all-competitions.json',
+                    JSON.stringify({competitions: updatedCompetitions}),
+                    true,
+                ));
+            }, true);
         }
     };
-    
+
     const onPreviousStep = () => {
         updateActiveStepIndex(activeStepIndex - 1);
-
     };
+
     const competitionStep = steps[activeStepIndex];
     const CurrentStepComponentDefinition = activeStepIndex < steps.length ?
         competitionStep.component :

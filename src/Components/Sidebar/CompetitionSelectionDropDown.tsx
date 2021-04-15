@@ -1,23 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
+import {getFromS3} from "../../aws/getFromS3";
 
-export type Competition = {
+export type CompetitionDropDownOption = {
     id: string;
     name: string;
 }
 
 interface Props {
-    selectedCompetition: Competition;
-    setSelectedCompetition: (selectedCompetition: Competition) => void;
+    selectedCompetition: CompetitionDropDownOption;
+    setSelectedCompetition: (selectedCompetition: CompetitionDropDownOption) => void;
 }
 
 const CompetitionSelectionDropDown = (props: Props) => {
-    const [competitions, updateCompetitions] = useState([{
-        id: 'BJMF_Summer_2020',
-        name: 'Bitter Jester Music Festival 2020'
-    }]);
-
+    const [competitions, updateCompetitions] = useState([]);
     const [isOpen, updateIsOpen] = useState(false);
+
+    const fetch = async () => {
+        getFromS3('all-competitions.json', (competitions) => updateCompetitions(competitions.competitions), true);
+    }
+
+    useEffect(() => {
+        fetch();
+    }, []);
 
     const {selectedCompetition} = props;
 

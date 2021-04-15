@@ -1,11 +1,11 @@
 import {Button} from "reactstrap";
 import React from "react";
 import {RouteComponentProps, withRouter} from "react-router";
-import {Competition} from "./Sidebar/CompetitionSelectionDropDown";
+import {CompetitionDropDownOption} from "./Sidebar/CompetitionSelectionDropDown";
 import {UrlHelper} from "../utils/url-helper";
 
 interface Props extends RouteComponentProps {
-    selectedCompetition: Competition;
+    selectedCompetition: CompetitionDropDownOption;
     disabled: boolean;
 }
 
