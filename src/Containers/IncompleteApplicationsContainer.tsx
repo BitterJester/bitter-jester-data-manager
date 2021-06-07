@@ -60,7 +60,8 @@ export const IncompleteApplicationsContainer = () => {
             <Title titleDisplayText='Incomplete Applications' />
             <UpdateIncompleteInfoButton />
             <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0} />
-            <CardBody>
+            {incompleteApplications.incompleteApplications.length ?
+                <CardBody>
                 <Row>
                     <SortIncompleteApplicationsDropdown
                         dropdownItemOnClick={() => setIsSortedByBandName(false)}
@@ -68,13 +69,17 @@ export const IncompleteApplicationsContainer = () => {
                     />
                 </Row>
                 <Row>
-                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Band Name</Col>
-                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Applicant Name</Col>
-                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Primary Email Address</Col>
-                    <Col style={{ fontSize: '24px', fontWeight: 'bold' }}>Relationship To Band</Col>
+                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Band Name</Col>
+                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Applicant Name</Col>
+                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Primary Email Address</Col>
+                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Relationship To Band</Col>
                 </Row>
                 {incompleteSubmissionCards}
-            </CardBody>
+            </CardBody> :
+                <div>
+                    <h1>No Incomplete Applications.</h1>
+                </div>
+            }
         </div>
     );
 };

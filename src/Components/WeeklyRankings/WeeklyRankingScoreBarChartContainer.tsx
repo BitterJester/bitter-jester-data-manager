@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Fragment} from 'react';
 import {S3Client} from "../../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
@@ -24,6 +24,14 @@ type Props = {
     setWeek: Function;
 }
 
+function NoRankingsYet() {
+    return <div>
+        <h1>
+            No Rankings Yet!
+        </h1>
+    </div>;
+}
+
 const WeeklyRankingScoreBarChartContainer = (props: Props) => {
     const {week, setWeek} = props;
     const initialSongRankingTotals: SongRankingTotals = {
@@ -47,12 +55,22 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     return (
         <div className={'weekly-results-container'}>
-            <WeeklyRankingsHeader
-                week={week}
-                setWeek={setWeek}
-                songRankingTotals={songRankingTotals}/>
-            <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
-            <WeeklyJudgesCommentsContainer week={week}/>
+            {
+                songRankingTotals.totalFinalRankings ?
+                (<Fragment>
+                    <WeeklyRankingsHeader
+                        week={week}
+                        setWeek={setWeek}
+                        songRankingTotals={songRankingTotals}/>
+                    <WeeklyRankingScoreBarChart songRankingTotals={songRankingTotals}/>
+                    <WeeklyJudgesCommentsContainer week={week}/>
+                </Fragment>) :
+                    (
+                        <Fragment>
+                            <NoRankingsYet />
+                        </Fragment>
+                    )
+            }
         </div>
     );
 };

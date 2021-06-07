@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Container } from 'reactstrap';
-import { SuggestedScheduleDragAndDropLists } from '../Components/SuggestedSchedule/SuggestedScheduleDragAndDropLists';
-import { getFromS3 } from '../aws/getFromS3';
-import { BitterJesterApplication } from '../Pages/Submissions';
+import React, {useEffect, useState} from 'react';
+import {Container} from 'reactstrap';
+import {SuggestedScheduleDragAndDropLists} from '../Components/SuggestedSchedule/SuggestedScheduleDragAndDropLists';
+import {getFromS3} from '../aws/getFromS3';
+import {BitterJesterApplication} from '../Pages/Submissions';
 import CardContainer from '../Components/Cards/CardContainer';
-import { Title } from '../Components/Title';
+import {Title} from '../Components/Title';
 import _ from 'lodash';
 import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendItem';
 import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
@@ -53,10 +53,7 @@ export const ScheduleContainer = () => {
         let nightToAddTo = nights[columnAddedToIndex];
 
         const getNightToRemoveFrom = () => {
-            return nights.filter(night => {
-                const isNightToRemoveFrom = _.isEqual(night.night, nights[columnRemovedFromIndex].night);
-                return isNightToRemoveFrom;
-            });
+            return nights.filter(night => _.isEqual(night.night, nights[columnRemovedFromIndex].night));
         };
         const nightToRemoveFrom = getNightToRemoveFrom();
 

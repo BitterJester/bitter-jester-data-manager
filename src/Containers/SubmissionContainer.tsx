@@ -15,7 +15,7 @@ export const SubmissionContainer = () => {
 
     useEffect(() => {
         async function fetch() {
-            await getFromS3('bitter-jester-test.json', setSubmissions);
+            await getFromS3('completed-submissions.json', setSubmissions);
         }
         fetch();
     }, []);
