@@ -1,13 +1,11 @@
 import {Button} from "reactstrap";
 import React, { Fragment } from "react";
 import {RouteComponentProps, withRouter} from "react-router";
-import {CompetitionDropDownOption} from "./Sidebar/CompetitionSelectionDropDown";
 import {UrlHelper} from "../utils/url-helper";
 import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 
 interface Props extends RouteComponentProps {
-    selectedCompetition: CompetitionDropDownOption;
     disabled: boolean;
 }
 

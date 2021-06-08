@@ -4,7 +4,6 @@ import {CompetitionDropDownOption} from "./Sidebar/CompetitionSelectionDropDown"
 import AdminRouteButtons from "./AdminRouteButtons";
 
 interface Props {
-    selectedCompetition: CompetitionDropDownOption;
     disabled: boolean;
 }
 
@@ -19,9 +18,7 @@ export function AdminHomePageView(props: Props) {
                     This row of buttons is for navigating to admin pages. This is only visible to accounts registered with
                     @bitterjester.com emails.
                 </p>
-                <AdminRouteButtons
-                    selectedCompetition={props.selectedCompetition}
-                    disabled={props.disabled}/>
+                <AdminRouteButtons disabled={props.disabled}/>
             </>
         )}
     </div>;

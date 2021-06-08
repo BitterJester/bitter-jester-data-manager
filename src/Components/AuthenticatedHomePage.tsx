@@ -40,10 +40,7 @@ const AuthenticatedHomePage = (props) => {
                 Original Song Competition
             </Button>}
         </div>
-        <AdminHomePageView
-            disabled={areButtonsDisabled}
-            selectedCompetition={selectedCompetition}
-        />
+        <AdminHomePageView disabled={areButtonsDisabled}/>
     </>;
 };
 
