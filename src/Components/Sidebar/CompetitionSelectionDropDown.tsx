@@ -1,34 +1,35 @@
 import React, { useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {useSelector} from "react-redux";
-import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
+import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 
 export type CompetitionDropDownOption = {
     id: string;
     name: string;
 }
 
-interface Props {
-    selectedCompetition: CompetitionDropDownOption;
-    setSelectedCompetition: (selectedCompetition: CompetitionDropDownOption) => void;
-}
-
-const CompetitionSelectionDropDown = (props: Props) => {
-    const competitions = useSelector((state: DataManagerReduxStore) => state.appInfo);
+const CompetitionSelectionDropDown = () => {
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     const [isOpen, updateIsOpen] = useState(false);
-
-    const {selectedCompetition} = props;
-
     return (
         <div className={'competition-selection-drop-down'}>
             <Dropdown toggle={() => updateIsOpen(!isOpen)} isOpen={isOpen} disabled={false}>
                 <DropdownToggle disabled={false} className={'toggle'} caret>
-                    {selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
+                    {selectedCompetition && selectedCompetition.name !== ''  ? selectedCompetition.name : 'Select Your Competition'}
                 </DropdownToggle>
                 <DropdownMenu>
-                    {competitions.competitions.map(competition =>
+                    {competitions.map(competition =>
                         <DropdownItem
-                            onClick={() => props.setSelectedCompetition(competition)}>
+                            onClick={() => {
+                                const found = competitions.find(c => c.name === competition.name);
+                                dataManagerReduxStore.dispatch({
+                                    type: 'competition/set',
+                                    payload: {selectedCompetition: {...competition, ...found}}
+                                });
+                            }}
+                        >
                             {competition.name}
                         </DropdownItem>)}
                 </DropdownMenu>
