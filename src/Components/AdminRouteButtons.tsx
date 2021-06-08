@@ -1,8 +1,10 @@
 import {Button} from "reactstrap";
-import React from "react";
+import React, { Fragment } from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import {CompetitionDropDownOption} from "./Sidebar/CompetitionSelectionDropDown";
 import {UrlHelper} from "../utils/url-helper";
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 
 interface Props extends RouteComponentProps {
     selectedCompetition: CompetitionDropDownOption;
@@ -10,7 +12,8 @@ interface Props extends RouteComponentProps {
 }
 
 function AdminRouteButtons(props: Props) {
-    const {history, selectedCompetition} = props;
+    const selectedCompetition = useSelector((state: DataManagerReduxStore) => state.selectedCompetition);
+    const {history} = props;
 
     const urlHelper = new UrlHelper(history);
 
@@ -32,7 +35,7 @@ function AdminRouteButtons(props: Props) {
             onClick={() => urlHelper.redirectToIncompleteApplications(selectedCompetition.id)}>
             Incomplete Applications
         </Button>
-        <Button
+        {selectedCompetition.type === 'online' && <Fragment><Button
             className={"home-route-button"}
             disabled={props.disabled}
             onClick={() => urlHelper.redirectToSchedulePage(selectedCompetition.id)}>
@@ -43,7 +46,7 @@ function AdminRouteButtons(props: Props) {
             disabled={props.disabled}
             onClick={() => urlHelper.redirectToResults(selectedCompetition.id)}>
             Results
-        </Button>
+        </Button></Fragment>}
     </div>);
 }
 

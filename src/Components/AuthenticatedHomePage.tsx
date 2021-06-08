@@ -33,12 +33,12 @@ const AuthenticatedHomePage = (props) => {
             <CompetitionSelectionDropDown/>
         </div>
         <div className={"public-route-buttons"}>
-            <Button
+            {selectedCompetition.type === 'online' && <Button
                 className='home-route-button'
                 onClick={() => urlHelper.redirectToOriginalSongCompetition(selectedCompetition.id)}
                 disabled={areButtonsDisabled}>
                 Original Song Competition
-            </Button>
+            </Button>}
         </div>
         <AdminHomePageView
             disabled={areButtonsDisabled}

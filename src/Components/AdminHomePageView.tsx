@@ -10,7 +10,7 @@ interface Props {
 
 export function AdminHomePageView(props: Props) {
     const {user} = useAuth0();
-    const isAdmin = user.email.split('@')[1] === 'bitterjester.com' || user.email === 'spencer.kasper@gmail.com';
+    const isAdmin = user.email.split('@')[1] === 'bitterjester.com';
 
     return <div>
         {isAdmin && (
