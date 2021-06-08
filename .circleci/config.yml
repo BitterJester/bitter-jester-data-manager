@@ -7,7 +7,8 @@ jobs:
     steps:
       - checkout
       - node/install:
-          - version: 14.15.1
+          - node-version: 14.15.1
+          - npm-version: 6.14.8
       - run:
           name: Build an environment file
           command: |
