@@ -2,40 +2,39 @@ version: 2.1
 orbs:
   node: circleci/node@4.5.0
 jobs:
-  build-and-test:
-    executor:
-      name: cimg/node:14.17.0
+  build-and-deploy:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run:
-                name: Build an environment file
-                command: |
-                  chmod 777 ./buildEnv.sh
-                  echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
-                  echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
-                  npm run buildEnv
-            - run:
-                name: Install aws cli
-                command: |
-                  sudo apt-get update
-                  sudo apt-get install awscli
-                  aws --version
-            - run:
-                name: Install dependencies
-                command: |
-                  npm install
-            - run:
-                name: Deploy to s3 bucket
-                command: |
-                  npm run deploy
-            - run:
-                name: Invalidate cloudfront caches
-                command: |
-                  chmod 777 ./invalidateCloudfrontCaches.sh
-                  npm run invalidateCloudfrontCaches
+      - node/install:
+          install-yarn: true
+      - run:
+          name: Build an environment file
+          command: |
+            chmod 777 ./buildEnv.sh
+            echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
+            echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
+            npm run buildEnv
+      - run:
+          name: Install aws cli
+          command: |
+            sudo apt-get update
+            sudo apt-get install awscli
+            aws --version
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
+      - run:
+          name: Deploy to s3 bucket
+          command: |
+            npm run deploy
+      - run:
+          name: Invalidate cloudfront caches
+          command: |
+            chmod 777 ./invalidateCloudfrontCaches.sh
+            npm run invalidateCloudfrontCaches
 workflows:
-  build-and-test:
+  build-and-deploy:
     jobs:
-      - build-and-test
+      - build-and-deploy
