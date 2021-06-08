@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - node/install:
-          install-yarn: true
+          - version: 14.15.1
       - run:
           name: Build an environment file
           command: |
