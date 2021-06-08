@@ -36,7 +36,7 @@ function AdminRouteButtons(props: Props) {
             className={"home-route-button"}
             disabled={props.disabled}
             onClick={() => urlHelper.redirectToSchedulePage(selectedCompetition.id)}>
-            Friday Night Scheduler
+            Original Song Competition Scheduler
         </Button>
         <Button
             className={"home-route-button"}
