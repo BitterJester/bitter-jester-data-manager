@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import OriginalSongCompetitionScheduleCard from "../Components/Cards/OriginalSongCompetitionScheduleCard";
 import {Container} from 'reactstrap';
 import {getFromS3} from "../aws/getFromS3";
-import {OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../pages/OriginalSongCompetition";
 
 const OriginalSongCompetitionScheduleContainer = () => {
     const initialOriginalSongs: OriginalSongs = {

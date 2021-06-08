@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong, OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {OnClickFunction} from "../SortIncompleteApplicationsDropdown";
 import {dropdownMenuModifiers} from '../../utils/dropdownMenuModifiers';
 

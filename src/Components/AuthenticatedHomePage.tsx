@@ -1,12 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CompetitionSelectionDropDown from "./Sidebar/CompetitionSelectionDropDown";
 import {Button} from "reactstrap";
 import AdminRouteButtons from "./AdminRouteButtons";
 import {withRouter} from "react-router";
 import {AdminHomePageView} from "./AdminHomePageView";
 import {UrlHelper} from "../utils/url-helper";
+import {getFromS3} from "../aws/getFromS3";
+import dataManagerReduxStore from "../redux/data-manager-redux-store";
 
 const AuthenticatedHomePage = (props) => {
+    const fetch = async () => {
+        getFromS3('all-competitions.json', (competitions) => {
+            return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: competitions.competitions}});
+        }, true);
+    }
+
+    useEffect(() => {
+        fetch();
+    }, []);
+
     const [selectedCompetition, setSelectedCompetition] = useState({id: '', name: ''});
     const areButtonsDisabled = selectedCompetition.id === '';
 

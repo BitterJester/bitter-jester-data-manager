@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import {getFromS3} from "../../aws/getFromS3";
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 
 export type CompetitionDropDownOption = {
     id: string;
@@ -13,16 +14,8 @@ interface Props {
 }
 
 const CompetitionSelectionDropDown = (props: Props) => {
-    const [competitions, updateCompetitions] = useState([]);
+    const competitions = useSelector((state: DataManagerReduxStore) => state.appInfo);
     const [isOpen, updateIsOpen] = useState(false);
-
-    const fetch = async () => {
-        getFromS3('all-competitions.json', (competitions) => updateCompetitions(competitions.competitions), true);
-    }
-
-    useEffect(() => {
-        fetch();
-    }, []);
 
     const {selectedCompetition} = props;
 
@@ -33,7 +26,7 @@ const CompetitionSelectionDropDown = (props: Props) => {
                     {selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
                 </DropdownToggle>
                 <DropdownMenu>
-                    {competitions.map(competition =>
+                    {competitions.competitions.map(competition =>
                         <DropdownItem
                             onClick={() => props.setSelectedCompetition(competition)}>
                             {competition.name}

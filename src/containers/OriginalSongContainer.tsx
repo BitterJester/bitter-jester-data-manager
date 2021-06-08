@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {JudgesInfos, OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {JudgesInfos, OriginalSongs} from "../pages/OriginalSongCompetition";
 
 import {Col, Row} from "reactstrap";
 import ArtistStatementCollapseCard from "../Components/Cards/ArtistStatementCollapseCard";

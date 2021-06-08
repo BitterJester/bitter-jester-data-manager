@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Title} from "../Title";
 import {Card} from "reactstrap";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import BandSelectionDropDown from "../JudgingFormForWeek/BandSelectionDropDown";
 import LyricsPdf from "../JudgingFormForWeek/LyricsPdf";
 

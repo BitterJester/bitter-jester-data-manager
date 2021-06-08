@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { Row, Alert } from 'reactstrap';
 import ScheduleDropdown from './ScheduleDropdown';
-import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../../Containers/ScheduleContainer';
+import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../../containers/ScheduleContainer';
 import SaveScheduleButton from './SaveScheduleButton';
 import TotalCount from '../TotalCount';
 

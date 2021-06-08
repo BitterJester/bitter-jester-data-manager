@@ -6,7 +6,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import Sidebar from './Components/Sidebar/Sidebar';
 import './App.scss';
 import {Col, Row} from "reactstrap";
-import HomePage from "./Pages/HomePage";
+import HomePage from "./pages/HomePage";
 import {ROUTES} from "./static/constants/routes";
 
 function App() {

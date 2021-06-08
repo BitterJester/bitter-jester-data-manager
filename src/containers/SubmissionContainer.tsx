@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Container} from 'reactstrap';
-import {BitterJesterApplications} from '../Pages/Submissions';
+import {BitterJesterApplications} from '../pages/Submissions';
 import {Title} from '../Components/Title';
 import {getFromS3} from '../aws/getFromS3';
 import CardContainer from '../Components/Cards/CardContainer';

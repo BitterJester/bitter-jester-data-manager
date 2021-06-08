@@ -1,5 +1,5 @@
 import {Place} from "../../static/constants/places";
-import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong, OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {SongRanking} from "../Cards/OverallBandRankingsCard";
 import React, {useState} from "react";
 import {Col} from "reactstrap";

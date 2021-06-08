@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, Card, Col, Row} from "reactstrap";
 import {DragAndDropList} from "../DragAndDrop/DragAndDropList";
 import {Title} from "../Title";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import _ from 'lodash';
 import SaveOriginalSongScheduleButton from "../SaveOriginalSongScheduleButton";
 

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Col, Row} from 'reactstrap';
 import {DragAndDropList} from '../DragAndDrop/DragAndDropList';
-import {Schedule} from '../../Containers/ScheduleContainer';
+import {Schedule} from '../../containers/ScheduleContainer';
 import {BackgroundColor} from './BackgroundColor';
 import '../../static/css/suggestedScheduleDragAndDropLists.css';
 

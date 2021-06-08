@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import CardContainer from '../Cards/CardContainer';
 import CardItem from '../Cards/CardItem';
 import IncompleteSubmissionCard from './IncompleteSubmissionCard';
-import { IncompleteApplication } from '../../Containers/IncompleteApplicationsContainer';
+import { IncompleteApplication } from '../../containers/IncompleteApplicationsContainer';
 
 describe('IncompleteSubmissionCard', () => {
     const incompleteApplication: IncompleteApplication = {

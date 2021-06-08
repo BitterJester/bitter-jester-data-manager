@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import OverallBandRankingsCard from "./OverallBandRankingsCard";
 import {Card} from "reactstrap";
 import {Title} from "../Title";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import '../../../mocks/mockUseAuth0';
 
 describe('OverallBandRankingsCard', () => {

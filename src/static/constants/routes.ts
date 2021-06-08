@@ -1,9 +1,9 @@
-import {Submissions} from "../../Pages/Submissions";
-import {IncompleteApplications} from "../../Pages/IncompleteApplications";
-import OriginalSongCompetition from "../../Pages/OriginalSongCompetition";
-import OriginalSongCompetitionSchedulePage from "../../Pages/OriginalSongCompetitionSchedulePage";
-import OriginalSongResults from "../../Pages/OriginalSongResults";
-import CreateCompetition from "../../Pages/CreateCompetition/CreateCompetition";
+import {Submissions} from "../../pages/Submissions";
+import {IncompleteApplications} from "../../pages/IncompleteApplications";
+import OriginalSongCompetition from "../../pages/OriginalSongCompetition";
+import OriginalSongCompetitionSchedulePage from "../../pages/OriginalSongCompetitionSchedulePage";
+import OriginalSongResults from "../../pages/OriginalSongResults";
+import CreateCompetition from "../../pages/CreateCompetition/CreateCompetition";
 
 interface RouteInfo {
     route: string;

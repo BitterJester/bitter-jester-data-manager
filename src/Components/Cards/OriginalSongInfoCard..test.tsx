@@ -1,7 +1,7 @@
 import React from 'react';
 import OriginalSongInfoCard from "./OriginalSongInfoCard";
 import {shallow} from "enzyme";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {Title} from "../Title";
 import BandSelectionDropDown from "../JudgingFormForWeek/BandSelectionDropDown";
 

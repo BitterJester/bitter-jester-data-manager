@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, Button, Card} from 'reactstrap';
 import {Title} from "../Title";
-import {OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
 import {useAuth0} from "../../react-auth0-spa";
 import OverallSongRankingsDropdownRow from "../JudgingFormForWeek/OverallSongRankingsDropdownRow";

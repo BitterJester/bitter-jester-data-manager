@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import ScheduleToolbar from './ScheduleToolbar';
 import ScheduleDropdown from './ScheduleDropdown';
 import SaveScheduleButton from './SaveScheduleButton';
-import { Schedule } from '../../Containers/ScheduleContainer';
+import { Schedule } from '../../containers/ScheduleContainer';
 import TotalCount from '../TotalCount';
 
 describe('ScheduleToolbar', () => {

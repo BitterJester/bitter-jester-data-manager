@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Button} from 'reactstrap';
 import _ from 'lodash';
 import {S3Client} from "../aws/s3Client";
-import {OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../pages/OriginalSongCompetition";
 
 type Props = {
     originalSongs: OriginalSongs,

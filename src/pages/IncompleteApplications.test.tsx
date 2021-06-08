@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IncompleteApplications } from './IncompleteApplications';
-import { IncompleteApplicationsContainer } from '../Containers/IncompleteApplicationsContainer';
+import { IncompleteApplicationsContainer } from '../containers/IncompleteApplicationsContainer';
 
 describe('IncompleteApplications page', () => {
     const component = shallow(<IncompleteApplications />);

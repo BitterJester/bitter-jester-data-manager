@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OriginalSongContainer from "./OriginalSongContainer";
-import {OriginalSongs} from "../Pages/OriginalSongCompetition";
+import {OriginalSongs} from "../pages/OriginalSongCompetition";
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
 import ArtistStatementCollapseCard from "../Components/Cards/ArtistStatementCollapseCard";
 

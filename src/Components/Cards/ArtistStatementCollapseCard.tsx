@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Card, Collapse} from "reactstrap";
 import {Title} from "../Title";
-import {OriginalSong} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong} from "../../pages/OriginalSongCompetition";
 
 type Props = {
     originalSong: OriginalSong;

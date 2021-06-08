@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {OriginalSong} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong} from "../../pages/OriginalSongCompetition";
 import {Document, Page, pdfjs} from 'react-pdf';
 import {Button} from "reactstrap";
 

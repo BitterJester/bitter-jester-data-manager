@@ -1,5 +1,5 @@
 import React from 'react';
-import { IncompleteApplicationsContainer } from '../Containers/IncompleteApplicationsContainer';
+import { IncompleteApplicationsContainer } from '../containers/IncompleteApplicationsContainer';
 
 export const IncompleteApplications = () => {
     return (

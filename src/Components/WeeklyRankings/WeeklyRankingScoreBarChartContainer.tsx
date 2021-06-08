@@ -3,7 +3,7 @@ import {S3Client} from "../../aws/s3Client";
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
-import {JudgesInfo} from "../../Pages/OriginalSongCompetition";
+import {JudgesInfo} from "../../pages/OriginalSongCompetition";
 import {getFromS3} from "../../aws/getFromS3";
 
 type SongRankingTotal = {

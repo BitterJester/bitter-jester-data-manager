@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CompletedSubmissionCardsTable from './CompletedSubmissionCardsTable';
-import { BitterJesterApplication } from '../../Pages/Submissions';
+import { BitterJesterApplication } from '../../pages/Submissions';
 import NByMGrid from '../NByMGrid/NByMGrid';
 
 describe('CompletedSubmissionCardsTable', () => {

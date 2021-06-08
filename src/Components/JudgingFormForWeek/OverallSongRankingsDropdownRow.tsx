@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row} from "reactstrap";
-import {OriginalSong, OriginalSongs} from "../../Pages/OriginalSongCompetition";
+import {OriginalSong, OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {SongRanking, SongRankings} from "../Cards/OverallBandRankingsCard";
 import _ from 'lodash';
 import {PLACES} from "../../static/constants/places";

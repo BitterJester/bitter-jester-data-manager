@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {getFromS3} from '../aws/getFromS3';
-import OriginalSongContainer from '../Containers/OriginalSongContainer';
+import OriginalSongContainer from '../containers/OriginalSongContainer';
 import Page from "../Components/Page";
 import {withRouter, useParams} from "react-router-dom";
 import {useLocation} from "react-router";
