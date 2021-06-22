@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { publishSNS } from '../../aws/publishSNS';
 import { Alert, Button } from 'reactstrap';
+import {UrlHelper} from "../../utils/url-helper";
 
 const UpdateInfoTopicArn = 'arn:aws:sns:us-east-1:771384749710:CheckJotFormForUpdatesSnsTopic';
 
 export const UpdateInfoButton = () => {
     const [showAlert, setShowAlert] = useState(false);
     const updateInfo = async () => {
-        await publishSNS({Message: 'UpdateInfo', TopicArn: UpdateInfoTopicArn});
+        await publishSNS({Message: `competition=${UrlHelper.parseQueryParams().competition}`, TopicArn: UpdateInfoTopicArn});
 
         onAlertStatusChange();
     };
