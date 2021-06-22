@@ -13,6 +13,7 @@ const CompetitionSelectionDropDown = () => {
         return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
     });
     const [isOpen, updateIsOpen] = useState(false);
+
     return (
         <div className={'competition-selection-drop-down'}>
             <Dropdown toggle={() => updateIsOpen(!isOpen)} isOpen={isOpen} disabled={false}>

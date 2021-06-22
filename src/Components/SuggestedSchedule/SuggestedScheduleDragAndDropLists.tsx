@@ -12,7 +12,7 @@ type Props = {
 
 export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const {schedule} = props;
-    const fridayNights = ['6/5', '6/12', '6/19', '6/26'];
+    const fridayNights = ['7/23', '7/30', '8/6', '8/13'];
     const schedulesInformationForEachNight = [];
 
     schedule.nights.forEach(night => {
