@@ -7,11 +7,15 @@ import {UrlHelper} from "../utils/url-helper";
 import {getFromS3} from "../aws/getFromS3";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 import {useSelector} from "react-redux";
+import {useAuth0} from "../react-auth0-spa";
 
 const AuthenticatedHomePage = (props) => {
+    const {user} = useAuth0();
+    const isAdmin = user.email.split('@')[1] === 'bitterjester.com';
     const fetch = async () => {
         getFromS3('all-competitions.json', (competitions) => {
-            return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: competitions.competitions}});
+            const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
+            return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: isAdmin ? competitions.competitions : filteredCompetitions}});
         }, true);
     }
 
