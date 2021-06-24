@@ -12,7 +12,7 @@ export class BackgroundColor {
             '1': '23',
             '2': '30',
             '3': '6',
-            '4': '19'
+            '4': '13'
         }
 
         const nightString = nightMap[String(this.night)];
