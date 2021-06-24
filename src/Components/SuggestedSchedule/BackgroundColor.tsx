@@ -9,10 +9,10 @@ export class BackgroundColor {
 
     get() {
         const nightMap = {
-            '1': '5',
-            '2': '12',
-            '3': 'June 19',
-            '4': '26'
+            '1': '23',
+            '2': '30',
+            '3': '6',
+            '4': '19'
         }
 
         const nightString = nightMap[String(this.night)];
