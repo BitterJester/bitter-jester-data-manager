@@ -35,6 +35,10 @@ export class UrlHelper {
         this.redirectWithQueryParams(ROUTES.completedSubmissions.route, {competition: competitionId});
     }
 
+    public redirectToUploadedFiles(competitionId) {
+        this.redirectWithQueryParams(ROUTES.uploadedFiles.route, {competition: competitionId});
+    }
+
     public redirectToIncompleteApplications(competitionId) {
         this.redirectWithQueryParams(ROUTES.incompleteApplications.route, {competition: competitionId});
     }

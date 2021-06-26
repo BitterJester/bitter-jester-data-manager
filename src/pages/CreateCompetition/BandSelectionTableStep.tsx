@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {DataGrid, ColDef, SelectionChangeParams} from '@material-ui/data-grid';
+import {DataGrid} from '@material-ui/data-grid';
 import {getFromS3} from "../../aws/getFromS3";
 
 const BandSelectionTableStep = (props) => {
@@ -16,7 +16,7 @@ const BandSelectionTableStep = (props) => {
         fetch();
     }, []);
 
-    const columns: ColDef[] = [
+    const columns = [
         {field: 'id', headerName: 'Id', width: 60},
         {field: 'bandName', headerName: 'Band Name', width: 160},
         {field: 'primaryEmailAddress', headerName: 'Primary Email Address', width: 300},
@@ -32,7 +32,7 @@ const BandSelectionTableStep = (props) => {
         },
     ];
 
-    const onSelectionChange = (update: SelectionChangeParams) => {
+    const onSelectionChange = (update) => {
         const selectedBands = bands.filter(band => update.rowIds.includes(band.id.toString()));
         updateCompetition({
             bands: {

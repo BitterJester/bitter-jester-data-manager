@@ -28,6 +28,12 @@ function AdminRouteButtons(props: Props) {
             Completed Submissions
         </Button>
         <Button
+            className={" home-route-button"}
+            disabled={props.disabled}
+            onClick={() => urlHelper.redirectToUploadedFiles(selectedCompetition.id)}>
+            Uploaded Files
+        </Button>
+        <Button
             className={"home-route-button"}
             disabled={props.disabled}
             onClick={() => urlHelper.redirectToIncompleteApplications(selectedCompetition.id)}>

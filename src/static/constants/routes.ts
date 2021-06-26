@@ -4,6 +4,7 @@ import OriginalSongCompetition from "../../pages/OriginalSongCompetition";
 import OriginalSongCompetitionSchedulePage from "../../pages/OriginalSongCompetitionSchedulePage";
 import OriginalSongResults from "../../pages/OriginalSongResults";
 import CreateCompetition from "../../pages/CreateCompetition/CreateCompetition";
+import UploadedFilesPage from "../../pages/UploadedFilesPage";
 
 interface RouteInfo {
     route: string;
@@ -17,6 +18,7 @@ interface Routes {
     fridayNightScheduler: RouteInfo;
     originalSongResults: RouteInfo;
     createACompetition: RouteInfo;
+    uploadedFiles: RouteInfo;
 }
 
 export const ROUTES: Routes = {
@@ -43,5 +45,9 @@ export const ROUTES: Routes = {
     createACompetition: {
         route: '/createCompetition',
         component: CreateCompetition
+    },
+    uploadedFiles: {
+        route: '/uploadedFiles',
+        component: UploadedFilesPage
     }
 }
