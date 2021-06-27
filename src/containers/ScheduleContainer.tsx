@@ -8,6 +8,8 @@ import {Title} from '../Components/Title';
 import _ from 'lodash';
 import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendItem';
 import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 
 export type Night = {
     night: number;

@@ -4,6 +4,8 @@ import {DragAndDropList} from '../DragAndDrop/DragAndDropList';
 import {Schedule} from '../../containers/ScheduleContainer';
 import {BackgroundColor} from './BackgroundColor';
 import '../../static/css/suggestedScheduleDragAndDropLists.css';
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 
 type Props = {
     schedule: Schedule;
@@ -14,9 +16,12 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const {schedule} = props;
     const fridayNights = ['7/23', '7/30', '8/6', '8/13'];
     const schedulesInformationForEachNight = [];
+    const removedBands = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.removedBands);
 
     schedule.nights.forEach(night => {
-        const submissionTableRowBandsForOneNight = night.bands.map((app, index) => {
+        const submissionTableRowBandsForOneNight = night.bands
+            .filter(band => !removedBands.includes(band.bandName))
+            .map((app, index) => {
             const color = new BackgroundColor(app, night.night).get();
 
             return (

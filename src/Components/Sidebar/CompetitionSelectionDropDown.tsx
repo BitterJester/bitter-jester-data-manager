@@ -25,6 +25,7 @@ const CompetitionSelectionDropDown = () => {
                         <DropdownItem
                             onClick={() => {
                                 const found = competitions.find(c => c.name === competition.name);
+                                console.error('found: ', found);
                                 dataManagerReduxStore.dispatch({
                                     type: 'competition/set',
                                     payload: {selectedCompetition: {...competition, ...found}}
