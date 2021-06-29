@@ -28,7 +28,6 @@ export type SongRankings = {
     isFinalRanking: boolean;
     judge: Judge;
 }
-const s3Client = new S3Client();
 
 const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:CalculateScoresForEachOriginalSongInWeekSnsTopic';
 
@@ -49,7 +48,7 @@ const OverallBandRankingsCard = (props: Props) => {
 
         fetch();
     }, [week]);
-
+    const s3Client = new S3Client();
     const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []});
     const save = async (updatedSongRankings) => {
 

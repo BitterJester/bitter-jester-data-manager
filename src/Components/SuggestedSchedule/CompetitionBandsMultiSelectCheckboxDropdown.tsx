@@ -14,6 +14,10 @@ import {useSelector} from "react-redux";
 import {Button, Col} from "reactstrap";
 import {S3Client} from "../../aws/s3Client";
 import {getFromS3} from "../../aws/getFromS3";
+import axios from "axios";
+import {Schedule} from "../../containers/ScheduleContainer";
+import {UrlHelper} from "../../utils/url-helper";
+import BitterJesterApiRequest from "../../utils/bitter-jester-api-request";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -71,11 +75,16 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
             type: 'competition/set-removed-bands',
             payload: {removedBands: updatedRemovedBands}
         });
-        return await s3Client.put(s3Client.createPutPublicJsonRequest(
+        await s3Client.put(s3Client.createPutPublicJsonRequest(
             'bitter-jester-test',
             'removed-bands.json',
             JSON.stringify({removedBands: updatedRemovedBands})
         ));
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>('update-schedule');
+        dataManagerReduxStore.dispatch({
+            type: 'competition/set-schedule',
+            payload: {schedule: updatedSchedule}
+        });
     };
 
     const isChecked = (option) => {

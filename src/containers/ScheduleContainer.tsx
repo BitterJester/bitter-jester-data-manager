@@ -9,7 +9,10 @@ import _ from 'lodash';
 import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendItem';
 import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
 import {useSelector} from "react-redux";
-import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
+import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
+import axios from "axios";
+import {UrlHelper} from "../utils/url-helper";
+import BitterJesterApiRequest from "../utils/bitter-jester-api-request";
 
 export type Night = {
     night: number;
@@ -30,18 +33,14 @@ export const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
 export const SUGGESTED_VERSION = 'Suggested';
 
 export const ScheduleContainer = () => {
-    const initialSchedule: Schedule = {
-        fridayNightOne: [],
-        fridayNightTwo: [],
-        fridayNightThree: [],
-        fridayNightFour: [],
-        nights: [],
-        version: LAST_SAVE_VERSION
-    };
-    const [schedule, setSchedule] = useState(initialSchedule);
+    const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
     async function fetch(fileName) {
-        await getFromS3(fileName, setSchedule);
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>('update-schedule');
+        dataManagerReduxStore.dispatch({
+            type: 'competition/set-schedule',
+            payload: {schedule: updatedSchedule}
+        });
     }
 
     useEffect(() => {
@@ -71,7 +70,10 @@ export const ScheduleContainer = () => {
         };
         addBandToNewLocation();
 
-        setSchedule(scheduleCopy);
+        dataManagerReduxStore.dispatch({
+            type: 'competition/set-schedule',
+            payload: {schedule: scheduleCopy}
+        });
     }
 
     const formatVersionForTitle = (version: string): string => {

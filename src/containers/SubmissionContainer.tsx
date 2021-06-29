@@ -9,19 +9,22 @@ import TotalCount from '../Components/TotalCount';
 import CompletedSubmissionCardsTable from '../Components/CompletedSubmissions/CompletedSubmissionCardsTable';
 import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
+import BitterJesterApiRequest from "../utils/bitter-jester-api-request";
+import {BitterJesterApplications} from "../pages/Submissions";
 
 export const SubmissionContainer = () => {
     const submissions = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.bands);
 
     useEffect(() => {
         async function fetch() {
-            await getFromS3('completed-submissions.json', (data) => {
-                dataManagerReduxStore.dispatch({
-                    type: 'competition/set-bands',
-                    payload: {bands: data.completedApplications}
-                })
-            });
+            const completedSubmissions = await BitterJesterApiRequest.get<BitterJesterApplications>('completed-submissions');
+
+            dataManagerReduxStore.dispatch({
+                type: 'competition/set-bands',
+                payload: {bands: completedSubmissions.completedApplications}
+            })
         }
+
         fetch();
     }, []);
 
@@ -31,10 +34,10 @@ export const SubmissionContainer = () => {
 
     return (
         <Container fluid>
-            <div style={{ padding: '16px' }}>
+            <div style={{padding: '16px'}}>
                 <CardContainer>
-                    <Title titleDisplayText={'Completed Submissions'} />
-                    <UpdateInfoButton />
+                    <Title titleDisplayText={'Completed Submissions'}/>
+                    <UpdateInfoButton/>
                     <TotalCount count={getTotalCount()}/>
                     <CompletedSubmissionCardsTable completedSubmissions={submissions}/>
                 </CardContainer>

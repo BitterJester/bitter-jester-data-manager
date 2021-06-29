@@ -1,9 +1,11 @@
 import {BitterJesterApplication} from "../../pages/Submissions";
 import {JudgesInfo} from "../../pages/OriginalSongCompetition";
+import {LAST_SAVE_VERSION, Schedule} from "../../containers/ScheduleContainer";
 
 type SelectedCompetitionReduxState = SelectedCompetition & {
     allBandDropDownOptions: any[];
     removedBands: any[];
+    schedule: Schedule;
 }
 
 type SelectedCompetition = {
@@ -16,7 +18,16 @@ type SelectedCompetition = {
     type: 'inPerson' | 'online' | ''
 }
 
-const initialState: SelectedCompetitionReduxState = {
+const initialSchedule: Schedule = {
+    fridayNightOne: [],
+    fridayNightTwo: [],
+    fridayNightThree: [],
+    fridayNightFour: [],
+    nights: [],
+    version: LAST_SAVE_VERSION
+};
+
+export const SELECTED_COMPETITION_REDUCER_INITIAL_STATE: SelectedCompetitionReduxState = {
     id: '',
     name: '',
     bands: [],
@@ -26,9 +37,10 @@ const initialState: SelectedCompetitionReduxState = {
     type: '',
     allBandDropDownOptions: [],
     removedBands: [],
+    schedule: initialSchedule,
 };
 
-export default function selectedCompetitionReducer(state = initialState, action) {
+export default function selectedCompetitionReducer(state = SELECTED_COMPETITION_REDUCER_INITIAL_STATE, action) {
     switch (action.type) {
         case 'competition/set':
             const selectedCompetition: SelectedCompetitionReduxState = action.payload.selectedCompetition;
@@ -46,6 +58,11 @@ export default function selectedCompetitionReducer(state = initialState, action)
             return {
                 ...state,
                 removedBands: action.payload.removedBands
+            }
+        case 'competition/set-schedule':
+            return {
+                ...state,
+                schedule: action.payload.schedule
             }
         default:
             return state
