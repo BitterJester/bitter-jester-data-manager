@@ -1,4 +1,4 @@
-interface UploadedFile {
+export interface UploadedFile {
     fileName: string;
     fileType: string;
     type: string;
@@ -21,6 +21,7 @@ export default function uploadedFilesReducer(state = initialState, action) {
     switch (action.type) {
         case 'files/set':
             const payload = action.payload;
+            console.error('payload: ', payload);
             return {
                 ...state,
                 ...(payload.files !== undefined && payload.files),

@@ -20,6 +20,7 @@ const TYPE_MAP = {
 
 const UploadedFilesTable = () => {
     const uploadedFiles = useSelector((state: DataManagerReduxStore) => state.uploadedFiles.files);
+    console.error(uploadedFiles);
     const rows = uploadedFiles.map((file, index) => ({...file, id: index, type: TYPE_MAP[file.type]}));
 
     const onSelectionChange = (update) => {

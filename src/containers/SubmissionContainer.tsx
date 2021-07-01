@@ -9,7 +9,7 @@ import TotalCount from '../Components/TotalCount';
 import CompletedSubmissionCardsTable from '../Components/CompletedSubmissions/CompletedSubmissionCardsTable';
 import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
-import BitterJesterApiRequest from "../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, {API_URL_PATHS} from "../utils/bitter-jester-api-request";
 import {BitterJesterApplications} from "../pages/Submissions";
 
 export const SubmissionContainer = () => {
@@ -17,7 +17,7 @@ export const SubmissionContainer = () => {
 
     useEffect(() => {
         async function fetch() {
-            const completedSubmissions = await BitterJesterApiRequest.get<BitterJesterApplications>('completed-submissions');
+            const completedSubmissions = await BitterJesterApiRequest.get<BitterJesterApplications>(API_URL_PATHS.COMPLETED_SUBMISSIONS);
 
             dataManagerReduxStore.dispatch({
                 type: 'competition/set-bands',

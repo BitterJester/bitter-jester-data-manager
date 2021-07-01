@@ -17,7 +17,7 @@ import {getFromS3} from "../../aws/getFromS3";
 import axios from "axios";
 import {Schedule} from "../../containers/ScheduleContainer";
 import {UrlHelper} from "../../utils/url-helper";
-import BitterJesterApiRequest from "../../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, { API_URL_PATHS } from "../../utils/bitter-jester-api-request";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -80,7 +80,7 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
             'removed-bands.json',
             JSON.stringify({removedBands: updatedRemovedBands})
         ));
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>('update-schedule');
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATHS.UPDATE_SCHEDULE);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}

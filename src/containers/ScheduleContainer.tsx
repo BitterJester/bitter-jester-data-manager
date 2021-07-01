@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 import axios from "axios";
 import {UrlHelper} from "../utils/url-helper";
-import BitterJesterApiRequest from "../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, {API_URL_PATHS} from "../utils/bitter-jester-api-request";
 
 export type Night = {
     night: number;
@@ -36,7 +36,7 @@ export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
     async function fetch(fileName) {
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>('update-schedule');
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATHS.UPDATE_SCHEDULE);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}

@@ -6,15 +6,17 @@ import UploadedFilesTable from "../Components/uploaded-files/UploadedFilesTable"
 import {Button, Card} from "reactstrap";
 import {Title} from "../Components/Title";
 import axios from "axios";
+import BitterJesterApiRequest, {API_URL_PATHS} from '../utils/bitter-jester-api-request';
+import {UploadedFile} from "../redux/reducers/uploadedFilesReducer";
 
 const UploadedFilesContainer = () => {
     const selectedFiles = useSelector((state: DataManagerReduxStore) => state.uploadedFiles.selectedFiles);
     const fetch = async () => {
-        return getFromS3('uploaded-files.json', (files) => {
-            dataManagerReduxStore.dispatch({
-                type: 'files/set',
-                payload: {files}
-            })
+        const files = await BitterJesterApiRequest.get<UploadedFile[]>(API_URL_PATHS.RENAMED_FILES);
+
+        dataManagerReduxStore.dispatch({
+            type: 'files/set',
+            payload: {files: {files}}
         });
     }
 
