@@ -35,8 +35,9 @@ export const SUGGESTED_VERSION = 'Suggested';
 export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
-    async function fetch(fileName) {
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATHS.UPDATE_SCHEDULE);
+    async function fetch(scheduleType) {
+        const path = scheduleType === SUGGESTED_FRIDAY_NIGHT_SCHEDULE ? '' : '?lastSaved=true';
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(`${API_URL_PATHS.UPDATE_SCHEDULE}${path}`);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}
