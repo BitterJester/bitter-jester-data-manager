@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Row} from 'reactstrap';
 import '../../static/css/scheduleLegend.css';
+import GradeIcon from "@material-ui/icons/Grade";
 
 const ScheduleLegendItem = () => {
     return (
@@ -20,6 +21,14 @@ const ScheduleLegendItem = () => {
             <Col>
                 <div className={'coloredKey'} style={{background: 'red'}}/>
                 <p>Band is scheduled on a night that they are not available.</p>
+            </Col>
+            <Col>
+                <div>
+                    <div style={{color: 'purple'}} className={'coloredKey'}>
+                        <GradeIcon/>
+                    </div>
+                    <p>Showcase Band</p>
+                </div>
             </Col>
         </Row>
     );

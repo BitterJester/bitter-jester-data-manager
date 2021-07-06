@@ -6,6 +6,7 @@ import {BackgroundColor} from './BackgroundColor';
 import '../../static/css/suggestedScheduleDragAndDropLists.css';
 import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
+import GradeIcon from '@material-ui/icons/Grade';
 
 type Props = {
     schedule: Schedule;
@@ -23,9 +24,12 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
             .filter(band => !removedBands.includes(band.bandName))
             .map((app, index) => {
             const color = new BackgroundColor(app, night.night).get();
-
+            const isShowcaseBand = index === 0;
             return (
                 <Col>
+                    {isShowcaseBand && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
+                        <GradeIcon />
+                    </div>}
                     <div style={{ backgroundColor: color }} className={'suggestedScheduleBandName'}>
                         {app.bandName}
                     </div>
@@ -46,7 +50,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         });
 
         schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
-    });
+    })
 
     return (
         <Fragment>
