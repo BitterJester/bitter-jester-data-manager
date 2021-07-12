@@ -7,12 +7,12 @@ export const API_URL_PATHS = {
     UPDATE_SCHEDULE: 'update-schedule'
 }
 
-const API_RESOURCE_ID = 'jfzu5sd2db';
+const DOMAIN = 'https://api.bitter-jester-data-manager.com/v1/';
 
 class BitterJesterApiRequest {
     static async get<T>(path) {
         const competitionId = UrlHelper.parseQueryParams().competition;
-        const response = await axios.get(`https://${API_RESOURCE_ID}.execute-api.us-east-1.amazonaws.com/prod/${competitionId}/${path}`) as {data: {body: T}};
+        const response = await axios.get(`${DOMAIN}${competitionId}/${path}`) as {data: {body: T}};
         return response.data.body;
     }
 }
