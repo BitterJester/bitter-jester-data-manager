@@ -7,10 +7,12 @@ export const API_URL_PATHS = {
     UPDATE_SCHEDULE: 'update-schedule'
 }
 
+const API_RESOURCE_ID = 'jfzu5sd2db';
+
 class BitterJesterApiRequest {
     static async get<T>(path) {
         const competitionId = UrlHelper.parseQueryParams().competition;
-        const response = await axios.get(`https://g6wxu2uwc9.execute-api.us-east-1.amazonaws.com/prod/${competitionId}/${path}`) as {data: {body: T}};
+        const response = await axios.get(`https://${API_RESOURCE_ID}.execute-api.us-east-1.amazonaws.com/prod/${competitionId}/${path}`) as {data: {body: T}};
         return response.data.body;
     }
 }
