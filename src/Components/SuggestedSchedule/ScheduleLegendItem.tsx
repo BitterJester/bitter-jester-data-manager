@@ -27,7 +27,15 @@ const ScheduleLegendItem = () => {
                     <div style={{color: 'purple'}} className={'coloredKey'}>
                         <GradeIcon/>
                     </div>
-                    <p>Showcase Band</p>
+                    <p>First Showcase Band</p>
+                </div>
+            </Col>
+            <Col>
+                <div>
+                    <div style={{color: 'blue'}} className={'coloredKey'}>
+                        <GradeIcon/>
+                    </div>
+                    <p>Second Showcase Band</p>
                 </div>
             </Col>
         </Row>

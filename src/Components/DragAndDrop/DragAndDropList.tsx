@@ -10,6 +10,7 @@ type Props = {
     getItemStyle?: Function;
     orderedColumnTitles: string[];
     updateState: Function;
+    onDragEnd?: Function;
 };
 
 export const DragAndDropList = (props: Props) => {
@@ -40,6 +41,9 @@ export const DragAndDropList = (props: Props) => {
     };
 
     const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
+        if(props.onDragEnd){
+            props.onDragEnd(result, provided);
+        }
         if (!result.destination) {
             return null;
         }
