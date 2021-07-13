@@ -27,7 +27,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
             .map((app, index) => {
                 const color = new BackgroundColor(app, night.night).get();
                 const isFirstShowcaseBand = index === 0;
-                const isSecondShowcaseBand = index === 1;
+                const isSecondShowcaseBand = index === night.bands.length - 1;
                 return (
                     <Col>
                         {isFirstShowcaseBand && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
