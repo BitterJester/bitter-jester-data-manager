@@ -4,7 +4,8 @@ import {UrlHelper} from "./url-helper";
 export const API_URL_PATHS = {
     COMPLETED_SUBMISSIONS: 'completed-submissions',
     RENAMED_FILES: 'renamed-files',
-    UPDATE_SCHEDULE: 'update-schedule'
+    UPDATE_SCHEDULE: 'update-schedule',
+    SAVED_SCHEDULE: 'saved-schedule'
 }
 
 const DOMAIN = 'https://api.bitter-jester-data-manager.com/v1/';
