@@ -29,14 +29,13 @@ export type Schedule = {
 }
 
 export const LAST_SAVE_VERSION = 'last_saved';
-export const SUGGESTED_FRIDAY_NIGHT_SCHEDULE = 'friday-night-schedule.json';
-export const SUGGESTED_VERSION = 'Suggested';
+export const SUGGESTED_VERSION = 'suggested';
 
 export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
     async function fetch(scheduleType) {
-        const path = scheduleType === SUGGESTED_FRIDAY_NIGHT_SCHEDULE ? API_URL_PATHS.UPDATE_SCHEDULE : API_URL_PATHS.SAVED_SCHEDULE;
+        const path = scheduleType === SUGGESTED_VERSION ? API_URL_PATHS.UPDATE_SCHEDULE : API_URL_PATHS.SAVED_SCHEDULE;
         const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(path);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
@@ -45,7 +44,7 @@ export const ScheduleContainer = () => {
     }
 
     useEffect(() => {
-        fetch(SUGGESTED_FRIDAY_NIGHT_SCHEDULE);
+        fetch(SUGGESTED_VERSION);
     }, []);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
@@ -87,7 +86,7 @@ export const ScheduleContainer = () => {
     };
 
     const formatTitle = (): string => {
-        return `${schedule ? formatVersionForTitle(schedule.version) : SUGGESTED_VERSION} Friday Night Schedule`;
+        return `${schedule ? formatVersionForTitle(schedule.version) : formatVersionForTitle(SUGGESTED_VERSION)} Friday Night Schedule`;
     }
 
     return (

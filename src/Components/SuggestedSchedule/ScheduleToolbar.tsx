@@ -1,12 +1,10 @@
 import React, { useState, Fragment } from 'react';
 import { Alert } from 'reactstrap';
 import ScheduleDropdown from './ScheduleDropdown';
-import { Schedule, SUGGESTED_FRIDAY_NIGHT_SCHEDULE } from '../../containers/ScheduleContainer';
+import {LAST_SAVE_VERSION, Schedule, SUGGESTED_VERSION} from '../../containers/ScheduleContainer';
 import SaveScheduleButton from './SaveScheduleButton';
 import TotalCount from '../TotalCount';
 import CompetitionBandsMultiSelectCheckboxDropdown from "./CompetitionBandsMultiSelectCheckboxDropdown";
-
-const USER_FRIDAY_NIGHT_SCHEDULE = 'user-friday-night-schedule.json';
 
 type Props = {
     schedule: Schedule;
@@ -30,8 +28,8 @@ const ScheduleToolbar = (props: Props) => {
             <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
             <div style={{display: 'flex', width: '100%', alignItems: 'flex-start'}}>
                 <ScheduleDropdown
-                    dropdownItemOnClick={() => updateSchedule(SUGGESTED_FRIDAY_NIGHT_SCHEDULE)}
-                    dropdownItemOnClick2={() => updateSchedule(USER_FRIDAY_NIGHT_SCHEDULE)}
+                    dropdownItemOnClick={() => updateSchedule(SUGGESTED_VERSION)}
+                    dropdownItemOnClick2={() => updateSchedule(LAST_SAVE_VERSION)}
                 />
                 <SaveScheduleButton schedule={schedule} onAlert={onAlert} />
                 <div style={{ textAlign: 'right', width: '80%', paddingRight: '32px', display: 'inline' }}>
