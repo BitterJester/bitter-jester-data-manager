@@ -7,13 +7,13 @@ import {UrlHelper} from "../utils/url-helper";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 import {useSelector} from "react-redux";
 import {useAuth0} from "../react-auth0-spa";
-import BitterJesterApiRequest, {API_URL_PATHS} from "../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../utils/bitter-jester-api-request";
 
 const AuthenticatedHomePage = (props) => {
     const {user} = useAuth0();
     const isAdmin = user.email.split('@')[1] === 'bitterjester.com';
     const fetch = async () => {
-        const competitions = await BitterJesterApiRequest.get(API_URL_PATHS.COMPETITIONS, false) as {competitions: {type: string}[]};
+        const competitions = await BitterJesterApiRequest.get(API_URL_PATH_FUNCTIONS.GET_COMPETITIONS) as {competitions: {type: string}[]};
         const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
         return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: isAdmin ? competitions.competitions : filteredCompetitions}});
     }

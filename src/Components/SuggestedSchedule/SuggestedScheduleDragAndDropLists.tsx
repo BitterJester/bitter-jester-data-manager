@@ -8,7 +8,6 @@ import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import GradeIcon from '@material-ui/icons/Grade';
 import {DropResult} from "react-beautiful-dnd";
-import BitterJesterApiRequest, {API_URL_PATHS} from "../../utils/bitter-jester-api-request";
 
 type Props = {
     schedule: Schedule;

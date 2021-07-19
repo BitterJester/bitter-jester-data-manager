@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Container} from 'reactstrap';
 import {SuggestedScheduleDragAndDropLists} from '../Components/SuggestedSchedule/SuggestedScheduleDragAndDropLists';
-import {getFromS3} from '../aws/getFromS3';
 import {BitterJesterApplication} from '../pages/Submissions';
 import CardContainer from '../Components/Cards/CardContainer';
 import {Title} from '../Components/Title';
@@ -10,9 +9,7 @@ import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendIt
 import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
 import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
-import axios from "axios";
-import {UrlHelper} from "../utils/url-helper";
-import BitterJesterApiRequest, {API_URL_PATHS} from "../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../utils/bitter-jester-api-request";
 
 export type Night = {
     night: number;
@@ -35,8 +32,11 @@ export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
     async function fetch(scheduleType) {
-        const path = scheduleType === SUGGESTED_VERSION ? API_URL_PATHS.UPDATE_SCHEDULE : API_URL_PATHS.SAVED_SCHEDULE;
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(path);
+        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(
+            scheduleType === SUGGESTED_VERSION ?
+                API_URL_PATH_FUNCTIONS.GET_SCHEDULE :
+                () => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(true)
+        );
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}

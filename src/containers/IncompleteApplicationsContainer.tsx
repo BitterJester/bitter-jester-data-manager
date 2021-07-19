@@ -6,6 +6,7 @@ import UpdateIncompleteInfoButton from '../Components/IncompleteApplications/Upd
 import TotalCount from '../Components/TotalCount';
 import SortIncompleteApplicationsDropdown from '../Components/SortIncompleteApplicationsDropdown';
 import _ from 'lodash';
+import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../utils/bitter-jester-api-request";
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -30,7 +31,8 @@ export const IncompleteApplicationsContainer = () => {
 
     useEffect(() => {
         async function fetch() {
-            await getFromS3('incomplete-applications.json', setIncompleteApplications);
+            const updatedApps = await BitterJesterApiRequest.get<IncompleteApplications>(API_URL_PATH_FUNCTIONS.GET_INCOMPLETE_APPLICATIONS);
+            setIncompleteApplications(updatedApps);
         }
         fetch();
     }, []);
