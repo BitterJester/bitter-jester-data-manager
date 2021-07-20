@@ -15,7 +15,6 @@ import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-man
 import {useSelector} from "react-redux";
 import {Button} from "reactstrap";
 import {S3Client} from "../../aws/s3Client";
-import {getFromS3} from "../../aws/getFromS3";
 import {Schedule} from "../../containers/ScheduleContainer";
 import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../../utils/bitter-jester-api-request";
 
@@ -54,12 +53,10 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     const s3Client = new S3Client();
 
     const fetch = async () => {
-        await getFromS3('removed-bands.json', (removedBands) => {
-            const extracted = removedBands.removedBands;
-            return dataManagerReduxStore.dispatch({
-                type: 'competition/set-removed-bands',
-                payload: {removedBands: extracted}
-            });
+        const removedBands = await BitterJesterApiRequest.get<{ removedBands: string[] }>(API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS);
+        return dataManagerReduxStore.dispatch({
+            type: 'competition/set-removed-bands',
+            payload: {removedBands: removedBands.removedBands}
         });
     }
 
@@ -115,12 +112,11 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
         const bandSelected = isAddBandBack ? allRemoval.filter(b => !updatedSelectedCombined.includes(b))[0] : updatedSelectedCombined.filter(b => !allRemoval.includes(b))[0];
         const wasActuallyRemoved = removedBands.includes(bandSelected);
 
-        if(isAddBandBack && wasActuallyRemoved) {
+        if (isAddBandBack && wasActuallyRemoved) {
             addToPendingForAddition(bandSelected);
-        }else if(isAddBandBack && !wasActuallyRemoved){
+        } else if (isAddBandBack && !wasActuallyRemoved) {
             removeFromPendingForRemoval(bandSelected);
-        }
-        else if(!isAddBandBack && wasActuallyRemoved){
+        } else if (!isAddBandBack && wasActuallyRemoved) {
             removeFromPendingForAddition(bandSelected);
         } else {
             addToPendingForRemoval(bandSelected);
@@ -140,7 +136,8 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
                     input={<Input/>}
                     renderValue={() =>
                         pendingForRemoval.length !== 0 || pendingForAddition.length !== 0 ?
-                            (<div>{`${pendingForRemoval.length} pending removal and ${pendingForAddition.length} pending addition`}</div>):
+                            (
+                                <div>{`${pendingForRemoval.length} pending removal and ${pendingForAddition.length} pending addition`}</div>) :
                             (<div>{`${removedBands.length} band(s) removed`}</div>)
                     }
                     MenuProps={MenuProps}

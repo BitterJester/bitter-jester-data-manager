@@ -12,7 +12,8 @@ export const API_URL_PATH_FUNCTIONS = {
     GET_INCOMPLETE_APPLICATIONS: () => getFullPathWithCompetition('applications/', '/get-incomplete-applications'),
     GET_UPLOADED_FILES: () => getFullPathWithCompetition('applications/', '/get-uploaded-files'),
     GET_COMPETITIONS: () => `${DOMAIN}competitions/competitions`,
-    GET_SCHEDULE: (lastSaved = false) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule')
+    GET_SCHEDULE: (lastSaved = false) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule'),
+    GET_REMOVED_BANDS: () => getFullPathWithCompetition('schedule/', '/get-removed-bands')
 }
 
 class BitterJesterApiRequest {
