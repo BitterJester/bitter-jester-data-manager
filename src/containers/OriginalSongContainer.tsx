@@ -6,7 +6,6 @@ import ArtistStatementCollapseCard from "../Components/Cards/ArtistStatementColl
 import OriginalSongInfoCard from "../Components/Cards/OriginalSongInfoCard";
 import OriginalSongJudgingFormCard from "../Components/Cards/OriginalSongJudgingFormCard";
 import OverallBandRankingsCard from "../Components/Cards/OverallBandRankingsCard";
-import {useAuth0} from "../react-auth0-spa";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -20,8 +19,7 @@ const OriginalSongContainer = (props: Props) => {
     const originalSong = originalSongs[songIndex];
     const bandName = originalSong ? originalSong.bandName : '';
     const songName = originalSong ? originalSong.songName : '';
-    const {user} = useAuth0();
-
+    const user = {email: ''};
     const judge = props.judgesInfo.judges.filter(judge => judge.emailAddress.toLowerCase() === user.email.toLowerCase())[0];
     if (judge && originalSongs) {
         const songsForJudgesWeek = originalSongs.filter(song => {

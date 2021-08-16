@@ -4,7 +4,6 @@ import OverallBandRankingsCard from "./OverallBandRankingsCard";
 import {Card} from "reactstrap";
 import {Title} from "../Title";
 import {OriginalSongs} from "../../pages/OriginalSongCompetition";
-import '../../../mocks/mockUseAuth0';
 
 describe('OverallBandRankingsCard', () => {
     const originalSongs: OriginalSongs = {

@@ -6,12 +6,10 @@ import {AdminHomePageView} from "./AdminHomePageView";
 import {UrlHelper} from "../utils/url-helper";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 import {useSelector} from "react-redux";
-import {useAuth0} from "../react-auth0-spa";
 import {BitterJesterApiCompetitionsRequest} from "../utils/api-requests/bitter-jester-api-competitions-request";
 
 const AuthenticatedHomePage = (props) => {
-    const {user} = useAuth0();
-    const isAdmin = user.email.split('@')[1] === 'bitterjester.com';
+    const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
     const fetch = async () => {
         const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
         const competitions = await competitionsApiRequest.getAllCompetitions();

@@ -3,7 +3,6 @@ import {Alert, Button, Card} from 'reactstrap';
 import {Title} from "../Title";
 import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
-import {useAuth0} from "../../react-auth0-spa";
 import OverallSongRankingsDropdownRow from "../JudgingFormForWeek/OverallSongRankingsDropdownRow";
 import OverallSongRankingsPersistanceRow from "../JudgingFormForWeek/OverallSongRankingsPersistanceRow";
 import {publishSNS} from "../../aws/publishSNS";
@@ -33,7 +32,7 @@ const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:Calculate
 
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs, week} = props;
-    const {user} = useAuth0();
+    const user = {email: '', nickname: ''}
     const judge = {email: user.email, nickname: user.nickname};
 
     const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false, judge};

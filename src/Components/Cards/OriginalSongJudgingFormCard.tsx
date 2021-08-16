@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from "reactstrap";
 import {Title} from "../Title";
-import {useAuth0} from "../../react-auth0-spa";
 import {S3Client} from "../../aws/s3Client";
 import {publishSNS} from "../../aws/publishSNS";
 import {JudgingReminderAlert} from "./JudgingReminderAlert";
@@ -41,7 +40,7 @@ export const formatJudgesCommentsFilePath = (bandName: string, songName: string)
 };
 
 const OriginalSongJudgingFormCard = (props: Props) => {
-    const {user} = useAuth0();
+    const user = {nickname: '', email: ''};
     const {bandName, songName, week} = props;
 
     const [judgesComments, setJudgesComments] = useState({} as JudgeFeedback);

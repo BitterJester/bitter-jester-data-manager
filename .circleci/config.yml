@@ -12,10 +12,12 @@ jobs:
       - run:
           name: Build an environment file
           command: |
-            chmod 777 ./buildEnv.sh
+            chmod 755 ./buildEnv.sh
             echo 'export REACT_APP_SCHEDULE_API_KEY=${REACT_APP_SCHEDULE_API_KEY}' >> $BASH_ENV
             echo 'export REACT_APP_COMPETITIONS_API_KEY=${REACT_APP_COMPETITIONS_API_KEY}' >> $BASH_ENV
             echo 'export REACT_APP_APPLICATIONS_API_KEY=${REACT_APP_APPLICATIONS_API_KEY}' >> $BASH_ENV
+            echo 'export REACT_APP_COGNITO_USER_POOL_ID=${REACT_APP_COGNITO_USER_POOL_ID}' >> $BASH_ENV
+            echo 'export REACT_APP_USER_POOL_WEB_CLIENT_ID=${REACT_APP_USER_POOL_WEB_CLIENT_ID}' >> $BASH_ENV
             npm run buildEnv
       - run:
           name: Install aws cli
@@ -33,7 +35,7 @@ jobs:
       - run:
           name: Invalidate cloudfront caches
           command: |
-            chmod 777 ./invalidateCloudfrontCaches.sh
+            chmod 755 ./invalidateCloudfrontCaches.sh
             npm run invalidateCloudfrontCaches
 workflows:
   build-and-deploy:
