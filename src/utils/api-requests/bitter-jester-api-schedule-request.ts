@@ -1,0 +1,20 @@
+import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "./bitter-jester-api-request";
+import {Schedule} from "../../containers/ScheduleContainer";
+
+export class BitterJesterApiScheduleRequest extends BitterJesterApiRequest {
+    constructor() {
+        super(process.env.REACT_APP_SCHEDULE_API_KEY);
+    }
+
+    getSchedule(isLastSaved = false){
+        return this.get<Schedule>(() => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(isLastSaved));
+    }
+
+    getRemovedBands(){
+        return this.get<{ removedBands: string[] }>(API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS);
+    }
+
+    updateRemovedBands(removedBands){
+        return this.post(API_URL_PATH_FUNCTIONS.UPDATE_REMOVED_BANDS, {removedBands});
+    }
+}

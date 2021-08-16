@@ -9,7 +9,8 @@ import ScheduleLegendItem from '../Components/SuggestedSchedule/ScheduleLegendIt
 import ScheduleToolbar from '../Components/SuggestedSchedule/ScheduleToolbar';
 import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../redux/data-manager-redux-store";
-import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../utils/bitter-jester-api-request";
+import {INITIAL_SCHEDULE} from "../redux/reducers/selectedCompetitionReducer";
+import {BitterJesterApiScheduleRequest} from "../utils/api-requests/bitter-jester-api-schedule-request";
 
 export type Night = {
     night: number;
@@ -32,14 +33,11 @@ export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
 
     async function fetch(scheduleType) {
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(
-            scheduleType === SUGGESTED_VERSION ?
-                API_URL_PATH_FUNCTIONS.GET_SCHEDULE :
-                () => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(true)
-        );
+        const scheduleApiRequest = new BitterJesterApiScheduleRequest();
+        const updatedSchedule = await scheduleApiRequest.getSchedule(scheduleType !== SUGGESTED_VERSION);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
-            payload: {schedule: updatedSchedule}
+            payload: {schedule: updatedSchedule ? updatedSchedule: INITIAL_SCHEDULE}
         });
     }
 

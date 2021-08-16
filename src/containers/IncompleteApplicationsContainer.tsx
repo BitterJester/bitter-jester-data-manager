@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { getFromS3 } from '../aws/getFromS3';
-import { Title } from '../Components/Title';
-import { CardBody, Row, Col } from 'reactstrap';
+import React, {useEffect, useState} from 'react';
+import {Title} from '../Components/Title';
+import {CardBody, Col, Row} from 'reactstrap';
 import UpdateIncompleteInfoButton from '../Components/IncompleteApplications/UpdateIncompleteInfoButton';
 import TotalCount from '../Components/TotalCount';
 import SortIncompleteApplicationsDropdown from '../Components/SortIncompleteApplicationsDropdown';
 import _ from 'lodash';
-import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../utils/bitter-jester-api-request";
+import {BitterJesterApiApplicationsRequest} from "../utils/api-requests/bitter-jester-api-applications-request";
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -31,7 +30,8 @@ export const IncompleteApplicationsContainer = () => {
 
     useEffect(() => {
         async function fetch() {
-            const updatedApps = await BitterJesterApiRequest.get<IncompleteApplications>(API_URL_PATH_FUNCTIONS.GET_INCOMPLETE_APPLICATIONS);
+            const applicationsApiRequest = new BitterJesterApiApplicationsRequest();
+            const updatedApps = await applicationsApiRequest.getIncompleteApplications();
             setIncompleteApplications(updatedApps);
         }
         fetch();

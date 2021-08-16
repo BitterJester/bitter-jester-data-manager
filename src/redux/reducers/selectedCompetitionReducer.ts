@@ -18,7 +18,7 @@ type SelectedCompetition = {
     type: 'inPerson' | 'online' | ''
 }
 
-const initialSchedule: Schedule = {
+export const INITIAL_SCHEDULE: Schedule = {
     fridayNightOne: [],
     fridayNightTwo: [],
     fridayNightThree: [],
@@ -37,7 +37,7 @@ export const SELECTED_COMPETITION_REDUCER_INITIAL_STATE: SelectedCompetitionRedu
     type: '',
     allBandDropDownOptions: [],
     removedBands: [],
-    schedule: initialSchedule,
+    schedule: INITIAL_SCHEDULE,
 };
 
 export default function selectedCompetitionReducer(state = SELECTED_COMPETITION_REDUCER_INITIAL_STATE, action) {

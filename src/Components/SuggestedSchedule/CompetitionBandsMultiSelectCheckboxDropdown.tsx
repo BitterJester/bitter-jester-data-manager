@@ -16,7 +16,8 @@ import {useSelector} from "react-redux";
 import {Button} from "reactstrap";
 import {S3Client} from "../../aws/s3Client";
 import {Schedule} from "../../containers/ScheduleContainer";
-import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../../utils/bitter-jester-api-request";
+import BitterJesterApiRequest, {API_URL_PATH_FUNCTIONS} from "../../utils/api-requests/bitter-jester-api-request";
+import {BitterJesterApiScheduleRequest} from "../../utils/api-requests/bitter-jester-api-schedule-request";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -41,6 +42,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     const classes = useStyles();
+    const scheduleApiRequest = new BitterJesterApiScheduleRequest();
+
     const {removedBands, allBandDropDownOptions} = useSelector((state: DataManagerReduxStore) => {
         return {
             allBandDropDownOptions: state.selectedCompetition.allBandDropDownOptions,
@@ -50,13 +53,11 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     const [pendingForRemoval, setPendingForRemoval] = useState([]);
     const [pendingForAddition, setPendingForAddition] = useState([]);
 
-    const s3Client = new S3Client();
-
     const fetch = async () => {
-        const removedBands = await BitterJesterApiRequest.get<{ removedBands: string[] }>(API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS);
+        const removedBands = await scheduleApiRequest.getRemovedBands();
         return dataManagerReduxStore.dispatch({
             type: 'competition/set-removed-bands',
-            payload: {removedBands: removedBands.removedBands}
+            payload: {removedBands: removedBands && removedBands.removedBands ? removedBands.removedBands: []}
         });
     }
 
@@ -72,12 +73,9 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
             type: 'competition/set-removed-bands',
             payload: {removedBands: updatedRemovedBands}
         });
-        await s3Client.put(s3Client.createPutPublicJsonRequest(
-            'bitter-jester-test',
-            'removed-bands.json',
-            JSON.stringify({removedBands: updatedRemovedBands})
-        ));
-        const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATH_FUNCTIONS.GET_SCHEDULE);
+        const response = await scheduleApiRequest.updateRemovedBands(updatedRemovedBands);
+        console.error(response);
+        const updatedSchedule = await scheduleApiRequest.getSchedule();
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}
