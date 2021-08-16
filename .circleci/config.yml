@@ -13,8 +13,9 @@ jobs:
           name: Build an environment file
           command: |
             chmod 777 ./buildEnv.sh
-            echo 'export REACT_APP_AWS_ACCESS_ID=${REACT_APP_AWS_ACCESS_ID}' >> $BASH_ENV
-            echo 'export REACT_APP_AWS_SECRET_KEY=${REACT_APP_AWS_SECRET_KEY}' >> $BASH_ENV
+            echo 'export REACT_APP_SCHEDULE_API_KEY=${REACT_APP_SCHEDULE_API_KEY}' >> $BASH_ENV
+            echo 'export REACT_APP_COMPETITIONS_API_KEY=${REACT_APP_COMPETITIONS_API_KEY}' >> $BASH_ENV
+            echo 'export REACT_APP_APPLICATIONS_API_KEY=${REACT_APP_APPLICATIONS_API_KEY}' >> $BASH_ENV
             npm run buildEnv
       - run:
           name: Install aws cli
