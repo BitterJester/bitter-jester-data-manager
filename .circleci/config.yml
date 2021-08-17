@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@4.5.0
+  aws-cli: circleci/aws-cli@2.0
+  sam: circleci/aws-sam-serverless@3.1.0
 jobs:
   build-and-deploy:
     executor: node/default
@@ -40,4 +42,6 @@ jobs:
 workflows:
   build-and-deploy:
     jobs:
-      - build-and-deploy
+      - build-and-deploy:
+          context:
+            - AWS_CONTEXT
