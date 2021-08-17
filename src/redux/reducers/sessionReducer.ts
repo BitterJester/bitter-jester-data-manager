@@ -19,9 +19,9 @@ export default function sessionReducer(state = initialState, action) {
             return {
                 ...state,
                 isAdmin,
-                name: authData ? authData.attributes.name : '',
-                email: authData ? authData.attributes.email : '',
-                phoneNumber: authData ? authData.attributes.phone_number : '',
+                name: authData && authData.attributes ? authData.attributes.name : '',
+                email: authData && authData.attributes ? authData.attributes.email : '',
+                phoneNumber: authData && authData.attributes ? authData.attributes.phone_number : '',
                 signInUserSession: authData ? authData.signInUserSession : null,
                 authState
             }

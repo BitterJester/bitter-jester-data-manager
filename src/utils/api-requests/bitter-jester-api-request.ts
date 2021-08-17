@@ -28,7 +28,7 @@ class BitterJesterApiRequest {
     }
 
     async get<T>(getPathFunction) {
-        const response = await axios.get(getPathFunction()) as {data: {body: T}};
+        const response = await axios.get(getPathFunction(), {headers: this.HEADERS}) as {data: {body: T}};
         return response.data ? response.data.body : null;
     }
 
