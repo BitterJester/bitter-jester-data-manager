@@ -14,7 +14,7 @@ export default function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case 'signInUserSession/set':
             const {authState, authData} = action.payload;
-            const usersAssignedGroups = authData ? authData.signInUserSession.accessToken.payload['cognito:groups'] : [];
+            const usersAssignedGroups = authData && authData.signInUserSession ? authData.signInUserSession.accessToken.payload['cognito:groups'] : [];
             const isAdmin = usersAssignedGroups && usersAssignedGroups.length && usersAssignedGroups.includes('admin');
             return {
                 ...state,
