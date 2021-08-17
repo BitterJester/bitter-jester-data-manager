@@ -8,6 +8,9 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      - sam/install:
+          aws-access-key-id: AWS_ACCESS_ID
+          aws-secret-access-key: AWS_SECRET_KEY
       - node/install:
           node-version: 14.15.1
           npm-version: 6.14.8
