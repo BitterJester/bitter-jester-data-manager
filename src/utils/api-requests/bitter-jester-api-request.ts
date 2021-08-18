@@ -23,7 +23,7 @@ class BitterJesterApiRequest {
     constructor(apiKey) {
         this.HEADERS = {
             'Content-Type': 'application/json',
-            'x-api-key': apiKey
+            'X-Api-Key': apiKey
         }
     }
 
@@ -36,6 +36,15 @@ class BitterJesterApiRequest {
         const response = await axios.post(getPathFunction(), data, {headers: this.HEADERS});
         console.error(response);
         return response;
+    }
+
+    getFullPathWithCompetition(apiPart, path) {
+        return `${DOMAIN}${apiPart}competitionId/${UrlHelper.parseQueryParams().competition}${path}`;
+    }
+
+    getFullPathWithWeek(apiPart, path) {
+        const week = UrlHelper.parseQueryParams().week ? UrlHelper.parseQueryParams().week : '1';
+        return this.getFullPathWithCompetition(apiPart, `/week/${week}${path}`);
     }
 }
 
