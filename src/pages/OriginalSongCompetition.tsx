@@ -5,6 +5,7 @@ import Page from "../Components/Page";
 import {withRouter, useParams} from "react-router-dom";
 import {useLocation} from "react-router";
 import {UrlHelper} from "../utils/url-helper";
+import {BitterJesterApiOriginalSongCompetitionRequest} from "../utils/api-requests/bitter-jester-api-original-song-competition-request";
 
 export type OriginalSong = {
     songDescription: string;
@@ -54,13 +55,19 @@ const OriginalSongCompetition = () => {
         await getFromS3(fileName, setState);
     }
 
-    useEffect(() => {
-        fetch('original-song-submissions.json', setOriginalSongs);
-    }, []);
+    async function getSongSubmissions() {
+        const apiRequest = new BitterJesterApiOriginalSongCompetitionRequest();
+        const apps = await apiRequest.getOriginalSongCompetitionApplications();
+        setOriginalSongs(apps);
+    }
 
     useEffect(() => {
-        fetch('judges-info.json', setJudgesInfo);
+        getSongSubmissions();
     }, []);
+
+    // useEffect(() => {
+    //     fetch('judges-info.json', setJudgesInfo);
+    // }, []);
 
     return (
         <Page>
