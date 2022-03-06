@@ -16,4 +16,8 @@ export class BitterJesterApiOriginalSongCompetitionRequest extends BitterJesterA
     getScoresForSongsInWeek() {
         return this.get<any>(() => this.getFullPathWithWeek(this.API_PART, '/get-scores-for-week'));
     }
+
+    updateOverallRankingsForWeek(updatedSongRankings) {
+        return this.post(() => this.getFullPathWithWeek(this.API_PART, '/update-rankings'), updatedSongRankings);
+    }
 }

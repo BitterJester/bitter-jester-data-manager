@@ -5,9 +5,8 @@ import {OriginalSongs} from "../../pages/OriginalSongCompetition";
 import {S3Client} from "../../aws/s3Client";
 import OverallSongRankingsDropdownRow from "../JudgingFormForWeek/OverallSongRankingsDropdownRow";
 import OverallSongRankingsPersistanceRow from "../JudgingFormForWeek/OverallSongRankingsPersistanceRow";
-import {publishSNS} from "../../aws/publishSNS";
 import {Judge} from "./OriginalSongJudgingFormCard";
-import {getFromS3} from "../../aws/getFromS3";
+import {BitterJesterApiOriginalSongCompetitionRequest} from "../../utils/api-requests/bitter-jester-api-original-song-competition-request";
 
 type Props = {
     originalSongs: OriginalSongs;
@@ -28,8 +27,6 @@ export type SongRankings = {
     judge: Judge;
 }
 
-const CALCULATE_SCORES_TOPIC_ARN = 'arn:aws:sns:us-east-1:771384749710:CalculateScoresForEachOriginalSongInWeekSnsTopic';
-
 const OverallBandRankingsCard = (props: Props) => {
     const {originalSongs, week} = props;
     const user = {email: '', nickname: ''}
@@ -38,28 +35,13 @@ const OverallBandRankingsCard = (props: Props) => {
     const initialSongRankings: SongRankings = {rankings: [], isFinalRanking: false, judge};
     const [songRankings, setSongRankings] = useState(initialSongRankings);
 
-    const bandRankingsS3Key = `week=${week}/overall-song-rankings/${user.nickname.replace('.', '_')}.json`;
-
     useEffect(() => {
-        const fetch = async () => {
-            await getFromS3(bandRankingsS3Key, setSongRankings);
-        };
-
-        fetch();
     }, [week]);
-    const s3Client = new S3Client();
     const [alert, setAlert] = useState({color: 'success', isOpen: false, message: []});
     const save = async (updatedSongRankings) => {
-
-        await s3Client.put(
-            s3Client.createPutPublicJsonRequest(
-                'bitter-jester-test',
-                bandRankingsS3Key,
-                JSON.stringify(updatedSongRankings)
-            )
-        );
-
-        await publishSNS({Message: `week=${week}`, TopicArn: CALCULATE_SCORES_TOPIC_ARN});
+        const apiRequest = new BitterJesterApiOriginalSongCompetitionRequest();
+        const response = await apiRequest.updateOverallRankingsForWeek(updatedSongRankings);
+        console.error(response);
     };
 
     return (

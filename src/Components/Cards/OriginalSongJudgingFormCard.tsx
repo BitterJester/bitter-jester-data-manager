@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Card} from "reactstrap";
 import {Title} from "../Title";
-import {S3Client} from "../../aws/s3Client";
-import {publishSNS} from "../../aws/publishSNS";
 import {JudgingReminderAlert} from "./JudgingReminderAlert";
 import {SaveCommentsButton} from "./SaveCommentsButton";
 import {JudgesCommentsForm} from "./JudgesCommentsForm";
-import {getFromS3} from "../../aws/getFromS3";
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 
 export type Judge = {
     email: string;
@@ -40,20 +39,21 @@ export const formatJudgesCommentsFilePath = (bandName: string, songName: string)
 };
 
 const OriginalSongJudgingFormCard = (props: Props) => {
-    const user = {nickname: '', email: ''};
+    const user = useSelector((state: DataManagerReduxStore) => {
+        const userSession = state.signInUserSession;
+        return {nickname: userSession.name, email: userSession.email};
+    });
     const {bandName, songName, week} = props;
 
     const [judgesComments, setJudgesComments] = useState({} as JudgeFeedback);
 
-    const fileName = `${formatJudgesCommentsFilePath(bandName, songName)}${user.nickname.replace('.', '_')}.json`;
-
-    useEffect(() => {
-        const getJudgesComments = async () => {
-            await getFromS3(fileName, setJudgesComments);
-        };
-
-        getJudgesComments();
-    }, [fileName, bandName, songName, user.nickname, user.email]);
+    // useEffect(() => {
+    //     // const getJudgesComments = async () => {
+    //     //     await getFromS3(fileName, setJudgesComments);
+    //     // };
+    //     //
+    //     // getJudgesComments();
+    // }, [fileName, bandName, songName, user.nickname, user.email]);
 
     useEffect(() => {
         setAlert({...alert, isAlertOpen: false});
@@ -77,20 +77,16 @@ const OriginalSongJudgingFormCard = (props: Props) => {
             },
             week
         };
+        //
+        // const s3Client = new S3Client();
+        // await s3Client.put(
+        //     s3Client.createPutPublicJsonRequest(
+        //         'bitter-jester-test',
+        //         fileName,
+        //         JSON.stringify(judgeFeedback)
+        //     )
+        // );
 
-        const s3Client = new S3Client();
-        await s3Client.put(
-            s3Client.createPutPublicJsonRequest(
-                'bitter-jester-test',
-                fileName,
-                JSON.stringify(judgeFeedback)
-            )
-        );
-
-        await publishSNS({
-            Message: `week=${week}`,
-            TopicArn: 'arn:aws:sns:us-east-1:771384749710:AggregateCommentsForWeekSnsTopic'
-        });
         setAlert({...alert, isAlertOpen: true, message: 'Successfully saved your comments.', color: 'success'});
     };
 

@@ -6,6 +6,8 @@ import {withRouter, useParams} from "react-router-dom";
 import {useLocation} from "react-router";
 import {UrlHelper} from "../utils/url-helper";
 import {BitterJesterApiOriginalSongCompetitionRequest} from "../utils/api-requests/bitter-jester-api-original-song-competition-request";
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 
 export type OriginalSong = {
     songDescription: string;
@@ -39,21 +41,15 @@ export type JudgesInfos = {
 }
 
 const OriginalSongCompetition = () => {
+    const user = useSelector((state: DataManagerReduxStore) => {
+        const userSession = state.signInUserSession;
+        return {nickname: userSession.name, email: userSession.email};
+    });
     const initialOriginalSongs: OriginalSongs = {
         originalSongs: []
     };
 
     const [originalSongs, setOriginalSongs] = useState(initialOriginalSongs);
-
-    const initialJudgesInfo: JudgesInfos = {
-        judges: []
-    };
-
-    const [judgesInfo, setJudgesInfo] = useState(initialJudgesInfo);
-
-    async function fetch(fileName, setState) {
-        await getFromS3(fileName, setState);
-    }
 
     async function getSongSubmissions() {
         const apiRequest = new BitterJesterApiOriginalSongCompetitionRequest();
@@ -65,13 +61,9 @@ const OriginalSongCompetition = () => {
         getSongSubmissions();
     }, []);
 
-    // useEffect(() => {
-    //     fetch('judges-info.json', setJudgesInfo);
-    // }, []);
-
     return (
         <Page>
-            <OriginalSongContainer originalSongs={originalSongs} judgesInfo={judgesInfo}
+            <OriginalSongContainer originalSongs={originalSongs} judgesInfo={user}
                                    setOriginalSongs={setOriginalSongs}/>
             <p>
                 {'This tool was built by Spencer Kasper'}

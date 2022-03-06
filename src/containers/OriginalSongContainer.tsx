@@ -9,7 +9,7 @@ import OverallBandRankingsCard from "../Components/Cards/OverallBandRankingsCard
 
 type Props = {
     originalSongs: OriginalSongs;
-    judgesInfo: JudgesInfos;
+    judgesInfo: any;
     setOriginalSongs: Function;
 }
 

@@ -7,7 +7,6 @@ import {Title} from "../../Components/Title";
 import {CurrentStepWithNavigation} from "./CurrentStepWithNavigation";
 import CompetitionTimeFrameStep from "./CompetitionTimeFrameStep";
 import JudgeSelectionTableStep from "./JudgeSelectionTableStep";
-import {Judge} from "../../Components/Cards/OriginalSongJudgingFormCard";
 import {JudgesInfo} from "../OriginalSongCompetition";
 import BandSelectionTableStep from "./BandSelectionTableStep";
 import ReviewStep from "./ReviewStep";

@@ -1,10 +1,9 @@
-import React, {useEffect, useState, Fragment} from 'react';
-import {S3Client} from "../../aws/s3Client";
+import React, {Fragment, useEffect, useState} from 'react';
 import WeeklyRankingScoreBarChart from "./WeeklyRankingScoreBarChart";
 import WeeklyJudgesCommentsContainer from "./WeeklyJudgesCommentsContainer";
 import WeeklyRankingsHeader from "./WeeklyRankingsHeader";
 import {JudgesInfo} from "../../pages/OriginalSongCompetition";
-import {getFromS3} from "../../aws/getFromS3";
+import {BitterJesterApiOriginalSongCompetitionRequest} from "../../utils/api-requests/bitter-jester-api-original-song-competition-request";
 
 type SongRankingTotal = {
     songName: string;
@@ -44,10 +43,8 @@ const WeeklyRankingScoreBarChartContainer = (props: Props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            await getFromS3(`week=${week}/song-ranking-totals.json`, (fetchedSongRankingTotals) => {
-                fetchedSongRankingTotals.totalScores = fetchedSongRankingTotals.totalScores.sort((a, b) => a.totalPoints > b.totalPoints ? -1 : 1);
-                setSongRankingTotals(fetchedSongRankingTotals);
-            });
+            const apiRequest = new BitterJesterApiOriginalSongCompetitionRequest();
+            setSongRankingTotals(await apiRequest.getScoresForSongsInWeek());
         };
 
         fetch();

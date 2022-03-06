@@ -29,10 +29,11 @@ function App() {
     const {authState, signInUserSession} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
     const toRoute = (route, index) => {
         const routeInfo = ROUTES[route];
+        const RoutePageComponent = routeInfo.component;
         return <Route
             key={`route-${index}`}
             path={routeInfo.route}>
-            {routeInfo.component}
+            {<RoutePageComponent />}
         </Route>;
     };
 
