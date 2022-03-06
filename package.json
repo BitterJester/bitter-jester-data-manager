@@ -23,7 +23,7 @@
         "@types/reactstrap": "8.4.2",
         "apexcharts": "3.19.2",
         "aws-amplify": "^4.3.13",
-        "aws-sdk": "2.627.0",
+        "aws-sdk": "2.814.0",
         "axios": "^0.21.4",
         "bootstrap": "4.4.1",
         "bootstrap-icons": "1.0.0-alpha3",
