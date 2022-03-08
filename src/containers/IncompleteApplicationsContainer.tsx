@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Title} from '../Components/Title';
 import {CardBody, Col, Row} from 'reactstrap';
-import UpdateIncompleteInfoButton from '../Components/IncompleteApplications/UpdateIncompleteInfoButton';
 import TotalCount from '../Components/TotalCount';
 import SortIncompleteApplicationsDropdown from '../Components/SortIncompleteApplicationsDropdown';
 import _ from 'lodash';
@@ -60,7 +59,6 @@ export const IncompleteApplicationsContainer = () => {
     return (
         <div>
             <Title titleDisplayText='Incomplete Applications' />
-            <UpdateIncompleteInfoButton />
             <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0} />
             {incompleteApplications.incompleteApplications.length ?
                 <CardBody>

@@ -3,7 +3,6 @@ import {Container} from 'reactstrap';
 import {Title} from '../Components/Title';
 import CardContainer from '../Components/Cards/CardContainer';
 import '../static/css/submissionContainer.css';
-import {UpdateInfoButton} from '../Components/CompletedSubmissions/UpdateInfoButton';
 import TotalCount from '../Components/TotalCount';
 import CompletedSubmissionCardsTable from '../Components/CompletedSubmissions/CompletedSubmissionCardsTable';
 import {useSelector} from "react-redux";
@@ -36,7 +35,6 @@ export const SubmissionContainer = () => {
             <div style={{padding: '16px'}}>
                 <CardContainer>
                     <Title titleDisplayText={'Completed Submissions'}/>
-                    <UpdateInfoButton/>
                     <TotalCount count={getTotalCount()}/>
                     <CompletedSubmissionCardsTable completedSubmissions={submissions}/>
                 </CardContainer>
