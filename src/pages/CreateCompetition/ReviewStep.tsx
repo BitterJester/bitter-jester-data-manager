@@ -23,13 +23,6 @@ const ReviewStep = (props) => {
                 </div>
             })}
             </div>
-            <div>
-                Bands: {competition.bands.bands.map(band => {
-                    return <div>
-                        {`${band.bandName}`}
-                    </div>
-            })}
-            </div>
         </div>
     )
 };

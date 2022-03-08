@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {DataGrid, ColDef, SelectionChangeParams} from '@material-ui/data-grid';
 import {getFromS3} from "../../aws/getFromS3";
+import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
 
 const JudgeSelectionTableStep = (props) => {
     const {selectedCompetitionJudges, updateCompetition} = props;
     const [judges, updateJudges] = useState([]);
     const fetch = async () => {
-        await getFromS3('judges-info.json', (response) => {
-            const judgesWithArbitraryId = response.judges.map((judge, index) => ({id: index, ...judge}));
-            updateJudges(judgesWithArbitraryId);
-        }, true);
+        const response = await new BitterJesterApiCompetitionsRequest().getAllJudges();
+        const judgesWithArbitraryId = response.judges.map((judge, index) => ({id: index, ...judge}));
+        updateJudges(judgesWithArbitraryId);
     }
 
     useEffect(() => {

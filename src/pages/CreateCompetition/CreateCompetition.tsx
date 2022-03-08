@@ -4,7 +4,7 @@ import {SelectCompetitionTypeStep} from "./SelectCompetitionTypeStep";
 import Page from '../../Components/Page';
 import CardContainer from "../../Components/Cards/CardContainer";
 import {Title} from "../../Components/Title";
-import {CurrentStepWithNavigation} from "./CurrentStepWithNavigation";
+import CurrentStepWithNavigation from "./CurrentStepWithNavigation";
 import CompetitionTimeFrameStep from "./CompetitionTimeFrameStep";
 import JudgeSelectionTableStep from "./JudgeSelectionTableStep";
 import {JudgesInfo} from "../OriginalSongCompetition";
@@ -48,11 +48,10 @@ export interface CompetitionState {
     type?: CompetitionType;
     timeFrame?: CompetitionTimeFrame;
     judges?: CompetitionJudges;
-    bands?: CompetitionBands;
     name?: CompetitionName;
 }
 
-const CreateCompetition = () => {
+const CreateCompetition = (props) => {
     const [activeStepIndex, updateActiveStepIndex] = useState(0);
     const [competition, updateCompetition] = useState({} as CompetitionState);
 
@@ -96,14 +95,6 @@ const CreateCompetition = () => {
                 updateCompetition: applyUpdatesToCompetitionState
             },
             stateField: 'judges'
-        },
-        {
-            component: BandSelectionTableStep,
-            stepTitle: 'Select Bands',
-            props: {
-                selectedCompetitionBands: competition.bands || [],
-                updateCompetition: applyUpdatesToCompetitionState
-            }, stateField: 'bands'
         },
         {
             component: ReviewStep,

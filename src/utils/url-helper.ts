@@ -53,6 +53,10 @@ export class UrlHelper {
         this.redirectWithQueryParams(ROUTES.fridayNightScheduler.route, {competition: competitionId});
     }
 
+    public redirectToHomePage() {
+        this.redirect('/');
+    }
+
     private redirectWithQueryParams(path, queryParamMap) {
         const queryParamString = Object.keys(queryParamMap)
             .map(queryParam => `${queryParam}=${queryParamMap[queryParam]}`)

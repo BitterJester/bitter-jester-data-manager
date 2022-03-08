@@ -12,6 +12,7 @@ export const API_URL_PATH_FUNCTIONS = {
     GET_INCOMPLETE_APPLICATIONS: () => getFullPathWithCompetition('applications/', '/get-incomplete-applications'),
     GET_UPLOADED_FILES: () => getFullPathWithCompetition('applications/', '/get-uploaded-files'),
     GET_COMPETITIONS: () => `${DOMAIN}competitions/competitions`,
+    GET_JUDGES: () => `${DOMAIN}competitions/judges`,
     GET_SCHEDULE: (lastSaved = false) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule'),
     GET_REMOVED_BANDS: () => getFullPathWithCompetition('schedule/', '/get-removed-bands'),
     UPDATE_REMOVED_BANDS: () => getFullPathWithCompetition('schedule/', '/update-removed-bands')
@@ -32,8 +33,8 @@ class BitterJesterApiRequest {
         return response.data ? response.data.body : null;
     }
 
-    async post(getPathFunction, data) {
-        const response = await axios.post(getPathFunction(), data, {headers: this.HEADERS});
+    async post<T>(getPathFunction, data) {
+        const response = await axios.post<T>(getPathFunction(), data, {headers: this.HEADERS});
         console.error(response);
         return response;
     }

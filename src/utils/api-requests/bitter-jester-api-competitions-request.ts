@@ -8,4 +8,15 @@ export class BitterJesterApiCompetitionsRequest extends BitterJesterApiRequest {
     getAllCompetitions(){
         return this.get<{competitions: {type: string}[]}>(API_URL_PATH_FUNCTIONS.GET_COMPETITIONS);
     }
+
+    getAllJudges(){
+        return this.get<{judges: any[]}>(API_URL_PATH_FUNCTIONS.GET_JUDGES);
+    }
+
+    async saveCompetition(competition: any): Promise<{competitions: any[]}>{
+        console.error(competition);
+        const updatedCompetitions = await this.post<{competitions: any[]}>(API_URL_PATH_FUNCTIONS.GET_COMPETITIONS, {competition});
+        console.error(updatedCompetitions);
+        return updatedCompetitions.data;
+    }
 }

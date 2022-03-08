@@ -2,10 +2,10 @@ import CardContainer from "../../Components/Cards/CardContainer";
 import {Button} from "reactstrap";
 import React from "react";
 import {CompetitionState, CreateCompetitionStep} from "./CreateCompetition";
-import {S3Client} from "../../aws/s3Client";
-import {getFromS3} from "../../aws/getFromS3";
-import {CompetitionDropDownOption} from "../../Components/Sidebar/CompetitionSelectionDropDown";
 import {JudgesInfo} from "../OriginalSongCompetition";
+import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
+import {UrlHelper} from "../../utils/url-helper";
+import {withRouter} from "react-router";
 
 type Props = {
     updateActiveStepIndex: (index: number) => void;
@@ -18,13 +18,12 @@ interface Competition {
     id: string;
     name: string;
     judges: JudgesInfo[];
-    bands: object[];
     type: string;
     startDate: Date;
     endDate: Date;
 }
 
-export function CurrentStepWithNavigation(props: Props) {
+function CurrentStepWithNavigation(props) {
     const {updateActiveStepIndex, activeStepIndex, steps, competition} = props;
     const isOnReview = activeStepIndex === steps.length - 1;
 
@@ -36,7 +35,6 @@ export function CurrentStepWithNavigation(props: Props) {
         return {
             id: getCompetitionId(competition),
             name: competition.name.selectedValue,
-            bands: competition.bands.bands,
             judges: competition.judges.judges,
             startDate: competition.timeFrame.start,
             endDate: competition.timeFrame.end,
@@ -48,20 +46,9 @@ export function CurrentStepWithNavigation(props: Props) {
         if (!isOnReview) {
             updateActiveStepIndex(activeStepIndex + 1);
         } else {
-            await getFromS3('all-competitions.json', async (data) => {
-                const {competitions} = data;
-                const updatedCompetitions = [
-                    ...competitions,
-                    formatCompetitionForS3(competition)
-                ];
-                const s3Client = new S3Client();
-                await s3Client.put(s3Client.createPutPublicJsonRequest(
-                    'bitter-jester-test',
-                    'all-competitions.json',
-                    JSON.stringify({competitions: updatedCompetitions}),
-                    true,
-                ));
-            }, true);
+            const bitterJesterApiCompetitionsRequest = new BitterJesterApiCompetitionsRequest();
+            await bitterJesterApiCompetitionsRequest.saveCompetition(formatCompetitionForS3(competition));
+            new UrlHelper(props.history).redirectToHomePage();
         }
     };
 
@@ -98,3 +85,5 @@ export function CurrentStepWithNavigation(props: Props) {
         </CardContainer>
     </div>;
 }
+
+export default withRouter(CurrentStepWithNavigation);

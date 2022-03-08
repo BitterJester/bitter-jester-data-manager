@@ -44,7 +44,7 @@ export const ROUTES: Routes = {
     },
     createACompetition: {
         route: '/createCompetition',
-        component: CreateCompetition
+        component: CreateCompetition,
     },
     uploadedFiles: {
         route: '/uploadedFiles',
