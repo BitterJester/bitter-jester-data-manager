@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import GradeIcon from '@material-ui/icons/Grade';
 import {DropResult} from "react-beautiful-dnd";
+import {getNightMap} from "../../utils/getNightMap";
 
 type Props = {
     schedule: Schedule;
@@ -16,10 +17,10 @@ type Props = {
 
 export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const {schedule} = props;
-    const fridayNights = ['7/23', '7/30', '8/6', '8/13'];
     const schedulesInformationForEachNight = [];
-    const removedBands = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.removedBands);
-
+    const selectedCompetition = useSelector((state: DataManagerReduxStore) => state.selectedCompetition);
+    const removedBands = selectedCompetition.removedBands;
+    const fridayNights = Object.values(getNightMap(selectedCompetition.competitionId)).map(night => `${night.month}/${night.dayOfTheMonth}`);
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands
             .filter(band => !removedBands.includes(band.bandName))

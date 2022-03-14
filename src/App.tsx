@@ -6,7 +6,7 @@ import './App.scss';
 import {Col, Row} from "reactstrap";
 import HomePage from "./pages/HomePage";
 import {ROUTES} from "./static/constants/routes";
-import Amplify from 'aws-amplify';
+import Amplify, {Auth} from 'aws-amplify';
 import {AmplifyAuthenticator} from "@aws-amplify/ui-react";
 import {AuthState, onAuthUIStateChange} from '@aws-amplify/ui-components';
 import dataManagerReduxStore, {DataManagerReduxStore} from "./redux/data-manager-redux-store";
@@ -16,6 +16,9 @@ Amplify.configure({
     userPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID,
     userPoolWebClientId: process.env.REACT_APP_USER_POOL_WEB_CLIENT_ID
 });
+Auth.configure({
+
+})
 
 function App() {
     React.useEffect(() => {

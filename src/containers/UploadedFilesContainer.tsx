@@ -19,20 +19,21 @@ const UploadedFilesContainer = () => {
     }
 
     function timeout(delay: number) {
-        return new Promise( res => setTimeout(res, delay) );
+        return new Promise(res => setTimeout(res, delay));
     }
 
     async function download(fileUrl, fileName) {
         const a = document.createElement("a");
         a.href = fileUrl;
+        console.error(fileName);
         a.setAttribute("download", fileName);
         a.click();
         await timeout(2000);
     }
 
     const downloadSelectedFiles = async () => {
-        for(let file of selectedFiles){
-           await download(file.url, file.fileName);
+        for (let file of selectedFiles) {
+            await download(file.url, file.fileName);
         }
     }
 
@@ -45,7 +46,8 @@ const UploadedFilesContainer = () => {
             <Card>
                 <Title titleDisplayText={'Uploaded Files'}/>
                 <div style={{display: 'flex', padding: '24px'}}>
-                    <Button onClick={downloadSelectedFiles}>Download {selectedFiles.length} Selected</Button>
+                    <Button
+                        onClick={downloadSelectedFiles}>Download {selectedFiles.length} Selected</Button>
                 </div>
                 <UploadedFilesTable/>
             </Card>
