@@ -11,7 +11,8 @@ import {AmplifyAuthenticator} from "@aws-amplify/ui-react";
 import {AuthState, onAuthUIStateChange} from '@aws-amplify/ui-components';
 import dataManagerReduxStore, {DataManagerReduxStore} from "./redux/data-manager-redux-store";
 import {useSelector} from "react-redux";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 Amplify.configure({
     userPoolId: process.env.REACT_APP_COGNITO_USER_POOL_ID,
     userPoolWebClientId: process.env.REACT_APP_USER_POOL_WEB_CLIENT_ID
@@ -42,6 +43,12 @@ function App() {
 
     return (authState === AuthState.SignedIn && signInUserSession ?
             <Router>
+                <ToastContainer
+                    closeOnClick
+                    pauseOnHover
+                    autoClose={5000}
+                    newestOnTop
+                />
                 <Row style={{minHeight: '100vh'}}>
                     <Sidebar/>
                     <Col className={'main-content'}>
