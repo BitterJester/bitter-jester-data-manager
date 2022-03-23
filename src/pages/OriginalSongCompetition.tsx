@@ -8,6 +8,7 @@ import {UrlHelper} from "../utils/url-helper";
 import {BitterJesterApiOriginalSongCompetitionRequest} from "../utils/api-requests/bitter-jester-api-original-song-competition-request";
 import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
+import {BitterJesterApiCompetitionsRequest} from "../utils/api-requests/bitter-jester-api-competitions-request";
 
 export type OriginalSong = {
     songDescription: string;
@@ -48,7 +49,7 @@ const OriginalSongCompetition = () => {
     const initialOriginalSongs: OriginalSongs = {
         originalSongs: []
     };
-
+    const [judgesInfo, setJudgesInfo] = useState({judges: []});
     const [originalSongs, setOriginalSongs] = useState(initialOriginalSongs);
 
     async function getSongSubmissions() {
@@ -57,13 +58,21 @@ const OriginalSongCompetition = () => {
         setOriginalSongs(apps);
     }
 
+    async function getJudgesInfo() {
+        const response = await new BitterJesterApiCompetitionsRequest().getAllJudges();
+        setJudgesInfo(response);
+    }
+
     useEffect(() => {
         getSongSubmissions();
     }, []);
 
+    useEffect(() => {
+        getJudgesInfo();
+    }, []);
     return (
         <Page>
-            <OriginalSongContainer originalSongs={originalSongs} judgesInfo={user}
+            <OriginalSongContainer originalSongs={originalSongs} judgesInfo={judgesInfo}
                                    setOriginalSongs={setOriginalSongs}/>
             <p>
                 {'This tool was built by Spencer Kasper'}
