@@ -8,9 +8,12 @@ import {BitterJesterApiApplicationsRequest} from "../utils/api-requests/bitter-j
 
 const UploadedFilesContainer = () => {
     const selectedFiles = useSelector((state: DataManagerReduxStore) => state.uploadedFiles.selectedFiles);
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     const fetch = async () => {
         const applicationsApiRequest = new BitterJesterApiApplicationsRequest();
-        const files = await applicationsApiRequest.getUploadedFiles();
+        const files = await applicationsApiRequest.getUploadedFiles(selectedCompetition.id);
 
         dataManagerReduxStore.dispatch({
             type: 'files/set',
@@ -25,7 +28,6 @@ const UploadedFilesContainer = () => {
     async function download(fileUrl, fileName) {
         const a = document.createElement("a");
         a.href = fileUrl;
-        console.error(fileName);
         a.setAttribute("download", fileName);
         a.click();
         await timeout(2000);

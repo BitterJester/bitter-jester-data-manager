@@ -1,21 +1,21 @@
-import axios, {AxiosRequestConfig} from "axios";
+import axios from "axios";
 import {UrlHelper} from "../url-helper";
 
 const DOMAIN = 'https://api.bitter-jester-data-manager.com/';
 
-function getFullPathWithCompetition(apiPart, path) {
-    return `${DOMAIN}${apiPart}${UrlHelper.parseQueryParams().competition}${path}`;
+function getFullPathWithCompetition(apiPart, path, params?) {
+    return `${DOMAIN}${apiPart}${params.competitionId}${path}`;
 }
 
 export const API_URL_PATH_FUNCTIONS = {
-    GET_COMPLETED_APPLICATIONS: () => getFullPathWithCompetition('applications/','/get-completed-applications'),
-    GET_INCOMPLETE_APPLICATIONS: () => getFullPathWithCompetition('applications/', '/get-incomplete-applications'),
-    GET_UPLOADED_FILES: () => getFullPathWithCompetition('applications/', '/get-uploaded-files'),
+    GET_COMPLETED_APPLICATIONS: (params) => getFullPathWithCompetition('applications/','/get-completed-applications', params),
+    GET_INCOMPLETE_APPLICATIONS: (params) => getFullPathWithCompetition('applications/', '/get-incomplete-applications', params),
+    GET_UPLOADED_FILES: (params) => getFullPathWithCompetition('applications/', '/get-uploaded-files', params),
     GET_COMPETITIONS: () => `${DOMAIN}competitions/competitions`,
     GET_JUDGES: () => `${DOMAIN}competitions/judges`,
-    GET_SCHEDULE: (lastSaved = false) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule'),
-    GET_REMOVED_BANDS: () => getFullPathWithCompetition('schedule/', '/get-removed-bands'),
-    UPDATE_REMOVED_BANDS: () => getFullPathWithCompetition('schedule/', '/update-removed-bands')
+    GET_SCHEDULE: (lastSaved = false, params) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule', params),
+    GET_REMOVED_BANDS: (params) => getFullPathWithCompetition('schedule/', '/get-removed-bands', params),
+    UPDATE_REMOVED_BANDS: (params) => getFullPathWithCompetition('schedule/', '/update-removed-bands', params)
 }
 
 class BitterJesterApiRequest {
@@ -34,9 +34,7 @@ class BitterJesterApiRequest {
     }
 
     async post<T>(getPathFunction, data) {
-        const response = await axios.post<T>(getPathFunction(), data, {headers: this.HEADERS});
-        console.error(response);
-        return response;
+        return axios.post<T>(getPathFunction(), data, {headers: this.HEADERS});
     }
 
     getFullPathWithCompetition(apiPart, path) {

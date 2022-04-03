@@ -14,8 +14,19 @@
 
 .main-content {
   padding: 0;
+  width: 75vw;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .btn-secondary {
   background: rgb(123, 93, 151);
+}
+
+.sidebar-and-main-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
 }

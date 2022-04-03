@@ -31,10 +31,12 @@ export const SUGGESTED_VERSION = 'suggested';
 
 export const ScheduleContainer = () => {
     const schedule = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.schedule);
-
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     async function fetch(scheduleType) {
         const scheduleApiRequest = new BitterJesterApiScheduleRequest();
-        const updatedSchedule = await scheduleApiRequest.getSchedule(scheduleType !== SUGGESTED_VERSION);
+        const updatedSchedule = await scheduleApiRequest.getSchedule(selectedCompetition.id, scheduleType !== SUGGESTED_VERSION);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule ? updatedSchedule: INITIAL_SCHEDULE}
@@ -43,7 +45,7 @@ export const ScheduleContainer = () => {
 
     useEffect(() => {
         fetch(SUGGESTED_VERSION);
-    }, []);
+    }, [selectedCompetition.id]);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
         const scheduleCopy = _.cloneDeep(schedule);

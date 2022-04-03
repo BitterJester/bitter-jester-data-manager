@@ -11,11 +11,14 @@ import {BitterJesterApiApplicationsRequest} from "../utils/api-requests/bitter-j
 
 export const SubmissionContainer = () => {
     const submissions = useSelector((state: DataManagerReduxStore) => state.selectedCompetition.bands);
-
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     useEffect(() => {
+        console.error('fetch')
         async function fetch() {
             const applicationsApiRequest = new BitterJesterApiApplicationsRequest();
-            const completedSubmissions = await applicationsApiRequest.getCompletedApplications();
+            const completedSubmissions = await applicationsApiRequest.getCompletedApplications(selectedCompetition.id);
 
             dataManagerReduxStore.dispatch({
                 type: 'competition/set-bands',
@@ -24,7 +27,7 @@ export const SubmissionContainer = () => {
         }
 
         fetch();
-    }, []);
+    }, [selectedCompetition.id]);
 
     const getTotalCount = () => {
         return submissions ? submissions.length : 0;

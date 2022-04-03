@@ -49,9 +49,9 @@ function App() {
                     autoClose={5000}
                     newestOnTop
                 />
-                <Row style={{minHeight: '100vh'}}>
+                <div className={'sidebar-and-main-content'}>
                     <Sidebar/>
-                    <Col className={'main-content'}>
+                    <div className={'main-content'}>
                         <Switch>
                             <Route exact path='/'>
                                 <HomePage/>
@@ -60,8 +60,8 @@ function App() {
                                 Object.keys(ROUTES).map(toRoute)
                             }
                         </Switch>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </Router> : <AmplifyAuthenticator/>
     );
 }

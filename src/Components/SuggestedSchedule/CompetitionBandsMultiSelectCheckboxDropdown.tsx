@@ -43,7 +43,9 @@ const useStyles = makeStyles((theme: Theme) =>
 const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     const classes = useStyles();
     const scheduleApiRequest = new BitterJesterApiScheduleRequest();
-
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     const {removedBands, allBandDropDownOptions} = useSelector((state: DataManagerReduxStore) => {
         return {
             allBandDropDownOptions: state.selectedCompetition.allBandDropDownOptions,
@@ -54,7 +56,7 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     const [pendingForAddition, setPendingForAddition] = useState([]);
 
     const fetch = async () => {
-        const removedBands = await scheduleApiRequest.getRemovedBands();
+        const removedBands = await scheduleApiRequest.getRemovedBands(selectedCompetition.id);
         return dataManagerReduxStore.dispatch({
             type: 'competition/set-removed-bands',
             payload: {removedBands: removedBands && removedBands.removedBands ? removedBands.removedBands: []}
@@ -73,9 +75,8 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
             type: 'competition/set-removed-bands',
             payload: {removedBands: updatedRemovedBands}
         });
-        const response = await scheduleApiRequest.updateRemovedBands(updatedRemovedBands);
-        console.error(response);
-        const updatedSchedule = await scheduleApiRequest.getSchedule();
+        const response = await scheduleApiRequest.updateRemovedBands(updatedRemovedBands, selectedCompetition.id);
+        const updatedSchedule = await scheduleApiRequest.getSchedule(selectedCompetition.id);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
             payload: {schedule: updatedSchedule}

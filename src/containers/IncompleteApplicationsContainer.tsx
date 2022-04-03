@@ -5,6 +5,8 @@ import TotalCount from '../Components/TotalCount';
 import SortIncompleteApplicationsDropdown from '../Components/SortIncompleteApplicationsDropdown';
 import _ from 'lodash';
 import {BitterJesterApiApplicationsRequest} from "../utils/api-requests/bitter-jester-api-applications-request";
+import {useSelector} from "react-redux";
+import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -26,11 +28,13 @@ export const IncompleteApplicationsContainer = () => {
     };
     const [incompleteApplications, setIncompleteApplications] = useState(initialIncompleteApplications);
     const [isSortedByBandName, setIsSortedByBandName] = useState(false);
-
+    const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
+        return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
+    });
     useEffect(() => {
         async function fetch() {
             const applicationsApiRequest = new BitterJesterApiApplicationsRequest();
-            const updatedApps = await applicationsApiRequest.getIncompleteApplications();
+            const updatedApps = await applicationsApiRequest.getIncompleteApplications(selectedCompetition.id);
             setIncompleteApplications(updatedApps);
         }
         fetch();

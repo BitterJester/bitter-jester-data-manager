@@ -8,15 +8,15 @@ export class BitterJesterApiApplicationsRequest extends BitterJesterApiRequest {
         super(process.env.REACT_APP_APPLICATIONS_API_KEY);
     }
 
-    getCompletedApplications(){
-        return this.get<BitterJesterApplications>(API_URL_PATH_FUNCTIONS.GET_COMPLETED_APPLICATIONS);
+    getCompletedApplications(competitionId){
+        return this.get<BitterJesterApplications>(() => API_URL_PATH_FUNCTIONS.GET_COMPLETED_APPLICATIONS({competitionId}));
     }
 
-    getIncompleteApplications(){
-        return this.get<{ incompleteApplications: IncompleteApplication[] }>(API_URL_PATH_FUNCTIONS.GET_INCOMPLETE_APPLICATIONS);
+    getIncompleteApplications(competitionId){
+        return this.get<{ incompleteApplications: IncompleteApplication[] }>(() => API_URL_PATH_FUNCTIONS.GET_INCOMPLETE_APPLICATIONS({competitionId}));
     }
 
-    getUploadedFiles(){
-        return this.get<UploadedFile[]>(API_URL_PATH_FUNCTIONS.GET_UPLOADED_FILES);
+    getUploadedFiles(competitionId){
+        return this.get<UploadedFile[]>(() => API_URL_PATH_FUNCTIONS.GET_UPLOADED_FILES({competitionId}));
     }
 }

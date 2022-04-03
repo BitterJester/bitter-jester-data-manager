@@ -6,15 +6,15 @@ export class BitterJesterApiScheduleRequest extends BitterJesterApiRequest {
         super(process.env.REACT_APP_SCHEDULE_API_KEY);
     }
 
-    getSchedule(isLastSaved = false){
-        return this.get<Schedule>(() => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(isLastSaved));
+    getSchedule(competitionId, isLastSaved = false){
+        return this.get<Schedule>(() => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(isLastSaved, {competitionId}));
     }
 
-    getRemovedBands(){
-        return this.get<{ removedBands: string[] }>(API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS);
+    getRemovedBands(competitionId){
+        return this.get<{ removedBands: string[] }>(() => API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS({competitionId}));
     }
 
-    updateRemovedBands(removedBands){
-        return this.post(API_URL_PATH_FUNCTIONS.UPDATE_REMOVED_BANDS, {removedBands});
+    updateRemovedBands(removedBands, competitionId){
+        return this.post(() => API_URL_PATH_FUNCTIONS.UPDATE_REMOVED_BANDS({competitionId}), {removedBands});
     }
 }

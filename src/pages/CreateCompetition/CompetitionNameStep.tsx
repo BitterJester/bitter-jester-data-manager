@@ -10,7 +10,6 @@ const CompetitionNameStep = (props) => {
                 label={'Competition Name'}
                 onChange={(event) => {
                     const name = event.target.value;
-                    console.error(name);
                     updateCompetition({name: {selectedValue: name}});
                 }}
             />

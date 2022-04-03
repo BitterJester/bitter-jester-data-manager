@@ -1,19 +1,32 @@
 .sidebar-container {
-  max-width: 250px;
+  width: 25vw;
+  height: 100vh;
   background: rgb(123, 93, 151);
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 
   #homeLogo:hover {
     cursor: pointer;
   }
 
+  .action-card {
+    overflow-y: auto;
+    height: 100%;
+  }
+
   .sidebar {
+    height: 50%;
+    padding: 16px;
+
     .sidebar-button {
       width: 100%;
       border-radius: 0;
       background: none;
       border: none;
-      color: white;
+      color: black;
       font-size: 25px;
       text-align: left;
       padding: 8px 8px 8px 32px;

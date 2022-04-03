@@ -9,18 +9,6 @@ import {useSelector} from "react-redux";
 import {BitterJesterApiCompetitionsRequest} from "../utils/api-requests/bitter-jester-api-competitions-request";
 
 const AuthenticatedHomePage = (props) => {
-    const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
-    const fetch = async () => {
-        const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
-        const competitions = await competitionsApiRequest.getAllCompetitions();
-        const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
-        return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: isAdmin ? competitions.competitions : filteredCompetitions}});
-    }
-
-    useEffect(() => {
-        fetch();
-    }, []);
-
     const {selectedCompetition} = useSelector((state: DataManagerReduxStore) => ({selectedCompetition: state.selectedCompetition}))
 
     const areButtonsDisabled = selectedCompetition.id === '';
@@ -29,20 +17,8 @@ const AuthenticatedHomePage = (props) => {
 
     return <>
         <div>
-            Please select the competition you are judging for and navigate to the Original Song Competition page.
+            There is nothing to put here anymore for now... we can figure this out later.
         </div>
-        <div className={""}>
-            <CompetitionSelectionDropDown/>
-        </div>
-        <div className={"public-route-buttons"}>
-            {selectedCompetition.type === 'online' && <Button
-                className='home-route-button'
-                onClick={() => urlHelper.redirectToOriginalSongCompetition(selectedCompetition.id)}
-                disabled={areButtonsDisabled}>
-                Original Song Competition
-            </Button>}
-        </div>
-        <AdminHomePageView disabled={areButtonsDisabled}/>
     </>;
 };
 

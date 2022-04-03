@@ -41,7 +41,6 @@ const OverallBandRankingsCard = (props: Props) => {
     const save = async (updatedSongRankings) => {
         const apiRequest = new BitterJesterApiOriginalSongCompetitionRequest();
         const response = await apiRequest.updateOverallRankingsForWeek(updatedSongRankings);
-        console.error(response);
     };
 
     return (

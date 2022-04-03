@@ -25,7 +25,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         const submissionTableRowBandsForOneNight = night.bands
             .filter(band => !removedBands.includes(band.bandName))
             .map((app, index) => {
-                const color = new BackgroundColor(app, night.night).get();
+                const color = new BackgroundColor(app, night.night).get(selectedCompetition.id);
                 const isFirstShowcaseBand = index === 0;
                 const isSecondShowcaseBand = index === night.bands.length - 1;
                 return (
@@ -72,7 +72,6 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
             showcaseBand = schedule.nights[night].bands[1];
         }
         // const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATHS.UPDATE_SCHEDULE);
-        console.error(showcaseBand);
     };
     return (
         <Fragment>
