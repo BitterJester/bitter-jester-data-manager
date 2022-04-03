@@ -41,7 +41,7 @@ const UploadedFilesContainer = () => {
 
     useEffect(() => {
         fetch();
-    }, []);
+    }, [selectedCompetition.id]);
 
     return (
         <div>

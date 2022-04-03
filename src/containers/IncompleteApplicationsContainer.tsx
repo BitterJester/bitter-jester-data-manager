@@ -38,7 +38,7 @@ export const IncompleteApplicationsContainer = () => {
             setIncompleteApplications(updatedApps);
         }
         fetch();
-    }, []);
+    }, [selectedCompetition.id]);
 
     const sortByBandName = () => {
         const incompleteApplicationsCopy = _.cloneDeep(incompleteApplications.incompleteApplications);
