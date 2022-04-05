@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Title} from '../Components/Title';
 import {CardBody, Col, Row} from 'reactstrap';
 import TotalCount from '../Components/TotalCount';
@@ -7,6 +7,9 @@ import _ from 'lodash';
 import {BitterJesterApiApplicationsRequest} from "../utils/api-requests/bitter-jester-api-applications-request";
 import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../redux/data-manager-redux-store";
+import {Columns, DataGrid} from "@material-ui/data-grid";
+import CardContainer from "../Components/Cards/CardContainer";
+import Page from "../Components/Page";
 
 type IncompleteApplications = {
     incompleteApplications: IncompleteApplication[];
@@ -37,6 +40,7 @@ export const IncompleteApplicationsContainer = () => {
             const updatedApps = await applicationsApiRequest.getIncompleteApplications(selectedCompetition.id);
             setIncompleteApplications(updatedApps);
         }
+
         fetch();
     }, [selectedCompetition.id]);
 
@@ -47,43 +51,54 @@ export const IncompleteApplicationsContainer = () => {
     };
 
     const orderedApplications = isSortedByBandName ? sortByBandName() : incompleteApplications.incompleteApplications;
-
-    const incompleteSubmissionCards = orderedApplications
-        .map(app => {
-            return (
-                <Row>
-                    <Col>{app.bandName}</Col>
-                    <Col>{`${app.applicantName.first} ${app.applicantName.last}`}</Col>
-                    <Col>{app.primaryEmailAddress}</Col>
-                    <Col>{app.relationshipToBand}</Col>
-                </Row>
-            );
-        });
-
+    const COLUMNS: Columns = [
+        {
+            field: 'id',
+            headerName: 'Id',
+            width: 80,
+        },
+        {
+            field: 'bandName',
+            headerName: 'Band Name',
+            width: 160,
+        },
+        {
+            field: 'primaryContactName',
+            headerName: 'Primary Contact Name',
+            width: 200,
+        },
+        {
+            field: 'primaryEmailAddress',
+            headerName: 'Primary Email Address',
+            width: 160,
+        },
+        {
+            field: 'relationshipToBand',
+            headerName: 'Relationship to Band',
+            width: 200,
+        }
+    ]
+    const rows = orderedApplications
+        .map((app, index) => ({
+            id: index + 1,
+            bandName: app.bandName,
+            primaryContactName: `${app.applicantName.first} ${app.applicantName.last}`,
+            primaryEmailAddress: app.primaryEmailAddress,
+            relationshipToBand: app.relationshipToBand,
+        }));
     return (
-        <div>
-            <Title titleDisplayText='Incomplete Applications' />
-            <TotalCount count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0} />
-            {incompleteApplications.incompleteApplications.length ?
-                <CardBody>
-                <Row>
-                    <SortIncompleteApplicationsDropdown
-                        dropdownItemOnClick={() => setIsSortedByBandName(false)}
-                        dropdownItemOnClick2={() => setIsSortedByBandName(true)}
+        <Page>
+            <CardContainer>
+                <Title titleDisplayText='Incomplete Applications'/>
+                <TotalCount
+                    count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0}/>
+                <div style={{height: '80vh', width: '100%'}}>
+                    <DataGrid
+                        columns={COLUMNS}
+                        rows={rows}
                     />
-                </Row>
-                <Row>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Band Name</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Applicant Name</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Primary Email Address</Col>
-                    <Col style={{fontSize: '24px', fontWeight: 'bold'}}>Relationship To Band</Col>
-                </Row>
-                {incompleteSubmissionCards}
-            </CardBody> :
-                <div>
-                    <h1>No Incomplete Applications.</h1>
                 </div>
-            }
-        </div>
+            </CardContainer>
+        </Page>
     );
 };
