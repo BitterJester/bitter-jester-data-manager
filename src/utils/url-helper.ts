@@ -9,11 +9,10 @@ export class UrlHelper {
         this.history = history;
     }
 
-    public static setOrAddQueryParam(paramName, paramValue) {
-        if ('URLSearchParams' in window) {
-            const searchParams = new URLSearchParams(window.location.search);
-            searchParams.set(paramName, paramValue);
-            window.location.search = searchParams.toString();
+    public static setQueryString(queryString) {
+        if (window.history.pushState) {
+            const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryString;
+            window.history.pushState({path:newurl},'',newurl);
         }
     }
 

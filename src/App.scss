@@ -12,6 +12,10 @@
 @import "~video-react/styles/scss/video-react";
 @import 'static/scss/Sidebar';
 
+.selected {
+  background: #e28732 !important;
+  color: white !important;
+}
 
 .main-content {
   padding: 0;

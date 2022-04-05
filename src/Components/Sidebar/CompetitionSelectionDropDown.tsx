@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
 import {UrlHelper} from "../../utils/url-helper";
+import {toast} from "react-toastify";
 
 const CompetitionSelectionDropDown = () => {
     const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
@@ -47,7 +48,7 @@ const CompetitionSelectionDropDown = () => {
                                 type: 'competition/set',
                                 payload: {selectedCompetition: {...competition, ...found}}
                             });
-                            UrlHelper.setOrAddQueryParam('competitionId', competition.id);
+                            UrlHelper.setQueryString(`?competitionId=${competition.id}`);
                         };
                         return (
                             <DropdownItem
