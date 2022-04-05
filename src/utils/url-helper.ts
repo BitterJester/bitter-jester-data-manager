@@ -9,6 +9,14 @@ export class UrlHelper {
         this.history = history;
     }
 
+    public static setOrAddQueryParam(paramName, paramValue) {
+        if ('URLSearchParams' in window) {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set(paramName, paramValue);
+            window.location.search = searchParams.toString();
+        }
+    }
+
     public static parseQueryParams() {
         const queryString = window.location.search;
         const queryStringWithQuestionRemoved = queryString.slice(1, queryString.length);

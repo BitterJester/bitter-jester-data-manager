@@ -15,18 +15,18 @@ export const SubmissionContainer = () => {
         return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
     });
     useEffect(() => {
-        console.error('fetch')
         async function fetch() {
             const applicationsApiRequest = new BitterJesterApiApplicationsRequest();
             const completedSubmissions = await applicationsApiRequest.getCompletedApplications(selectedCompetition.id);
-
             dataManagerReduxStore.dispatch({
                 type: 'competition/set-bands',
-                payload: {bands: completedSubmissions.completedApplications}
+                payload: {bands: completedSubmissions ? completedSubmissions.completedApplications : []}
             })
         }
 
-        fetch();
+        if (selectedCompetition.id && selectedCompetition.id !== '') {
+            fetch();
+        }
     }, [selectedCompetition.id]);
 
     const getTotalCount = () => {

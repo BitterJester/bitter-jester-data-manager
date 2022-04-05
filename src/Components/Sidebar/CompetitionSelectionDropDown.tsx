@@ -3,24 +3,31 @@ import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
 import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
-
-export type CompetitionDropDownOption = {
-    id: string;
-    name: string;
-}
+import {UrlHelper} from "../../utils/url-helper";
 
 const CompetitionSelectionDropDown = () => {
     const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
-    const fetch = async () => {
-        const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
-        const competitions = await competitionsApiRequest.getAllCompetitions();
-        const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
-        return dataManagerReduxStore.dispatch({type: 'competitions/set', payload: {competitions: isAdmin ? competitions.competitions : filteredCompetitions}});
-    }
-
     useEffect(() => {
+        const fetch = async () => {
+            const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
+            const competitions = await competitionsApiRequest.getAllCompetitions();
+            const queryparams = new URLSearchParams(window.location.search);
+            if(queryparams.has('competitionId')) {
+                // @ts-ignore
+                const found = competitions.competitions.find(comp => comp.id === queryparams.get('competitionId'));
+                dataManagerReduxStore.dispatch({
+                    type: 'competition/set',
+                    payload: {selectedCompetition: found},
+                });
+            }
+            const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
+            return dataManagerReduxStore.dispatch({
+                type: 'competitions/set',
+                payload: {competitions: isAdmin ? competitions.competitions : filteredCompetitions}
+            });
+        }
         fetch();
-    }, []);
+    }, [isAdmin]);
     const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
         return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
     });
@@ -33,18 +40,23 @@ const CompetitionSelectionDropDown = () => {
                     {selectedCompetition && selectedCompetition.name !== '' ? selectedCompetition.name : 'Select Your Competition'}
                 </DropdownToggle>
                 <DropdownMenu>
-                    {competitions.map(competition =>
-                        <DropdownItem
-                            onClick={() => {
-                                const found = competitions.find(c => c.name === competition.name);
-                                dataManagerReduxStore.dispatch({
-                                    type: 'competition/set',
-                                    payload: {selectedCompetition: {...competition, ...found}}
-                                });
-                            }}
-                        >
-                            {competition.name}
-                        </DropdownItem>)}
+                    {competitions.map(competition => {
+                        const onSelectedCompetitionChanged = () => {
+                            const found = competitions.find(c => c.name === competition.name);
+                            dataManagerReduxStore.dispatch({
+                                type: 'competition/set',
+                                payload: {selectedCompetition: {...competition, ...found}}
+                            });
+                            UrlHelper.setOrAddQueryParam('competitionId', competition.id);
+                        };
+                        return (
+                            <DropdownItem
+                                onClick={onSelectedCompetitionChanged}
+                            >
+                                {competition.name}
+                            </DropdownItem>
+                        );
+                    })}
                 </DropdownMenu>
             </Dropdown>
         </div>

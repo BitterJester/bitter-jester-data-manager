@@ -1,20 +1,43 @@
-import React, { Fragment } from 'react';
-import NByMGrid from '../NByMGrid/NByMGrid';
-import { BitterJesterApplication } from '../../pages/Submissions';
-import CompletedSubmissionCard from './CompletedSubmissionCard';
+import React, {Fragment} from 'react';
+import {BitterJesterApplication} from '../../pages/Submissions';
+import {ColDef, DataGrid} from "@material-ui/data-grid";
 
 type Props = {
     completedSubmissions: BitterJesterApplication[];
 }
 
 const CompletedSubmissionCardsTable = (props: Props) => {
-    const completedSubmissionCards = props.completedSubmissions.map((submission, index) => {
-        return <CompletedSubmissionCard key={index} completedSubmission={submission} />
-    });
-
+    const rows = props.completedSubmissions
+        .map((file, index) => ({...file, id: index}));
+    const COLUMNS: ColDef[] = [
+        {field: 'id', headerName: 'Id', width: 60},
+        {field: 'bandName', headerName: 'Band Name', width: 130},
+        {field: 'primaryEmailAddress', headerName: 'Primary Email Address', width: 160},
+        {
+            field: 'primaryPhoneNumber',
+            headerName: 'Primary Phone Number',
+            width: 160,
+        },
+        {
+            field: 'citiesRepresented',
+            headerName: 'Cities Represented',
+            width: 300,
+        },
+        {
+            field: 'referencedBands',
+            headerName: 'Referenced Bands',
+            width: 300,
+        },
+    ];
     return (
         <Fragment>
-            <NByMGrid columns={2} gridItems={completedSubmissionCards} />
+            <div style={{height: '80vh', width: '100%'}}>
+                <DataGrid
+                    columns={COLUMNS}
+                    rows={rows}
+                    pageSize={50}
+                />
+            </div>
         </Fragment>
     );
 };
