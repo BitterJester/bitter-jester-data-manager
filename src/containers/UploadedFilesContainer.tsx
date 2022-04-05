@@ -40,6 +40,7 @@ const UploadedFilesContainer = () => {
     }
 
     useEffect(() => {
+        if(selectedCompetition.id && selectedCompetition.id !== '')
         fetch();
     }, [selectedCompetition.id]);
 

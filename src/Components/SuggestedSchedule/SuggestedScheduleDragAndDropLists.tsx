@@ -20,7 +20,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const schedulesInformationForEachNight = [];
     const selectedCompetition = useSelector((state: DataManagerReduxStore) => state.selectedCompetition);
     const removedBands = selectedCompetition.removedBands;
-    const fridayNights = Object.values(getNightMap(selectedCompetition.competitionId)).map(night => `${night.month}/${night.dayOfTheMonth}`);
+    const fridayNights = Object.values(getNightMap(selectedCompetition.id)).map(night => `${night.month}/${night.dayOfTheMonth}`);
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands
             .filter(band => !removedBands.includes(band.bandName))

@@ -60,7 +60,6 @@ const Sidebar = (props: Props) => {
             </div>
             <div className={'sidebar'}>
                 <Card className={'action-card'}>
-                    <button className={getButtonClass(HOME_PATH)} onClick={() => redirect(HOME_PATH)}>Home</button>
                     <button className={getButtonClass(CREATE_COMPETITION_PATH)} onClick={() => redirect(CREATE_COMPETITION_PATH)}>Create
                         Competition
                     </button>
@@ -97,7 +96,7 @@ const Sidebar = (props: Props) => {
                             onClick={() => redirect(withCompetitionIdQueryParam(RESULT_PATH), true)}>
                         Results
                     </button>
-                    <AmplifySignOut/>
+                    <AmplifySignOut />
                 </Card>
             </div>
         </div>

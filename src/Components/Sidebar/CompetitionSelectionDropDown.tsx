@@ -4,16 +4,16 @@ import {useSelector} from "react-redux";
 import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
 import {UrlHelper} from "../../utils/url-helper";
-import {toast} from "react-toastify";
+import {withRouter} from "react-router";
 
-const CompetitionSelectionDropDown = () => {
+const CompetitionSelectionDropDown = (props) => {
     const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
     useEffect(() => {
         const fetch = async () => {
             const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
             const competitions = await competitionsApiRequest.getAllCompetitions();
             const queryparams = new URLSearchParams(window.location.search);
-            if(queryparams.has('competitionId')) {
+            if (queryparams.has('competitionId')) {
                 // @ts-ignore
                 const found = competitions.competitions.find(comp => comp.id === queryparams.get('competitionId'));
                 dataManagerReduxStore.dispatch({
@@ -48,7 +48,11 @@ const CompetitionSelectionDropDown = () => {
                                 type: 'competition/set',
                                 payload: {selectedCompetition: {...competition, ...found}}
                             });
-                            UrlHelper.setQueryString(`?competitionId=${competition.id}`);
+                            if (window.location.pathname === '/') {
+                                new UrlHelper(props.history).redirectToCompletedSubmissions(found.id);
+                            } else {
+                                UrlHelper.setQueryString(`?competitionId=${competition.id}`);
+                            }
                         };
                         return (
                             <DropdownItem
@@ -64,4 +68,4 @@ const CompetitionSelectionDropDown = () => {
     );
 };
 
-export default CompetitionSelectionDropDown;
+export default withRouter(CompetitionSelectionDropDown);

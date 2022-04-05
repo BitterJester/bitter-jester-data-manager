@@ -41,7 +41,9 @@ export const IncompleteApplicationsContainer = () => {
             setIncompleteApplications(updatedApps);
         }
 
-        fetch();
+        if (selectedCompetition.id && selectedCompetition.id !== '') {
+            fetch();
+        }
     }, [selectedCompetition.id]);
 
     const sortByBandName = () => {

@@ -7,7 +7,7 @@ const HomePage = () => {
     return (
         <div className={'home-container'}>
             <Card>
-                <Title titleDisplayText={"WELCOME TO THE BITTER JESTER DATA MANAGER"}/>
+                <Title titleDisplayText={"Please select a competition."}/>
             </Card>
         </div>
     );
