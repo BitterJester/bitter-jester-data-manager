@@ -26,7 +26,7 @@ const ScheduleToolbar = (props: Props) => {
     return (
         <Fragment>
             <Alert isOpen={isSaveAlertOpen} toggle={onAlert} style={{ textAlign: 'center' }}>The schedule has been updated!</Alert>
-            <div style={{display: 'flex', width: '100%', alignItems: 'flex-start'}}>
+            <div style={{display: 'flex', width: '100%', alignItems: 'flex-start', flexWrap: 'wrap'}}>
                 <ScheduleDropdown
                     dropdownItemOnClick={() => updateSchedule(SUGGESTED_VERSION)}
                     dropdownItemOnClick2={() => updateSchedule(LAST_SAVE_VERSION)}

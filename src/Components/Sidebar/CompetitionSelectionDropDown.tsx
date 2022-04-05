@@ -5,6 +5,7 @@ import dataManagerReduxStore, {DataManagerReduxStore} from "../../redux/data-man
 import {BitterJesterApiCompetitionsRequest} from "../../utils/api-requests/bitter-jester-api-competitions-request";
 import {UrlHelper} from "../../utils/url-helper";
 import {withRouter} from "react-router";
+import * as Url from "url";
 
 const CompetitionSelectionDropDown = (props) => {
     const {isAdmin} = useSelector((state: DataManagerReduxStore) => state.signInUserSession);
@@ -13,13 +14,17 @@ const CompetitionSelectionDropDown = (props) => {
             const competitionsApiRequest = new BitterJesterApiCompetitionsRequest();
             const competitions = await competitionsApiRequest.getAllCompetitions();
             const queryparams = new URLSearchParams(window.location.search);
-            if (queryparams.has('competitionId')) {
+            if (queryparams.has('competition')) {
                 // @ts-ignore
-                const found = competitions.competitions.find(comp => comp.id === queryparams.get('competitionId'));
+                const found = competitions.competitions.find(comp => comp.id === queryparams.get('competition'));
                 dataManagerReduxStore.dispatch({
                     type: 'competition/set',
                     payload: {selectedCompetition: found},
                 });
+                if(window.location.pathname === '/') {
+                    // @ts-ignore
+                    new UrlHelper(props.history).redirectToCompletedSubmissions(found.id);
+                }
             }
             const filteredCompetitions = competitions.competitions.filter(comp => comp.type === 'online');
             return dataManagerReduxStore.dispatch({
@@ -51,7 +56,7 @@ const CompetitionSelectionDropDown = (props) => {
                             if (window.location.pathname === '/') {
                                 new UrlHelper(props.history).redirectToCompletedSubmissions(found.id);
                             } else {
-                                UrlHelper.setQueryString(`?competitionId=${competition.id}`);
+                                UrlHelper.setQueryString(`?competition=${competition.id}`);
                             }
                         };
                         return (
