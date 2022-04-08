@@ -10,22 +10,23 @@ export class BackgroundColor {
     }
 
     get(competitionId) {
-        const nightMap = getNightMap(competitionId)
+        const nightMap = getNightMap(competitionId);
         const nightParts = nightMap[String(this.night)];
-        const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(nightParts.dayOfTheMonth);
+        const dayOfTheMonth = nightParts.dayOfTheMonth;
+        const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(dayOfTheMonth);
 
         if(this.application.isBandAvailableOnAllFridays || didGetFirstChoice) {
             return 'darkgreen';
         }
 
-        const didGetSecondChoice = this.application.secondChoiceFridayNight.includes(nightParts);
+        const didGetSecondChoice = this.application.secondChoiceFridayNight.includes(dayOfTheMonth);
 
         if(didGetSecondChoice){
             return 'rgb(227, 194, 27)';
         }
 
         const isUnavailable = this.application.unavailableFridayNights ? 
-            Boolean(this.application.unavailableFridayNights.map(night => night.includes(nightParts)).filter(item => item === true).length) :
+            Boolean(this.application.unavailableFridayNights.map(night => night.includes(dayOfTheMonth)).filter(item => item === true).length) :
             false;
 
         if(isUnavailable){
