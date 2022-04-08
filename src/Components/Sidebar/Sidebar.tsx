@@ -1,12 +1,10 @@
 import React, {Fragment} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
-import {Button, Col} from "reactstrap";
 import {AmplifySignOut} from '@aws-amplify/ui-react';
 import {toast} from "react-toastify";
 import CompetitionSelectionDropDown from "./CompetitionSelectionDropDown";
 import {useSelector} from "react-redux";
 import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
-import {UrlHelper} from "../../utils/url-helper";
 import {Card} from "@material-ui/core";
 import {ROUTES} from "../../static/constants/routes";
 
@@ -43,11 +41,7 @@ const Sidebar = (props: Props) => {
         return `${path}?competitionId=${selectedCompetition.id}`;
     }
 
-    const {history} = props;
-
-    const urlHelper = new UrlHelper(history);
     const getButtonClass = (path) => {
-        console.error(window.location.pathname);
         return window.location.pathname === path ? 'sidebar-button selected' : 'sidebar-button';
     };
     return (

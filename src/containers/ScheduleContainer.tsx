@@ -34,17 +34,20 @@ export const ScheduleContainer = () => {
     const {selectedCompetition, competitions} = useSelector((state: DataManagerReduxStore) => {
         return ({competitions: state.appInfo.competitions, selectedCompetition: state.selectedCompetition});
     });
+
     async function fetch(scheduleType) {
         const scheduleApiRequest = new BitterJesterApiScheduleRequest();
         const updatedSchedule = await scheduleApiRequest.getSchedule(selectedCompetition.id, scheduleType !== SUGGESTED_VERSION);
         dataManagerReduxStore.dispatch({
             type: 'competition/set-schedule',
-            payload: {schedule: updatedSchedule ? updatedSchedule: INITIAL_SCHEDULE}
+            payload: {schedule: updatedSchedule ? updatedSchedule : INITIAL_SCHEDULE}
         });
     }
 
     useEffect(() => {
-        fetch(SUGGESTED_VERSION);
+        if (selectedCompetition.id) {
+            fetch(SUGGESTED_VERSION);
+        }
     }, [selectedCompetition.id]);
 
     const updateSchedule = (columnRemovedFromIndex, rowRemovedFromIndex, columnAddedToIndex, rowAddedToIndex) => {
@@ -91,11 +94,11 @@ export const ScheduleContainer = () => {
 
     return (
         <Container fluid>
-            <div style={{ padding: '16px' }}>
-                <CardContainer style={{ padding: '16px' }}>
-                    <Title titleDisplayText={formatTitle()} />
-                    <ScheduleToolbar schedule={schedule} updateSchedule={fetch} />
-                    <ScheduleLegendItem />
+            <div style={{padding: '16px'}}>
+                <CardContainer style={{padding: '16px'}}>
+                    <Title titleDisplayText={formatTitle()}/>
+                    <ScheduleToolbar schedule={schedule} updateSchedule={fetch}/>
+                    <ScheduleLegendItem/>
                     <SuggestedScheduleDragAndDropLists schedule={schedule} updateSchedule={updateSchedule}/>
                 </CardContainer>
             </div>

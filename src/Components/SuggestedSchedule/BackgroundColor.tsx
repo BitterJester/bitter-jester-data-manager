@@ -13,9 +13,9 @@ export class BackgroundColor {
         const nightMap = getNightMap(competitionId);
         const nightParts = nightMap[String(this.night)];
         const dayOfTheMonth = nightParts.dayOfTheMonth;
-        const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(dayOfTheMonth);
-
-        if(this.application.isBandAvailableOnAllFridays || didGetFirstChoice) {
+        const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(dayOfTheMonth) ||
+            this.application.firstChoiceFridayNight === 'Available Every Friday';
+        if(didGetFirstChoice) {
             return 'darkgreen';
         }
 

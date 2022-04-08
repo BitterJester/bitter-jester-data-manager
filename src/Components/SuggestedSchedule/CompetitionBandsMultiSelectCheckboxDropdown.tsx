@@ -59,13 +59,15 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
         const removedBands = await scheduleApiRequest.getRemovedBands(selectedCompetition.id);
         return dataManagerReduxStore.dispatch({
             type: 'competition/set-removed-bands',
-            payload: {removedBands: removedBands && removedBands.removedBands ? removedBands.removedBands: []}
+            payload: {removedBands: removedBands && removedBands.removedBands ? removedBands.removedBands : []}
         });
     }
 
     useEffect(() => {
-        fetch();
-    }, [])
+        if (selectedCompetition.id) {
+            fetch();
+        }
+    }, [selectedCompetition.id])
 
     const onRemoveBand = async () => {
         const updatedRemovedBands = [...removedBands, ...pendingForRemoval].filter(pend => !pendingForAddition.includes(pend));
