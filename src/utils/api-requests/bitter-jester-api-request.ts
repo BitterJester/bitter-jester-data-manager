@@ -14,6 +14,7 @@ export const API_URL_PATH_FUNCTIONS = {
     GET_COMPETITIONS: () => `${DOMAIN}competitions/competitions`,
     GET_JUDGES: () => `${DOMAIN}competitions/judges`,
     GET_SCHEDULE: (lastSaved = false, params) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule', params),
+    SAVE_SCHEDULE: (params) => getFullPathWithCompetition('schedule/',  '/schedule', params),
     GET_REMOVED_BANDS: (params) => getFullPathWithCompetition('schedule/', '/get-removed-bands', params),
     UPDATE_REMOVED_BANDS: (params) => getFullPathWithCompetition('schedule/', '/update-removed-bands', params)
 }

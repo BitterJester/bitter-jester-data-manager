@@ -10,6 +10,10 @@ export class BitterJesterApiScheduleRequest extends BitterJesterApiRequest {
         return this.get<Schedule>(() => API_URL_PATH_FUNCTIONS.GET_SCHEDULE(isLastSaved, {competitionId}));
     }
 
+    saveSchedule(competitionId, schedule: Schedule){
+        return this.post<Schedule>(() => API_URL_PATH_FUNCTIONS.SAVE_SCHEDULE({competitionId}), schedule);
+    }
+
     getRemovedBands(competitionId){
         return this.get<{ removedBands: string[] }>(() => API_URL_PATH_FUNCTIONS.GET_REMOVED_BANDS({competitionId}));
     }

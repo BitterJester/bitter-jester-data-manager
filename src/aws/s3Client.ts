@@ -5,10 +5,10 @@ export class S3Client {
     client: AWS.S3;
 
     constructor() {
-        this.client = new AWS.S3({
-            accessKeyId: process.env.REACT_APP_AWS_ACCESS_ID,
-            secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
-        })
+        // this.client = new AWS.S3({
+        //     accessKeyId: process.env.REACT_APP_AWS_ACCESS_ID,
+        //     secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
+        // })
     }
 
     async put(request) {

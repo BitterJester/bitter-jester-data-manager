@@ -125,25 +125,27 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     }
 
     return (
-        <div style={{display: 'inline-flex', textAlign: 'right', alignItems: 'center'}}>
+        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end'}}>
             <FormControl className={classes.formControl}>
-                <InputLabel>Remove Bands</InputLabel>
                 <Select
                     multiple
                     value={[...removedBands, ...pendingForRemoval].filter(bandName => !pendingForAddition.includes(bandName))}
                     onChange={(event) => {
                         insanity(event);
                     }}
+                    displayEmpty
                     input={<Input/>}
                     renderValue={() =>
                         pendingForRemoval.length !== 0 || pendingForAddition.length !== 0 ?
                             (
                                 <div>{`${pendingForRemoval.length} pending removal and ${pendingForAddition.length} pending addition`}</div>) :
-                            (<div>{`${removedBands.length} band(s) removed`}</div>)
+                            (<div>{`${removedBands.length} band(s) have currently been removed.`}</div>)
                     }
                     MenuProps={MenuProps}
                 >
-                    {allBandDropDownOptions.map((option) => (
+                    {allBandDropDownOptions
+                        .sort((a, b) => a.name < b.name ? -1 : 1)
+                        .map((option) => (
                         <MenuItem key={option.id} value={option.name}>
                             <Checkbox checked={isChecked(option)}/>
                             <ListItemText primary={option.name}/>
