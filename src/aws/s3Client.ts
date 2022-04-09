@@ -1,8 +1,7 @@
-import AWS from 'aws-sdk';
 import {getCompetitionPrefixFromQueryParams} from "./getFromS3";
 
 export class S3Client {
-    client: AWS.S3;
+    client;
 
     constructor() {
         // this.client = new AWS.S3({

@@ -37,10 +37,10 @@ const WeeklyJudgesCommentsContainer = (props: Props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            await getFromS3(`week=${props.week}/aggregated-judges-comments.json`, (aggregatedJudgesComments) => {
-                aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
-                setJudgesComments(aggregatedJudgesComments);
-            });
+            // await getFromS3(`week=${props.week}/aggregated-judges-comments.json`, (aggregatedJudgesComments) => {
+            //     aggregatedJudgesComments.comments = _.orderBy(aggregatedJudgesComments.comments, 'judge.email')
+            //     setJudgesComments(aggregatedJudgesComments);
+            // });
         };
 
         fetch();

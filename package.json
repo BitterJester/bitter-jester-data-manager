@@ -23,7 +23,6 @@
         "@types/reactstrap": "8.4.2",
         "apexcharts": "3.19.2",
         "aws-amplify": "^4.3.13",
-        "aws-sdk": "2.627.0",
         "axios": "^0.21.4",
         "bootstrap": "4.4.1",
         "bootstrap-icons": "1.0.0-alpha3",
@@ -32,7 +31,6 @@
         "enzyme": "3.11.0",
         "enzyme-adapter-react-16": "1.15.2",
         "husky": "4.2.3",
-        "jest": "24.9.0",
         "lodash": "4.17.15",
         "node-sass": "4.14.1",
         "react": "16.12.0",
@@ -50,7 +48,6 @@
         "react-toastify": "^8.2.0",
         "reactstrap": "8.4.1",
         "redux": "^4.1.2",
-        "ts-jest": "25.2.1",
         "typescript": "3.7.5",
         "video-react": "0.14.1"
     },

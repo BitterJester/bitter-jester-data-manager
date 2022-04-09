@@ -53,6 +53,7 @@ export const DragAndDropList = (props: Props) => {
 
     const columnTitlesCopy = _.cloneDeep(props.orderedColumnTitles);
     return (
+    // @ts-ignore
         <DragDropContext onDragEnd={onDragEnd}>
             {
                 orderedItemsForDisplay.map((item, index) => {

@@ -1,5 +1,3 @@
-import aws from 'aws-sdk';
-import {GetObjectRequest} from 'aws-sdk/clients/s3';
 import {UrlHelper} from "../utils/url-helper";
 
 export function getCompetitionPrefixFromQueryParams() {
@@ -7,14 +5,11 @@ export function getCompetitionPrefixFromQueryParams() {
 }
 
 export const getFromS3 = async (key: string, setStateFunction?: Function, isRoot: boolean = false) => {
-    const s3 = new aws.S3({
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_ID,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY
-    });
+    const s3 = null;
 
     async function getSubmissionsFromS3(key: string) {
         const finalKey = isRoot ? key : `${getCompetitionPrefixFromQueryParams()}/${key}`;
-        const s3ReadInfo: GetObjectRequest = {
+        const s3ReadInfo = {
             Bucket: 'bitter-jester-test',
             Key: finalKey
         };

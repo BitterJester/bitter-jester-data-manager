@@ -86,10 +86,10 @@ const Sidebar = (props: Props) => {
                     <button className={getButtonClass(UPLOADED_FILES_PATH)}
                             onClick={() => redirect(withCompetitionIdQueryParam(UPLOADED_FILES_PATH), true)}>Uploaded Files
                     </button>
-                    <button className={getButtonClass(RESULT_PATH)}
-                            onClick={() => redirect(withCompetitionIdQueryParam(RESULT_PATH), true)}>
-                        Results
-                    </button>
+                    {/*<button className={getButtonClass(RESULT_PATH)}*/}
+                    {/*        onClick={() => redirect(withCompetitionIdQueryParam(RESULT_PATH), true)}>*/}
+                    {/*    Results*/}
+                    {/*</button>*/}
                     <AmplifySignOut />
                 </Card>
             </div>

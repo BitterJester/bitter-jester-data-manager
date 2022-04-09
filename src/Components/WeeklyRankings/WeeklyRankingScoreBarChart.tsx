@@ -60,12 +60,12 @@ const WeeklyRankingScoreBarChart = (props: Props) => {
         <CardContainer className="weekly-ranking-bar-chart-container">
             <Title titleDisplayText={'SONG RANKINGS'}/>
             <div className="weekly-ranking-bar-chart">
-                {chartData.series && <Chart
-                    options={chartData.options}
-                    series={chartData.series}
-                    type="bar"
-                    height={'500'}
-                />}
+                {/*{chartData.series && <Chart*/}
+                {/*    options={chartData.options}*/}
+                {/*    series={chartData.series}*/}
+                {/*    type="bar"*/}
+                {/*    height={'500'}*/}
+                {/*/>}*/}
             </div>
             <p>
                 Judges Who Haven't Submitted Rankings
