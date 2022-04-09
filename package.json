@@ -57,7 +57,7 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "deploy": "CI=false; npm run build; aws s3 sync build/ s3://bitter-jester-data-manager",
+        "deploy": "CI=false; aws s3 sync build/ s3://bitter-jester-data-manager",
         "test": "jest",
         "eject": "react-scripts eject",
         "buildEnv": "./buildEnv.sh",

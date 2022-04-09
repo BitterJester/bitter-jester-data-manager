@@ -34,6 +34,10 @@ jobs:
             cache-path: ~/project/node_modules
             override-ci-command: npm install
       - run:
+          name: Build website
+          command: |
+            npm run build
+      - run:
           name: Deploy to s3 bucket
           command: |
             npm run deploy
