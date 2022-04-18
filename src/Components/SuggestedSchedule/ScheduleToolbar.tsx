@@ -16,7 +16,8 @@ const ScheduleToolbar = (props: Props) => {
     const [isSaveAlertOpen, setIsSaveAlertOpen] = useState(false);
 
     const onAlert = () => {
-        setIsSaveAlertOpen(!isSaveAlertOpen);
+        setIsSaveAlertOpen(false);
+        setIsSaveAlertOpen(true);
     }
 
     const getTotalBands = (): number => {
