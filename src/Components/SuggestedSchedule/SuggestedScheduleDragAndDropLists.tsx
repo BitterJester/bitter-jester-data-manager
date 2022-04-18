@@ -21,6 +21,11 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     const selectedCompetition = useSelector((state: DataManagerReduxStore) => state.selectedCompetition);
     const removedBands = selectedCompetition.removedBands;
     const fridayNights = Object.values(getNightMap(selectedCompetition.id)).map(night => `${night.month}/${night.dayOfTheMonth}`);
+
+    function getValueOrDefault(value, modifierFunction = (value) => value) {
+        return value ? modifierFunction(value) : '-';
+    }
+
     schedule.nights.forEach(night => {
         const submissionTableRowBandsForOneNight = night.bands
             .filter(band => !removedBands.includes(band.bandName))
@@ -43,10 +48,10 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                             {`First Choice: ${app.firstChoiceFridayNight}`}
                         </div>
                         <div className={'suggestedScheduleItemInfo'}>
-                            {`Second Choice: ${app.secondChoiceFridayNight}`}
+                            {`Second Choice: ${getValueOrDefault(app.secondChoiceFridayNight)}`}
                         </div>
                         <div className={'suggestedScheduleItemInfo'}>
-                            {`Unavailable Nights: ${app.unavailableFridayNights}`}
+                            {`Unavailable Nights: ${(getValueOrDefault(app.unavailableFridayNights, (value) => value.join(', ')))}`}
                         </div>
                         <div className={'suggestedScheduleItemInfo'}>
                             {`Cities Represented: ${app.citiesRepresented}`}
