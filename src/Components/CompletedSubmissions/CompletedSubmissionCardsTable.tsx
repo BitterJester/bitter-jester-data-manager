@@ -8,7 +8,7 @@ type Props = {
 
 const CompletedSubmissionCardsTable = (props: Props) => {
     const rows = props.completedSubmissions
-        .map((file, index) => ({...file, id: index}));
+        .map((file, index) => ({...file, id: index + 1}));
     const COLUMNS: ColDef[] = [
         {field: 'id', headerName: 'Id', width: 60},
         {field: 'bandName', headerName: 'Band Name', width: 130},
