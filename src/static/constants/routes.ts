@@ -5,6 +5,7 @@ import OriginalSongCompetitionSchedulePage from "../../pages/OriginalSongCompeti
 import OriginalSongResults from "../../pages/OriginalSongResults";
 import CreateCompetition from "../../pages/CreateCompetition/CreateCompetition";
 import UploadedFilesPage from "../../pages/UploadedFilesPage";
+import {JudgingApplications} from "../../pages/JudgingApplications";
 
 interface RouteInfo {
     route: string;
@@ -19,6 +20,7 @@ interface Routes {
     originalSongResults: RouteInfo;
     createACompetition: RouteInfo;
     uploadedFiles: RouteInfo;
+    judgingApplications: RouteInfo;
 }
 
 export const ROUTES: Routes = {
@@ -33,6 +35,10 @@ export const ROUTES: Routes = {
     incompleteApplications: {
         route: '/incompleteApplications',
         component: IncompleteApplications
+    },
+    judgingApplications: {
+        route: '/judgingApplications',
+        component: JudgingApplications,
     },
     fridayNightScheduler: {
         route: '/bjmf145auth',

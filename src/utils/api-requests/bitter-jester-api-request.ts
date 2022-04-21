@@ -13,6 +13,7 @@ export const API_URL_PATH_FUNCTIONS = {
     GET_UPLOADED_FILES: (params) => getFullPathWithCompetition('applications/', '/get-uploaded-files', params),
     GET_COMPETITIONS: () => `${DOMAIN}competitions/competitions`,
     GET_JUDGES: () => `${DOMAIN}competitions/judges`,
+    GET_JUDGES_V2: (params) => getFullPathWithCompetition('applications/', '/judges', params),
     GET_SCHEDULE: (lastSaved = false, params) => getFullPathWithCompetition('schedule/', lastSaved ? '/get-schedule?lastSaved=true' : '/get-schedule', params),
     SAVE_SCHEDULE: (params) => getFullPathWithCompetition('schedule/',  '/schedule', params),
     GET_REMOVED_BANDS: (params) => getFullPathWithCompetition('schedule/', '/get-removed-bands', params),

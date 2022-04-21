@@ -16,7 +16,7 @@ const HOME_PATH = '/';
 const COMPLETED_SUBMISSIONS_PATH = '/completedSubmissions';
 const UPLOADED_FILES_PATH = '/uploadedFiles';
 const INCOMPLETE_APPLICATIONS_PATH = '/incompleteApplications';
-const RESULT_PATH = '/bjmf145results';
+const JUDGING_APPLICATIONS_PATH = '/judgingApplications';
 const CREATE_COMPETITION_PATH = '/createCompetition';
 
 const Sidebar = (props: Props) => {
@@ -83,13 +83,13 @@ const Sidebar = (props: Props) => {
                             onClick={() => redirect(withCompetitionIdQueryParam(INCOMPLETE_APPLICATIONS_PATH), true)}>Incomplete
                         Submissions
                     </button>
+                    <button className={getButtonClass(JUDGING_APPLICATIONS_PATH)}
+                            onClick={() => redirect(withCompetitionIdQueryParam(JUDGING_APPLICATIONS_PATH), true)}>Judging
+                        Submissions
+                    </button>
                     <button className={getButtonClass(UPLOADED_FILES_PATH)}
                             onClick={() => redirect(withCompetitionIdQueryParam(UPLOADED_FILES_PATH), true)}>Uploaded Files
                     </button>
-                    {/*<button className={getButtonClass(RESULT_PATH)}*/}
-                    {/*        onClick={() => redirect(withCompetitionIdQueryParam(RESULT_PATH), true)}>*/}
-                    {/*    Results*/}
-                    {/*</button>*/}
                     <AmplifySignOut />
                 </Card>
             </div>

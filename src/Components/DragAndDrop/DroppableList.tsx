@@ -23,7 +23,6 @@ const DroppableList = (props: Props) => {
 
     const getListStyle = isDraggingOver => ({
         padding: grid,
-        width: '100%'
     });
 
     const droppableId = `droppable-${orderInList}`;

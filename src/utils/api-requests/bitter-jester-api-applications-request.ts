@@ -16,6 +16,10 @@ export class BitterJesterApiApplicationsRequest extends BitterJesterApiRequest {
         return this.get<{ incompleteApplications: IncompleteApplication[] }>(() => API_URL_PATH_FUNCTIONS.GET_INCOMPLETE_APPLICATIONS({competitionId}));
     }
 
+    getJudgingApplications(competitionId) {
+        return this.get<{completedApplications: any[]}>(() => API_URL_PATH_FUNCTIONS.GET_JUDGES_V2({competitionId}));
+    }
+
     getUploadedFiles(competitionId){
         return this.get<UploadedFile[]>(() => API_URL_PATH_FUNCTIONS.GET_UPLOADED_FILES({competitionId}));
     }
