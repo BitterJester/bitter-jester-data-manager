@@ -83,6 +83,10 @@ export const JudgingApplications = () => {
         <Page>
             <CardContainer>
                 <h2>Judging Schedule</h2>
+                <p>
+                    This page is a work in progress and although everyone can see it right now, it is just for Spencer for now
+                    ;)
+                </p>
                 <Row>
                     <DragAndDropList
                         initialOrderComponentsToDisplay={judgingApplicationCards}
