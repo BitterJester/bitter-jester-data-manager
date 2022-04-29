@@ -38,6 +38,14 @@ const ScheduleLegendItem = () => {
                     <p>Closing Showcase</p>
                 </div>
             </Col>
+            <Col>
+                <div>
+                    <div style={{color: 'black'}} className={'coloredKey'}>
+                        <GradeIcon/>
+                    </div>
+                    <p>Guest Artist</p>
+                </div>
+            </Col>
         </Row>
     );
 };

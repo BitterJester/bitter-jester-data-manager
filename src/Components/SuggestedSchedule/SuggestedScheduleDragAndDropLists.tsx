@@ -32,13 +32,17 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
             .map((app, index) => {
                 const color = new BackgroundColor(app, night.night).get(selectedCompetition.id);
                 const isFirstShowcaseBand = index === 0;
-                const isSecondShowcaseBand = index === night.bands.length - 1;
+                const isSecondShowcaseBand = index === night.bands.length - 2;
+                const isGuestArtist = index === night.bands.length - 1;
                 return (
                     <Col>
                         {isFirstShowcaseBand && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
                             <GradeIcon/>
                         </div>}
                         {isSecondShowcaseBand && <div style={{color: 'blue'}} className={'suggestedScheduleItemInfo'}>
+                            <GradeIcon/>
+                        </div>}
+                        {isGuestArtist && <div style={{color: 'black'}} className={'suggestedScheduleItemInfo'}>
                             <GradeIcon/>
                         </div>}
                         <div style={{backgroundColor: color}} className={'suggestedScheduleBandName'}>
