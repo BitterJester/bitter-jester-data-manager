@@ -24,7 +24,7 @@ const ScheduleLegendItem = () => {
             </Col>
             <Col>
                 <div>
-                    <div style={{color: 'purple'}} className={'coloredKey'}>
+                    <div style={{color: 'rgb(227, 194, 27)'}} className={'coloredKey'}>
                         <GradeIcon/>
                     </div>
                     <p>Opening Showcase</p>
@@ -40,7 +40,7 @@ const ScheduleLegendItem = () => {
             </Col>
             <Col>
                 <div>
-                    <div style={{color: 'black'}} className={'coloredKey'}>
+                    <div style={{color: 'purple'}} className={'coloredKey'}>
                         <GradeIcon/>
                     </div>
                     <p>Guest Artist</p>

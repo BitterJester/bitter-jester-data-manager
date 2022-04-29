@@ -36,13 +36,13 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                 const isGuestArtist = index === night.bands.length - 1;
                 return (
                     <Col>
-                        {isFirstShowcaseBand && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
+                        {isFirstShowcaseBand && <div style={{color: 'rgb(227, 194, 27)'}} className={'suggestedScheduleItemInfo'}>
                             <GradeIcon/>
                         </div>}
                         {isSecondShowcaseBand && <div style={{color: 'blue'}} className={'suggestedScheduleItemInfo'}>
                             <GradeIcon/>
                         </div>}
-                        {isGuestArtist && <div style={{color: 'black'}} className={'suggestedScheduleItemInfo'}>
+                        {isGuestArtist && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
                             <GradeIcon/>
                         </div>}
                         <div style={{backgroundColor: color}} className={'suggestedScheduleBandName'}>
