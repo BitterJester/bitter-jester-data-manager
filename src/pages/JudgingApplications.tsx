@@ -89,6 +89,7 @@ export const JudgingApplications = () => {
                 </p>
                 <Row>
                     <DragAndDropList
+                        typeOfItemsInLists={'Judges'}
                         initialOrderComponentsToDisplay={judgingApplicationCards}
                         orderedColumnTitles={fridayNights}
                         updateState={updateJudgingSchedule}

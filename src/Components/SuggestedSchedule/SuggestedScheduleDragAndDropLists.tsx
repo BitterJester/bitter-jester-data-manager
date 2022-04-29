@@ -86,6 +86,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         <Fragment>
             <Row>
                 <DragAndDropList
+                    typeOfItemsInLists={'Bands'}
                     initialOrderComponentsToDisplay={schedulesInformationForEachNight}
                     updateState={props.updateSchedule}
                     orderedColumnTitles={fridayNights}

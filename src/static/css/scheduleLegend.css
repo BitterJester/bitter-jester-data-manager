@@ -6,3 +6,14 @@
 .scheduleLegendContainer {
     padding-top: 64px;
 }
+
+.legend-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.legend-item-text {
+    text-align: left;
+}

@@ -11,10 +11,11 @@ type Props = {
     orderedColumnTitles: string[];
     updateState: Function;
     onDragEnd?: Function;
+    typeOfItemsInLists: string;
 };
 
 export const DragAndDropList = (props: Props) => {
-    const {initialOrderComponentsToDisplay, getItemStyle} = props;
+    const {initialOrderComponentsToDisplay, getItemStyle, typeOfItemsInLists} = props;
     const [orderedItemsForDisplay, setOrderedItemsForDisplay] = useState(initialOrderComponentsToDisplay);
     useEffect(() => {
         setOrderedItemsForDisplay(initialOrderComponentsToDisplay);
@@ -61,6 +62,7 @@ export const DragAndDropList = (props: Props) => {
                     return (
                         <Col xs={xs} style={{background: 'rgb(204, 202, 202)'}}>
                             <Title titleDisplayText={columnTitlesCopy.shift()}/>
+                            <p style={{fontStyle: 'italic', fontWeight: 'bold'}}>{item.length} {typeOfItemsInLists}</p>
                             <DroppableList
                                 orderInList={index}
                                 orderedItemsForDisplay={item}

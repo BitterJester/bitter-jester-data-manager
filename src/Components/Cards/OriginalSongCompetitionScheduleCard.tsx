@@ -88,9 +88,11 @@ const OriginalSongCompetitionScheduleCard = (props: Props) => {
                 originalSongs={originalSongSubmissions}/>
             <Title titleDisplayText={'ORIGINAL SONG COMPETITION SCHEDULE'}/>
             <Row>
-                <DragAndDropList initialOrderComponentsToDisplay={orderedDragAndDropItems}
-                                 orderedColumnTitles={orderedColumnTitles}
-                                 updateState={updateSchedule}/>
+                <DragAndDropList
+                    typeOfItemsInLists={'Songs'}
+                    initialOrderComponentsToDisplay={orderedDragAndDropItems}
+                    orderedColumnTitles={orderedColumnTitles}
+                    updateState={updateSchedule}/>
             </Row>
         </Card>
     );
