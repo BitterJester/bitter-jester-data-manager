@@ -46,13 +46,14 @@ export const IncompleteApplicationsContainer = () => {
         }
     }, [selectedCompetition.id]);
 
+    const listOfIncompleteApps = incompleteApplications ? incompleteApplications.incompleteApplications : [];
     const sortByBandName = () => {
-        const incompleteApplicationsCopy = _.cloneDeep(incompleteApplications.incompleteApplications);
+        const incompleteApplicationsCopy = incompleteApplications ? _.cloneDeep(listOfIncompleteApps) : [];
 
         return incompleteApplicationsCopy.sort((a, b) => a.bandName.toLowerCase() < b.bandName.toLowerCase() ? -1 : 1);
     };
 
-    const orderedApplications = isSortedByBandName ? sortByBandName() : incompleteApplications.incompleteApplications;
+    const orderedApplications = isSortedByBandName ? sortByBandName() : listOfIncompleteApps;
     const COLUMNS: Columns = [
         {
             field: 'id',
@@ -93,7 +94,7 @@ export const IncompleteApplicationsContainer = () => {
             <CardContainer>
                 <Title titleDisplayText='Incomplete Applications'/>
                 <TotalCount
-                    count={incompleteApplications.incompleteApplications ? incompleteApplications.incompleteApplications.length : 0}/>
+                    count={listOfIncompleteApps ? listOfIncompleteApps.length : 0}/>
                 <div style={{height: '80vh', width: '100%'}}>
                     <DataGrid
                         columns={COLUMNS}
