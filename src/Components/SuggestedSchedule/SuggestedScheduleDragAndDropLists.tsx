@@ -26,46 +26,48 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
         return value ? modifierFunction(value) : '-';
     }
 
-    schedule.nights.forEach(night => {
-        const submissionTableRowBandsForOneNight = night.bands
-            .filter(band => !removedBands.includes(band.bandName))
-            .map((app, index) => {
-                const color = new BackgroundColor(app, night.night).get(selectedCompetition.id);
-                const isFirstShowcaseBand = index === 0;
-                const isSecondShowcaseBand = index === night.bands.length - 2;
-                const isGuestArtist = index === night.bands.length - 1;
-                return (
-                    <Col>
-                        {isFirstShowcaseBand && <div style={{color: 'rgb(227, 194, 27)'}} className={'suggestedScheduleItemInfo'}>
-                            <GradeIcon/>
-                        </div>}
-                        {isSecondShowcaseBand && <div style={{color: 'blue'}} className={'suggestedScheduleItemInfo'}>
-                            <GradeIcon/>
-                        </div>}
-                        {isGuestArtist && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
-                            <GradeIcon/>
-                        </div>}
-                        <div style={{backgroundColor: color}} className={'suggestedScheduleBandName'}>
-                            {app.bandName}
-                        </div>
-                        <div className={'suggestedScheduleItemInfo'}>
-                            {`First Choice: ${app.firstChoiceFridayNight}`}
-                        </div>
-                        <div className={'suggestedScheduleItemInfo'}>
-                            {`Second Choice: ${getValueOrDefault(app.secondChoiceFridayNight)}`}
-                        </div>
-                        <div className={'suggestedScheduleItemInfo'}>
-                            {`Unavailable Nights: ${(getValueOrDefault(app.unavailableFridayNights, (value) => value.join(', ')))}`}
-                        </div>
-                        <div className={'suggestedScheduleItemInfo'}>
-                            {`Cities Represented: ${app.citiesRepresented}`}
-                        </div>
-                    </Col>
-                );
-            });
+    if(schedule && schedule.nights) {
+        schedule.nights.forEach(night => {
+            const submissionTableRowBandsForOneNight = night.bands
+                .filter(band => !removedBands.includes(band.bandName))
+                .map((app, index) => {
+                    const color = new BackgroundColor(app, night.night).get(selectedCompetition.id);
+                    const isFirstShowcaseBand = index === 0;
+                    const isSecondShowcaseBand = index === night.bands.length - 2;
+                    const isGuestArtist = index === night.bands.length - 1;
+                    return (
+                        <Col>
+                            {isFirstShowcaseBand && <div style={{color: 'rgb(227, 194, 27)'}} className={'suggestedScheduleItemInfo'}>
+                                <GradeIcon/>
+                            </div>}
+                            {isSecondShowcaseBand && <div style={{color: 'blue'}} className={'suggestedScheduleItemInfo'}>
+                                <GradeIcon/>
+                            </div>}
+                            {isGuestArtist && <div style={{color: 'purple'}} className={'suggestedScheduleItemInfo'}>
+                                <GradeIcon/>
+                            </div>}
+                            <div style={{backgroundColor: color}} className={'suggestedScheduleBandName'}>
+                                {app.bandName}
+                            </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`First Choice: ${app.firstChoiceFridayNight}`}
+                            </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`Second Choice: ${getValueOrDefault(app.secondChoiceFridayNight)}`}
+                            </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`Unavailable Nights: ${(getValueOrDefault(app.unavailableFridayNights, (value) => value.join(', ')))}`}
+                            </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`Cities Represented: ${app.citiesRepresented}`}
+                            </div>
+                        </Col>
+                    );
+                });
 
-        schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
-    });
+            schedulesInformationForEachNight.push(submissionTableRowBandsForOneNight);
+        });
+    }
 
     const getDroppableIndex = (droppableId) => droppableId.split('-')[1];
 

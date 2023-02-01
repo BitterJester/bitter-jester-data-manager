@@ -20,7 +20,7 @@ const ScheduleToolbar = (props: Props) => {
     }
 
     const getTotalBands = (): number => {
-        return schedule.nights.reduce((count, night) => count + night.bands.length, 0);
+        return schedule && schedule.nights ? schedule.nights.reduce((count, night) => count + night.bands.length, 0) : 0;
     }
 
     return (
