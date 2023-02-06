@@ -13,8 +13,15 @@ export class BackgroundColor {
         const nightMap = getNightMap(competitionId);
         const nightParts = nightMap[String(this.night)];
         const dayOfTheMonth = nightParts.dayOfTheMonth;
+        const isUnavailable = this.application.unavailableFridayNights ?
+            Boolean(this.application.unavailableFridayNights.map(night => night.includes(` ${dayOfTheMonth},`)).filter(item => item === true).length) :
+            false;
         const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(` ${dayOfTheMonth},`) ||
-            this.application.firstChoiceFridayNight === 'Available Every Friday';
+            this.application.firstChoiceFridayNight === 'Available Every Friday' ||
+        (
+            this.application.firstChoiceFridayNight.toLowerCase().includes('no preference') &&
+                !isUnavailable
+        );
         if(didGetFirstChoice) {
             return 'darkgreen';
         }
@@ -23,9 +30,6 @@ export class BackgroundColor {
         if(didGetSecondChoice){
             return 'rgb(227, 194, 27)';
         }
-        const isUnavailable = this.application.unavailableFridayNights ?
-            Boolean(this.application.unavailableFridayNights.map(night => night.includes(` ${dayOfTheMonth},`)).filter(item => item === true).length) :
-            false;
 
         if(isUnavailable){
             return 'red';
