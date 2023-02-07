@@ -28,6 +28,7 @@ const UploadedFilesContainer = () => {
     async function download(fileUrl, fileName) {
         const a = document.createElement("a");
         a.href = fileUrl;
+        a.target = '__blank';
         a.setAttribute("download", fileName);
         a.click();
         await timeout(2000);

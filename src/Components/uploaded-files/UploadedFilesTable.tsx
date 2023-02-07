@@ -6,9 +6,8 @@ import {DataGrid} from "@material-ui/data-grid";
 const COLUMNS = [
     { field: 'bandName', headerName: 'Band Name', width: 200 },
     { field: 'type', headerName: 'Type', width: 120},
-    { field: 'fileName', headerName: 'File Name', width: 400, filterable: false},
-    { field: 'fileType', headerName: 'File Type', width: 80 },
-    { field: 'title', headerName: 'Title (If applicable...)', width: 200, filterable: false}
+    { field: 'fileName', headerName: 'File Name', width: 548, filterable: false},
+    { field: 'fileType', headerName: 'File Type', width: 120 },
 ];
 
 const TYPE_MAP = {
