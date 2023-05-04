@@ -9,6 +9,7 @@ import {DataManagerReduxStore} from "../../redux/data-manager-redux-store";
 import GradeIcon from '@material-ui/icons/Grade';
 import {DropResult} from "react-beautiful-dnd";
 import {getNightMap} from "../../utils/getNightMap";
+import BitterJesterApiRequest from "../../utils/api-requests/bitter-jester-api-request";
 
 type Props = {
     schedule: Schedule;
@@ -71,19 +72,17 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
 
     const getDroppableIndex = (droppableId) => droppableId.split('-')[1];
 
-    const onDragEnd = async (result: DropResult, provided) => {
-        const destinationIsShowcaseBand = result.destination.index === 0;
-        const sourceIsShowcaseBand = result.source.index === 0;
-        let showcaseBand;
-        if (destinationIsShowcaseBand) {
-            const night = getDroppableIndex(result.destination.droppableId);
-            showcaseBand = schedule.nights[night].bands[result.source.index];
-        } else if (sourceIsShowcaseBand) {
-            const night = getDroppableIndex(result.source.droppableId);
-            showcaseBand = schedule.nights[night].bands[1];
-        }
-        // const updatedSchedule = await BitterJesterApiRequest.get<Schedule>(API_URL_PATHS.UPDATE_SCHEDULE);
-    };
+    // const onDragEnd = async (result: DropResult, provided) => {
+    //     const destinationIsShowcaseBand = result.destination.index === 0;
+    //     const sourceIsShowcaseBand = result.source.index === 0;
+    //     if (destinationIsShowcaseBand) {
+    //         const night = getDroppableIndex(result.destination.droppableId);
+    //     } else if (sourceIsShowcaseBand) {
+    //         const night = getDroppableIndex(result.source.droppableId);
+    //         showcaseBand = schedule.nights[night].bands[1];
+    //     }
+    //
+    // };
     return (
         <Fragment>
             <Row>
@@ -92,7 +91,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                     initialOrderComponentsToDisplay={schedulesInformationForEachNight}
                     updateState={props.updateSchedule}
                     orderedColumnTitles={fridayNights}
-                    onDragEnd={onDragEnd}
+                    // onDragEnd={onDragEnd}
                 />
             </Row>
         </Fragment>
