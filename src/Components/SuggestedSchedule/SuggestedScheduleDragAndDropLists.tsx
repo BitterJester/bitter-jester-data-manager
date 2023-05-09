@@ -30,7 +30,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
     if(schedule && schedule.nights) {
         schedule.nights.forEach(night => {
             const submissionTableRowBandsForOneNight = night.bands
-                .filter(band => !removedBands.includes(band.bandName))
+                .filter(band => band && !removedBands.includes(band.bandName))
                 .map((app, index) => {
                     const color = new BackgroundColor(app, night.night).get(selectedCompetition.id);
                     const isFirstShowcaseBand = index === 0;
