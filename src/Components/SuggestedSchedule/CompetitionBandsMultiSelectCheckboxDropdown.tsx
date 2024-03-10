@@ -30,6 +30,14 @@ const MenuProps = {
     },
 };
 
+const toLowerCaseAndTrimmed = (value) => {
+    return value.trim().toLowerCase();
+}
+
+const mapToLowerCaseAndTrimmed = (values) => {
+    return values.map(x => toLowerCaseAndTrimmed(x));
+}
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         formControl: {
@@ -70,7 +78,8 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     }, [selectedCompetition.id])
 
     const onRemoveBand = async () => {
-        const updatedRemovedBands = [...removedBands, ...pendingForRemoval].filter(pend => !pendingForAddition.includes(pend));
+        const updatedRemovedBands = [...mapToLowerCaseAndTrimmed(removedBands), ...mapToLowerCaseAndTrimmed(pendingForRemoval)]
+            .filter(pend => !mapToLowerCaseAndTrimmed(pendingForAddition).includes(toLowerCaseAndTrimmed(pend)));
         setPendingForRemoval([]);
         setPendingForAddition([]);
         dataManagerReduxStore.dispatch({
@@ -86,24 +95,24 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     };
 
     const isChecked = (option) => {
-        return pendingForRemoval.filter(removedBandName => removedBandName === option.id).length === 1 ||
-            removedBands.filter(removedBandName => removedBandName === option.id && !pendingForAddition.includes(removedBandName)).length === 1;
+        return pendingForRemoval.filter(removedBandName => toLowerCaseAndTrimmed(removedBandName) === toLowerCaseAndTrimmed(option.id)).length === 1 ||
+            removedBands.filter(removedBandName => toLowerCaseAndTrimmed(removedBandName) === toLowerCaseAndTrimmed(option.id) && !mapToLowerCaseAndTrimmed(pendingForAddition).includes(toLowerCaseAndTrimmed(removedBandName))).length === 1;
     }
 
     const addToPendingForAddition = (toAdd) => {
-        setPendingForAddition([...pendingForAddition, toAdd]);
+        setPendingForAddition([...mapToLowerCaseAndTrimmed(pendingForAddition), toLowerCaseAndTrimmed(toAdd)]);
     };
 
     const addToPendingForRemoval = (toAdd) => {
-        setPendingForRemoval([...pendingForRemoval, toAdd]);
+        setPendingForRemoval([...mapToLowerCaseAndTrimmed(pendingForRemoval), toLowerCaseAndTrimmed(toAdd)]);
     }
 
     const removeFromPendingForAddition = (toRemove) => {
-        setPendingForAddition(pendingForAddition.filter(pend => pend !== toRemove));
+        setPendingForAddition(pendingForAddition.filter(pend => toLowerCaseAndTrimmed(pend) !== toLowerCaseAndTrimmed(toRemove)));
     }
 
     const removeFromPendingForRemoval = (toRemove) => {
-        setPendingForRemoval(pendingForRemoval.filter(pend => pend !== toRemove));
+        setPendingForRemoval(pendingForRemoval.filter(pend => toLowerCaseAndTrimmed(pend) !== toLowerCaseAndTrimmed(toRemove)));
     }
 
     const insanity = (event) => {
