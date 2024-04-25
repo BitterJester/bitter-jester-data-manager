@@ -21,6 +21,7 @@ export class BitterJesterApiApplicationsRequest extends BitterJesterApiRequest {
     }
 
     getUploadedFiles(competitionId){
-        return this.get<UploadedFile[]>(() => API_URL_PATH_FUNCTIONS.GET_UPLOADED_FILES({competitionId}));
+        const path = API_URL_PATH_FUNCTIONS.GET_UPLOADED_FILES({competitionId});
+        return this.get<UploadedFile[]>(() => `${path}?shouldDownloadFiles=true`);
     }
 }

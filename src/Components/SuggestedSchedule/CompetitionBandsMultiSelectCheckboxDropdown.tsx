@@ -31,7 +31,7 @@ const MenuProps = {
 };
 
 const toLowerCaseAndTrimmed = (value) => {
-    return value.trim().toLowerCase();
+    return value ? value.trim().toLowerCase() : value;
 }
 
 const mapToLowerCaseAndTrimmed = (values) => {
@@ -95,7 +95,9 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
     };
 
     const isChecked = (option) => {
-        return pendingForRemoval.filter(removedBandName => toLowerCaseAndTrimmed(removedBandName) === toLowerCaseAndTrimmed(option.id)).length === 1 ||
+        return pendingForRemoval.filter(removedBandName => {
+                return toLowerCaseAndTrimmed(removedBandName) === toLowerCaseAndTrimmed(option.id);
+            }).length === 1 ||
             removedBands.filter(removedBandName => toLowerCaseAndTrimmed(removedBandName) === toLowerCaseAndTrimmed(option.id) && !mapToLowerCaseAndTrimmed(pendingForAddition).includes(toLowerCaseAndTrimmed(removedBandName))).length === 1;
     }
 
@@ -117,51 +119,57 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
 
     const insanity = (event) => {
         const updatedSelectedCombined = event.target.value as string[];
-        const allRemoval = [...removedBands, ...pendingForRemoval].filter(pend => !pendingForAddition.includes(pend));
-        const isAddBandBack = allRemoval.length > updatedSelectedCombined.length;
-        const bandSelected = isAddBandBack ? allRemoval.filter(b => !updatedSelectedCombined.includes(b))[0] : updatedSelectedCombined.filter(b => !allRemoval.includes(b))[0];
+        console.error(updatedSelectedCombined);
+        console.error(removedBands);
+        console.error(pendingForAddition);
+        console.error(pendingForRemoval);
+        const allRemovedOrPendingForRemoval = [...removedBands, ...pendingForRemoval].filter(pend => !pendingForAddition.includes(pend));
+        const isAddBandBack = allRemovedOrPendingForRemoval.length > updatedSelectedCombined.length;
+        const bandSelected = isAddBandBack ? allRemovedOrPendingForRemoval.filter(b => !updatedSelectedCombined.includes(b))[0] : updatedSelectedCombined.filter(b => !allRemovedOrPendingForRemoval.includes(b))[0];
         const wasActuallyRemoved = removedBands.includes(bandSelected);
-
+        console.error(`isAddBandBack: ${isAddBandBack}; wasActuallyRemoved: ${wasActuallyRemoved}`);
         if (isAddBandBack && wasActuallyRemoved) {
+            console.error('add to pending');
             addToPendingForAddition(bandSelected);
         } else if (isAddBandBack && !wasActuallyRemoved) {
+            console.error('remove from pending for removal');
             removeFromPendingForRemoval(bandSelected);
         } else if (!isAddBandBack && wasActuallyRemoved) {
+            console.error('remove from pending for addition');
             removeFromPendingForAddition(bandSelected);
         } else {
+            console.error('add to pending for removal')
             addToPendingForRemoval(bandSelected);
         }
     }
 
     return (
-        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end'}}>
-            <FormControl className={classes.formControl}>
-                <Select
-                    multiple
-                    value={[...removedBands, ...pendingForRemoval].filter(bandName => !pendingForAddition.includes(bandName))}
-                    onChange={(event) => {
-                        insanity(event);
-                    }}
-                    displayEmpty
-                    input={<Input/>}
-                    renderValue={() =>
-                        pendingForRemoval.length !== 0 || pendingForAddition.length !== 0 ?
-                            (
-                                <div>{`${pendingForRemoval.length} pending removal and ${pendingForAddition.length} pending addition`}</div>) :
-                            (<div>{`${removedBands.length} band(s) have currently been removed.`}</div>)
-                    }
-                    MenuProps={MenuProps}
-                >
-                    {allBandDropDownOptions
-                        .sort((a, b) => a.name < b.name ? -1 : 1)
-                        .map((option) => (
-                        <MenuItem key={option.id} value={option.name}>
+        <div style={{display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end'}}>
+            <Select
+                multiple
+                value={[...removedBands, ...pendingForRemoval].filter(bandName => !pendingForAddition.includes(bandName))}
+                onChange={(event) => {
+                    insanity(event);
+                }}
+                displayEmpty
+                input={<Input/>}
+                renderValue={() =>
+                    pendingForRemoval.length !== 0 || pendingForAddition.length !== 0 ?
+                        (
+                            <div>{`${pendingForRemoval.length} pending removal and ${pendingForAddition.length} pending addition`}</div>) :
+                        (<div>{`${removedBands.length} band(s) have currently been removed.`}</div>)
+                }
+                // MenuProps={MenuProps}
+            >
+                {allBandDropDownOptions
+                    .sort((a, b) => a.name < b.name ? -1 : 1)
+                    .map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
                             <Checkbox checked={isChecked(option)}/>
                             <ListItemText primary={option.name}/>
                         </MenuItem>
                     ))}
-                </Select>
-            </FormControl>
+            </Select>
             <Button onClick={onRemoveBand}>Confirm</Button>
         </div>
     );

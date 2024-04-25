@@ -49,10 +49,13 @@ export default function selectedCompetitionReducer(state = SELECTED_COMPETITION_
                 ...selectedCompetition
             }
         case 'competition/set-bands':
+            const allBandDropDownOptions = action.payload.bands
+                .filter(band => band.bandName && band.bandName !== '')
+                .map(band => ({id: band.bandName.toLowerCase().trim(), name: band.bandName}));
             return {
                 ...state,
                 bands: action.payload.bands,
-                allBandDropDownOptions: action.payload.bands.map(band => ({id: band.bandName, name: band.bandName}))
+                allBandDropDownOptions: allBandDropDownOptions
             }
         case 'competition/set-removed-bands':
             return {
