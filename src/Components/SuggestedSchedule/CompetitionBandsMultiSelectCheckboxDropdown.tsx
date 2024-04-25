@@ -119,26 +119,17 @@ const CompetitionBandsMultiSelectCheckboxDropdown = () => {
 
     const insanity = (event) => {
         const updatedSelectedCombined = event.target.value as string[];
-        console.error(updatedSelectedCombined);
-        console.error(removedBands);
-        console.error(pendingForAddition);
-        console.error(pendingForRemoval);
         const allRemovedOrPendingForRemoval = [...removedBands, ...pendingForRemoval].filter(pend => !pendingForAddition.includes(pend));
         const isAddBandBack = allRemovedOrPendingForRemoval.length > updatedSelectedCombined.length;
         const bandSelected = isAddBandBack ? allRemovedOrPendingForRemoval.filter(b => !updatedSelectedCombined.includes(b))[0] : updatedSelectedCombined.filter(b => !allRemovedOrPendingForRemoval.includes(b))[0];
         const wasActuallyRemoved = removedBands.includes(bandSelected);
-        console.error(`isAddBandBack: ${isAddBandBack}; wasActuallyRemoved: ${wasActuallyRemoved}`);
         if (isAddBandBack && wasActuallyRemoved) {
-            console.error('add to pending');
             addToPendingForAddition(bandSelected);
         } else if (isAddBandBack && !wasActuallyRemoved) {
-            console.error('remove from pending for removal');
             removeFromPendingForRemoval(bandSelected);
         } else if (!isAddBandBack && wasActuallyRemoved) {
-            console.error('remove from pending for addition');
             removeFromPendingForAddition(bandSelected);
         } else {
-            console.error('add to pending for removal')
             addToPendingForRemoval(bandSelected);
         }
     }
