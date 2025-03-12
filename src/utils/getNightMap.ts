@@ -28,6 +28,13 @@ export const getNightMap = (competitionId: string) => {
             3: {dayOfTheMonth: '14', month: '6'},
             4: {dayOfTheMonth: '15', month: '6'}
         };
+    } else if (competitionId === 'bitter_jester_summer_2025') {
+        return {
+            1: {dayOfTheMonth: '6', month: '6'},
+            2: {dayOfTheMonth: '7', month: '6'},
+            3: {dayOfTheMonth: '13', month: '6'},
+            4: {dayOfTheMonth: '14', month: '6'}
+        };
     } else {
         return DEFAULT_DAYS
     }
