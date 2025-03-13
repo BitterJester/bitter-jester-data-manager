@@ -62,6 +62,12 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                             <div className={'suggestedScheduleItemInfo'}>
                                 {`Cities Represented: ${app.citiesRepresented}`}
                             </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`Band Member Ages: ${app.bandMemberAges ? app.bandMemberAges.join(', ') : '-'}`}
+                            </div>
+                            <div className={'suggestedScheduleItemInfo'}>
+                                {`Average Age: ${app.bandMemberAges ? (app.bandMemberAges.reduce((acc, curr) => acc + Number(curr), 0)) / app.bandMemberAges.length : '-'}`}
+                            </div>
                         </Col>
                     );
                 });

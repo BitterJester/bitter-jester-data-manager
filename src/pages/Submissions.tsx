@@ -18,6 +18,7 @@ export type BitterJesterApplication = {
     citiesRepresented: string;
     unavailableFridayNights?: string[];
     referencedBands?: string | undefined;
+    bandMemberAges?: number[];
 }
 
 
