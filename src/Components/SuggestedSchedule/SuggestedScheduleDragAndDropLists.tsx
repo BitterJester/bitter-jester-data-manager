@@ -36,6 +36,9 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                     const isFirstShowcaseBand = index === 0;
                     const isSecondShowcaseBand = index === night.bands.length - 2;
                     const isGuestArtist = index === night.bands.length - 1;
+                    const averageAge = app.bandMemberAges ?
+                        Math.round((app.bandMemberAges.reduce((acc, curr) => acc + Number(curr), 0)) / app.bandMemberAges.length) :
+                        '-';
                     return (
                         <Col>
                             {isFirstShowcaseBand && <div style={{color: 'rgb(227, 194, 27)'}} className={'suggestedScheduleItemInfo'}>
@@ -66,7 +69,7 @@ export const SuggestedScheduleDragAndDropLists = (props: Props) => {
                                 {`Band Member Ages: ${app.bandMemberAges ? app.bandMemberAges.join(', ') : '-'}`}
                             </div>
                             <div className={'suggestedScheduleItemInfo'}>
-                                {`Average Age: ${app.bandMemberAges ? (app.bandMemberAges.reduce((acc, curr) => acc + Number(curr), 0)) / app.bandMemberAges.length : '-'}`}
+                                {`Average Age: ${averageAge}`}
                             </div>
                         </Col>
                     );
