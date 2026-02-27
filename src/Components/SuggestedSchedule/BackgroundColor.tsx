@@ -16,18 +16,18 @@ export class BackgroundColor {
         const isUnavailable = this.application.unavailableFridayNights ?
             Boolean(this.application.unavailableFridayNights.map(night => night.includes(` ${dayOfTheMonth},`)).filter(item => item === true).length) :
             false;
-        const didGetFirstChoice = this.application.firstChoiceFridayNight.includes(` ${dayOfTheMonth},`) ||
+        const didGetFirstChoice = (this.application.firstChoiceFridayNight.includes(` ${dayOfTheMonth},`) ||
             this.application.firstChoiceFridayNight === 'Available Every Friday' ||
         (
             this.application.firstChoiceFridayNight.toLowerCase().includes('no preference') &&
                 !isUnavailable
-        );
+        )) && !isUnavailable;
         if(didGetFirstChoice) {
             return 'darkgreen';
         }
         const didGetSecondChoice = this.application.secondChoiceFridayNight.includes(` ${dayOfTheMonth},`);
 
-        if(didGetSecondChoice){
+        if(didGetSecondChoice && !isUnavailable){
             return 'rgb(227, 194, 27)';
         }
 
